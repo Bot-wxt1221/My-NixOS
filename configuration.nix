@@ -14,6 +14,7 @@
   # Use the systemd-boot EFI boot loader.
   # boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  security.sudo.wheelNeedsPassword = false;
   boot.loader.grub.device = "nodev";
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_rt_6_8;
   services.flatpak.enable = true;
