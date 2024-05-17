@@ -56,7 +56,7 @@
     thefuck
     waydroid
     xclip todesk
-    gcc (lowPrio clang) (lowPrio clang-tools) gdb gnumake lld
+    gcc (lowPrio clang) (lowPrio clang-tools) gdb gnumake lld vscode-extensions.ms-vscode.cpptools
     wget
     cmake
     alsa-firmware
