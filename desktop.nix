@@ -18,6 +18,7 @@
     noto-fonts-emoji
     liberation_ttf
     fira-code
+    wqy_microhei
     fira-code-symbols
     mplus-outline-fonts.githubRelease
     dina-font
