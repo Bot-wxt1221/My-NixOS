@@ -61,7 +61,7 @@
     cmake
     alsa-firmware
     gnome.gnome-terminal
-    linuxKernel.kernels.linux_rt_6_8
+    linuxKernel.kernels.linux_rt_6_8 cpu-x
     gnome.gnome-tweaks
     clash-verge-rev
   ];
