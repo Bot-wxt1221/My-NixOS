@@ -36,7 +36,7 @@
     gnome-2048 gh scrcpy android-tools
     zip
     xz
-    unzip
+    unzip gnomeExtensions.gsconnect
     openjdk17-bootstrap maven
     p7zip
     keepassxc
