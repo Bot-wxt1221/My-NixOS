@@ -16,7 +16,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   security.sudo.wheelNeedsPassword = false;
   boot.loader.grub.device = "nodev";
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_rt_6_8;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_rt_6_9;
   services.flatpak.enable = true;
   boot.loader.grub.efiSupport = true;
   networking.hostName = "wxt"; # Define your hostname.
@@ -61,7 +61,7 @@
     cmake
     alsa-firmware
     gnome.gnome-terminal
-    linuxKernel.kernels.linux_rt_6_8 cpu-x
+    linuxKernel.kernels.linux_rt_6_9 cpu-x
     gnome.gnome-tweaks
     clash-verge-rev
   ];
