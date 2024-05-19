@@ -65,8 +65,8 @@
     gnome.gnome-tweaks
     clash-verge-rev virt-manager libvirt
   ];
-  config.virtualisation.libvirtd = true;
-  config.virtualisation.vswitch = true;
+  virtualisation.libvirtd = true;
+  virtualisation.vswitch = true;
   systemd.services.clash-verge-rev = {
     enable = true;
     description = "clash verge rev";
