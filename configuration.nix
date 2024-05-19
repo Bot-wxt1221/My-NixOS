@@ -55,13 +55,6 @@
     thefuck
     waydroid
     xclip todesk
-     (let base = pkgs.appimageTools.defaultFhsEnvArgs; in
-      pkgs.buildFHSUserEnv (base // {
-      name = "fhs";
-      profile = "export FHS=1";
-      runScript = "zsh";
-      extraOutputsToInstall = ["dev"];
-    }))
     gcc (lowPrio clang) (lowPrio clang-tools) gdb gnumake lld vscode-extensions.ms-vscode.cpptools
     wget
     cmake
