@@ -63,8 +63,10 @@
     gnome.gnome-terminal
     linuxKernel.kernels.linux_rt_6_9 cpu-x
     gnome.gnome-tweaks
-    clash-verge-rev
+    clash-verge-rev virt-manager libvirt
   ];
+  config.virtualisation.libvirtd = true;
+  config.virtualisation.vswitch = true;
   systemd.services.clash-verge-rev = {
     enable = true;
     description = "clash verge rev";
