@@ -46,13 +46,6 @@
     ];
     
   };
-  dconf.settings = {
-    "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
-    };
-  };
-  # List packages installed in system profile. To search, run:
   # $ nix search wget
   services.todesk.enable = true;
   programs.clash-verge.autoStart = true;
