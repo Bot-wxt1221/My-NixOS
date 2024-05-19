@@ -41,10 +41,16 @@
    };
   users.users.wxt = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "adbusers"]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "adbusers" "libvirtd"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
     
+  };
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
   };
   # List packages installed in system profile. To search, run:
   # $ nix search wget
