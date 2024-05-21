@@ -15,6 +15,7 @@
   # boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   security.sudo.wheelNeedsPassword = false;
+  virtualisation.docker.enable = true;
   boot.loader.grub.device = "nodev";
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_rt_6_9;
   services.flatpak.enable = true;
@@ -41,7 +42,7 @@
    };
   users.users.wxt = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "adbusers" "libvirtd"]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "adbusers" "libvirtd" "docker"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
     
