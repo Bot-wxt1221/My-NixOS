@@ -65,8 +65,7 @@
     linuxKernel.kernels.linux_rt_6_9 cpu-x
     gnome.gnome-tweaks
     clash-verge-rev virt-manager libvirt
-  ];
-  environment.systemPackages = [pkgsCross.aarch64-android pkgsCross.arm-embedded];
+  ] with pkgsCross; [aarch64-android];
   virtualisation.libvirtd.enable = true;
   virtualisation.vswitch.enable = true;
   systemd.services.clash-verge-rev = {
