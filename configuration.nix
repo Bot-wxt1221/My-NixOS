@@ -64,7 +64,7 @@
     gnome.gnome-terminal dconf intel-gpu-tools
     linuxKernel.kernels.linux_rt_6_9 cpu-x
     gnome.gnome-tweaks
-    clash-verge-rev virt-manager libvirt
+    clash-verge-rev virt-manager libvirt pkgsCross.aarch64-android pkgsCross.arm-embedded
   ];
   virtualisation.libvirtd.enable = true;
   virtualisation.vswitch.enable = true;
