@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:Bot-wxt1221/nixpkgs/main";
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
