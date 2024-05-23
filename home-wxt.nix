@@ -37,7 +37,7 @@
     nnn # terminal file manager
     bilibili microsoft-edge qq neovim neovide resources
     # archives
-    vscode-extensions.ms-vscode.cpptools gnomeExtensions.appindicator gnomeExtensions.dash-to-panel
+    vscode-extensions.ms-vscode.cpptools gnomeExtensions.appindicator gnomeExtensions.dash-to-panel hmcl
     gnome-2048 gh scrcpy android-tools
     zip
     xz
