@@ -61,7 +61,7 @@
     wget
     cmake
     alsa-firmware
-    gnome.gnome-terminal dconf
+    gnome.gnome-terminal dconf intel-gpu-tools
     linuxKernel.kernels.linux_rt_6_9 cpu-x
     gnome.gnome-tweaks
     clash-verge-rev virt-manager libvirt
