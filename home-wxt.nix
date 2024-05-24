@@ -43,7 +43,7 @@
     xz
     unzip gnomeExtensions.gsconnect
     openjdk17-bootstrap maven
-    p7zip
+    p7zip spotify
     keepassxc motrix
     # utils
     ripgrep # recursively searches directories for a regex pattern
