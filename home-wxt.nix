@@ -5,6 +5,10 @@
   nixpkgs.config.allowUnfree = true;
   home.username = "wxt";
   home.homeDirectory = "/home/wxt";
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
