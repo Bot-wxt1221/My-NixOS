@@ -15,6 +15,12 @@
   # boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   security.sudo.wheelNeedsPassword = false;
+  services.kubo = {
+    enable = true;
+    user = "wxt";
+    enableGC = false;
+    autoMount = true;
+  };
   virtualisation.docker.enable = true;
   boot.loader.grub.device = "nodev";
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_rt_6_9;
