@@ -5,9 +5,9 @@
   nixpkgs.config.allowUnfree = true;
   home.username = "wxt";
   home.homeDirectory = "/home/wxt";
-  gnupg.agent = {
+  services.gpg-agent = {
     enable = true;
-    enableSSHSupport = true;
+    enableSshSupport = true;
   };
 
   dconf.settings = {
