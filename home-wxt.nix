@@ -5,7 +5,7 @@
   nixpkgs.config.allowUnfree = true;
   home.username = "wxt";
   home.homeDirectory = "/home/wxt";
-  programs.gnupg.agent = {
+  gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
   };
