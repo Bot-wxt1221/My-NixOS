@@ -8,14 +8,21 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
+  boot.initrd.kernelModules = ["i915" "nvidia" "vfio-iommu-type1" "kvmgt" "mdev"];
+  nixpkgs.config.packageOverrides = pkgs: {
+    intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
+  };
    hardware.opengl = {
     enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      libvdpau-va-gl
+    ];
     driSupport = true;
     driSupport32Bit = true;
   };
-
+  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; 
   # Load nvidia driver for Xorg and Wayland
 
   hardware.nvidia = {
@@ -58,6 +65,7 @@
 	    intelBusId = "PCI:0:2:0";
     };
   };
+  boot.kernelParams = [ "i915.enable_guc=3" "nvidia_drm.fbdev=1" "nvidia_drm.modeset=1" "i915.enable_fbc=1" "i915.enable_execlists=0" "i915.enable_gvt=1"];
   services.xserver.videoDrivers = [ "modesettings" "nvidia" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
