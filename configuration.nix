@@ -15,6 +15,7 @@
   # boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   security.sudo.wheelNeedsPassword = false;
+  services.printing.drivers = [ pkgs.hplipWithPlugin ];
   services.kubo = {
     enable = true;
     user = "wxt";
