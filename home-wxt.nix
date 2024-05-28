@@ -57,7 +57,7 @@
 
     # networking tools
     mtr # A network diagnostic tool
-    iperf3 wpsoffice
+    iperf3 wpsoffice-cn
     dnsutils  # `dig` + `nslookup`
     ldns # replacement of `dig`, it provide the command `drill`
     aria2 # A lightweight multi-protocol & multi-source command-line download utility
