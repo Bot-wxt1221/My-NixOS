@@ -47,7 +47,7 @@
     unzip gnomeExtensions.gsconnect
     openjdk17-bootstrap maven
     p7zip spotify
-    keepassxc motrix
+    keepassxc motrix krdc
     # utils
     ripgrep # recursively searches directories for a regex pattern
     jq # A lightweight and flexible command-line JSON processor
