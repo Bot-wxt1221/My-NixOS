@@ -81,7 +81,7 @@
     gnome.gnome-terminal dconf intel-gpu-tools
     linuxKernel.kernels.linux_rt_6_9 cpu-x
     gnome.gnome-tweaks
-    clash-verge-rev virt-manager libvirt
+    clash-verge-rev virt-manager libvirt nix-output-monitor
   ] ;
   virtualisation.libvirtd.enable = true;
   virtualisation.vswitch.enable = true;
