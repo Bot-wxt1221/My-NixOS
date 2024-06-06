@@ -17,6 +17,8 @@
   security.tpm2.pkcs11.enable = true;  # expose /run/current-system/sw/lib/libtpm2_pkcs11.so
   security.tpm2.tctiEnvironment.enable = true;  # TPM2TOOLS_TCTI and TPM2_PKCS11_TCTI env variables
   boot.loader.efi.canTouchEfiVariables = true;
+  nix.optimise.automatic = true;
+  nix.optimise.dates = [ "12:00" ]; # Optional; allows customizing optimisation schedule
   security.sudo.wheelNeedsPassword = false;
   services.printing.drivers = [ pkgs.hplipWithPlugin ];
   services.kubo = {
@@ -24,6 +26,11 @@
     user = "wxt";
     enableGC = false;
     autoMount = true;
+  };
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
   };
   virtualisation.kvmgt.enable = true;
   virtualisation.kvmgt.vgpus = {
