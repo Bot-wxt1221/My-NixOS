@@ -128,7 +128,7 @@
     userEmail = "3264117476@qq.com";
     extraConfig = {
       commit = { gpgsign = true; };
-      user = { signingKey = "BAE1C90CEF3BC55643AEFE37362D06E3991565DF"; };
+      user = { signingKey = "30A417022236AF61A3745C1C0DD874925162B3DB"; };
     };
   };
 
