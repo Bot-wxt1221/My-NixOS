@@ -10,8 +10,6 @@
     bilibili 
     microsoft-edge
     qq
-    neovim
-    neovide
     resources
     intel-gpu-tools
     xclip
