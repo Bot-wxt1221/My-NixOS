@@ -4,7 +4,7 @@
 
   ];
   home.file.".local/share/nvim/dapinstall/ccppr_vsc/extension/debugAdapters/bin/OpenDebugAD7" = {
-	source = lib.makeBinPath[pkgs.vscode-extension-ms-vscode-cpptools]/share/vscode/extensions/ms-vscode.cpptools/debugAdapters/bin/OpenDebugAD7;
+	source = lib.makeBinPath[pkgs.vscode-extensions.ms-vscode.cpptools]/share/vscode/extensions/ms-vscode.cpptools/debugAdapters/bin/OpenDebugAD7;
 	executable = true;
   };
   home.file."OI/.vscode/launch.json".text = ''
