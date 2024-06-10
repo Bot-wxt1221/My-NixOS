@@ -21,7 +21,7 @@
     scrcpy
     android-tools
     zip
-    xz
+    xz obs-studio
     unzip     
     p7zip spotify
     keepassxc
