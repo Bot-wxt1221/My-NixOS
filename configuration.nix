@@ -18,7 +18,7 @@
   time.timeZone = "Asia/Shanghai";
   users.users.wxt = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "docker" "adbusers" "libvirtd"];
     packages = with pkgs; [
     ];  
   };

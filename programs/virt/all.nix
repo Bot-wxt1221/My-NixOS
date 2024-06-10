@@ -8,5 +8,4 @@
   environment.systemPackages = with pkgs; [
     virt-manager
   ];
-  users.users.wxt.extraGroups = ["libvirt"];
 }

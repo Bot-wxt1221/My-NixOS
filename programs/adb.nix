@@ -3,7 +3,4 @@
   imports = [
 
   ];
-  users.users.wxt = {
-    extraGroups = [ "adbusers" ];
-  };
 }
