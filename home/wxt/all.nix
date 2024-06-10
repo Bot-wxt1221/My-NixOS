@@ -3,6 +3,7 @@
 {
   imports = [
     ./gpg.nix
+    ./debug-cc.nix
     ./virt.nix
     ./archive.nix
     ./java.nix
