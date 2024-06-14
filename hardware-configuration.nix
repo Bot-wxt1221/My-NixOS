@@ -9,11 +9,10 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
-  boot.initrd.kernelModules = ["i915" "nvidia" "vfio-iommu-type1" "kvmgt" "mdev"];
+  boot.initrd.kernelModules = ["i915" "nvidia" "vfio-iommu-type1" "kvmgt" "mdev" "acpi_call" "snd-aloop"];
   nixpkgs.config.packageOverrides = pkgs: {
     intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
   };
-  boot.initrd.kernelModules = [ "acpi_call" ];
   services.fstrim.enable = lib.mkDefault true;
    hardware.opengl = {
     enable = true;
