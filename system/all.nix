@@ -6,5 +6,6 @@
     ./audio.nix
     ./libinput.nix
     ./console.nix 
+    ./laptop.nix
   ];
 }
