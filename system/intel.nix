@@ -1,4 +1,4 @@
-{config ,pkgs, libs, ...}:{
+{config ,pkgs, lib, ...}:{
     environment.variables = {
       VDPAU_DRIVER = lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
     };
