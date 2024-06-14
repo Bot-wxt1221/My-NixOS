@@ -3,6 +3,7 @@
   imports = [
     ./kubo.nix
     ./nix/nix.nix
+    ./todesk.nix
     ./docker.nix
     ./clash-verge.nix
     ./virt/all.nix

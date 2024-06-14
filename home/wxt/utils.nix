@@ -7,6 +7,7 @@
     pavucontrol
     neofetch
     neovim.packages."${pkgs.system}".neovim
+    paprefs
     rustdesk
     weston
     bilibili 
