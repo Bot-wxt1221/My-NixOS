@@ -13,6 +13,8 @@
   nixpkgs.config.packageOverrides = pkgs: {
     intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
   };
+  boot.initrd.kernelModules = [ "acpi_call" ];
+  services.fstrim.enable = lib.mkDefault true;
    hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [
@@ -68,7 +70,7 @@
   boot.kernelParams = [ "i915.enable_guc=3" "nvidia_drm.fbdev=1" "nvidia_drm.modeset=1" "i915.enable_fbc=1" "i915.enable_execlists=0" "i915.enable_gvt=1"];
   services.xserver.videoDrivers = [ "modesettings" "nvidia" ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/acdb0489-78e4-46a4-bada-59ec4a6eb30e";
