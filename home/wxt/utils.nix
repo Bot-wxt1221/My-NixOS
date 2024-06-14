@@ -1,11 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, neovim, ... }:
 {
   imports = [
 
   ];
   home.packages = with pkgs;[
+    pavucontrol
     neofetch
-    neovim
+    neovim.packages."${pkgs.system}".neovim
     rustdesk
     weston
     bilibili 
