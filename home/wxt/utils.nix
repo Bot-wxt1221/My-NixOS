@@ -1,4 +1,4 @@
-{ config, pkgs, neovim, ... }:
+{configs ,pkgs ,...}:
 {
   imports = [
 
@@ -6,7 +6,6 @@
   home.packages = with pkgs;[
     pavucontrol
     neofetch
-    neovim.packages."${pkgs.system}".neovim
     paprefs
     rustdesk
     weston
