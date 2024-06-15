@@ -8,6 +8,7 @@
     neovim-src.url = "github:neovim/neovim"
     neovim.url = "github:nix-community/neovim-nightly-overlay/master";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
+    neovim.inputs.neovim-src.follows = "neovim-src";
   };
 
   outputs = { self, nixpkgs, home-manager, neovim, ... }@inputs: {
