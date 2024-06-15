@@ -35,7 +35,7 @@
     # Enable this if you have graphical corruption issues or application crashes after waking
     # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
     # of just the bare essentials.
-    powerManagement.enable = false;
+    powerManagement.enable = true;
 
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
@@ -58,12 +58,11 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     prime = {
        offload = {
-       	enable = true;
-			enableOffloadCmd = true;
-		};
-    # Make sure to use the correct Bus ID values for your system!
-    	nvidiaBusId = "PCI:1:0:0";
-	    intelBusId = "PCI:0:2:0";
+      	enable = true;
+	enableOffloadCmd = true;
+      };
+      nvidiaBusId = "PCI:1:0:0";
+      intelBusId = "PCI:0:2:0";
     };
   };
   boot.kernelParams = [ "i915.enable_guc=3" "nvidia_drm.fbdev=1" "nvidia_drm.modeset=1" "i915.enable_fbc=1" "i915.enable_execlists=0" "i915.enable_gvt=1"];
