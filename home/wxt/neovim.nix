@@ -3,5 +3,11 @@
   imports = [
 
   ];
-  neovim.packages."${pkgs.system}".neovim
+  programs.neovim={
+    enable = true;
+    package = neovim.packages.${pkgs.system}.default;
+    plugins = [
+	{ plugin = pkgs.vimPlugins.nvchad; }
+    ]
+  };
 }
