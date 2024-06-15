@@ -172,7 +172,9 @@
         "flake-parts": "flake-parts",
         "git-hooks": "git-hooks",
         "hercules-ci-effects": "hercules-ci-effects",
-        "neovim-src": "neovim-src",
+        "neovim-src": [
+          "neovim-src"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -195,11 +197,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1718407238,
-        "narHash": "sha256-eJ0qrdEWH7WRwLTBIXIOYB/DvBHvgvm6x4bBonkzXLQ=",
+        "lastModified": 1718418076,
+        "narHash": "sha256-k2XkHXrnFs1KNW3mEbEkj0+1gcrq3cFx3LfkRjWZzD4=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "199d852d9f8584217be38efb56b725aa3db62931",
+        "rev": "61aabe0730b547b733faaf74ff181ec8c33f8b92",
         "type": "github"
       },
       "original": {
@@ -228,6 +230,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "neovim": "neovim",
+        "neovim-src": "neovim-src",
         "nixpkgs": "nixpkgs"
       }
     }
