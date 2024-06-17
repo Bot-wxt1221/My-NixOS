@@ -44,7 +44,6 @@
     nmap # A utility for network discovery and security auditing
     ipcalc  # it is a calculator for the IPv4/v6 addresses
     alsa-firmware
-    libreoffice-fresh
     # misc
     cowsay
     file
