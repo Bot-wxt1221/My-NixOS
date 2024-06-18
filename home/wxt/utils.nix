@@ -5,6 +5,7 @@
   ];
   home.packages = with pkgs;[
     pavucontrol
+    cachix
     neofetch
     paprefs
     rustdesk
