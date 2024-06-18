@@ -8,6 +8,6 @@
     user = "wxt";
     enableGC = false;
     autoMount = true;
-    settings.Addresses.API = ["127.0.0.1:5001"];
+    settings.Addresses.API = ["/ip4/127.0.0.1/tcp/5001"];
   };
 }
