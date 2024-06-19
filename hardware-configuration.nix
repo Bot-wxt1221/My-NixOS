@@ -24,7 +24,7 @@
     driSupport32Bit = true;
   };
   boot.extraModprobeConfig = ''
-    options snd-aloop enable=1,1,1,1,1,1,1,1,1,1 index=0,1,2,3,4,5,6,7,8,9
+    options snd-aloop enable=1,1,1,1,1,1,1,1
   '';
   environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; 
   # Load nvidia driver for Xorg and Wayland
