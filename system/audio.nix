@@ -16,7 +16,7 @@
     pulse.enable = true;
     jack.enable = true;
   };
-  programs.pipewire.extraPackages = [pkgs.alsa-firmware];
+  hardware.firmware = [ pkgs.alsa-firmware ];
   services.pipewire.extraConfig.pipewire-pulse."92-low-latency" = {
     context.modules = [
       {
