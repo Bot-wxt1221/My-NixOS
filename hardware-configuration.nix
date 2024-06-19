@@ -9,7 +9,7 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = ["i915" "nvidia" "vfio-iommu-type1" "kvmgt" "mdev" "acpi_call"];
+  boot.initrd.kernelModules = ["i915" "nvidia" "vfio-iommu-type1" "kvmgt" "mdev" "acpi_call" "snd_aloop"];
   nixpkgs.config.packageOverrides = pkgs: {
     intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
   };
@@ -23,6 +23,9 @@
     driSupport = true;
     driSupport32Bit = true;
   };
+  boot.extraModprobeConfig = ''
+    options snd-aloop enable=1,1,1,1,1,1,1,1 index=0,1,2,3,4,5,6,7
+  '';
   environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; 
   # Load nvidia driver for Xorg and Wayland
 
