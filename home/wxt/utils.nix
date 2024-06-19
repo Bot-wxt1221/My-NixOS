@@ -4,11 +4,10 @@
 
   ];
   home.packages = with pkgs;[
-    pavucontrol
     cachix
     neofetch
-    paprefs
     rustdesk
+    helvum
     weston
     bilibili 
     microsoft-edge
