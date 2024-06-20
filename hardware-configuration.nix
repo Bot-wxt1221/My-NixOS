@@ -20,8 +20,6 @@
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
       libvdpau-va-gl
     ];
-    driSupport = true;
-    driSupport32Bit = true;
   };
   boot.extraModprobeConfig = ''
     options snd-aloop enable=1,1,1,1,1,1,1,1
