@@ -8,6 +8,7 @@
     neofetch
     rustdesk
     helvum
+    fractal
     weston
     bilibili 
     microsoft-edge
