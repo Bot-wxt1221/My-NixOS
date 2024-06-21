@@ -120,24 +120,16 @@
     "donate-over-proxy": 1,
     "pools": [
         {
-            "algo": null,
-            "coin": null,
-            "url": "donate.v2.xmrig.com:3333",
-            "user": "YOUR_WALLET_ADDRESS",
+            "coin": "monero",
+            "algo": "rx/0",
+            "url": "zeph.kryptex.network:8888",
+            "user": "ZEPHYR2TBe6hELPtyzNESeREMtVrx3DziTDfftLfScPq66K8h7fUxNbQGouJXHhRxYjgiNsyVwGJ4QzQf15W7viTEFPwLEYV6PW4G/wxt",
             "pass": "x",
-            "rig-id": null,
-            "nicehash": false,
-            "keepalive": false,
-            "enabled": true,
-            "tls": false,
-            "sni": false,
-            "tls-fingerprint": null,
-            "daemon": false,
-            "socks5": null,
-            "self-select": null,
-            "submit-to-origin": false
+            "tls": true,
+            "keepalive": true,
+            "nicehash": false
         }
-    ],
+    ]
     "retries": 5,
     "retry-pause": 5,
     "print-time": 60,
