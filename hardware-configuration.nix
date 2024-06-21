@@ -67,7 +67,7 @@
       intelBusId = "PCI:0:2:0";
     };
   };
-  boot.kernelParams = [ "i915.enable_guc=3" "nvidia_drm.fbdev=1" "nvidia_drm.modeset=1" "i915.enable_fbc=1" "i915.enable_execlists=0" "i915.enable_gvt=1" "acpi_osi=Linux-Dell-Video"];
+  boot.kernelParams = [ "i915.enable_guc=3" "nvidia_drm.fbdev=1" "nvidia_drm.modeset=1" "i915.enable_fbc=1" "i915.enable_execlists=0" "i915.enable_gvt=1" "acpi_osi=Linux-Dell-Video" "hugepagesz=1GB" "default_hugepagesz=1GB" "hugepages=3"];
   services.xserver.videoDrivers = [ "modesettings" "nvidia" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
