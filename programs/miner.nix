@@ -7,5 +7,5 @@
     pkgs.xmrig
   ];
   services.xmrig.enable = true;
-  services.xmrig.settings = libs.fromJSON (libs.readFile "miner.json");
+  services.xmrig.settings = lib.fromJSON (lib.readFile "miner.json");
 }
