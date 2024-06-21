@@ -7,7 +7,7 @@
     xmrig
   ];
   services.xmrig.enable = true;
-  services.xmrig.settings = {
+  services.xmrig.settings = ''{
     "api": {
         "id": null,
         "worker-id": null
@@ -161,5 +161,5 @@
     "watch": true,
     "pause-on-battery": false,
     "pause-on-active": false
-};
+}'';
 }
