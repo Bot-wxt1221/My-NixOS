@@ -22,22 +22,22 @@
       {
         name = "libpipewire-module-protocol-pulse";
         args = {
-          pulse.min.req = "2560/48000";
-          pulse.default.req = "2560/48000";
-          pulse.max.req = "2560/48000";
-          pulse.min.quantum = "2560/48000";
-          pulse.max.quantum = "2560/48000";
+          pulse.min.req = "4000/48000";
+          pulse.default.req = "4000/48000";
+          pulse.max.req = "4000/48000";
+          pulse.min.quantum = "4000/48000";
+          pulse.max.quantum = "4000/48000";
         };
       }
     ];
     context.properties = {
       default.clock.rate = 48000;
-      default.clock.quantum = 2560;
-      default.clock.min-quantum = 2560;
-      default.clock.max-quantum = 2560;
+      default.clock.quantum = 4000;
+      default.clock.min-quantum = 4000;
+      default.clock.max-quantum = 4000;
     };
     stream.properties = {
-      node.latency = "2560/48000";
+      node.latency = "4000/48000";
       resample.quality = 1;
     };
   };
