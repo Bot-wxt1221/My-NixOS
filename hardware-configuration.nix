@@ -13,6 +13,7 @@
   nixpkgs.config.packageOverrides = pkgs: {
     intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
   };
+  services.hardware.bolt.enable = true;
   services.fstrim.enable = lib.mkDefault true;
   hardware.graphics = {
     enable = true;
