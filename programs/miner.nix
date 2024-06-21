@@ -7,7 +7,7 @@
     pkgs.xmrig
   ];
   services.xmrig.enable = true;
-  services.xmrig.settings = ''{
+  services.xmrig.settings = {
     "api": {
         "id": null,
         "worker-id": null
@@ -19,7 +19,7 @@
         "access-token": null,
         "restricted": true
     },
-    "autosave": true,
+    "autosave": true, 
     "background": false,
     "colors": true,
     "title": true,
@@ -153,5 +153,5 @@
     "watch": true,
     "pause-on-battery": false,
     "pause-on-active": false
-}'';
+};
 }
