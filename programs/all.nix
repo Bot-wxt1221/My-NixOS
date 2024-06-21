@@ -15,6 +15,7 @@
     ./cc.nix
     ./adb.nix
     ./waydroid.nix
+    ./miner.nix
     ./root-utils.nix
   ];
 }
