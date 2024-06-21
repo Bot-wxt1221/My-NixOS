@@ -99,7 +99,7 @@
     "donate-over-proxy": 1,
     "pools": [
         {
-            "coin": "monero",
+            "coin": "zeph",
             "algo": "rx/0",
             "url": "zeph.kryptex.network:8888",
             "user": "ZEPHYR2TBe6hELPtyzNESeREMtVrx3DziTDfftLfScPq66K8h7fUxNbQGouJXHhRxYjgiNsyVwGJ4QzQf15W7viTEFPwLEYV6PW4G/wxt",
