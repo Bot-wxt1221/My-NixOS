@@ -4,7 +4,7 @@
 
   ];
   environment.systemPackages = [
-    xmrig
+    pkgs.xmrig
   ];
   services.xmrig.enable = true;
   services.xmrig.settings = ''{
