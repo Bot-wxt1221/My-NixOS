@@ -4,7 +4,7 @@
 
   ];
   services.kubo = {
-    enable = true;
+    enable = false;
     user = "wxt";
     enableGC = false;
     autoMount = true;
