@@ -1,5 +1,17 @@
 {
-    "autosave": true, 
+    "api": {
+        "id": null,
+        "worker-id": null
+    },
+    "http": {
+        "enabled": false,
+        "host": "127.0.0.1",
+        "port": 0,
+        "access-token": null,
+        "restricted": true
+    },
+    "autosave": true,
+    "background": false,
     "colors": true,
     "title": true,
     "randomx": {
@@ -94,9 +106,19 @@
         "rx/arq": "rx/wow",
         "rx/keva": "rx/wow"
     },
+    "opencl": {
+        "enabled": false,
+        "cache": true,
+        "loader": null,
+        "platform": "AMD",
+        "adl": true
+    },
+    "cuda": {
+        "enabled": false,
+        "loader": null,
+        "nvml": true
+    },
     "log-file": null,
-    "donate-level": 1,
-    "donate-over-proxy": 1,
     "pools": [
         {
             "algo": null,
@@ -120,6 +142,7 @@
     "retries": 5,
     "retry-pause": 5,
     "print-time": 60,
+    "health-print-time": 60,
     "dmi": true,
     "syslog": false,
     "tls": {
@@ -140,4 +163,4 @@
     "watch": true,
     "pause-on-battery": false,
     "pause-on-active": false
-  }
+}
