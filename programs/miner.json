@@ -1,5 +1,17 @@
 {
-    "autosave": true, 
+    "api": {
+        "id": null,
+        "worker-id": null
+    },
+    "http": {
+        "enabled": false,
+        "host": "127.0.0.1",
+        "port": 0,
+        "access-token": null,
+        "restricted": true
+    },
+    "autosave": true,
+    "background": false,
     "colors": true,
     "title": true,
     "randomx": {
@@ -16,7 +28,7 @@
     "cpu": {
         "enabled": true,
         "huge-pages": true,
-        "huge-pages-jit": true,
+        "huge-pages-jit": false,
         "hw-aes": null,
         "priority": null,
         "memory-pool": false,
@@ -94,24 +106,49 @@
         "rx/arq": "rx/wow",
         "rx/keva": "rx/wow"
     },
+    "opencl": {
+        "enabled": false,
+        "cache": true,
+        "loader": null,
+        "platform": "AMD",
+        "adl": true,
+        "cn-lite/0": false,
+        "cn/0": false
+    },
+    "cuda": {
+        "enabled": false,
+        "loader": null,
+        "nvml": true,
+        "cn-lite/0": false,
+        "cn/0": false
+    },
     "log-file": null,
     "donate-level": 1,
     "donate-over-proxy": 1,
     "pools": [
         {
-            "coin": "zeph",
-            "algo": "rx/0",
-            "url": "zeph.kryptex.network:8888",
-            "user": "ZEPHYR2TBe6hELPtyzNESeREMtVrx3DziTDfftLfScPq66K8h7fUxNbQGouJXHhRxYjgiNsyVwGJ4QzQf15W7viTEFPwLEYV6PW4G/wxt",
-            "pass": "x",
+            "algo": null,
+            "coin": null,
+            "url": "pool.hashvault.pro:3333",
+            "user": "ZEPHYR2TBe6hELPtyzNESeREMtVrx3DziTDfftLfScPq66K8h7fUxNbQGouJXHhRxYjgiNsyVwGJ4QzQf15W7viTEFPwLEYV6PW4G",
+            "pass": "wxt",
+            "rig-id": null,
+            "nicehash": false,
+            "keepalive": false,
+            "enabled": true,
             "tls": true,
-            "keepalive": true,
-            "nicehash": false
+            "sni": false,
+            "tls-fingerprint": "420c7850e09b7c0bdcf748a7da9eb3647daf8515718f36d9ccfdd6b9ff834b14",
+            "daemon": false,
+            "socks5": null,
+            "self-select": null,
+            "submit-to-origin": false
         }
     ],
     "retries": 5,
     "retry-pause": 5,
     "print-time": 60,
+    "health-print-time": 60,
     "dmi": true,
     "syslog": false,
     "tls": {
@@ -130,6 +167,6 @@
     "user-agent": null,
     "verbose": 0,
     "watch": true,
-    "pause-on-battery": false,
+    "pause-on-battery": true,
     "pause-on-active": false
-  }
+}
