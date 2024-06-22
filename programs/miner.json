@@ -1,17 +1,5 @@
 {
-    "api": {
-        "id": null,
-        "worker-id": null
-    },
-    "http": {
-        "enabled": false,
-        "host": "127.0.0.1",
-        "port": 0,
-        "access-token": null,
-        "restricted": true
-    },
-    "autosave": true,
-    "background": false,
+    "autosave": true, 
     "colors": true,
     "title": true,
     "randomx": {
@@ -28,8 +16,8 @@
     "cpu": {
         "enabled": true,
         "huge-pages": true,
-        "huge-pages-jit": true,
-        "hw-aes": true,
+        "huge-pages-jit": false,
+        "hw-aes": null,
         "priority": null,
         "memory-pool": false,
         "yield": true,
@@ -106,22 +94,6 @@
         "rx/arq": "rx/wow",
         "rx/keva": "rx/wow"
     },
-    "opencl": {
-        "enabled": false,
-        "cache": true,
-        "loader": null,
-        "platform": "AMD",
-        "adl": true,
-        "cn-lite/0": false,
-        "cn/0": false
-    },
-    "cuda": {
-        "enabled": false,
-        "loader": null,
-        "nvml": true,
-        "cn-lite/0": false,
-        "cn/0": false
-    },
     "log-file": null,
     "donate-level": 1,
     "donate-over-proxy": 1,
@@ -136,7 +108,7 @@
             "nicehash": false,
             "keepalive": false,
             "enabled": true,
-            "tls": true,
+            "tls": false,
             "sni": false,
             "tls-fingerprint": "420c7850e09b7c0bdcf748a7da9eb3647daf8515718f36d9ccfdd6b9ff834b14",
             "daemon": false,
@@ -148,7 +120,6 @@
     "retries": 5,
     "retry-pause": 5,
     "print-time": 60,
-    "health-print-time": 60,
     "dmi": true,
     "syslog": false,
     "tls": {
@@ -169,4 +140,4 @@
     "watch": true,
     "pause-on-battery": false,
     "pause-on-active": false
-}
+  }
