@@ -3,9 +3,9 @@
   imports = [
 
   ];
-  boot.kernelPackages = pkgs.linuxKernel.kernels.linux_zen_latest;
+  boot.kernelPackages = pkgs.linuxKernel.kernels.linux_zen;
   environment.systemPackages = with pkgs; [
-    pkgs.linuxKernel.kernels.linux_zen_latest
+    pkgs.linuxKernel.kernels.linux_zen
   ];
   boot.kernelParams = [
     "acpi_osi=Linux-Dell-Video"
