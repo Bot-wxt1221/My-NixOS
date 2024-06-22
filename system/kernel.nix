@@ -3,7 +3,7 @@
   imports = [
 
   ];
-  boot.kernelPackages = pkgs.linuxKernel.kernels.linux_zen;
+  boot.kernelPackages = linuxKernel.kernels.linux_zen;
   environment.systemPackages = with pkgs; [
     linuxKernel.kernels.linux_zen
   ];
