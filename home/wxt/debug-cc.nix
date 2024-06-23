@@ -5,6 +5,7 @@
   ];
   home.file.".local/share/OpenDebugAD7/OpenDebugAD7".source = "${pkgs.vscode-extensions.ms-vscode.cpptools}/share/vscode/extensions/ms-vscode.cpptools/debugAdapters/bin/OpenDebugAD7";
   home.file.".local/share/OpenDebugAD7/OpenDebugAD7".executable = true;
+  home.file."OI/.vscode/launch.json".text = ''
 {
     "version": "0.2.0",
     "configurations": [
