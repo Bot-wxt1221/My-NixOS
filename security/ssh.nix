@@ -8,6 +8,6 @@
     enableSSHSupport = true;
   };
   services.openssh.enable = true;
-  settings.PasswordAuthentication = false;
-  settings.KbdInteractiveAuthentication = false;
+  services.openssh.settings.PasswordAuthentication = false;
+  services.openssh.settings.KbdInteractiveAuthentication = false;
 }
