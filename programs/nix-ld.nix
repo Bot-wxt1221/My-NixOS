@@ -7,5 +7,6 @@
   programs.nix-ld.libraries = with pkgs; [
     fuse3
     fuse2
+    glib
   ];
 }
