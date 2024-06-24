@@ -25,6 +25,7 @@
         "numa": true,
         "scratchpad_prefetch_mode": 1
     },
+    "cuda": true,
     "cpu": {
         "enabled": true,
         "huge-pages": true,
