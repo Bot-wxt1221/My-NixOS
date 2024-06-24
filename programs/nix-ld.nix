@@ -7,7 +7,7 @@
   programs.nix-ld.libraries = with pkgs; [
     fuse3
     curl
-    libcrypto
+    crypto
     fuse2
     glib
   ];
