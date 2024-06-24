@@ -59,9 +59,8 @@
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     prime = {
-       offload = {
+       sync = {
       	enable = true;
-	enableOffloadCmd = true;
       };
       nvidiaBusId = "PCI:1:0:0";
       intelBusId = "PCI:0:2:0";

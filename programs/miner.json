@@ -25,9 +25,6 @@
         "numa": true,
         "scratchpad_prefetch_mode": 1
     },
-    "cuda": {
-       "enable": true
-    },
     "cpu": {
         "enabled": true,
         "huge-pages": true,
@@ -117,8 +114,8 @@
         "adl": true
     },
     "cuda": {
-        "enabled": false,
-        "loader": null,
+        "enabled": true,
+        "loader": "/home/wxt/libxmrig-cuda.so",
         "nvml": true
     },
     "log-file": null,
@@ -126,8 +123,8 @@
         {
             "algo": null,
             "coin": null,
-	    "url": "192.168.2.114:3333",
-            "url_bk": "pool.hashvault.pro:3333",
+	    "url_bk": "192.168.2.114:3333",
+            "url": "pool.hashvault.pro:3333",
             "user": "ZEPHYR2TBe6hELPtyzNESeREMtVrx3DziTDfftLfScPq66K8h7fUxNbQGouJXHhRxYjgiNsyVwGJ4QzQf15W7viTEFPwLEYV6PW4G",
             "pass": "wxt",
             "rig-id": null,
