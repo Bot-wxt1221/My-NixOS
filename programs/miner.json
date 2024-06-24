@@ -27,7 +27,6 @@
     },
     "cuda": {
        "enable": true,
-       "loader": 
     },
     "cpu": {
         "enabled": true,
