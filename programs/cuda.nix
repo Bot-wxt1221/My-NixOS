@@ -7,7 +7,7 @@
     cudatoolkit
     linuxPackages.nvidia_x11
   ];
-  environment.sessionVariables = {
-    CUDA_PATH = "${pkgs.cudatoolkit}";
-  };
+  #environment.sessionVariables = {
+  #  CUDA_PATH = "${pkgs.cudatoolkit}";
+  #};
 }

@@ -18,5 +18,6 @@
     ./miner.nix
     ./root-utils.nix
     ./nix-ld.nix
+    ./cuda.nix
   ];
 }
