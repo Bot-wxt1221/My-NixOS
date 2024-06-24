@@ -24,8 +24,8 @@
     };
     history.size = 10000;
     history.path = "${config.xdg.dataHome}/zsh/history";
+    zshrcExtra = ''
+      export CUDA_PATH="${pkgs.cudatoolkit}"
+    '';
   };
-  zshrcExtra = ''
-    export CUDA_PATH="${pkgs.cudatoolkit}"
-  '';
 }
