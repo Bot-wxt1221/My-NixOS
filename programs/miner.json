@@ -26,7 +26,7 @@
         "scratchpad_prefetch_mode": 1
     },
     "cuda": {
-       "enable": true,
+       "enable": true
     },
     "cpu": {
         "enabled": true,
