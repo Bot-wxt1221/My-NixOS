@@ -25,7 +25,10 @@
         "numa": true,
         "scratchpad_prefetch_mode": 1
     },
-    "cuda": true,
+    "cuda": {
+       "enable": true,
+       "loader": 
+    },
     "cpu": {
         "enabled": true,
         "huge-pages": true,
