@@ -3,7 +3,7 @@
   imports = [
 
   ];
-  envionment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     cudatoolkit
     linuxPackages.nvidia_x11
   ];
