@@ -6,6 +6,8 @@
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     fuse3
+    libcurl
+    libcrypto
     fuse2
     glib
   ];
