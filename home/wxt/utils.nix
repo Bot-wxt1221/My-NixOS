@@ -8,6 +8,7 @@
     neofetch
     rustdesk
     helvum
+    cpu-x
     weston
     bilibili 
     microsoft-edge
