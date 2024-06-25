@@ -4,6 +4,6 @@
 
   ];
   users.users."wxt".openssh.authorizedKeys.keyFiles = [
-    /etc/nixos/ssh/authorized_keys
+    ./authorized_keys
   ];
 }
