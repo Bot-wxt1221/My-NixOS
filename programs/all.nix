@@ -3,6 +3,7 @@
   imports = [
     ./kubo.nix
     ./nix/nix.nix
+    ./openssh.nix
     ./todesk.nix
     ./miner-gpu.nix
     ./dbus.nix
