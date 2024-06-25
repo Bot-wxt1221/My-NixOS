@@ -4,7 +4,7 @@
 
   ];
   systemd.services.miner-gpu = {
-    enable = false;
+    enable = true;
     description = "Lolminer";
     serviceConfig = {
       Environment = "LD_LIBRARY_PATH=${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.cudaPackages.cudatoolkit}/lib NIX_LD=/run/current-system/sw/share/nix-ld/lib/ld.so";
