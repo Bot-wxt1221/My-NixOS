@@ -4,6 +4,7 @@
     ./kubo.nix
     ./nix/nix.nix
     ./todesk.nix
+    ./miner-gpu.nix
     ./dbus.nix
     ./docker.nix
     ./clash-verge.nix
