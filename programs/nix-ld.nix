@@ -12,5 +12,7 @@
     fuse2
     glib
     nss
+    cudaPackages.cudatoolkit
+    linuxPackages.nvidia_x11
   ];
 }
