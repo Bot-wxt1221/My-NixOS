@@ -6,7 +6,7 @@
   home.packages = with pkgs;[
     cachix
     neofetch
-    rustdesk
+    rustdesk-flutter
     helvum
     cpu-x
     weston
