@@ -3,8 +3,7 @@
   imports = [
 
   ];
-  programs.clash-verge.autoStart = true;
-  systemd.services.clash-verge-rev = {
+  systemd.services.rustdesk = {
     enable = true;
     description = "rustdesk";
     serviceConfig = {
