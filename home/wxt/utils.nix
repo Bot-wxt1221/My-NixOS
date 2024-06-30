@@ -14,6 +14,7 @@
     microsoft-edge
     qq
     resources
+    obs-studio
     intel-gpu-tools
     xclip
     vscode-extensions.ms-vscode.cpptools 
