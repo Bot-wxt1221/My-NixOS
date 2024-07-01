@@ -20,7 +20,7 @@
     extraPackages = with pkgs; [
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
       libvdpau-va-gl
-      rocmPackages.clr.icd
+      intel-ocl
       nvidia-vaapi-driver
     ];
   };
