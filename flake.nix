@@ -16,6 +16,7 @@
     nixosConfigurations.wxt = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
+       specialArgs = { inherit nixpkgs;};
        ./configuration.nix
         home-manager.nixosModules.home-manager
           {
