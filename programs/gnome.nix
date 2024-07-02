@@ -8,8 +8,8 @@
   services.xserver.displayManager.gdm.enable = true;
   environment.systemPackages = with pkgs; [
     dconf
-    gnome.gnome-terminal
-    gnome.gnome-tweaks
+    gnome-terminal
+    gnome-tweaks
     gnomeExtensions.gsconnect
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-panel
