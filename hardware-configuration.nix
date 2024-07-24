@@ -19,10 +19,17 @@
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      vaapiIntel 
+      libva
       libvdpau-va-gl
-      intel-ocl
+      vaapiVdpau
+      ocl-icd
+      intel-compute-runtime
       nvidia-vaapi-driver
+    ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [
+      vaapiVdpau
+      libvdpau-va-gl
     ];
   };
   boot.extraModprobeConfig = ''
