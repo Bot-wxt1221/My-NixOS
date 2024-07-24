@@ -36,7 +36,7 @@
   boot.extraModprobeConfig = ''
     options snd-aloop enable=1,1,1,1,1,1,1,1
   '';
-  hardware.nvidia.dynamicBoost.enable
+  hardware.nvidia.dynamicBoost.enable = true;
   environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; 
   # Load nvidia driver for Xorg and Wayland
 
