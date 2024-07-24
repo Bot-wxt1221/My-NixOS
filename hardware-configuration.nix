@@ -24,6 +24,7 @@
       libvdpau-va-gl
       vaapiVdpau
       ocl-icd
+      intel-ocl
       intel-compute-runtime
       nvidia-vaapi-driver
     ];
