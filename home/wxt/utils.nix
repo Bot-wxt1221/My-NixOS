@@ -3,14 +3,12 @@
   imports = [
 
   ];
-  bilibili-edit=pkgs.bilibili.overrideAttrs(
-      rec{
-        src = pkgs.fetchurl {
-          url = "https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-1/io.github.msojocs.bilibili_1.14.0-1_amd64.deb";
-          hash = "sha256-iflq6Rgj5PUvtIJ2FCBO4ki8Tf6LNHZrxKXKYjqD/Qo=";
-        };
-      }
-  );
+  bilibili-edit=pkgs.bilibili.overrideAttrs{
+    src = pkgs.fetchurl {
+      url = "https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-1/io.github.msojocs.bilibili_1.14.0-1_amd64.deb";
+      hash = "sha256-iflq6Rgj5PUvtIJ2FCBO4ki8Tf6LNHZrxKXKYjqD/Qo=";
+    };
+  };
   home.packages = with pkgs;[
     cachix
     neofetch
