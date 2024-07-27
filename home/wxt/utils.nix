@@ -10,7 +10,14 @@
     helvum
     cpu-x
     weston
-    bilibili 
+    bilibili.overrideAttrs(
+      rec{
+        src = fetchurl {
+          url = "https://github.com/msojocs/bilibili-linux/releases/download/v${version}/io.github.msojocs.bilibili_${version}_amd64.deb";
+          hash = "sha256-iflq6Rgj5PUvtIJ2FCBO4ki8Tf6LNHZrxKXKYjqD/Qo=";
+        };
+      }
+    )
     microsoft-edge
     qq
     resources
