@@ -3,7 +3,7 @@
   imports = [
 
   ];
-  bilibili-edit=bilibili.overrideAttrs(
+  bilibili-edit=pkgs.bilibili.overrideAttrs(
       rec{
         src = fetchurl {
           url = "https://github.com/msojocs/bilibili-linux/releases/download/v${version}/io.github.msojocs.bilibili_${version}_amd64.deb";
