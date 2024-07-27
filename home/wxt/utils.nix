@@ -15,7 +15,7 @@
         url = "https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-1/io.github.msojocs.bilibili_1.14.0-1_amd64.deb";
         hash = "sha256-iflq6Rgj5PUvtIJ2FCBO4ki8Tf6LNHZrxKXKYjqD/Qo=";
       };
-    };
+    }
     microsoft-edge
     qq
     resources
