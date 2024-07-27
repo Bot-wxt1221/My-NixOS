@@ -3,14 +3,7 @@
   imports = [
 
   ];
-  home.packages = with pkgs;[
-    cachix
-    neofetch
-    rustdesk-flutter
-    helvum
-    cpu-x
-    weston
-    bilibili.overrideAttrs(
+  bilibili-edit=bilibili.overrideAttrs(
       rec{
         src = fetchurl {
           url = "https://github.com/msojocs/bilibili-linux/releases/download/v${version}/io.github.msojocs.bilibili_${version}_amd64.deb";
@@ -18,6 +11,14 @@
         };
       }
     )
+  home.packages = with pkgs;[
+    cachix
+    neofetch
+    rustdesk-flutter
+    helvum
+    cpu-x
+    weston
+    bilibili-edit
     microsoft-edge
     qq
     resources
