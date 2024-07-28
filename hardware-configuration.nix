@@ -36,7 +36,6 @@
   boot.extraModprobeConfig = ''
     options snd-aloop enable=1,1,1,1,1,1,1,1
   '';
-  hardware.nvidia.dynamicBoost.enable = true;
   environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; 
   # Load nvidia driver for Xorg and Wayland
 
@@ -49,7 +48,7 @@
     # Enable this if you have graphical corruption issues or application crashes after waking
     # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
     # of just the bare essentials.
-    powerManagement.enable = false;
+    powerManagement.enable = true;
 
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
