@@ -2,7 +2,7 @@
   description = "Main config";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/master";
+    nixpkgs.url = "github:Bot-wxt1221/nixpkgs/master";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     neovim-src.url = "github:neovim/neovim";
@@ -23,7 +23,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.wxt = import ./home/wxt/all.nix;
-	    home-manager.extraSpecialArgs = {inherit neovim;};
+      	    home-manager.extraSpecialArgs = {inherit neovim;};
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
           }
