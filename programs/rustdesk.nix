@@ -7,7 +7,7 @@
     enable = true;
     description = "rustdesk";
     serviceConfig = {
-      ExecStart = "${pkgs.rustdesk}/bin/rustdesk --service";
+      ExecStart = "${pkgs.rustdesk-flutter}/bin/rustdesk --service";
       ExecStop = "pkill -f \"rustdesk --\"";
       PIDFile = "/run/rustdesk.pid";
       KillMode = "mixed";
@@ -21,6 +21,5 @@
   };
   environment.systemPackages = with pkgs; [
     rustdesk-flutter
-    rustdesk
   ];
 }
