@@ -26,7 +26,7 @@ systemd.services.todeskd = {
       ];
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${cfg.package}/bin/todesk service";
+        ExecStart = "${pkgs.todesk}/bin/todesk service";
         ExecReload = "${pkgs.coreutils}/bin/kill -SIGINT $MAINPID";
         Restart = "on-failure";
         User = "root";
