@@ -14,9 +14,33 @@
       ./font.nix
       ./programs/all.nix
       ./system/all.nix
-      ./todesk.nix
     ];
-    services.todesk2.enable = true;
+systemd.services.todeskd = {
+      description = "ToDesk Daemon Service";
+
+      wantedBy = [ "multi-user.target" ];
+      wants = [
+        "network-online.target"
+	"display-manager.service"
+        "nss-lookup.target"
+      ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${cfg.package}/bin/todesk service";
+        ExecReload = "${pkgs.coreutils}/bin/kill -SIGINT $MAINPID";
+        Restart = "on-failure";
+        User = "root";
+        Group = "root";
+        WorkingDirectory = "/var/lib/todesk";
+        StateDirectory = "todesk";
+        StateDirectoryMode = "0777"; # Desktop application read /opt/todesk/config/config.ini. Such a pain!
+#        ProtectSystem = "strict";
+        ProtectHome = "read-only";
+#        PrivateTmp = "yes";
+        RemoveIPC = "yes";
+      };
+    };
+
   time.timeZone = "Asia/Shanghai";
   users.users.wxt = {
     isNormalUser = true;
