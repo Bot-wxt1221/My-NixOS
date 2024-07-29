@@ -14,7 +14,9 @@
       ./font.nix
       ./programs/all.nix
       ./system/all.nix
+      ./todesk.nix
     ];
+    services.todesk2.enable = true;
   time.timeZone = "Asia/Shanghai";
   users.users.wxt = {
     isNormalUser = true;
