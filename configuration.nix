@@ -31,13 +31,13 @@ systemd.services.todeskd = {
         Restart = "on-failure";
         User = "root";
         Group = "root";
-        WorkingDirectory = "/var/lib/todesk";
-        StateDirectory = "todesk";
-        StateDirectoryMode = "0777"; # Desktop application read /opt/todesk/config/config.ini. Such a pain!
+#        WorkingDirectory = "/var/lib/todesk";
+#        StateDirectory = "todesk";
+#        StateDirectoryMode = "0777"; # Desktop application read /opt/todesk/config/config.ini. Such a pain!
 #        ProtectSystem = "strict";
-        ProtectHome = "read-only";
+#        ProtectHome = "read-only";
 #        PrivateTmp = "yes";
-        RemoveIPC = "yes";
+#        RemoveIPC = "yes";
       };
     };
   environment.systemPackages = [pkgs.todesk];
