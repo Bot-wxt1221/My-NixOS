@@ -40,7 +40,7 @@ systemd.services.todeskd = {
         RemoveIPC = "yes";
       };
     };
-
+  environment.systemPackages = [pkgs.todesk];
   time.timeZone = "Asia/Shanghai";
   users.users.wxt = {
     isNormalUser = true;
