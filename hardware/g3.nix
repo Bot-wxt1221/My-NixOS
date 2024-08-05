@@ -3,6 +3,10 @@
 {
   imports = [
     ./g3-hardware-configuration.nix
+    ../system/intel.nix
+    ../system/laptop.nix
+    ../system/libinput.nix
+    ../programs/cuda.nix
   ];
   boot.initrd.kernelModules = ["i915" "vfio-iommu-type1" "kvmgt" "mdev" "acpi_call" "snd_aloop"];
   nixpkgs.config.packageOverrides = pkgs: {

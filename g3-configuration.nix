@@ -7,7 +7,6 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware/g3-hardware-configuration.nix
       ./network
       ./hardware/g3.nix
       ./security
@@ -19,6 +18,9 @@
   time.timeZone = "Asia/Shanghai";
   Ownhostname = "wxt-g3";
   Enablepipewire = true;
+  EnableWaydroid = true;
+  EnableMineGPU =true;
+  EnableMineCPU = true;
   users.users.wxt = {
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" "adbusers" "libvirtd"];

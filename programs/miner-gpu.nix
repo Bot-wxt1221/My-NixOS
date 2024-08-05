@@ -3,6 +3,13 @@
   imports = [
 
   ];
+  options ={
+  EnableMineGPU = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+    };
+  };
+  config = lib.mkIf config.EnableMineGPU{
   systemd.services.miner-gpu = {
     enable = true;
     description = "Lolminer";
@@ -13,4 +20,5 @@
     };
     wantedBy = [ "multi-user.target" ];
   };
+  }
 }
