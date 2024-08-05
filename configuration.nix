@@ -8,12 +8,12 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./network/all.nix
-      ./security/all.nix
+      ./network
+      ./security
       ./printing.nix
       ./font.nix
-      ./programs/all.nix
-      ./system/all.nix
+      ./programs
+      ./system
     ];
   time.timeZone = "Asia/Shanghai";
   users.users.wxt = {

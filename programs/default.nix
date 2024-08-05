@@ -10,7 +10,7 @@
     ./dbus.nix
     ./docker.nix
     ./clash-verge.nix
-    ./virt/all.nix
+    ./virt
     ./flatpak.nix
     ./qt.nix
     ./gnome.nix
