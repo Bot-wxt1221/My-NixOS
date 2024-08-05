@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./network
+      ./hardware/g3.nix
       ./security
       ./printing.nix
       ./font.nix
