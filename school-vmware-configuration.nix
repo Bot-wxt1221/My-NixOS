@@ -12,4 +12,10 @@
   time.timeZone = "Asia/Shanghai";
   Enablepulseaudio = true;
   Ownhostname = "wxt-school-vmware";
+  users.users.wxt = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "docker" "adbusers" ];
+    packages = with pkgs; [
+    ];  
+  };
 }
