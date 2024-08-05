@@ -17,7 +17,7 @@
       system = "x86_64-linux";
       specialArgs = { inherit nixpkgs; };
       modules = [
-       ./configuration.nix
+       ./g3-configuration.nix
         home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

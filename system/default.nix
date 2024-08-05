@@ -3,7 +3,8 @@
   imports = [
     ./grub.nix
     ./kernel.nix
-    ./audio.nix
+    ./audio-pipewire.nix
+    ./audio-pulse.nix
     ./intel.nix
     ./libinput.nix
     ./console.nix 
