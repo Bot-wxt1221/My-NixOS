@@ -10,6 +10,7 @@
     helvum
     cpu-x
     weston
+    nixfmt-rfc-style
     (pkgs.bilibili.overrideAttrs{
       src = pkgs.fetchurl {
         url = "https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-1/io.github.msojocs.bilibili_1.14.0-1_amd64.deb";
