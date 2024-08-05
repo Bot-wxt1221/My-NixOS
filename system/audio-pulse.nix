@@ -7,7 +7,6 @@
     };
   };
   config = lib.mkIf config.Enablepulseaudio {
-    sound.enable = true;
     hardware.pulseaudio.enable = true;
   };
 }
