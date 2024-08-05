@@ -20,5 +20,5 @@
     };
     wantedBy = [ "multi-user.target" ];
   };
-  }
+  };
 }
