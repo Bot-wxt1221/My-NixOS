@@ -13,7 +13,7 @@
   };
 
   outputs = { self, nixpkgs, home-manager, neovim, ...}@inputs: {
-    nixosConfigurations.wxt = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.wxt-g3 = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit nixpkgs; };
       modules = [
