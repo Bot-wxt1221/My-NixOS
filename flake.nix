@@ -7,7 +7,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     neovim-src.url = "github:neovim/neovim";
     neovim-src.flake = false;
-    neovim.url = "github:nix-community/neovim-nightly-overlay/master";
+    neovim.url = "github:Bot-wxt1221/neovim-nightly-overlay/master";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
     neovim.inputs.neovim-src.follows = "neovim-src";
   };
