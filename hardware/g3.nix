@@ -1,7 +1,7 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  import = [
+  imports = [
     ./g3-hardware-configuration.nix
   ];
   boot.initrd.kernelModules = ["i915" "vfio-iommu-type1" "kvmgt" "mdev" "acpi_call" "snd_aloop"];
