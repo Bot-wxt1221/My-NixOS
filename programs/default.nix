@@ -6,7 +6,7 @@
     ./rustdesk.nix
     ./openssh.nix
     ./fuse.nix
-    ./todesk.nix
+#    ./todesk.nix
     ./miner-gpu.nix
     ./dbus.nix
     ./docker.nix
