@@ -33,6 +33,19 @@ in
         url = "https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-1/io.github.msojocs.bilibili_1.14.0-1_amd64.deb";
         hash = "sha256-iflq6Rgj5PUvtIJ2FCBO4ki8Tf6LNHZrxKXKYjqD/Qo=";
       };
+      installPhase = ''
+        runHook preInstall
+
+        mkdir -p $out/bin
+        cp -r usr/share $out/share
+        sed -i "s|Exec=.*|Exec=$out/bin/bilibili|" $out/share/applications/*.desktop
+        cp -r opt/apps/io.github.msojocs.bilibili/files/bin/app $out/opt
+        makeWrapper ${pkgs.electron}/bin/electron $out/bin/bilibili \
+          --argv0 "bilibili" \
+          --add-flags "$out/opt/app.asar"
+          --add-flags "--ozone-platform-hint=wayland --enable-wayland-ime"
+        runHook postInstall
+      '';
     })
     wl-clipboard
     (pkgs.microsoft-edge.override {
