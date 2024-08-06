@@ -236,7 +236,8 @@
 
       bind=,escape,submap,reset
     submap=reset
-
+    bind=$mainMod,L,switch:off:Lid Switch,exec,hyprctl keyword monitor "eDP-1, preferred, auto, auto"
+    bind=$mainMod,l,switch:on:Lid Switch,exec,hyprctl keyword monitor "eDP-1, disable"
     bind=SUPERSHIFT,h,movewindow,l
     bind=SUPERSHIFT,l,movewindow,r
     bind=SUPERSHIFT,j,movewindow,u
