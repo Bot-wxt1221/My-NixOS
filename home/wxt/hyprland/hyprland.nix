@@ -236,9 +236,8 @@
 
       bind=,escape,submap,reset
     submap=reset
-    bindl=,switch:off:Lid Switch,exec,hyprctl keyword monitor ", preferred, auto, 1"
-    bindl=,switch:on:Lid Switch,exec,hyprctl keyword monitor ", disable"
-    bind = $mainMod, L ,Lid
+    bindl =$mainMod,l,exec,hyprctl keyword monitor ", preferred, auto, 1"
+    bindl =$mainMod, L,exec,hyprctl keyword monitor ", disable"
     bind=SUPERSHIFT,h,movewindow,l
     bind=SUPERSHIFT,l,movewindow,r
     bind=SUPERSHIFT,j,movewindow,u
