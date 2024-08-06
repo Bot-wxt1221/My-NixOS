@@ -42,7 +42,7 @@ in
         cp -r opt/apps/io.github.msojocs.bilibili/files/bin/app $out/opt
         makeWrapper ${pkgs.electron}/bin/electron $out/bin/bilibili \
           --argv0 "bilibili" \
-          --add-flags "$out/opt/app.asar"
+          --add-flags "$out/opt/app.asar" \
           --add-flags "--ozone-platform-hint=wayland --enable-wayland-ime"
         runHook postInstall
       '';
