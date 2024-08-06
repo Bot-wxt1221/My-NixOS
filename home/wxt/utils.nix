@@ -24,7 +24,6 @@
     resources
     obs-studio
     intel-gpu-tools
-    neoclip
     vscode-extensions.ms-vscode.cpptools 
     hmcl
     gnome-2048
