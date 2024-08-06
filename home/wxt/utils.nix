@@ -18,7 +18,7 @@
         hash = "sha256-iflq6Rgj5PUvtIJ2FCBO4ki8Tf6LNHZrxKXKYjqD/Qo=";
       };
     })
-
+    wl-clipboard
     microsoft-edge
     qq
     resources
