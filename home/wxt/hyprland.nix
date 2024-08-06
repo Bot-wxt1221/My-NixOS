@@ -100,6 +100,7 @@
     }
 
     exec-once=fcitx5 --replace -d
+    exec-once=hyprpaper
 
     $mainMod = SUPER # Sets "Windows" key as main modifier
 
