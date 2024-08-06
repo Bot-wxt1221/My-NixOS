@@ -4,7 +4,7 @@
   imports = [
     ./gpg.nix
     ./neovim.nix
-    ./hyprland.nix
+    ./hyprland
     ./debug-cc.nix
     ./virt.nix
     ./archive.nix
