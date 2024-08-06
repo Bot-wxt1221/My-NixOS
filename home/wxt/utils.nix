@@ -18,12 +18,13 @@
         hash = "sha256-iflq6Rgj5PUvtIJ2FCBO4ki8Tf6LNHZrxKXKYjqD/Qo=";
       };
     })
+
     microsoft-edge
     qq
     resources
     obs-studio
     intel-gpu-tools
-    xclip
+    neoclip
     vscode-extensions.ms-vscode.cpptools 
     hmcl
     gnome-2048
