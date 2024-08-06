@@ -2,7 +2,7 @@
 {
   imports = [
     ./hyprpaper.nix
-#    ./hyprland.nix
+    ./hyprland.nix
     ./waybar.nix
     ./swaync.nix
     ./wofi.nix
