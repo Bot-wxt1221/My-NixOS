@@ -10,4 +10,5 @@
     gnome-terminal
     gnome-tweaks
   ]; 
+  programs.dconf.enable = true;
 }
