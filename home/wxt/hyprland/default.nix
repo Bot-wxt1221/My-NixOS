@@ -4,5 +4,6 @@
     ./hyprpaper.nix
 #    ./hyprland.nix
     ./waybar.nix
+    ./swaync.nix
   ];
 }
