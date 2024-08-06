@@ -1,4 +1,18 @@
 { configs, pkgs, ... }:
+let 
+  sources-qq = import ./sources-qq.nix;
+  srcs-qq = {
+    x86_64-linux = fetchurl {
+      url = sources-qq.amd64_url;
+      hash = sources-qq.amd64_hash;
+    };
+    aarch64-linux = fetchurl {
+      url = sources-qq.arm64_url;
+      hash = sources-qq.arm64_hash;
+    };
+  };  
+  src-nw-qq = srcs-qq.${stdenv.hostPlatform.system} or (throw "Unsupported system: ${stdenv.hostPlatform.system}");
+in
 {
   imports = [
 
@@ -24,7 +38,11 @@
     (pkgs.microsoft-edge.override {
       commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime";
     })
-    qq
+    (pkgs.qq.override{
+      commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime";
+    }.overrideAttrs {
+      src = src-nw-qq;
+    })
     resources
     obs-studio
     intel-gpu-tools
