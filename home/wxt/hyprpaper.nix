@@ -9,4 +9,7 @@
     preload = ["${config.home.homeDirectory}/.config/hypr/wallpaper.png"];
     wallpaper = [",${config.home.homeDirectory}/.config/hypr/wallpaper.png"];
   };
+  home.packages = with pkgs;[
+    hyprpaper
+  ];
 }
