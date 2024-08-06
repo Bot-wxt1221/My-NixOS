@@ -7,6 +7,7 @@
     cachix
     neofetch
     rustdesk-flutter
+    kitty
     helvum
     cpu-x
     weston
