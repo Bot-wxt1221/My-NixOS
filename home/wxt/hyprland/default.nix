@@ -5,5 +5,7 @@
 #    ./hyprland.nix
     ./waybar.nix
     ./swaync.nix
+    ./clipboard.nix
   ];
+  home.packages = with pkgs;[hyprlock];
 }
