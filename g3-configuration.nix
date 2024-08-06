@@ -21,6 +21,7 @@
   EnableWaydroid = true;
   EnableMineGPU =true;
   EnableMineCPU = true;
+  programs.hyprland.enable = true;
   users.users.wxt = {
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" "adbusers" "libvirtd"];
