@@ -12,5 +12,6 @@
         fcitx5-gtk
       	fcitx5-chinese-addons
     ];
+    fcitx5.waylandFrontend = true;
   };
 }
