@@ -72,7 +72,7 @@
   home.file.".config/hypr/hyprland.conf".text = ''
     monitor=,preferred,auto,1
 
-    $terminal = gnome-terminal
+    $terminal = konsole
     $fileManager = nautilus -w
     $menu = wofi --show drun
 

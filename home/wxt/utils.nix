@@ -6,6 +6,7 @@
   home.packages = with pkgs; [
     cachix
     neofetch
+    konsole
     rustdesk-flutter
     kitty
     helvum
