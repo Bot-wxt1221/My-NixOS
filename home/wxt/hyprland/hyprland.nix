@@ -236,8 +236,8 @@
 
       bind=,escape,submap,reset
     submap=reset
-    bindl= $mainMod,l,exec,hyprctl dispatch dpms on
-    bindl= $mainMod,l,exec,hyprctl dispatch dpms off
+    bindl= $mainMod,U,exec,hyprctl dispatch dpms on
+    bindl= $mainMod,L,exec,hyprctl dispatch dpms off
     bind=SUPERSHIFT,h,movewindow,l
     bind=SUPERSHIFT,l,movewindow,r
     bind=SUPERSHIFT,j,movewindow,u
