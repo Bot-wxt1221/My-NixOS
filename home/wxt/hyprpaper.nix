@@ -8,4 +8,5 @@
     perload = ${config.home.homeDirectory}/.config/hypr/wallpaper.png
     wallpaper = ,${config.home.homeDirectory}/.config/hypr/wallpaper.png
   '';
+  services.hyprpaper.enable = true;
 }
