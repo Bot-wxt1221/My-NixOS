@@ -12,7 +12,7 @@
     monitor=,preferred,auto,1
 
     $terminal = gnome-terminal
-    $fileManager = nautilus
+    $fileManager = nautilus -w
     $menu = wofi --show drun
 
     env = XCURSOR_SIZE,24
