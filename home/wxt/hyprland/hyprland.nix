@@ -123,6 +123,7 @@
     bind = $mainMod, Q, exec, $terminal
     bind = $mainMod, C, killactive,
     bind = $mainMod, M, exit,
+    bind = ALT_F4, exit,
     bind = $mainMod, E, exec, $fileManager
     bind = $mainMod, V, togglefloating,
     bind = $mainMod, R, exec, $menu
