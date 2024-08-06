@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
 
@@ -9,6 +14,19 @@
     dconf
     gnome-terminal
     gnome-tweaks
-  ]; 
+  ];
   programs.dconf.enable = true;
+  xdg.portal = with pkgs; {
+    enable = true;
+    configPackages = [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal
+    ];
+    extraPortals = [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal
+    ];
+    xdgOpenUsePortal = true;
+  };
 }

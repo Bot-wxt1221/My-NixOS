@@ -1,10 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
 
   ];
-  environment.systemPackages = with pkgs;[
-    todesk
-  ];
+  environment.systemPackages = with pkgs; [ todesk ];
   services.todesk.enable = true;
 }

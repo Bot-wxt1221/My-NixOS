@@ -8,13 +8,11 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-     zplug = {
+    zplug = {
       enable = true;
-      plugins = [
-        { name = "sobolevn/wakatime-zsh-plugin"; }
-      ];
+      plugins = [ { name = "sobolevn/wakatime-zsh-plugin"; } ];
     };
-     oh-my-zsh = {
+    oh-my-zsh = {
       enable = true;
       plugins = [ "git" ];
       theme = "bira";

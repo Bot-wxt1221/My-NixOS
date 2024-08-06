@@ -1,4 +1,10 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [
@@ -8,7 +14,14 @@
     ../system/libinput.nix
     ../programs/cuda.nix
   ];
-  boot.initrd.kernelModules = ["i915" "vfio-iommu-type1" "kvmgt" "mdev" "acpi_call" "snd_aloop"];
+  boot.initrd.kernelModules = [
+    "i915"
+    "vfio-iommu-type1"
+    "kvmgt"
+    "mdev"
+    "acpi_call"
+    "snd_aloop"
+  ];
   nixpkgs.config.packageOverrides = pkgs: {
     intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
   };
@@ -18,7 +31,7 @@
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      vaapiIntel 
+      vaapiIntel
       libva
       libvdpau-va-gl
       vaapiVdpau
@@ -35,7 +48,9 @@
   boot.extraModprobeConfig = ''
     options snd-aloop enable=1,1,1,1,1,1,1,1
   '';
-  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; 
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";
+  };
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
@@ -45,15 +60,30 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     prime = {
       offload = {
-      	enable = true;
+        enable = true;
         enableOffloadCmd = true;
       };
       nvidiaBusId = "PCI:1:0:0";
       intelBusId = "PCI:0:2:0";
     };
   };
-  boot.kernelParams = [ "intel_iommu=on" "i915.enable_guc=3" "nvidia_drm.fbdev=1" "nvidia_drm.modeset=1" "i915.enable_fbc=1" "i915.enable_execlists=0" "i915.enable_gvt=1" "acpi_osi=Linux-Dell-Video" "hugepagesz=1GB" "default_hugepagesz=1GB" "hugepages=3"];
-  services.xserver.videoDrivers = [ "modesettings" "nvidia" ];
+  boot.kernelParams = [
+    "intel_iommu=on"
+    "i915.enable_guc=3"
+    "nvidia_drm.fbdev=1"
+    "nvidia_drm.modeset=1"
+    "i915.enable_fbc=1"
+    "i915.enable_execlists=0"
+    "i915.enable_gvt=1"
+    "acpi_osi=Linux-Dell-Video"
+    "hugepagesz=1GB"
+    "default_hugepagesz=1GB"
+    "hugepages=3"
+  ];
+  services.xserver.videoDrivers = [
+    "modesettings"
+    "nvidia"
+  ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 }

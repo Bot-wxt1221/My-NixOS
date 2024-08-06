@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
 
@@ -11,8 +16,6 @@
   };
   config = lib.mkIf config.EnableWaydroid {
     virtualisation.waydroid.enable = true;
-    environment.systemPackages = with pkgs; [
-      waydroid
-    ];
+    environment.systemPackages = with pkgs; [ waydroid ];
   };
 }

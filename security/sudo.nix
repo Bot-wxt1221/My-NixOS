@@ -1,6 +1,10 @@
-{ config, lib, pkgs, ... }:
 {
-  imports = [
-  ];
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  imports = [ ];
   security.sudo.wheelNeedsPassword = false;
 }

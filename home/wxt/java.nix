@@ -3,7 +3,8 @@
   imports = [
 
   ];
-  home.packages = with pkgs;[
-    openjdk17-bootstrap maven
+  home.packages = with pkgs; [
+    openjdk17-bootstrap
+    maven
   ];
 }

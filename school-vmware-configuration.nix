@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./hardware/school-vmware.nix
@@ -14,8 +19,11 @@
   Ownhostname = "wxt-school-vmware";
   users.users.wxt = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "adbusers" ];
-    packages = with pkgs; [
-    ];  
+    extraGroups = [
+      "wheel"
+      "docker"
+      "adbusers"
+    ];
+    packages = with pkgs; [ ];
   };
 }

@@ -1,4 +1,10 @@
-{ config, lib, pkgs, nix-colors, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  nix-colors,
+  ...
+}:
 {
   imports = [
     ./hyprpaper.nix

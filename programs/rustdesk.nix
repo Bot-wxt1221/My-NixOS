@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
 
@@ -16,10 +21,8 @@
       LimitNOFILE = "100000";
     };
     wantedBy = [ "multi-user.target" ];
-    requires = ["network-online.target"];
-    after = ["display-manager.service"];
+    requires = [ "network-online.target" ];
+    after = [ "display-manager.service" ];
   };
-  environment.systemPackages = with pkgs; [
-    rustdesk-flutter
-  ];
+  environment.systemPackages = with pkgs; [ rustdesk-flutter ];
 }

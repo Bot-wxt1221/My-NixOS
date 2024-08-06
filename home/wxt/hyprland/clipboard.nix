@@ -1,9 +1,12 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
 
   ];
-  home.packages = with pkgs;[
-    wl-clip-persist
-  ];
+  home.packages = with pkgs; [ wl-clip-persist ];
 }

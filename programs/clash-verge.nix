@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
 
@@ -12,7 +17,5 @@
     };
     wantedBy = [ "multi-user.target" ];
   };
-  environment.systemPackages = with pkgs; [
-    clash-verge-rev
-  ];
+  environment.systemPackages = with pkgs; [ clash-verge-rev ];
 }

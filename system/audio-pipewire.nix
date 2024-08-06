@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   options = {
     Enablepipewire = lib.mkOption {
@@ -7,9 +12,7 @@
     };
   };
   config = lib.mkIf config.Enablepipewire {
-    environment.systemPackages = with pkgs; [
-      alsa-firmware
-    ];
+    environment.systemPackages = with pkgs; [ alsa-firmware ];
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {

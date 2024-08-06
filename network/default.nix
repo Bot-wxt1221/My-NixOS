@@ -1,8 +1,11 @@
-{ config, lib, pkgs, ... }:
 {
-  imports = [
-    ./firewall.nix
-  ];
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  imports = [ ./firewall.nix ];
   options = {
     Ownhostname = lib.mkOption {
       type = lib.types.str;
@@ -13,6 +16,6 @@
   };
   config = {
     networking.hostName = config.Ownhostname; # Define your hostname.
-    networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+    networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
   };
 }

@@ -1,9 +1,14 @@
-{ config, pkgs, neovim, ... }:
+{
+  config,
+  pkgs,
+  neovim,
+  ...
+}:
 {
   imports = [
 
   ];
-  programs.neovim={
+  programs.neovim = {
     enable = true;
     package = neovim.packages.${pkgs.system}.default;
   };

@@ -1,41 +1,44 @@
-{configs ,pkgs ,...}:
+{ configs, pkgs, ... }:
 {
   imports = [
 
   ];
-  home.packages = with pkgs;[
+  home.packages = with pkgs; [
     cachix
     neofetch
     rustdesk-flutter
     kitty
     helvum
     cpu-x
+    gnome.nautilus
     weston
     nixfmt-rfc-style
-    (pkgs.bilibili.overrideAttrs{
+    (pkgs.bilibili.overrideAttrs {
       src = pkgs.fetchurl {
         url = "https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-1/io.github.msojocs.bilibili_1.14.0-1_amd64.deb";
         hash = "sha256-iflq6Rgj5PUvtIJ2FCBO4ki8Tf6LNHZrxKXKYjqD/Qo=";
       };
     })
     wl-clipboard
-    (pkgs.microsoft-edge.override{
+    (pkgs.microsoft-edge.override {
       commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime";
     })
     qq
     resources
     obs-studio
     intel-gpu-tools
-    vscode-extensions.ms-vscode.cpptools 
+    vscode-extensions.ms-vscode.cpptools
     hmcl
     gnome-2048
     gh
     scrcpy
     android-tools
     zip
-    xz obs-studio
-    unzip     
-    p7zip spotify
+    xz
+    obs-studio
+    unzip
+    p7zip
+    spotify
     keepassxc
     motrix
     krdc
@@ -47,13 +50,15 @@
 
     # networking tools
     mtr # A network diagnostic tool
-    iperf3 wpsoffice-cn glxinfo
-    dnsutils  # `dig` + `nslookup`
+    iperf3
+    wpsoffice-cn
+    glxinfo
+    dnsutils # `dig` + `nslookup`
     ldns # replacement of `dig`, it provide the command `drill`
     aria2 # A lightweight multi-protocol & multi-source command-line download utility
     socat # replacement of openbsd-netcat
     nmap # A utility for network discovery and security auditing
-    ipcalc  # it is a calculator for the IPv4/v6 addresses
+    ipcalc # it is a calculator for the IPv4/v6 addresses
     alsa-firmware
     # misc
     cowsay
