@@ -1,4 +1,4 @@
-{ config, pkgs, neovim,... }:
+{ config, pkgs, neovim, nix-colors,... }:
 
 {
   imports = [
