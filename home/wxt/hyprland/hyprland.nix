@@ -118,7 +118,6 @@
     exec-once=waybar
     exec-once=swaync
     exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-    exec-once=hyprlock
     $mainMod = SUPER # Sets "Windows" key as main modifier
 
     bind = $mainMod, Q, exec, $terminal
