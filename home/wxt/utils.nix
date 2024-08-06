@@ -21,7 +21,7 @@
     wl-clipboard
     pkgs.microsoft-edge.override{
       commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime";
-    };
+    }
     qq
     resources
     obs-studio
