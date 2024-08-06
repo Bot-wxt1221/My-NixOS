@@ -1,12 +1,12 @@
-{ configs, pkgs, ... }:
+{ configs, pkgs, libs,... }:
 let 
   sources-qq = import ./sources-qq.nix;
   srcs-qq = {
-    x86_64-linux = fetchurl {
+    x86_64-linux = libs.fetchurl {
       url = sources-qq.amd64_url;
       hash = sources-qq.amd64_hash;
     };
-    aarch64-linux = fetchurl {
+    aarch64-linux = libs.fetchurl {
       url = sources-qq.arm64_url;
       hash = sources-qq.arm64_hash;
     };
