@@ -4,8 +4,8 @@
     ./hyprpaper.nix
 #    ./hyprland.nix
     ./waybar.nix
-    ./swaylock.nix
     ./swaync.nix
+    ./hyprlock.nix
     ./clipboard.nix
   ];
 }
