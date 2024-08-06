@@ -8,6 +8,7 @@
     ./wofi.nix
     ./hyprlock.nix
     ./clipboard.nix
+    nix-colors.homeManagerModules.default
   ];
   colorScheme = nix-colors.colorSchemes.nord;
 }
