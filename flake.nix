@@ -24,7 +24,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.wxt = import ./home/wxt;
-      	    home-manager.extraSpecialArgs = {inherit neovim; inherit nix-colors};
+      	    home-manager.extraSpecialArgs = {inherit neovim; inherit nix-colors;};
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
           }
@@ -40,7 +40,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.wxt = import ./home/wxt;
-      	    home-manager.extraSpecialArgs = {inherit neovim; inherit nix-colors};
+      	    home-manager.extraSpecialArgs = {inherit neovim; inherit nix-colors;};
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
           }
