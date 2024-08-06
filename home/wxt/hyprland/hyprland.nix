@@ -236,8 +236,8 @@
 
       bind=,escape,submap,reset
     submap=reset
-    bindl =$mainMod,l,exec,hyprctl keyword monitor ", preferred, auto, 1"
-    bindl =$mainMod, L,exec,hyprctl keyword monitor ", disable"
+    bindl= $mainMod,l,exec,hyprctl dispatch dpms on
+    bindl= $mainMod,l,exec,hyprctl dispatch dpms off
     bind=SUPERSHIFT,h,movewindow,l
     bind=SUPERSHIFT,l,movewindow,r
     bind=SUPERSHIFT,j,movewindow,u
