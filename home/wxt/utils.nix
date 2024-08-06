@@ -10,7 +10,7 @@
     kitty
     helvum
     cpu-x
-    gnome.nautilus
+    nautilus
     weston
     nixfmt-rfc-style
     (pkgs.bilibili.overrideAttrs {
