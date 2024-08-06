@@ -11,7 +11,7 @@ let
       hash = sources-qq.arm64_hash;
     };
   };  
-  src-nw-qq = srcs-qq.${stdenv.hostPlatform.system} or (throw "Unsupported system: ${stdenv.hostPlatform.system}");
+  src-nw-qq = srcs-qq.${pkgs.stdenv.hostPlatform.system} or (throw "Unsupported system: ${pkgs.stdenv.hostPlatform.system}");
 in
 {
   imports = [
