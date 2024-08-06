@@ -5,5 +5,4 @@
 #    ./hyprland.nix
     ./waybar.nix
   ];
-  home.
 }
