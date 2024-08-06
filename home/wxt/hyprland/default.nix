@@ -9,4 +9,5 @@
     ./hyprlock.nix
     ./clipboard.nix
   ];
+  colorScheme = nix-colors.colorSchemes.nord;
 }
