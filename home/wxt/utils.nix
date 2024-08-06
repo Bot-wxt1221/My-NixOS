@@ -38,9 +38,9 @@ in
     (pkgs.microsoft-edge.override {
       commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime";
     })
-    (pkgs.qq.override{
+    ((pkgs.qq.override{
       commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime";
-    }.overrideAttrs {
+    }).overrideAttrs {
       src = src-nw-qq;
     })
     resources
