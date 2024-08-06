@@ -8,6 +8,21 @@
   imports = [
 
   ];
+  xdg.enable = true;
+  xdg.portal = with pkgs; {
+    enable = true;
+    configPackages = [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal
+    ];
+    extraPortals = [
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal
+    ];
+    xdgOpenUsePortal = true;
+  };
+
   xdg.mimeApps = let
     br = "microsoft-edge.desktop";
     fm = "org.gnome.Nautilus.desktop";
