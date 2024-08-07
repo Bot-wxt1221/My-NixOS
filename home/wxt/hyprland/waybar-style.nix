@@ -101,5 +101,9 @@ in
         padding-left: 10px;
         padding-right: 15px;
     }
+    #backlight {
+        padding-left: 9px;
+        padding-right: 9px;
+    }
   '';
 }
