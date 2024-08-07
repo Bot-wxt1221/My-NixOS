@@ -8,7 +8,7 @@
   imports = [
 
   ];
-  home.packages = with pkgs; [ fuzzel ];
+  home.packages = with pkgs; [ fuzzel light ];
   xdg.enable = true;
   xdg.portal = with pkgs; {
     enable = true;
@@ -187,7 +187,10 @@
     $mainMod = SUPER # Sets "Windows" key as main modifier
 
     bind = $mainMod, Q, exec, $terminal
-    binde=, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
+    bindl=, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
+    bindl=, XF86AudioMute, exec, pamixer -t
+    bindl=, XF86MonBrightnessUp,exec, light -U 5
+    bindl=, 
     bindl=, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
     bind = $mainMod, C, killactive,
     bind = $mainMod, M, exit,

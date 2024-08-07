@@ -23,6 +23,7 @@
       "wheel"
       "docker"
       "adbusers"
+      "video"
     ];
     packages = with pkgs; [ ];
   };

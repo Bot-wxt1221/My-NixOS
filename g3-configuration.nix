@@ -25,7 +25,7 @@
   Ownhostname = "wxt-g3";
   Enablepipewire = true;
   EnableWaydroid = true;
-  EnableMineGPU = true;
+  EnableMineGPU = false;
   EnableMineCPU = false;
   users.users.wxt = {
     isNormalUser = true;
@@ -34,6 +34,7 @@
       "docker"
       "adbusers"
       "libvirtd"
+      "video"
     ];
     packages = with pkgs; [ ];
   };

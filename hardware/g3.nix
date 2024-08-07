@@ -45,9 +45,6 @@
       libvdpau-va-gl
     ];
   };
-  boot.extraModprobeConfig = ''
-    options snd-aloop enable=1,1,1,1,1,1,1,1
-  '';
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "iHD";
   };
