@@ -7,7 +7,7 @@ let
     text_color = "#cdd6f4";
     secondary_accent = "89b4fa";
     tertiary_accent = "f5f5f5";
-    background = "#ffffff";
+    background = "#000000";
     opacity = "0.98";
   };
 in
