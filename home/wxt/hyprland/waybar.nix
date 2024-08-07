@@ -11,6 +11,7 @@
   };
   home.packages = with pkgs; [
     pamixer
+    pavucontrol
     ponymix
   ];
   programs.waybar.package = pkgs.waybar.overrideAttrs (oa: {
@@ -107,7 +108,7 @@
         default = [ " " ];
       };
       scroll-step = 5;
-      on-click = "pamixer -t";
+      on-click = "pavucontrol";
     };
     battery = {
       format = "{icon} {capacity}%";
