@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/master";
-    nix-colors.url = "github:misterio77/nix-colors";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     neovim-src.url = "github:neovim/neovim";
@@ -16,7 +15,6 @@
   outputs =
     {
       self,
-      nix-colors,
       nixpkgs,
       home-manager,
       neovim,
@@ -37,7 +35,6 @@
             home-manager.users.wxt = import ./home/wxt;
             home-manager.extraSpecialArgs = {
               inherit neovim;
-              inherit nix-colors;
             };
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
@@ -58,7 +55,6 @@
             home-manager.users.wxt = import ./home/wxt;
             home-manager.extraSpecialArgs = {
               inherit neovim;
-              inherit nix-colors;
             };
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix

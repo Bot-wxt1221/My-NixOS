@@ -8,6 +8,7 @@
   imports = [
 
   ];
+  home.packages = with pkgs; [fuzzel];
   xdg.enable = true;
   xdg.portal = with pkgs; {
     enable = true;
@@ -74,7 +75,7 @@
 
     $terminal = konsole
     $fileManager = nautilus -w
-    $menu = wofi --show drun
+    $menu = fuzzel
 
     env = XCURSOR_SIZE,24
     env = HYPRCURSOR_SIZE,24

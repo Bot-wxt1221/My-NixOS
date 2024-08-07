@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  nix-colors,
   ...
 }:
 {
@@ -11,9 +10,6 @@
     ./hyprland.nix
     ./waybar.nix
     ./swaync.nix
-    ./wofi.nix
     ./clipboard.nix
-    nix-colors.homeManagerModules.default
   ];
-  colorScheme = nix-colors.colorSchemes.nord;
 }
