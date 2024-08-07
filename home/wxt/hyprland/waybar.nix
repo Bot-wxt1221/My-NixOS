@@ -36,10 +36,16 @@
       "memory"
       "disk"
       "pulseaudio"
+      "backlight"
       "battery"
       "network"
       "custom/notification"
     ];
+    "backlight": {
+      "device": "intel_backlight",
+      "format": "{percent}% {icon}",
+      "format-icons": ["", ""]
+    }
     clock = {
       calendar = {
         format = {
