@@ -16,4 +16,6 @@
     gnome-tweaks
   ];
   programs.dconf.enable = true;
+  programs.hyprland.enable = true;
+  programs.hyprland.xwayland.enable = true;
 }

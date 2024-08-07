@@ -9,7 +9,10 @@
   programs.waybar = {
     enable = true;
   };
-  home.packages = with pkgs; [pamixer ponymix];
+  home.packages = with pkgs; [
+    pamixer
+    ponymix
+  ];
   programs.waybar.package = pkgs.waybar.overrideAttrs (oa: {
     mesonFlags = (oa.mesonFlags or [ ]) ++ [ "-Dexperimental=true" ];
   });

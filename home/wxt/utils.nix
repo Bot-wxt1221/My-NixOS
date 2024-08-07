@@ -1,5 +1,5 @@
-{ configs, pkgs,... }:
-let 
+{ configs, pkgs, ... }:
+let
   sources-qq = import ./sources-qq.nix;
   srcs-qq = {
     x86_64-linux = pkgs.fetchurl {
@@ -10,8 +10,10 @@ let
       url = sources-qq.arm64_url;
       hash = sources-qq.arm64_hash;
     };
-  };  
-  src-nw-qq = srcs-qq.${pkgs.stdenv.hostPlatform.system} or (throw "Unsupported system: ${pkgs.stdenv.hostPlatform.system}");
+  };
+  src-nw-qq =
+    srcs-qq.${pkgs.stdenv.hostPlatform.system}
+      or (throw "Unsupported system: ${pkgs.stdenv.hostPlatform.system}");
 in
 {
   imports = [
@@ -52,9 +54,9 @@ in
       commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime";
     })
     (
-      (pkgs.qq.override{
-        commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime";
-      }).overrideAttrs (previousAttrs:{
+      (pkgs.qq.override { commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime"; })
+      .overrideAttrs
+      (previousAttrs: {
         src = src-nw-qq;
         version = sources-qq.version;
       })

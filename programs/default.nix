@@ -20,7 +20,7 @@
     ./virt
     ./flatpak.nix
     ./qt.nix
-    ./gnome.nix
+    ./desktop.nix
     ./fcitx5.nix
     ./cc.nix
     ./adb.nix

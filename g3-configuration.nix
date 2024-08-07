@@ -27,7 +27,6 @@
   EnableWaydroid = true;
   EnableMineGPU = true;
   EnableMineCPU = false;
-  programs.hyprland.enable = true;
   users.users.wxt = {
     isNormalUser = true;
     extraGroups = [
