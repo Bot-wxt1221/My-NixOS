@@ -177,8 +177,8 @@
     }
 
     exec-once=fcitx5 --replace -d
-    exec-once=ponymix -t sink  --device "Cannon Lake PCH cAVS Speaker" set-default
-    exec-once=ponymix -t source --device "Cannon Lake PCH cAVS Digital Microphone" set-default
+    exec-once=ponymix -t sink  --device "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink" set-default && ponymix -t sink  --device "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink" mute && ponymix -t sink  --device "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink" unmute
+    exec-once=ponymix -t source  --device "alsa_input.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Mic1__source" set-default && ponymix -t source  --device "alsa_input.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Mic1__source" mute && ponymix -t source  --device "alsa_input.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Mic1__source" unmute
     exec-once=clash-verge
     exec-once=hyprpaper
     exec-once=waybar
