@@ -45,7 +45,7 @@
       device = "intel_backlight";
       format = "{percent}% {icon}";
       format-icons = [""  ""];
-    }
+    };
     clock = {
       calendar = {
         format = {
