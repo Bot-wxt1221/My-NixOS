@@ -182,6 +182,8 @@
     $mainMod = SUPER # Sets "Windows" key as main modifier
 
     bind = $mainMod, Q, exec, $terminal
+    binde=, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
+    bindl=, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
     bind = $mainMod, C, killactive,
     bind = $mainMod, M, exit,
     bind = ALT, F4, killactive,
