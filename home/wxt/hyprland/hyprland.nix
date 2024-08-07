@@ -227,8 +227,9 @@
     bind = $mainMod SHIFT, S, movetoworkspace, special:magic
 
     bind = $mainMod, mouse_down, workspace, e+1
+    bind = ALT, TAB, workspace, e-1
+    bind = ALT SHIFT, TAB, mouse_down, workspace, e+1
     bind = $mainMod, mouse_up, workspace, e-1
-
     bindm = $mainMod, mouse:272, movewindow
     bindm = $mainMod, mouse:273, resizewindow
     bind = $mainMod,F,submap,resize
