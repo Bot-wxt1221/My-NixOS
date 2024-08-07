@@ -8,7 +8,7 @@
   imports = [
 
   ];
-  home.packages = with pkgs; [ fuzzel light ];
+  home.packages = with pkgs; [ fuzzel ];
   xdg.enable = true;
   xdg.portal = with pkgs; {
     enable = true;
