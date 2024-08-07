@@ -189,8 +189,8 @@
     bind = $mainMod, Q, exec, $terminal
     bindl=, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
     bindl=, XF86AudioMute, exec, pamixer -t
-    bindl=, XF86MonBrightnessUp,exec, light -U 5
-    bindl=, 
+    bindl=, XF86MonBrightnessUp,exec, light -A 5
+    bindl=, XF86MonBrightnessDown,exec, light -U 5
     bindl=, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
     bind = $mainMod, C, killactive,
     bind = $mainMod, M, exit,
