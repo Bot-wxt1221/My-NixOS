@@ -26,7 +26,7 @@
   Enablepipewire = true;
   EnableWaydroid = true;
   EnableMineGPU = true;
-  EnableMineCPU = true;
+  EnableMineCPU = false;
   programs.hyprland.enable = true;
   users.users.wxt = {
     isNormalUser = true;
