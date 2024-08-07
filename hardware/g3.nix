@@ -76,9 +76,6 @@
     "i915.enable_execlists=0"
     "i915.enable_gvt=1"
     "acpi_osi=Linux-Dell-Video"
-    "hugepagesz=1GB"
-    "default_hugepagesz=1GB"
-    "hugepages=3"
   ];
   services.xserver.videoDrivers = [
     "modesettings"
