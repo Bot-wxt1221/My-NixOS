@@ -174,6 +174,8 @@
     }
 
     exec-once=fcitx5 --replace -d
+    exec-once=ponymix --device 696 set-default
+    exec-once=ponymix -t source --device 698 set-default
     exec-once=clash-verge
     exec-once=hyprpaper
     exec-once=waybar
