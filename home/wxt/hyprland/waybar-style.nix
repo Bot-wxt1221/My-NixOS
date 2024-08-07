@@ -26,7 +26,7 @@ in
     }
 
     window#waybar {
-        background: none;
+        background: ${custom.background};
     }
 
     #workspaces {
