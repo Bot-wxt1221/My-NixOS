@@ -46,7 +46,7 @@ in
         color: #b4befe;
     }
 
-    #tray, #pulseaudio, #network, #cpu, #memory, #disk, #clock, #battery, #custom-notification, #backlight {
+    #tray, #pulseaudio, #network, #cpu, #memory, #disk, #clock, #battery, #custom-notification, #backlight, #bluetooth {
         font-size: ${custom.font_size};
         color: ${custom.text_color};
     }
@@ -102,6 +102,10 @@ in
         padding-right: 15px;
     }
     #backlight {
+        padding-left: 9px;
+        padding-right: 9px;
+    }
+    #bluetooth {
         padding-left: 9px;
         padding-right: 9px;
     }
