@@ -58,7 +58,7 @@
             ];
             src = pkgs.fetchzip {
               url = "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-6.11-rc2.tar.gz";
-              hash = "";
+              hash = "sha256-+nfCerBqzOtf3xYVQfXA24r557V7v0Pe9J9p/R0DXOs=";
             };
           }
         );
