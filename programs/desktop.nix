@@ -20,4 +20,5 @@
   programs.hyprland.xwayland.enable = true;
   programs.light.enable = true;
   services.power-profiles-daemon.enable = true;
+  services.udisks2.enable = true;
 }
