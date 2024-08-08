@@ -115,7 +115,7 @@ in
     }
     #temperature,#temperature.critical {
         padding-left: 9px;
-        padding-right: 30px;
+        padding-right: 15px;
     }
   '';
 }
