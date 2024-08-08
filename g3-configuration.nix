@@ -26,6 +26,7 @@
   Enablepipewire = true;
   EnableWaydroid = true;
   EnableMineGPU = false;
+  EnableBluetooth = true;
   EnableMineCPU = false;
   EnableCuda = true;
   EnableDocker = true;

@@ -11,5 +11,6 @@
     ./audio-pipewire.nix
     ./audio-pulse.nix
     ./console.nix
+    ./bluetooth.nix
   ];
 }
