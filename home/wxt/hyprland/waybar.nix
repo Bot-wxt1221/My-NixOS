@@ -40,6 +40,7 @@
       "backlight"
       "battery"
       "network"
+      "bluetooth"
       "custom/notification"
     ];
     backlight = {
