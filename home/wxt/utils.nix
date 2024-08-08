@@ -23,7 +23,7 @@ in
     cachix
     neofetch
     konsole
-    gnome-logs
+    gnome.gnome-logs
     rustdesk-flutter
     kitty
     helvum
