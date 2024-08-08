@@ -8,12 +8,12 @@
   imports = [
 
   ];
-  programs.hyprland.enable = true;
-  programs.hyprland.xwayland.enable = true;
   home.packages = with pkgs; [
     fuzzel
     hyprshot
   ];
+  wayland.windowManager.hyprland.xwayland.enable = true;
+  wayland.windowManager.hyprland.enable = true;
   xdg.enable = true;
   xdg.portal = with pkgs; {
     enable = true;
