@@ -15,5 +15,8 @@
     };
 
   };
-  config = lib.mkIf config.EnableBluetooth { hardware.bluetooth.enable = true; };
+  config = lib.mkIf config.EnableBluetooth {
+    hardware.bluetooth.enable = true;
+    services.blueman.enable = true;
+  };
 }
