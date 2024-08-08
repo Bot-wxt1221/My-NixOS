@@ -8,6 +8,8 @@
   imports = [
 
   ];
+  programs.hyprland.enable = true;
+  programs.hyprland.xwayland.enable = true;
   home.packages = with pkgs; [
     fuzzel
     hyprshot
