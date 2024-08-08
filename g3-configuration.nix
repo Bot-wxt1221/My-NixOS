@@ -43,6 +43,17 @@
       configuration = {
         imports = [ ./mainline.nix ];
         system.nixos.tags = [ "test-kernel" ];
+        boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.buildLinux {
+      version = "5.0.0";
+      extraMeta.branch = "5.0";
+      kernelPatches = [];
+      src = pkgs.fetchFromGitHub {
+        owner = "torvalds";
+        repo = "linux";
+        rev = "1c163f4c7b3f621efff9b28a47abb36f7378d783";
+        sha256 = "1rzv1yfn8niib69dn6vpp24byck566a2fha48swd7ra20r0yhfgb";
+      };
+    });
       };
     };
   };
