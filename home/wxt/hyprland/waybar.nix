@@ -34,6 +34,7 @@
     modules-center = [ "clock" ];
     modules-right = [
       "tray"
+      "temperature"
       "cpu"
       "memory"
       "disk"
@@ -42,7 +43,6 @@
       "backlight"
       "battery"
       "network"
-      "temperature"
       "custom/notification"
     ];
     backlight = {
