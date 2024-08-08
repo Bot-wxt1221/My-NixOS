@@ -52,8 +52,8 @@
                 patch = "${nixpkgs}/pkgs/os-specific/linux/kernel/bridge-stp-helper.patch";
               }
               {
-                name = "request-key-helper-updated";
-                patch = "${nixpkgs}/pkgs/os-specific/linux/kernel/request-key-helper-updated.patch";
+                name = "request-key-helper";
+                patch = "${nixpkgs}/pkgs/os-specific/linux/kernel/request-key-helper.patch";
               }
             ];
             src = pkgs.fetchzip {
