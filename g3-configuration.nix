@@ -56,8 +56,9 @@
                 patch = "${nixpkgs}/pkgs/os-specific/linux/kernel/request-key-helper-updated.patch";
               }
             ];
-            src = lib.fetchzip {
+            src = pkgs.fetchzip {
               url = "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-6.11-rc2.tar.gz";
+              hash = "";
             };
           }
         );
