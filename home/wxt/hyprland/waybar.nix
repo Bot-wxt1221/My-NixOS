@@ -37,7 +37,7 @@
       "cpu"
       "memory"
       "disk"
-      "pipewire"
+      "pulseaudio"
       "bluetooth"
       "backlight"
       "battery"
@@ -132,7 +132,7 @@
       icon-size = 20;
       spacing = 8;
     };
-    pipewire = {
+    pulseaudio = {
       format = "{icon} {volume}%";
       format-muted = "  {volume}%";
       format-icons = {
