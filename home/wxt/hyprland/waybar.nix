@@ -190,9 +190,9 @@
       escape = true;
     };
     "temperature" = {
-     "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input",
-     "critical-threshold": 40,
-     "format-critical": "{temperatureC}°C ",
+     hwmon-path: "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input",
+     critical-threshold: 40,
+     format-critical: "{temperatureC}°C ",
     }
   };
 }
