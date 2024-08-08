@@ -107,7 +107,7 @@ in
     }
     #bluetooth {
         padding-left: 9px;
-        padding-right: 9px;
+        padding-right: 30px;
     }
   '';
 }

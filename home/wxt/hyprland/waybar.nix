@@ -37,11 +37,11 @@
       "cpu"
       "memory"
       "disk"
-      "pulseaudio"
+      "pipewire"
+      "bluetooth"
       "backlight"
       "battery"
       "network"
-      "bluetooth"
       "custom/notification"
     ];
     backlight = {
@@ -132,7 +132,7 @@
       icon-size = 20;
       spacing = 8;
     };
-    pulseaudio = {
+    pipewire = {
       format = "{icon} {volume}%";
       format-muted = "  {volume}%";
       format-icons = {
