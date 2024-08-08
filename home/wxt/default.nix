@@ -12,6 +12,7 @@
     ./hyprland
     ./debug-cc.nix
     ./virt.nix
+    ./waydroid.nix
     ./archive.nix
     ./java.nix
     ./utils.nix
