@@ -8,7 +8,7 @@
   imports = [
 
   ];
-  home.file.".local/share/application/Waydroid-Full-Ui.desktop".text = ''
+  home.file.".local/share/applications/Waydroid-Full-Ui.desktop".text = ''
     [Desktop Entry]
     Type=Application
     Name=Waydroid-Full-Ui
