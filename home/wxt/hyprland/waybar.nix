@@ -191,7 +191,7 @@
     };
     "temperature" = {
       hwmon-path = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input";
-      critical-threshold = 40;
+      critical-threshold = 80;
       format-critical = "{temperatureC}°C ";
     };
   };
