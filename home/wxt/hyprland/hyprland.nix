@@ -12,7 +12,6 @@
     fuzzel
     hyprshot
   ];
-  wayland.windowManager.hyprland.xwayland.enable = true;
   xdg.enable = true;
   xdg.portal = with pkgs; {
     enable = true;
@@ -112,7 +111,9 @@
 
       layout = dwindle
     }
-
+    xwayland {
+      force_zero_scaling = true
+    }
     decoration {
       rounding = 10
 
