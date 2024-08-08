@@ -46,9 +46,13 @@ in
         color: #b4befe;
     }
 
-    #tray, #pulseaudio, #network, #cpu, #memory, #disk, #clock, #battery, #custom-notification, #backlight, #bluetooth {
+    #tray, #pulseaudio, #network, #cpu, #memory, #disk, #clock, #battery, #custom-notification, #backlight, #bluetooth, #temperature {
         font-size: ${custom.font_size};
         color: ${custom.text_color};
+    }
+    #temperature.critical {
+      font-size: ${custom.font-size};
+      color: #ff4040;
     }
 
     #cpu {
@@ -106,6 +110,10 @@ in
         padding-right: 9px;
     }
     #bluetooth {
+        padding-left: 9px;
+        padding-right: 30px;
+    }
+    #temperature {
         padding-left: 9px;
         padding-right: 30px;
     }

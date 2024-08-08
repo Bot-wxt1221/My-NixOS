@@ -14,6 +14,7 @@
     pavucontrol
     ponymix
     blueberry
+    pantheon.switchboard-with-plugs
   ];
   programs.waybar.package = pkgs.waybar.overrideAttrs (oa: {
     mesonFlags = (oa.mesonFlags or [ ]) ++ [ "-Dexperimental=true" ];
@@ -41,6 +42,7 @@
       "backlight"
       "battery"
       "network"
+      "temperature"
       "custom/notification"
     ];
     backlight = {
@@ -126,6 +128,7 @@
       tooltip-format = "Connected to {essid} {ifname} via {gwaddr}";
       format-linked = "{ifname} (No IP)";
       format-disconnected = "󰖪 ";
+      on-click = "io.elementary.switchboard";
     };
     tray = {
       icon-size = 20;
@@ -186,5 +189,10 @@
       on-click-right = "swaync-client -d -sw";
       escape = true;
     };
+    "temperature" = {
+     "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input",
+     "critical-threshold": 40,
+     "format-critical": "{temperatureC}°C ",
+    }
   };
 }

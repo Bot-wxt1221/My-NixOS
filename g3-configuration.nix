@@ -39,6 +39,7 @@
       "adbusers"
       "libvirtd"
       "video"
+      "networkmanager"
     ];
     packages = with pkgs; [ ];
   };

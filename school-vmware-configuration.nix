@@ -23,6 +23,7 @@
       "docker"
       "adbusers"
       "video"
+      "networkmanager"
     ];
     packages = with pkgs; [ ];
   };
