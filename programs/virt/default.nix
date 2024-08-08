@@ -5,7 +5,7 @@
   ...
 }:
 {
-  imports = [ ./intel-gpu.nix ];
+  imports = [ ];
   virtualisation.libvirtd.enable = true;
   virtualisation.vswitch.enable = true;
   environment.systemPackages = with pkgs; [ virt-manager ];

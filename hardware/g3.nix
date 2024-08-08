@@ -71,7 +71,6 @@
     "nvidia_drm.modeset=1"
     "i915.enable_fbc=1"
     "i915.enable_execlists=0"
-    "i915.enable_gvt=1"
     "acpi_osi=Linux-Dell-Video"
   ];
   services.xserver.videoDrivers = [
