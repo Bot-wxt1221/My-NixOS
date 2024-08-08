@@ -75,7 +75,7 @@ in
     }
 
     #pulseaudio {
-        padding-left: 15px;
+        padding-left: 9px;
         padding-right: 9px;
         margin-left: 7px;
     }
@@ -115,7 +115,7 @@ in
     }
     #temperature,#temperature.critical {
         padding-left: 9px;
-        padding-right: 10px;
+        padding-right: 9px;
     }
   '';
 }
