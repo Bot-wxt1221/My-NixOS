@@ -8,7 +8,10 @@
   imports = [
 
   ];
-  home.packages = with pkgs; [ fuzzel hyprshot ];
+  home.packages = with pkgs; [
+    fuzzel
+    hyprshot
+  ];
   xdg.enable = true;
   xdg.portal = with pkgs; {
     enable = true;

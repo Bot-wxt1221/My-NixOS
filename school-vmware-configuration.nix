@@ -9,7 +9,6 @@
     ./hardware/school-vmware.nix
     ./network
     ./security
-    ./printing.nix
     ./font.nix
     ./programs
     ./system

@@ -27,6 +27,9 @@
   EnableWaydroid = true;
   EnableMineGPU = false;
   EnableMineCPU = false;
+  EnableCuda = true;
+  EnableDocker = true;
+  EnableKubo = true;
   users.users.wxt = {
     isNormalUser = true;
     extraGroups = [
