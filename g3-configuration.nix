@@ -47,11 +47,13 @@
             version = "6.11-rc2";
             extraMeta.branch = "6.11";
             kernelPatches = [
-              { name = "bridge-stp-helper";
-                patch = ${nixpkgs}/pkgs/os-specific/linux/kernel/bridge-stp-helper.patch;
+              {
+                name = "bridge-stp-helper";
+                patch = "${nixpkgs}/pkgs/os-specific/linux/kernel/bridge-stp-helper.patch";
               }
-              { name = "request-key-helper-updated";
-                patch = ${nixpkgs}/pkgs/os-specific/linux/kernel/request-key-helper-updated.patch;
+              {
+                name = "request-key-helper-updated";
+                patch = "${nixpkgs}/pkgs/os-specific/linux/kernel/request-key-helper-updated.patch";
               }
             ];
             src = lib.fetchzip {
@@ -60,7 +62,7 @@
           }
         );
       };
-      inheritParentConfig = true; 
+      inheritParentConfig = true;
     };
   };
 }
