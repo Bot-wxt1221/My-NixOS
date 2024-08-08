@@ -51,7 +51,7 @@ in
         color: ${custom.text_color};
     }
     #temperature.critical {
-      font-size: ${custom.font-size};
+      font-size: ${custom.font_size};
       color: #ff4040;
     }
 
