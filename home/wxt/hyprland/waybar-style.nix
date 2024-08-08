@@ -113,7 +113,7 @@ in
         padding-left: 9px;
         padding-right: 30px;
     }
-    #temperature {
+    #temperature,#temperature.critical {
         padding-left: 9px;
         padding-right: 30px;
     }
