@@ -41,7 +41,7 @@
   specialisation = {
     test-kernel = {
       configuration = {
-        imports = [./mainline.nix];
+        imports = [ ./mainline.nix ];
         system.nixos.tags = [ "test-kernel" ];
       };
     };
