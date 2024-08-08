@@ -38,4 +38,12 @@
     ];
     packages = with pkgs; [ ];
   };
+  specialisation = {
+    test-kernel = {
+      configuration = {
+        imports = [./mainline.nix];
+        system.nixos.tags = [ "test-kernel" ];
+      };
+    };
+  };
 }
