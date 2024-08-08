@@ -231,9 +231,9 @@
 
     bind = $mainMod, S, togglespecialworkspace, magic
     bind = $mainMod SHIFT, S, movetoworkspace, special:magic
-    bind = $mainMod, PRINT, exec, hyprshot -m region
-    bind = , PRINT, exec, hyprshot -m window
-    bind = $shiftMod, PRINT, exec, hyprshot -m output
+    bind = $mainMod, PRINT, exec, hyprshot -m window
+    bind = , PRINT, exec, hyprshot -m region
+    bind = $mainMod SHIFT, PRINT, exec, hyprshot -m output
     bind = $mainMod, mouse_down, workspace, e+1
     bind = $mainMod SHIFT, right ,workspace, e+1
     bind = $mainMod SHIFT, left ,workspace, e-1
