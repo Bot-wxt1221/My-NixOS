@@ -13,7 +13,6 @@
     hyprshot
   ];
   wayland.windowManager.hyprland.xwayland.enable = true;
-  wayland.windowManager.hyprland.enable = true;
   xdg.enable = true;
   xdg.portal = with pkgs; {
     enable = true;
