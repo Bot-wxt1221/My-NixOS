@@ -11,14 +11,13 @@
   home.packages = with pkgs; [
     fuzzel
     hyprshot
-    xorg.xcursorthemes
   ];
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
-    x11.defaultCursor = "DMZ-Black";
-    package = pkgs.vanilla-dmz;
-    name = "DMZ-Black";
+    x11.defaultCursor = "macOS";
+    package = pkgs.apple-cursor;
+    name = "macOS";
   };
   xdg.enable = true;
   xdg.portal = with pkgs; {
@@ -90,8 +89,8 @@
     $fileManager = nautilus -w
     $menu = fuzzel
     
-    env = XCURSOR_THEME,DMZ-Black
-    exec-once = hyprctl setcursor "DMZ-Black" 28
+    env = XCURSOR_THEME,macOS
+    exec-once = hyprctl setcursor "macOS" 28
     env = XCURSOR_SIZE, 28
     env = LIBVA_DRIVER_NAME,nvidia
     env = XDG_SESSION_TYPE,wayland
