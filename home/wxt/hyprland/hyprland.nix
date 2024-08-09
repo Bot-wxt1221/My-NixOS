@@ -15,7 +15,7 @@
   ];
   home.pointerCursor = {
     package = pkgs.bibata-cursors;
-    name = "wxt";
+    name = "Bibata-Modern-Ice";
   };
   xdg.enable = true;
   xdg.portal = with pkgs; {
