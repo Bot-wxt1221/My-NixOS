@@ -12,6 +12,7 @@
   home.packages = with pkgs; [
     pamixer
     pavucontrol
+    pwvucontrol
     ponymix
     blueberry
     pantheon.switchboard-with-plugs
@@ -141,7 +142,7 @@
         default = [ " " ];
       };
       scroll-step = 5;
-      on-click = "pavucontrol";
+      on-click = "pwvucontrol";
     };
     battery = {
       format = "{icon} {capacity}%";
