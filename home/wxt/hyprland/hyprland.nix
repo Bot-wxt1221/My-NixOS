@@ -14,8 +14,8 @@
     xorg.xcursorthemes
   ];
   home.pointerCursor = {
-    package = pkgs.xorg.xcursorthemes;
-    name = "whiteglass";
+    package = pkgs.xorg.vanilla-dmz;
+    name = "DMZ-Black";
   };
   xdg.enable = true;
   xdg.portal = with pkgs; {
