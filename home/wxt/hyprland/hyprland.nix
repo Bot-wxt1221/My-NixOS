@@ -14,8 +14,8 @@
     xorg.xcursorthemes
   ];
   home.pointerCursor = {
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Ice";
+    package = pkgs.xorg.xcursorthemes;
+    name = "whiteglass";
   };
   xdg.enable = true;
   xdg.portal = with pkgs; {
