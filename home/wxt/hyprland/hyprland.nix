@@ -11,7 +11,12 @@
   home.packages = with pkgs; [
     fuzzel
     hyprshot
+    xorg.xcursorthemes
   ];
+  xsession.pointerCursor = {
+    package = pkgs.xorg.xcursorthemes;
+    name = "wxt";
+  }
   xdg.enable = true;
   xdg.portal = with pkgs; {
     enable = true;
@@ -81,9 +86,8 @@
     $terminal = konsole
     $fileManager = nautilus -w
     $menu = fuzzel
-
-    env = XCURSOR_SIZE,24
-    env = HYPRCURSOR_SIZE,24
+    
+    env = XCURSOR_THEME,wxt
     env = LIBVA_DRIVER_NAME,nvidia
     env = XDG_SESSION_TYPE,wayland
     env = GBM_BACKEND,nvidia-drm
