@@ -27,6 +27,7 @@ in
     rustdesk-flutter
     kitty
     helvum
+    gnome-graphs
     cpu-x
     nautilus
     weston
