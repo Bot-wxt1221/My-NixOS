@@ -39,10 +39,12 @@
       intel-ocl
       intel-compute-runtime
       nvidia-vaapi-driver
+      intel-media-driver
     ];
     extraPackages32 = with pkgs.pkgsi686Linux; [
       vaapiVdpau
       libvdpau-va-gl
+      intel-media-driver
     ];
   };
   environment.sessionVariables = {
