@@ -17,6 +17,6 @@
   programs.nvchad = {
     enable = true;
     neovim = neovim.packages.${pkgs.system}.default;
-    extraConfig = starter;
+    extraConfig = ${starter};
   };
 }
