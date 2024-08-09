@@ -88,6 +88,8 @@
     env = XDG_SESSION_TYPE,wayland
     env = GBM_BACKEND,nvidia-drm
     env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+    env = QT_IM_MODULE, fcitx5
+    env = GTK_IM_MODULE, fcitx5
 
     cursor {
       no_hardware_cursors = true
@@ -188,6 +190,7 @@
     exec-once=hyprpaper
     exec-once=waybar
     exec-once=swaync
+    exec-once=rustdesk
     exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
     exec-once=fcitx5-remote -r
     exec-once=fcitx5 -d --replace
