@@ -14,6 +14,9 @@
     xorg.xcursorthemes
   ];
   home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    x11.defaultCursor = "DMZ-Black";
     package = pkgs.vanilla-dmz;
     name = "DMZ-Black";
   };
