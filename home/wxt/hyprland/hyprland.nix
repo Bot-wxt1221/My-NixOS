@@ -14,7 +14,7 @@
     xorg.xcursorthemes
   ];
   home.pointerCursor = {
-    package = pkgs.xorg.vanilla-dmz;
+    package = pkgs.vanilla-dmz;
     name = "DMZ-Black";
   };
   xdg.enable = true;
