@@ -87,7 +87,9 @@
     $fileManager = nautilus -w
     $menu = fuzzel
     
-    env = XCURSOR_THEME,wxt
+    env = XCURSOR_THEME,DMZ-Black
+    exec-once = hyprctl setcursor "DMZ-Black" 28
+    env = XCURSOR_SIZE, 28
     env = LIBVA_DRIVER_NAME,nvidia
     env = XDG_SESSION_TYPE,wayland
     env = GBM_BACKEND,nvidia-drm
