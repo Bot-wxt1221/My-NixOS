@@ -8,7 +8,6 @@
   imports = [
 
   ];
-  services.xserver.desktopManager.runXdgAutostartIfNone = true;
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
