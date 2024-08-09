@@ -2,6 +2,8 @@
   config,
   pkgs,
   neovim,
+  nvchad,
+  starter,
   ...
 }:
 
