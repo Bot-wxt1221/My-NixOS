@@ -15,9 +15,9 @@
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
-    x11.defaultCursor = "macOS";
+    x11.defaultCursor = "macOS-BigSur";
     package = pkgs.apple-cursor;
-    name = "macOS";
+    name = "macOS-BigSur";
   };
   xdg.enable = true;
   xdg.portal = with pkgs; {
@@ -89,8 +89,8 @@
     $fileManager = nautilus -w
     $menu = fuzzel
     
-    env = XCURSOR_THEME,macOS
-    exec-once = hyprctl setcursor "macOS" 28
+    env = XCURSOR_THEME,macOS-BigSur
+    exec-once = hyprctl setcursor "macOS-BigSur" 28
     env = XCURSOR_SIZE, 28
     env = LIBVA_DRIVER_NAME,nvidia
     env = XDG_SESSION_TYPE,wayland
