@@ -13,10 +13,10 @@
     hyprshot
     xorg.xcursorthemes
   ];
-  xsession.pointerCursor = {
+  home.pointerCursor = {
     package = pkgs.xorg.xcursorthemes;
     name = "wxt";
-  }
+  };
   xdg.enable = true;
   xdg.portal = with pkgs; {
     enable = true;
