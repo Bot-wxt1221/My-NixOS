@@ -48,7 +48,7 @@
     ];
   };
   environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "nvidia";
+    LIBVA_DRIVER_NAME = "iHD";
   };
   hardware.nvidia = {
     modesetting.enable = true;
@@ -58,8 +58,9 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     prime = {
-      sync = {
+      offload = {
         enable = true;
+        enableOffloadCmd = true;
       };
       nvidiaBusId = "PCI:1:0:0";
       intelBusId = "PCI:0:2:0";
