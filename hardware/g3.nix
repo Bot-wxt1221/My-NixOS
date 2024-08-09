@@ -56,9 +56,8 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     prime = {
-      offload = {
+      sync = {
         enable = true;
-        enableOffloadCmd = true;
       };
       nvidiaBusId = "PCI:1:0:0";
       intelBusId = "PCI:0:2:0";
