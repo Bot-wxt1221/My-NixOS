@@ -191,6 +191,9 @@
     exec-once=waybar
     exec-once=swaync
     exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+    exec-once=fcitx5-remote -r
+    exec-once=fcitx5 -d --replace
+    exec-once=fcitx5-remote -r
     $mainMod = SUPER # Sets "Windows" key as main modifier
 
     bind = $mainMod, Q, exec, $terminal
@@ -263,6 +266,7 @@
     bind=SUPERSHIFT,j,movewindow,u
     bind=SUPERSHIFT,k,movewindow,d
 
+    windowrule=pseudo,fcitx
     windowrulev2 = suppressevent maximize, class:.* # You'll probably like this.
   '';
 }
