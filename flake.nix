@@ -41,7 +41,7 @@
             home-manager.users.wxt = import ./home/wxt;
             home-manager.extraSpecialArgs = {
               inherit neovim;
-	      inherit nvchad;
+              inherit nvchad;
               inherit starter;
             };
             # Optionally, use home-manager.extraSpecialArgs to pass
@@ -63,8 +63,8 @@
             home-manager.users.wxt = import ./home/wxt;
             home-manager.extraSpecialArgs = {
               inherit neovim;
-	      inherit nvchad;
-	      inherit starter;
+              inherit nvchad;
+              inherit starter;
             };
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
