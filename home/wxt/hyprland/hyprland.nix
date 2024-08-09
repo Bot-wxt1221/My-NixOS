@@ -90,6 +90,7 @@
     env = __GLX_VENDOR_LIBRARY_NAME,nvidia
     env = QT_IM_MODULE, fcitx5
     env = GTK_IM_MODULE, fcitx5
+    env = SDL_VIDEODRIVER, wayland
 
     cursor {
       no_hardware_cursors = true
