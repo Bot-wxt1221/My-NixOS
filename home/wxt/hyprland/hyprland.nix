@@ -14,7 +14,7 @@
     xorg.xcursorthemes
   ];
   home.pointerCursor = {
-    package = pkgs.xorg.xcursorthemes;
+    package = pkgs.bibata-cursors;
     name = "wxt";
   };
   xdg.enable = true;
