@@ -14,6 +14,7 @@
     ./fuse.nix
     #    ./todesk.nix
     ./miner-gpu.nix
+    ./appimage-run.nix
     ./dbus.nix
     ./docker.nix
     ./clash-verge.nix
