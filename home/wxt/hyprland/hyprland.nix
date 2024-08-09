@@ -247,6 +247,8 @@
     bind = $mainMod, mouse_down, workspace, e+1
     bind = $mainMod SHIFT, right ,workspace, e+1
     bind = $mainMod SHIFT, left ,workspace, e-1
+    bind = $mainMod SHIFT, up ,movetoworkspace, e+1
+    bind = $mainMod SHIFT, down ,movetoworkspace, e-1
     bind = $mainMod, mouse_up, workspace, e-1
     bindm = $mainMod, mouse:272, movewindow
     bindm = $mainMod, mouse:273, resizewindow

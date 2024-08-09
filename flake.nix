@@ -23,6 +23,7 @@
       home-manager,
       neovim,
       nvchad,
+      starter,
       ...
     }@inputs:
     {
@@ -41,6 +42,7 @@
             home-manager.extraSpecialArgs = {
               inherit neovim;
 	      inherit nvchad;
+              inherit starter;
             };
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
@@ -62,6 +64,7 @@
             home-manager.extraSpecialArgs = {
               inherit neovim;
 	      inherit nvchad;
+	      inherit starter;
             };
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
