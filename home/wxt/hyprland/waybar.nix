@@ -142,7 +142,7 @@
         default = [ " " ];
       };
       scroll-step = 5;
-      on-click = "audiopanelwxt";
+      on-click = "/etc/wxt/panel/bin";
     };
     battery = {
       format = "{icon} {capacity}%";
