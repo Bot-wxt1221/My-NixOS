@@ -24,7 +24,6 @@ in
     neofetch
     konsole
     gnome.gnome-logs
-    rustdesk-flutter
     kitty
     helvum
     gnome-graphs

@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  pkgs-rustdesk,
   ...
 }:
 {
@@ -12,7 +13,7 @@
     enable = true;
     description = "rustdesk";
     serviceConfig = {
-      ExecStart = "${pkgs.rustdesk-flutter}/bin/rustdesk --service";
+      ExecStart = "${pkgs-rustdesk.rustdesk-flutter}/bin/rustdesk --service";
       ExecStop = "pkill -f \"rustdesk --\"";
       PIDFile = "/run/rustdesk.pid";
       KillMode = "mixed";
@@ -24,5 +25,5 @@
     requires = [ "network-online.target" ];
     after = [ "display-manager.service" ];
   };
-  environment.systemPackages = with pkgs; [ rustdesk-flutter ];
+  environment.systemPackages = with pkgs-rustdesk; [ rustdesk-flutter ];
 }
