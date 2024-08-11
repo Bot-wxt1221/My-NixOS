@@ -11,12 +11,14 @@
   home.packages = with pkgs; [
     fuzzel
     hyprshot
-    xorg.xcursorthemes
   ];
-  xsession.pointerCursor = {
-    package = pkgs.xorg.xcursorthemes;
-    name = "wxt";
-  }
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    x11.defaultCursor = "macOS-BigSur";
+    package = pkgs.apple-cursor;
+    name = "macOS-BigSur";
+  };
   xdg.enable = true;
   xdg.portal = with pkgs; {
     enable = true;
@@ -87,7 +89,9 @@
     $fileManager = nautilus -w
     $menu = fuzzel
     
-    env = XCURSOR_THEME,wxt
+    env = XCURSOR_THEME,macOS-BigSur
+    exec-once = hyprctl setcursor "macOS-BigSur" 28
+    env = XCURSOR_SIZE, 28
     env = LIBVA_DRIVER_NAME,nvidia
     env = XDG_SESSION_TYPE,wayland
     env = GBM_BACKEND,nvidia-drm

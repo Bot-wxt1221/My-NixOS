@@ -43,6 +43,7 @@
     ];
     packages = with pkgs; [ ];
   };
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   # specialisation = {
   #   test-kernel = {
   #     configuration = {

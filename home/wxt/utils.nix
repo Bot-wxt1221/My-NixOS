@@ -31,6 +31,7 @@ in
     cpu-x
     nautilus
     weston
+    pigz
     nixfmt-rfc-style
     (pkgs.bilibili.overrideAttrs {
       src = pkgs.fetchurl {
