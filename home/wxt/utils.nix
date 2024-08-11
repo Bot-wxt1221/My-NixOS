@@ -31,6 +31,7 @@ in
     cpu-x
     nautilus
     weston
+    file-roller
     pigz
     nixfmt-rfc-style
     wayvnc
