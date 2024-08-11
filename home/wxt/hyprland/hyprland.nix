@@ -31,9 +31,7 @@
     extraPortals = [
       xdg-desktop-portal-gtk
       xdg-desktop-portal
-      xdg-desktop-portal-hyprland
       xdg-desktop-portal-wlr
-      xdg-desktop-portal-gnome
     ];
     xdgOpenUsePortal = true;
   };
@@ -203,6 +201,7 @@
     exec-once=clash-verge
     exec-once=hyprpaper
     exec-once=waybar
+    exec-once=wayvnc -g
     exec-once=swaync
     exec-once=rustdesk
     exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
