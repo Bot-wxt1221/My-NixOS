@@ -31,8 +31,9 @@
     extraPortals = [
       xdg-desktop-portal-gtk
       xdg-desktop-portal
-      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
       xdg-desktop-portal-wlr
+      xdg-desktop-portal-gnome
     ];
     xdgOpenUsePortal = true;
   };
@@ -94,6 +95,7 @@
     
     env = XCURSOR_THEME,macOS-BigSur
     exec-once = hyprctl setcursor "macOS-BigSur" 28
+    env = XDG_CURRENT_DESKTOP, hyprland
     env = XCURSOR_SIZE, 28
     env = LIBVA_DRIVER_NAME,nvidia
     env = XDG_SESSION_TYPE,wayland
