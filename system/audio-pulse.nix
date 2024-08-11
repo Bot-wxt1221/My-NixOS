@@ -11,5 +11,8 @@
       default = false;
     };
   };
-  config = lib.mkIf config.Enablepulseaudio { hardware.pulseaudio.enable = true; };
+  config = lib.mkIf config.Enablepulseaudio {
+    hardware.pulseaudio.enable = true;
+    environment.etc."wxt/panel/bin".source = "${pkgs.pavucontrol}/bin/pavucontrol";
+  };
 }

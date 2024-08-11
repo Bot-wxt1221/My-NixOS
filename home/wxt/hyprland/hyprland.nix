@@ -90,7 +90,7 @@
     $terminal = konsole
     $fileManager = nautilus -w
     $menu = fuzzel
-    
+
     env = XCURSOR_THEME,macOS-BigSur
     exec-once = hyprctl setcursor "macOS-BigSur" 28
     env = XDG_CURRENT_DESKTOP, hyprland

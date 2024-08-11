@@ -142,7 +142,7 @@
         default = [ " " ];
       };
       scroll-step = 5;
-      on-click = "pwvucontrol";
+      on-click = "audiopanelwxt";
     };
     battery = {
       format = "{icon} {capacity}%";

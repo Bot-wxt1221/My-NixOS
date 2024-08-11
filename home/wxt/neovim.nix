@@ -17,5 +17,5 @@
     neovim = neovim.packages.${pkgs.system}.default;
     extraConfig = "${starter}";
   };
-  home.packages = with pkgs; [clang-tools];
+  home.packages = with pkgs; [ clang-tools ];
 }
