@@ -95,10 +95,7 @@
     exec-once = hyprctl setcursor "macOS-BigSur" 28
     env = XDG_CURRENT_DESKTOP, hyprland
     env = XCURSOR_SIZE, 28
-    env = LIBVA_DRIVER_NAME,nvidia
     env = XDG_SESSION_TYPE,wayland
-    env = GBM_BACKEND,nvidia-drm
-    env = __GLX_VENDOR_LIBRARY_NAME,nvidia
     env = QT_IM_MODULE, fcitx5
     env = GTK_IM_MODULE, fcitx5
     env = SDL_VIDEODRIVER, wayland
@@ -197,7 +194,7 @@
     exec-once=clash-verge
     exec-once=hyprpaper
     exec-once=waybar
-    exec-once=wayvnc -g
+    exec-once=wayvnc 0.0.0.0
     exec-once=swaync
     exec-once=rustdesk
     exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP

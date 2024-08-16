@@ -19,7 +19,8 @@
     ocl-icd
     glib
     nss
-    cudaPackages.cudatoolkit
-    linuxPackages.nvidia_x11
+    lib.mkIf
+    config.hardware.nvidia.modesetting.enable
+    (cudaPackages.cudatoolkit linuxPackages.nvidia_x11)
   ];
 }
