@@ -30,7 +30,7 @@
       nixosConfigurations.wxt-g3 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          nixpkgs=nixpkgs;
+          nixpkgs = nixpkgs;
         };
         modules = [
           ./g3-configuration.nix
@@ -52,7 +52,7 @@
       nixosConfigurations.wxt-school-vmware = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          nixpkgs=nixpkgs;
+          nixpkgs = nixpkgs;
         };
         modules = [
           ./school-vmware-configuration.nix
