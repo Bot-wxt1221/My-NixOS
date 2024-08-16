@@ -27,11 +27,11 @@
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
   programs.git.extraConfig = {
-      commit = {
-        gpgsign = true;
-      };
-      user = {
-        signingKey = "7D01C38E6B886424C0A51B348281D5EE2D1825A4";
-      };
+    commit = {
+      gpgsign = true;
     };
+    user = {
+      signingKey = "7D01C38E6B886424C0A51B348281D5EE2D1825A4";
+    };
+  };
 }

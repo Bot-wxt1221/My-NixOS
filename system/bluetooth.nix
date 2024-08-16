@@ -7,7 +7,6 @@
 {
   imports = [
 
-
   ];
   options = {
     EnableBluetooth = lib.mkOption {
