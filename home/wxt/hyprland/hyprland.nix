@@ -103,10 +103,6 @@
     env = GTK_IM_MODULE, fcitx5
     env = SDL_VIDEODRIVER, wayland
 
-    cursor {
-      no_hardware_cursors = true
-    }
-
     general { 
       gaps_in = 5
       gaps_out = 20
