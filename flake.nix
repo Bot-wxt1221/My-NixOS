@@ -2,7 +2,7 @@
   description = "Main config";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/master";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     neovim-src.url = "github:neovim/neovim";
@@ -38,7 +38,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.wxt = import ./home/wxt;
+            home-manager.users.wxt = import ./home/wxt/default-g3.nix;
             home-manager.extraSpecialArgs = {
               inherit neovim;
               inherit nvchad;
@@ -60,7 +60,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.wxt = import ./home/wxt;
+            home-manager.users.wxt = import ./home/wxt/default-school-vmware.nix;
             home-manager.extraSpecialArgs = {
               inherit neovim;
               inherit nvchad;
