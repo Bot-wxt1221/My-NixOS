@@ -3,9 +3,9 @@
 
   inputs = {
     nixpkgs-cache.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs-master";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs-cache";
     neovim-src.url = "github:neovim/neovim";
     neovim-src.flake = false;
     neovim.url = "github:nix-community/neovim-nightly-overlay/master";
@@ -32,7 +32,7 @@
       nixosConfigurations.wxt-g3 = nixpkgs-master.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          nixpkgs=nixpkgs-master;
+          nixpkgs = nixpkgs-master;
         };
         modules = [
           ./g3-configuration.nix
@@ -54,7 +54,7 @@
       nixosConfigurations.wxt-school-vmware = nixpkgs-cache.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          nixpkgs=nixpkgs-cache;
+          nixpkgs = nixpkgs-cache;
         };
         modules = [
           ./school-vmware-configuration.nix
