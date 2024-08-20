@@ -1,4 +1,3 @@
-]
 {
   config,
   lib,
@@ -24,9 +23,9 @@
         glib
         nss
       ]
-      (lib.mkIf config.hardware.nvidia.modesetting.enable [
-        cudaPackages.cudatoolkit
-        linuxPackages.nvidia_x11
+      (lib.mkIf EnableCuda [
+#        cudaPackages.cudatoolkit
+ #       linuxPackages.nvidia_x11
       ])
     ];
 }
