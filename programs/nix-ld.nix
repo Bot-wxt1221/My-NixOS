@@ -23,9 +23,5 @@
         glib
         nss
       ]
-      (lib.mkIf config.EnableCuda [
-#        cudaPackages.cudatoolkit
- #       linuxPackages.nvidia_x11
-      ])
     ];
 }
