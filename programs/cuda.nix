@@ -5,7 +5,7 @@
   ...
 }:
 {
-  imports = [ ./cuda-ld.nix ];
+  imports = [ ];
   options = {
     EnableCuda = lib.mkOption {
       type = lib.types.bool;
