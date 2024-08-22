@@ -14,7 +14,7 @@
     nvchad.inputs.nixpkgs.follows = "nixpkgs";
     starter.url = "github:Bot-wxt1221/Bot-wxt1221-NvChad";
     starter.flake = false;
-    nvchad.inputs.nvchad-starter.follows = "starter";
+#    nvchad.inputs.nvchad-starter.follows = "starter";
   };
 
   outputs =
