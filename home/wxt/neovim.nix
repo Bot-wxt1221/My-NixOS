@@ -15,11 +15,6 @@
     enable = true;
     neovim = neovim.packages.${pkgs.system}.default;
     extraPackages = with pkgs; [ clang-tools ];
-    extraPlugins = ''
-    return {
-      "nvim-lualine/lualine.nvim"
-    }
-    '';
   };
   home.packages = with pkgs; [ clang-tools ];
 }
