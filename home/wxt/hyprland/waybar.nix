@@ -17,9 +17,6 @@
     blueberry
     pantheon.switchboard-with-plugs
   ];
-  programs.waybar.package = pkgs.waybar.overrideAttrs (oa: {
-    mesonFlags = (oa.mesonFlags or [ ]) ++ [ "-Dexperimental=true" ];
-  });
   programs.waybar.settings.mainBar = {
     position = "bottom";
     layer = "top";
