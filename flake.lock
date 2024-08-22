@@ -231,21 +231,36 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "nvchad-starter": [
-          "starter"
-        ]
+        "nvchad-starter": "nvchad-starter"
       },
       "locked": {
-        "lastModified": 1724313828,
+        "lastModified": 1724313976,
         "narHash": "sha256-krAicAHo0LYlF2RZJ+uba8SBVGj+wHk1BteHXGId7LE=",
         "owner": "Bot-wxt1221",
         "repo": "nix-nvchad",
-        "rev": "718ae1bf2fed70d0303f7ec566f8e495810fe392",
+        "rev": "1096738c662a71b52cf58ed73c1f55f9b56da5a7",
         "type": "github"
       },
       "original": {
         "owner": "Bot-wxt1221",
         "repo": "nix-nvchad",
+        "type": "github"
+      }
+    },
+    "nvchad-starter": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1723385181,
+        "narHash": "sha256-J0iB+5aRuirhF91CnFfG8hDmkY5jOT2QlHrkoku3WVw=",
+        "owner": "NvChad",
+        "repo": "starter",
+        "rev": "3e1667ef3c5c5f74ba0783eb50984f5e2700948c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NvChad",
+        "ref": "main",
+        "repo": "starter",
         "type": "github"
       }
     },
