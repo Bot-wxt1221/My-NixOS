@@ -38,7 +38,7 @@ in
     (pkgs.bilibili.overrideAttrs {
       src = pkgs.fetchurl {
         url = "https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-2/io.github.msojocs.bilibili_1.14.0-2_amd64.deb";
-        hash = "sha256-iflq6Rgj5PUvtIJ2FCBO4ki8Tf6LNHZrxKXKYjqD/Qo=";
+        hash = "sha256-QQMdEpKE7r/fPMaX/yEoaa7KjilhiPMYLRvGPkv1jds=";
       };
       installPhase = ''
         runHook preInstall
