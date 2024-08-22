@@ -3,6 +3,7 @@
   pkgs,
   neovim,
   nvchad,
+  lib,
   ...
 }:
 
