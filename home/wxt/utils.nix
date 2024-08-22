@@ -53,6 +53,11 @@ in
           --add-flags "--ozone-platform-hint=wayland --enable-wayland-ime"
         runHook postInstall
       '';
+      unpackPhase = ''
+      runHook preUnpack
+      ${pkgs.dpkg}/bin/dpkg -x $src ./
+      runHook postUnpack
+    '';
     })
     wl-clipboard
     (pkgs.microsoft-edge.override {
