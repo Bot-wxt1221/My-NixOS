@@ -10,10 +10,11 @@
     neovim.url = "github:nix-community/neovim-nightly-overlay/master";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
     neovim.inputs.neovim-src.follows = "neovim-src";
-    nvchad.url = "github:NvChad/nix";
+    nvchad.url = "github:Bot-wxt1221/nix-nvchad";
     nvchad.inputs.nixpkgs.follows = "nixpkgs";
     starter.url = "github:Bot-wxt1221/Bot-wxt1221-NvChad";
     starter.flake = false;
+    nvchad.inputs.nvchad-starter.follows = "starter";
   };
 
   outputs =
@@ -23,7 +24,6 @@
       home-manager,
       neovim,
       nvchad,
-      starter,
       ...
     }@inputs:
     {
@@ -42,7 +42,6 @@
             home-manager.extraSpecialArgs = {
               inherit neovim;
               inherit nvchad;
-              inherit starter;
             };
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
@@ -64,7 +63,6 @@
             home-manager.extraSpecialArgs = {
               inherit neovim;
               inherit nvchad;
-              inherit starter;
             };
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
