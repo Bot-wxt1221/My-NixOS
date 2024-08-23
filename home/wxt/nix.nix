@@ -1,4 +1,4 @@
-{ config, pkgs }:
+{ config, pkgs ,... }:
 {
 
   home.file."update.sh".text = ''
