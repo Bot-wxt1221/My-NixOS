@@ -17,6 +17,7 @@
     ./archive.nix
     ./java.nix
     ./utils.nix
+    ./nix.nix
     ./zsh.nix
     ./git.nix
   ];

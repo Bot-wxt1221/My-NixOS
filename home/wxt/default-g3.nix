@@ -16,6 +16,7 @@
     ./waydroid.nix
     ./archive.nix
     ./java.nix
+    ./nix.nix
     ./utils.nix
     ./zsh.nix
     ./git.nix

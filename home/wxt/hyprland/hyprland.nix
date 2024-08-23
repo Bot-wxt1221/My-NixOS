@@ -194,6 +194,7 @@
     exec-once=clash-verge
     exec-once=hyprpaper
     exec-once=waybar
+    exec-once=wl-clip-persist --clipboard regular
     exec-once=wayvnc 0.0.0.0
     exec-once=swaync
     exec-once=rustdesk

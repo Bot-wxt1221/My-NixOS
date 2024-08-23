@@ -54,10 +54,10 @@ in
         runHook postInstall
       '';
       unpackPhase = ''
-      runHook preUnpack
-      ${pkgs.dpkg}/bin/dpkg -x $src ./
-      runHook postUnpack
-    '';
+        runHook preUnpack
+        ${pkgs.dpkg}/bin/dpkg -x $src ./
+        runHook postUnpack
+      '';
     })
     wl-clipboard
     (pkgs.microsoft-edge.override {
