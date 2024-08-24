@@ -24,6 +24,7 @@
       "adbusers"
       "video"
       "networkmanager"
+      "vboxsf"
     ];
     packages = with pkgs; [ ];
   };
