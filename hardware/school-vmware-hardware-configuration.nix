@@ -21,6 +21,7 @@
     "virtio_scsi"
     "sd_mod"
     "sr_mod"
+    "vmwgfx"
   ];
   boot.initrd.kernelModules = [ "vmwgfx" ];
   boot.kernelModules = [ ];
