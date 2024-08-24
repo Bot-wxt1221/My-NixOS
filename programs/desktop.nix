@@ -18,7 +18,6 @@
   ];
   programs.dconf.enable = true;
   programs.hyprland.enable = true;
-  programs.hyprland.xwayland.enable = true;
   programs.light.enable = true;
   services.power-profiles-daemon.enable = true;
   programs.gnome-disks.enable = true;
