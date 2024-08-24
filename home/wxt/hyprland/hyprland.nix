@@ -205,7 +205,6 @@
       exec-once=wayvnc 0.0.0.0
       exec-once=swaync
       exec-once=rustdesk
-      exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
       exec-once=fcitx5-remote -r
       exec-once=fcitx5 -d --replace
       exec-once=fcitx5-remote -r
