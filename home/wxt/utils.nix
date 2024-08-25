@@ -35,30 +35,33 @@ in
     nixfmt-rfc-style
     wayvnc
     realvnc-vnc-viewer
-    (pkgs.bilibili.overrideAttrs {
-      src = pkgs.fetchurl {
-        url = "https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-2/io.github.msojocs.bilibili_1.14.0-2_amd64.deb";
-        hash = "sha256-QQMdEpKE7r/fPMaX/yEoaa7KjilhiPMYLRvGPkv1jds=";
-      };
-      installPhase = ''
-        runHook preInstall
+    (
+      (pkgs.bilibili.overrideAttrs {
+        src = pkgs.fetchurl {
+          url = "https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-2/io.github.msojocs.bilibili_1.14.0-2_amd64.deb";
+          hash = "sha256-QQMdEpKE7r/fPMaX/yEoaa7KjilhiPMYLRvGPkv1jds=";
+        };
+        installPhase = ''
+          runHook preInstall
 
-        mkdir -p $out/bin
-        cp -r usr/share $out/share
-        sed -i "s|Exec=.*|Exec=$out/bin/bilibili|" $out/share/applications/*.desktop
-        cp -r opt/apps/io.github.msojocs.bilibili/files/bin/app $out/opt
-        makeWrapper ${pkgs.electron}/bin/electron $out/bin/bilibili \
-          --argv0 "bilibili" \
-          --add-flags "$out/opt/app.asar" \
-          --add-flags "--ozone-platform-hint=wayland --enable-wayland-ime"
-        runHook postInstall
-      '';
-      unpackPhase = ''
-        runHook preUnpack
-        ${pkgs.dpkg}/bin/dpkg -x $src ./
-        runHook postUnpack
-      '';
-    })
+          mkdir -p $out/bin
+          cp -r usr/share $out/share
+          sed -i "s|Exec=.*|Exec=$out/bin/bilibili|" $out/share/applications/*.desktop
+          cp -r opt/apps/io.github.msojocs.bilibili/files/bin/app $out/opt
+          makeWrapper ${pkgs.electron}/bin/electron $out/bin/bilibili \
+            --argv0 "bilibili" \
+            --add-flags "$out/opt/app.asar" \
+            --add-flags "--ozone-platform-hint=wayland --enable-wayland-ime"
+          runHook postInstall
+        '';
+        unpackPhase = ''
+          runHook preUnpack
+          ${pkgs.dpkg}/bin/dpkg -x $src ./
+          runHook postUnpack
+        '';
+      }).override
+      { electron = pkgs.electron_29; }
+    )
     wl-clipboard
     (pkgs.microsoft-edge.override {
       commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime --process-per-site --enable-zero-copy --enable-features=WebUIDarkMode,UseOzonePlatform,VaapiVideoDecodeLinuxGL,VaapiVideoDecoder,WebRTCPipeWireCapturer,WaylandWindowDecorations";
