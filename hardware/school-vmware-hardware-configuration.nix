@@ -17,23 +17,20 @@
     "ohci_pci"
     "ehci_pci"
     "ahci"
-    "virtio_pci"
-    "virtio_scsi"
     "sd_mod"
     "sr_mod"
-    "vmwgfx"
   ];
-  boot.initrd.kernelModules = [ "vmwgfx" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/6b495398-6e08-4604-bc75-6ccf502b11f1";
+    device = "/dev/disk/by-uuid/94dffce5-16b1-4a9b-b3be-30e71f456591";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/12CE-A600";
+    device = "/dev/disk/by-uuid/CF6B-AF5B";
     fsType = "vfat";
     options = [
       "fmask=0022"
@@ -41,7 +38,14 @@
     ];
   };
 
-  swapDevices = [ { device = "/dev/disk/by-uuid/8c2cc284-42da-4a25-93a6-4b8797ee540e"; } ];
+  fileSystems."/mnt" = {
+    device = "C_DRIVE";
+    fsType = "vboxsf";
+  };
+
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/ec35a953-cb38-487c-978f-6a56329b0f31"; }
+  ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -50,6 +54,7 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp0s3.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp0s8.useDHCP = lib.mkDefault true;
+  # networking.interfaces.Mihomo.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   virtualisation.virtualbox.guest.enable = true;
