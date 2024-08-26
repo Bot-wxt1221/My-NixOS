@@ -8,7 +8,7 @@
   options = {
     EnableVirt = lib.mkOption {
       type = lib.types.bool;
-      default = true;
+      default = false;
     };
   };
   config = lib.mkIf config.EnableVirt {
