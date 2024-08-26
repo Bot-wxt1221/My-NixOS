@@ -25,6 +25,7 @@
   Ownhostname = "wxt-g3";
   Enablepipewire = true;
   EnableWaydroid = true;
+  EnableVirt = true;
   EnableMineGPU = false;
   EnableBluetooth = true;
   EnableMineCPU = false;
