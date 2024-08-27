@@ -23,7 +23,7 @@ in
     cachix
     neofetch
     konsole
-    gnome.gnome-logs
+    gnome-logs
     kitty
     helvum
     gnome-graphs
