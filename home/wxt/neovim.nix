@@ -13,7 +13,7 @@
   #  };
   programs.nvchad = {
     enable = true;
-#    neovim = neovim.packages.${pkgs.system}.default;
+    #    neovim = neovim.packages.${pkgs.system}.default;
     extraPackages = with pkgs; [ clang-tools ];
   };
   home.packages = with pkgs; [ clang-tools ];
