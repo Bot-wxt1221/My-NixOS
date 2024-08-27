@@ -10,13 +10,13 @@
 @define-color mantle #E0E0E0;
 @define-color crust  #E0E0E0;
 
-@define-color text     #0F0F0F;
-@define-color subtext0 #1F1F1F;
-@define-color subtext1 #2F2F2F;
+@define-color text     #F0F0F0;
+@define-color subtext0 #F0F0F0;
+@define-color subtext1 #F0F0F0;
 
-@define-color surface0 #E0E0E0;
-@define-color surface1 #E0E0E0;
-@define-color surface2 #E0E0E0;
+@define-color surface0 #0E0E0E;
+@define-color surface1 #0E0E0E;
+@define-color surface2 #0E0E0E;
 
 @define-color blue      #89b4fa;
 @define-color lavender  #b4befe;
