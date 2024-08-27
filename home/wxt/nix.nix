@@ -18,6 +18,7 @@
   home.file."install.sh".text = ''
     cd ~/config
     git add .
+    sudo echo hello
     bash "/home/wxt/update2.sh" |& nom --json
     git add .
     git commit -m "Update"

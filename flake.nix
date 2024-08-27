@@ -15,6 +15,7 @@
     starter.url = "github:Bot-wxt1221/Bot-wxt1221-NvChad";
     starter.flake = false;
     nvchad.inputs.nvchad-starter.follows = "starter";
+    luogu-gcc.url = "github:luogu-dev/judge-env";
   };
 
   outputs =
@@ -24,6 +25,7 @@
       home-manager,
       neovim,
       nvchad,
+      luogu-gcc,
       ...
     }@inputs:
     {
@@ -42,6 +44,7 @@
             home-manager.extraSpecialArgs = {
               inherit neovim;
               inherit nvchad;
+              inherit luogu-gcc;
             };
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
@@ -63,6 +66,7 @@
             home-manager.extraSpecialArgs = {
               inherit neovim;
               inherit nvchad;
+              inherit luogu-gcc;
             };
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
