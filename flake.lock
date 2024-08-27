@@ -322,16 +322,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1724741841,
+        "lastModified": 1724743047,
         "narHash": "sha256-0ba91LBhcvucVSoeE18xXWEfpRFje9dWiZ1ktCLszhs=",
         "owner": "nix-community",
         "repo": "nix4nvchad",
-        "rev": "b3872e3890d4b6b70312895aeafaefb8d8cf40ba",
+        "rev": "04de203f8c0ddb78d499ba9725a71a242082f143",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "patch-1",
         "repo": "nix4nvchad",
         "type": "github"
       }

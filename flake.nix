@@ -10,7 +10,7 @@
     neovim.url = "github:nix-community/neovim-nightly-overlay/master";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
     neovim.inputs.neovim-src.follows = "neovim-src";
-    nvchad.url = "github:nix-community/nix4nvchad/patch-1";
+    nvchad.url = "github:nix-community/nix4nvchad";
     nvchad.inputs.nixpkgs.follows = "nixpkgs";
     starter.url = "github:Bot-wxt1221/Bot-wxt1221-NvChad";
     starter.flake = false;
