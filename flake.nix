@@ -73,28 +73,5 @@
           }
         ];
       };
-      nixosConfigurations.wxt-vm-aarch64 = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        specialArgs = {
-          nixpkgs = nixpkgs;
-        };
-        modules = [
-          ./vm-aarch64.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.wxt = import ./home/wxt/default-vm-aarch64.nix;
-            home-manager.extraSpecialArgs = {
-              inherit neovim;
-              inherit nvchad;
-              inherit luogu-gcc;
-            };
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
-          }
-        ];
-      };
-
     };
 }
