@@ -17,5 +17,5 @@
   config = lib.mkIf config.EnableVirtualBox{
     virtualisation.virtualbox.host.enable = true;
     users.extraGroups.vboxusers.members = [ "wxt" ];
-  }
+  };
 }
