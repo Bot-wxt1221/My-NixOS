@@ -27,7 +27,7 @@
   EnableWaydroid = true;
   EnableVirt = true;
   EnableMineGPU = false;
-  EnableVirtualBox = true;
+  EnableVirtualBox = false;
   EnableBluetooth = true;
   EnableMineCPU = false;
   EnableCuda = true;
