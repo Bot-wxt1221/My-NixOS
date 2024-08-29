@@ -8,11 +8,11 @@
   imports = [
 
   ];
-  home.file.".config/hypr/wallpaper.png".source = ./nixos-wallpaper-catppuccin-latte.png;
+  home.file.".config/hypr/wallpaper.jpeg".source = ./wallpaper.jpeg;
   services.hyprpaper.enable = true;
   services.hyprpaper.settings = {
-    preload = [ "${config.home.homeDirectory}/.config/hypr/wallpaper.png" ];
-    wallpaper = [ ",${config.home.homeDirectory}/.config/hypr/wallpaper.png" ];
+    preload = [ "${config.home.homeDirectory}/.config/hypr/wallpaper.jpeg" ];
+    wallpaper = [ ",${config.home.homeDirectory}/.config/hypr/wallpaper.jpeg" ];
   };
   home.packages = with pkgs; [ hyprpaper ];
 }
