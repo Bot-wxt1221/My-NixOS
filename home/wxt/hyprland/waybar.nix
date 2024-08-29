@@ -52,15 +52,29 @@
       ];
     };
     clock = {
+      format = "{:%H:%M}  ";
+      format-alt = "{:%A, %B %d, %Y (%R)}  ";
+      tooltip-format = "<tt><small>{calendar}</small></tt>";
       calendar = {
+        mode = "year";
+        mode-mon-col = 3;
+        weeks-pos = "right";
+        on-scroll = 1;
         format = {
-          today = "<span color='#b4befe'><b><u>{}</u></b></span>";
+          months = "<span color='#ffead3'><b>{}</b></span>";
+          days = "<span color='#ecc6d9'><b>{}</b></span>";
+          weeks = "<span color='#99ffdd'><b>W{}</b></span>";
+          weekdays = "<span color='#ffcc66'><b>{}</b></span>";
+          today = "<span color='#ff6699'><b><u>{}</u></b></span>";
         };
       };
-      format = " {:%H:%M}";
-      tooltip = "true";
-      tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-      format-alt = " {:%d/%m}";
+      actions = {
+        on-click-right = "mode";
+        on-click-forward = "tz_up";
+        on-click-backward = "tz_down";
+        on-scroll-up = "shift_up";
+        on-scroll-down = "shift_down";
+      };
     };
     "hyprland/workspaces" = {
       active-only = false;
@@ -126,7 +140,7 @@
       tooltip-format = "Connected to {essid} {ifname} via {gwaddr}";
       format-linked = "{ifname} (No IP)";
       format-disconnected = "󰖪 ";
-      on-click = "io.elementary.switchboard";
+      on-click = "io.elementary.settings";
     };
     tray = {
       icon-size = 20;
