@@ -9,12 +9,12 @@
 
   ];
   options = {
-    EnableVirtualBox = mkOption {
-      type=libs.types.bool;
-      default=false;
+    EnableVirtualBox = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
     };
   };
-  config = lib.mkIf config.EnableVirtualBox{
+  config = lib.mkIf config.EnableVirtualBox {
     virtualisation.virtualbox.host.enable = true;
     users.extraGroups.vboxusers.members = [ "wxt" ];
   };
