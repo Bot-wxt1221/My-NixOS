@@ -196,7 +196,6 @@
       }
 
       exec-once=waydroid session start
-      exec-once=sleep 5 && ponymix -t sink  --device "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink" set-default && ponymix -t sink  --device "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink" mute && ponymix -t sink  --device "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink" unmute
       exec-once=sleep 5 && ponymix -t source  --device "alsa_input.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Mic1__source" set-default && ponymix -t source  --device "alsa_input.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Mic1__source" mute && ponymix -t source  --device "alsa_input.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Mic1__source" unmute
       exec-once=clash-verge
       exec-once=hyprpaper
@@ -204,7 +203,6 @@
       exec-once=wl-clip-persist --clipboard regular
       exec-once=wayvnc 0.0.0.0
       exec-once=swaync
-      exec-once=rustdesk
       exec-once=fcitx5-remote -r
       exec-once=fcitx5 -d --replace
       exec-once=fcitx5-remote -r
