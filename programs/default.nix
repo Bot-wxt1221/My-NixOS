@@ -11,6 +11,7 @@
     ./nix/nix.nix
     ./rustdesk.nix
     ./openssh.nix
+    ./virutalbox.nix
     ./fuse.nix
     #    ./todesk.nix
     ./miner-gpu.nix
