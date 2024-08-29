@@ -64,7 +64,7 @@
           months = "<span color='#ffead3'><b>{}</b></span>";
           days = "<span color='#ecc6d9'><b>{}</b></span>";
           weeks = "<span color='#99ffdd'><b>W{}</b></span>";
-          weekdays = "<span color='#ffcc66'><b>{}&nbsp;</b></span>";
+          weekdays = "<span color='#ffcc66'><b> 一   二   三   四   五   六   日                 一   二   三   四   五   六   日                 一   二   三   四   五   六   日</b></span>";
           today = "<span color='#ff6699'><b><u>{}</u></b></span>";
         };
       };
