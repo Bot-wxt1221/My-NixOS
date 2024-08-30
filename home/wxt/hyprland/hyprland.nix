@@ -97,7 +97,9 @@
       $terminal = konsole
       $fileManager = nautilus -w
       $menu = fuzzel
-      dwindle.no_gaps_when_only=1
+      dwindle{
+        no_gaps_when_only=1
+        }
       env = XCURSOR_THEME,macOS-BigSur
       exec-once = hyprctl setcursor "macOS-BigSur" 28
       env = XDG_CURRENT_DESKTOP, hyprland
