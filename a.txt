@@ -1,0 +1,1004 @@
+Sourcing setup-cuda-hook
+Running phase: unpackPhase
+@nix { "action": "setPhase", "phase": "unpackPhase" }
+unpacking source archive /nix/store/nnxscqpn74phlalryysf5vfmh6zr7gc7-source
+source root is source
+Running phase: patchPhase
+@nix { "action": "setPhase", "phase": "patchPhase" }
+applying patch /nix/store/q40k4s40abpxl5gavvkbi3ich3znrfmv-cmake-don-t-use-OpenCVFindOpenEXR.patch
+patching file cmake/OpenCVFindLibsGrfmt.cmake
+Hunk #1 succeeded at 294 (offset 37 lines).
+applying patch /nix/store/xn18kzkfl1851djxky1nc1vghsp5vqfn-cuda_opt_flow.patch
+patching file opencv_contrib/cudaoptflow/CMakeLists.txt
+Running phase: updateAutotoolsGnuConfigScriptsPhase
+@nix { "action": "setPhase", "phase": "updateAutotoolsGnuConfigScriptsPhase" }
+Running phase: configurePhase
+@nix { "action": "setPhase", "phase": "configurePhase" }
+Executing setupCUDAToolkitCompilers
+fixing cmake files...
+cmake flags: -DCMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY=OFF -DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF -DCMAKE_EXPORT_NO_PACKAGE_REGISTRY=ON -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DCMAKE_INSTALL_LOCALEDIR=/nix/store/3hayq79a8vpy39dw3m51c19ghpfqp132-opencv-4.9.0/share/locale -DCMAKE_INSTALL_LIBEXECDIR=/nix/store/3hayq79a8vpy39dw3m51c19ghpfqp132-opencv-4.9.0/libexec -DCMAKE_INSTALL_LIBDIR=/nix/store/3hayq79a8vpy39dw3m51c19ghpfqp132-opencv-4.9.0/lib -DCMAKE_INSTALL_DOCDIR=/nix/store/3hayq79a8vpy39dw3m51c19ghpfqp132-opencv-4.9.0/share/doc/OpenCV -DCMAKE_INSTALL_INFODIR=/nix/store/3hayq79a8vpy39dw3m51c19ghpfqp132-opencv-4.9.0/share/info -DCMAKE_INSTALL_MANDIR=/nix/store/3hayq79a8vpy39dw3m51c19ghpfqp132-opencv-4.9.0/share/man -DCMAKE_INSTALL_OLDINCLUDEDIR=/nix/store/3hayq79a8vpy39dw3m51c19ghpfqp132-opencv-4.9.0/include -DCMAKE_INSTALL_INCLUDEDIR=/nix/store/3hayq79a8vpy39dw3m51c19ghpfqp132-opencv-4.9.0/include -DCMAKE_INSTALL_SBINDIR=/nix/store/3hayq79a8vpy39dw3m51c19ghpfqp132-opencv-4.9.0/sbin -DCMAKE_INSTALL_BINDIR=/nix/store/3hayq79a8vpy39dw3m51c19ghpfqp132-opencv-4.9.0/bin -DCMAKE_INSTALL_NAME_DIR=/nix/store/3hayq79a8vpy39dw3m51c19ghpfqp132-opencv-4.9.0/lib -DCMAKE_POLICY_DEFAULT_CMP0025=NEW -DCMAKE_OSX_SYSROOT= -DCMAKE_FIND_FRAMEWORK=LAST -DCMAKE_STRIP=/nix/store/zlvn0bc69jkzrbm8ravkcp6407snv195-gcc-wrapper-13.3.0/bin/strip -DCMAKE_RANLIB=/nix/store/zlvn0bc69jkzrbm8ravkcp6407snv195-gcc-wrapper-13.3.0/bin/ranlib -DCMAKE_AR=/nix/store/zlvn0bc69jkzrbm8ravkcp6407snv195-gcc-wrapper-13.3.0/bin/ar -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_INSTALL_PREFIX=/nix/store/3hayq79a8vpy39dw3m51c19ghpfqp132-opencv-4.9.0 -DOPENCV_GENERATE_PKGCONFIG=ON -DWITH_OPENMP=ON -DBUILD_PROTOBUF=OFF -DProtobuf_PROTOC_EXECUTABLE=/nix/store/yf9c4zdlzi3v8xxzzx04phz28r9lqm15-protobuf-21.12/bin/protoc -DPROTOBUF_UPDATE_FILES=ON -DOPENCV_ENABLE_NONFREE=OFF -DBUILD_TESTS=ON -DBUILD_PERF_TESTS=OFF -DCMAKE_SKIP_BUILD_RPATH=ON -DBUILD_DOCS=OFF -DOPENCV_ENABLE_PKG_CONFIG=ON -DWITH_IPP=OFF -DWITH_TIFF=ON -DWITH_WEBP=ON -DWITH_JPEG=ON -DWITH_PNG=ON -DWITH_OPENEXR=ON -DWITH_OPENJPEG=ON -DWITH_JASPER=OFF -DWITH_TBB=OFF -DWITH_CUDA=ON -DWITH_CUDA_FAST_MATH=ON -DWITH_CUBLAS=ON -DWITH_CUDNN=OFF -DWITH_CUFFT=ON -DWITH_ENABLE_LTO=ON -DWITH_ENABLE_THIN_LTO=OFF -DCUDA_FAST_MATH=ON -DCUDA_NVCC_FLAGS=--expt-relaxed-constexpr -DCUDA_ARCH_BIN=6.0;6.1;7.0;7.5;8.0;8.6;8.9;9.0;9.0a -DCUDA_ARCH_PTX=9.0a -DNVIDIA_OPTICAL_FLOW_2_0_HEADERS_PATH=/nix/store/aql9h1dj735fgcra2jcvz0cwcxmwr655-nvidia-optical-flow-sdk-2.0 -DOPENCL_LIBRARY=/nix/store/0wq6jx9p4g78r8hk7rbbc64jml8qgb61-ocl-icd-2.3.2/lib/libOpenCL.so -DCUDAToolkit_INCLUDE_DIR=/nix/store/vcych2zzaz26v3vvai35lwpn8hxvxj1c-libnpp-12.2.5.2-dev/include;/nix/store/9kfdwzkms9dxzm8c8ray2hbh94jpdvjq-cuda_cccl-12.4.99-dev/include;/nix/store/zp5a7wxv1vf8aa4w32ky31m0jy5hxghy-cuda_nvcc-12.4.99/include;/nix/store/aql9h1dj735fgcra2jcvz0cwcxmwr655-nvidia-optical-flow-sdk-2.0/include;/nix/store/i9md8fnhzirm51rx4j4lcvhavy5p0wk9-libcufft-11.2.0.44-dev/include;/nix/store/2bn8fggcvfr7l56pac6q4lip4v2cmpab-cuda_cudart-12.4.99-dev/include;/nix/store/y5waabl2376qv95dxpmnpsxj1fza9xv6-libcublas-12.4.2.65-dev/include -DCUDAToolkit_ROOT=/nix/store/527b1j981bb90ax7j37hwsajvg2jzdp3-cuda_cudart-12.4.99-lib;/nix/store/vcych2zzaz26v3vvai35lwpn8hxvxj1c-libnpp-12.2.5.2-dev;/nix/store/zk914kx4xv4p3pbn39yk1f892f2blgwk-libnpp-12.2.5.2;/nix/store/scflzaqzdfyrd0hn3hwp4jj9sgdwzia8-libcublas-12.4.2.65-static;/nix/store/9kfdwzkms9dxzm8c8ray2hbh94jpdvjq-cuda_cccl-12.4.99-dev;/nix/store/z1xamcpjrplwk0rd51mm201fs29va7wn-libcufft-11.2.0.44;/nix/store/blir9nw83akkwd45d01csxwfbagknbss-cuda_cudart-12.4.99-static;/nix/store/zp5a7wxv1vf8aa4w32ky31m0jy5hxghy-cuda_nvcc-12.4.99;/nix/store/jsynkw3w33qxn0a1nn308c9ghl8hv338-cuda_nvcc-12.4.99-static;/nix/store/aql9h1dj735fgcra2jcvz0cwcxmwr655-nvidia-optical-flow-sdk-2.0;/nix/store/b5vd7db3ammajjj6hnvwr4q5zbgx7hlw-libcufft-11.2.0.44-static;/nix/store/g54wvbd0d73rsjrf24jj77c2a27kdx7l-cuda_cudart-12.4.99;/nix/store/i9md8fnhzirm51rx4j4lcvhavy5p0wk9-libcufft-11.2.0.44-dev;/nix/store/n070cpqirg3ga66c1hv7wb5qvahllcy0-cuda_cudart-12.4.99-stubs;/nix/store/pb899im4lmqfkrn5h3x3k1rpylm80m0i-libcublas-12.4.2.65;/nix/store/2bn8fggcvfr7l56pac6q4lip4v2cmpab-cuda_cudart-12.4.99-dev;/nix/store/gzdf29imgggaz92cbzv945drzbj5y3bv-libnpp-12.2.5.2-static;/nix/store/a1h7dlc4y6vn0cfskas32m81fh9gn075-libnpp-12.2.5.2-lib;/nix/store/y5waabl2376qv95dxpmnpsxj1fza9xv6-libcublas-12.4.2.65-dev;/nix/store/h8swqpyxqkinkfw3iyy6b3jcrsxv76xn-libcufft-11.2.0.44-lib;/nix/store/424aj61mm9niq03dhh247sf4bnvplw2w-cuda_cccl-12.4.99;/nix/store/5wiv9brgqdhcmb0kgri520wydb8925pl-libcublas-12.4.2.65-lib -DCUDA_HOST_COMPILER=/nix/store/zlvn0bc69jkzrbm8ravkcp6407snv195-gcc-wrapper-13.3.0/bin/c++ -DCMAKE_CUDA_HOST_COMPILER=/nix/store/zlvn0bc69jkzrbm8ravkcp6407snv195-gcc-wrapper-13.3.0/bin/c++ -DOPENCV_EXTRA_MODULES_PATH=/build/source/opencv_contrib
+-- The CXX compiler identification is GNU 13.3.0
+-- The C compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /nix/store/zlvn0bc69jkzrbm8ravkcp6407snv195-gcc-wrapper-13.3.0/bin/g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /nix/store/zlvn0bc69jkzrbm8ravkcp6407snv195-gcc-wrapper-13.3.0/bin/gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- ocv_init_download: OpenCV source tree is not fetched as git repository. 3rdparty resources will be downloaded from github.com by default.
+-- Detected processor: x86_64
+[33mCMake Warning (dev) at cmake/OpenCVUtils.cmake:144 (find_package):
+  Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+  are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+  the cmake_policy command to set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  cmake/OpenCVDetectPython.cmake:64 (find_host_package)
+  cmake/OpenCVDetectPython.cmake:286 (find_python)
+  CMakeLists.txt:632 (include)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+[0m
+-- Could NOT find PythonInterp (missing: PYTHON_EXECUTABLE) (Required is at least version "3.2")
+-- Looking for ccache - not found
+-- Performing Test HAVE_CXX_FSIGNED_CHAR
+-- Performing Test HAVE_CXX_FSIGNED_CHAR - Success
+-- Performing Test HAVE_C_FSIGNED_CHAR
+-- Performing Test HAVE_C_FSIGNED_CHAR - Success
+-- Performing Test HAVE_CXX_W
+-- Performing Test HAVE_CXX_W - Success
+-- Performing Test HAVE_C_W
+-- Performing Test HAVE_C_W - Success
+-- Performing Test HAVE_CXX_WALL
+-- Performing Test HAVE_CXX_WALL - Success
+-- Performing Test HAVE_C_WALL
+-- Performing Test HAVE_C_WALL - Success
+-- Performing Test HAVE_CXX_WRETURN_TYPE
+-- Performing Test HAVE_CXX_WRETURN_TYPE - Success
+-- Performing Test HAVE_C_WRETURN_TYPE
+-- Performing Test HAVE_C_WRETURN_TYPE - Success
+-- Performing Test HAVE_CXX_WNON_VIRTUAL_DTOR
+-- Performing Test HAVE_CXX_WNON_VIRTUAL_DTOR - Success
+-- Performing Test HAVE_C_WNON_VIRTUAL_DTOR
+-- Performing Test HAVE_C_WNON_VIRTUAL_DTOR - Failed
+-- Performing Test HAVE_CXX_WADDRESS
+-- Performing Test HAVE_CXX_WADDRESS - Success
+-- Performing Test HAVE_C_WADDRESS
+-- Performing Test HAVE_C_WADDRESS - Success
+-- Performing Test HAVE_CXX_WSEQUENCE_POINT
+-- Performing Test HAVE_CXX_WSEQUENCE_POINT - Success
+-- Performing Test HAVE_C_WSEQUENCE_POINT
+-- Performing Test HAVE_C_WSEQUENCE_POINT - Success
+-- Performing Test HAVE_CXX_WFORMAT
+-- Performing Test HAVE_CXX_WFORMAT - Success
+-- Performing Test HAVE_C_WFORMAT
+-- Performing Test HAVE_C_WFORMAT - Success
+-- Performing Test HAVE_CXX_WFORMAT_SECURITY
+-- Performing Test HAVE_CXX_WFORMAT_SECURITY - Success
+-- Performing Test HAVE_C_WFORMAT_SECURITY
+-- Performing Test HAVE_C_WFORMAT_SECURITY - Success
+-- Performing Test HAVE_CXX_WMISSING_DECLARATIONS
+-- Performing Test HAVE_CXX_WMISSING_DECLARATIONS - Success
+-- Performing Test HAVE_C_WMISSING_DECLARATIONS
+-- Performing Test HAVE_C_WMISSING_DECLARATIONS - Success
+-- Performing Test HAVE_CXX_WMISSING_PROTOTYPES
+-- Performing Test HAVE_CXX_WMISSING_PROTOTYPES - Failed
+-- Performing Test HAVE_C_WMISSING_PROTOTYPES
+-- Performing Test HAVE_C_WMISSING_PROTOTYPES - Success
+-- Performing Test HAVE_CXX_WSTRICT_PROTOTYPES
+-- Performing Test HAVE_CXX_WSTRICT_PROTOTYPES - Failed
+-- Performing Test HAVE_C_WSTRICT_PROTOTYPES
+-- Performing Test HAVE_C_WSTRICT_PROTOTYPES - Success
+-- Performing Test HAVE_CXX_WUNDEF
+-- Performing Test HAVE_CXX_WUNDEF - Success
+-- Performing Test HAVE_C_WUNDEF
+-- Performing Test HAVE_C_WUNDEF - Success
+-- Performing Test HAVE_CXX_WINIT_SELF
+-- Performing Test HAVE_CXX_WINIT_SELF - Success
+-- Performing Test HAVE_C_WINIT_SELF
+-- Performing Test HAVE_C_WINIT_SELF - Success
+-- Performing Test HAVE_CXX_WPOINTER_ARITH
+-- Performing Test HAVE_CXX_WPOINTER_ARITH - Success
+-- Performing Test HAVE_C_WPOINTER_ARITH
+-- Performing Test HAVE_C_WPOINTER_ARITH - Success
+-- Performing Test HAVE_CXX_WSHADOW
+-- Performing Test HAVE_CXX_WSHADOW - Success
+-- Performing Test HAVE_C_WSHADOW
+-- Performing Test HAVE_C_WSHADOW - Success
+-- Performing Test HAVE_CXX_WSIGN_PROMO
+-- Performing Test HAVE_CXX_WSIGN_PROMO - Success
+-- Performing Test HAVE_C_WSIGN_PROMO
+-- Performing Test HAVE_C_WSIGN_PROMO - Failed
+-- Performing Test HAVE_CXX_WUNINITIALIZED
+-- Performing Test HAVE_CXX_WUNINITIALIZED - Success
+-- Performing Test HAVE_C_WUNINITIALIZED
+-- Performing Test HAVE_C_WUNINITIALIZED - Success
+-- Performing Test HAVE_CXX_WSUGGEST_OVERRIDE
+-- Performing Test HAVE_CXX_WSUGGEST_OVERRIDE - Success
+-- Performing Test HAVE_C_WSUGGEST_OVERRIDE
+-- Performing Test HAVE_C_WSUGGEST_OVERRIDE - Failed
+-- Performing Test HAVE_CXX_WNO_DELETE_NON_VIRTUAL_DTOR
+-- Performing Test HAVE_CXX_WNO_DELETE_NON_VIRTUAL_DTOR - Success
+-- Performing Test HAVE_C_WNO_DELETE_NON_VIRTUAL_DTOR
+-- Performing Test HAVE_C_WNO_DELETE_NON_VIRTUAL_DTOR - Failed
+-- Performing Test HAVE_CXX_WNO_UNNAMED_TYPE_TEMPLATE_ARGS
+-- Performing Test HAVE_CXX_WNO_UNNAMED_TYPE_TEMPLATE_ARGS - Failed
+-- Performing Test HAVE_C_WNO_UNNAMED_TYPE_TEMPLATE_ARGS
+-- Performing Test HAVE_C_WNO_UNNAMED_TYPE_TEMPLATE_ARGS - Failed
+-- Performing Test HAVE_CXX_WNO_COMMENT
+-- Performing Test HAVE_CXX_WNO_COMMENT - Success
+-- Performing Test HAVE_C_WNO_COMMENT
+-- Performing Test HAVE_C_WNO_COMMENT - Success
+-- Performing Test HAVE_CXX_WIMPLICIT_FALLTHROUGH_3
+-- Performing Test HAVE_CXX_WIMPLICIT_FALLTHROUGH_3 - Success
+-- Performing Test HAVE_C_WIMPLICIT_FALLTHROUGH_3
+-- Performing Test HAVE_C_WIMPLICIT_FALLTHROUGH_3 - Success
+-- Performing Test HAVE_CXX_WNO_STRICT_OVERFLOW
+-- Performing Test HAVE_CXX_WNO_STRICT_OVERFLOW - Success
+-- Performing Test HAVE_C_WNO_STRICT_OVERFLOW
+-- Performing Test HAVE_C_WNO_STRICT_OVERFLOW - Success
+-- Performing Test HAVE_CXX_FDIAGNOSTICS_SHOW_OPTION
+-- Performing Test HAVE_CXX_FDIAGNOSTICS_SHOW_OPTION - Success
+-- Performing Test HAVE_C_FDIAGNOSTICS_SHOW_OPTION
+-- Performing Test HAVE_C_FDIAGNOSTICS_SHOW_OPTION - Success
+-- Performing Test HAVE_CXX_WNO_LONG_LONG
+-- Performing Test HAVE_CXX_WNO_LONG_LONG - Success
+-- Performing Test HAVE_C_WNO_LONG_LONG
+-- Performing Test HAVE_C_WNO_LONG_LONG - Success
+-- Performing Test HAVE_CXX_PTHREAD
+-- Performing Test HAVE_CXX_PTHREAD - Success
+-- Performing Test HAVE_C_PTHREAD
+-- Performing Test HAVE_C_PTHREAD - Success
+-- Performing Test HAVE_CXX_FOMIT_FRAME_POINTER
+-- Performing Test HAVE_CXX_FOMIT_FRAME_POINTER - Success
+-- Performing Test HAVE_C_FOMIT_FRAME_POINTER
+-- Performing Test HAVE_C_FOMIT_FRAME_POINTER - Success
+-- Performing Test HAVE_CXX_FFUNCTION_SECTIONS
+-- Performing Test HAVE_CXX_FFUNCTION_SECTIONS - Success
+-- Performing Test HAVE_C_FFUNCTION_SECTIONS
+-- Performing Test HAVE_C_FFUNCTION_SECTIONS - Success
+-- Performing Test HAVE_CXX_FDATA_SECTIONS
+-- Performing Test HAVE_CXX_FDATA_SECTIONS - Success
+-- Performing Test HAVE_C_FDATA_SECTIONS
+-- Performing Test HAVE_C_FDATA_SECTIONS - Success
+-- Performing Test HAVE_CXX_MSSE (check file: cmake/checks/cpu_sse.cpp)
+-- Performing Test HAVE_CXX_MSSE - Success
+-- Performing Test HAVE_CXX_MSSE2 (check file: cmake/checks/cpu_sse2.cpp)
+-- Performing Test HAVE_CXX_MSSE2 - Success
+-- Performing Test HAVE_CXX_MSSE3 (check file: cmake/checks/cpu_sse3.cpp)
+-- Performing Test HAVE_CXX_MSSE3 - Success
+-- Performing Test HAVE_CXX_MSSSE3 (check file: cmake/checks/cpu_ssse3.cpp)
+-- Performing Test HAVE_CXX_MSSSE3 - Success
+-- Performing Test HAVE_CXX_MSSE4_1 (check file: cmake/checks/cpu_sse41.cpp)
+-- Performing Test HAVE_CXX_MSSE4_1 - Success
+-- Performing Test HAVE_CXX_MPOPCNT (check file: cmake/checks/cpu_popcnt.cpp)
+-- Performing Test HAVE_CXX_MPOPCNT - Success
+-- Performing Test HAVE_CXX_MSSE4_2 (check file: cmake/checks/cpu_sse42.cpp)
+-- Performing Test HAVE_CXX_MSSE4_2 - Success
+-- Performing Test HAVE_CXX_MF16C (check file: cmake/checks/cpu_fp16.cpp)
+-- Performing Test HAVE_CXX_MF16C - Success
+-- Performing Test HAVE_CXX_MFMA
+-- Performing Test HAVE_CXX_MFMA - Success
+-- Performing Test HAVE_CXX_MAVX (check file: cmake/checks/cpu_avx.cpp)
+-- Performing Test HAVE_CXX_MAVX - Success
+-- Performing Test HAVE_CXX_MAVX2 (check file: cmake/checks/cpu_avx2.cpp)
+-- Performing Test HAVE_CXX_MAVX2 - Success
+-- Performing Test HAVE_CXX_MAVX512F (check file: cmake/checks/cpu_avx512.cpp)
+-- Performing Test HAVE_CXX_MAVX512F - Success
+-- Performing Test HAVE_CXX_MAVX512F_MAVX512CD (check file: cmake/checks/cpu_avx512common.cpp)
+-- Performing Test HAVE_CXX_MAVX512F_MAVX512CD - Success
+-- Performing Test HAVE_CXX_MAVX512F_MAVX512CD_MAVX512VL_MAVX512BW_MAVX512DQ (check file: cmake/checks/cpu_avx512skx.cpp)
+-- Performing Test HAVE_CXX_MAVX512F_MAVX512CD_MAVX512VL_MAVX512BW_MAVX512DQ - Success
+-- Performing Test HAVE_CPU_BASELINE_FLAGS
+-- Performing Test HAVE_CPU_BASELINE_FLAGS - Success
+-- Performing Test HAVE_CPU_DISPATCH_FLAGS_SSE4_1
+-- Performing Test HAVE_CPU_DISPATCH_FLAGS_SSE4_1 - Success
+-- Performing Test HAVE_CPU_DISPATCH_FLAGS_SSE4_2
+-- Performing Test HAVE_CPU_DISPATCH_FLAGS_SSE4_2 - Success
+-- Performing Test HAVE_CPU_DISPATCH_FLAGS_FP16
+-- Performing Test HAVE_CPU_DISPATCH_FLAGS_FP16 - Success
+-- Performing Test HAVE_CPU_DISPATCH_FLAGS_AVX
+-- Performing Test HAVE_CPU_DISPATCH_FLAGS_AVX - Success
+-- Performing Test HAVE_CPU_DISPATCH_FLAGS_AVX2
+-- Performing Test HAVE_CPU_DISPATCH_FLAGS_AVX2 - Success
+-- Performing Test HAVE_CPU_DISPATCH_FLAGS_AVX512_SKX
+-- Performing Test HAVE_CPU_DISPATCH_FLAGS_AVX512_SKX - Success
+-- Performing Test HAVE_CXX_FVISIBILITY_HIDDEN
+-- Performing Test HAVE_CXX_FVISIBILITY_HIDDEN - Success
+-- Performing Test HAVE_C_FVISIBILITY_HIDDEN
+-- Performing Test HAVE_C_FVISIBILITY_HIDDEN - Success
+-- Performing Test HAVE_CXX_FVISIBILITY_INLINES_HIDDEN
+-- Performing Test HAVE_CXX_FVISIBILITY_INLINES_HIDDEN - Success
+-- Performing Test HAVE_C_FVISIBILITY_INLINES_HIDDEN
+-- Performing Test HAVE_C_FVISIBILITY_INLINES_HIDDEN - Failed
+-- Performing Test HAVE_LINK_AS_NEEDED
+-- Performing Test HAVE_LINK_AS_NEEDED - Success
+-- Performing Test HAVE_LINK_NO_UNDEFINED
+-- Performing Test HAVE_LINK_NO_UNDEFINED - Success
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for posix_memalign
+-- Looking for posix_memalign - found
+-- Looking for malloc.h
+-- Looking for malloc.h - found
+-- Looking for memalign
+-- Looking for memalign - found
+-- Found OpenMP_C: -fopenmp (found version "4.5")
+-- Found OpenMP_CXX: -fopenmp (found version "4.5")
+-- Found OpenMP: TRUE (found version "4.5")
+-- Found ZLIB: /nix/store/zm7nh67qxgyski4j23vyd993kbmw3248-zlib-1.3.1/lib/libz.so (found suitable version "1.3.1", minimum required is "1.2.3")
+-- Found JPEG: /nix/store/2qpll37ivpkkfrsnrplfcs70wg6a3mkp-libjpeg-turbo-3.0.3/lib/libjpeg.so (found version "62")
+-- Found TIFF: /nix/store/8c3hfhx3qrx2y4av9bgva8whpafcfsv8-libtiff-4.6.0/lib/libtiff.so (found version "4.6.0")
+-- Found WebP: /nix/store/5kl32whi42ilx1qa6hgyh8r4k0hld9da-libwebp-1.4.0/lib/libwebp.so
+-- Found system OpenJPEG: openjp2 (found version "2.5.2")
+-- Checking for module 'OpenEXR'
+--   Found OpenEXR, version 2.5.10
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- NVCUVID: Header not found, WITH_NVCUVID requires Nvidia decoding library header /nix/store/zp5a7wxv1vf8aa4w32ky31m0jy5hxghy-cuda_nvcc-12.4.99;/nix/store/zp5a7wxv1vf8aa4w32ky31m0jy5hxghy-cuda_nvcc-12.4.99/include/nvcuvid.h
+-- NVCUVENC: Header not found, WITH_NVCUVENC requires Nvidia encoding library header /nix/store/zp5a7wxv1vf8aa4w32ky31m0jy5hxghy-cuda_nvcc-12.4.99;/nix/store/zp5a7wxv1vf8aa4w32ky31m0jy5hxghy-cuda_nvcc-12.4.99/include/nvEncodeAPI.h
+-- CUDA detected: 12.4
+-- CUDA: Using CUDA_ARCH_BIN=6.0;6.1;7.0;7.5;8.0;8.6;8.9;9.0;9.0a
+-- CUDA: NVCC target flags --expt-relaxed-constexpr;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_89,code=sm_89;-gencode;arch=compute_90,code=sm_90;-gencode;arch=compute_90,code=sm_90;-D_FORCE_INLINES;-gencode;arch=compute_90,code=compute_90
+-- Found OpenBLAS libraries: /nix/store/3bsp5s8bxj06gd2c7rqqb9abv5hv2qp6-openblas-0.3.27/lib/libopenblas.so
+-- Found OpenBLAS include: /nix/store/pssyccy8l3pb9jjgyxhf06d1lkjgkgr1-openblas-0.3.27-dev/include
+-- LAPACK(OpenBLAS): LAPACK_LIBRARIES: /nix/store/3bsp5s8bxj06gd2c7rqqb9abv5hv2qp6-openblas-0.3.27/lib/libopenblas.so
+-- LAPACK(OpenBLAS): Support is enabled.
+-- Could NOT find Java (missing: Java_JAVA_EXECUTABLE Java_JAR_EXECUTABLE Java_JAVAC_EXECUTABLE Java_JAVAH_EXECUTABLE Java_JAVADOC_EXECUTABLE) 
+-- Could NOT find JNI (missing: JAVA_INCLUDE_PATH JAVA_INCLUDE_PATH2 AWT JVM) 
+-- VTK is not found. Please set -DVTK_DIR in CMake to VTK build directory, or to VTK install subdirectory with VTKConfig.cmake file
+-- Looking for dlerror in dl
+-- Looking for dlerror in dl - found
+-- Performing Test HAVE_C_WNO_IMPLICIT_FALLTHROUGH
+-- Performing Test HAVE_C_WNO_IMPLICIT_FALLTHROUGH - Success
+-- Performing Test HAVE_C_WNO_UNDEF
+-- Performing Test HAVE_C_WNO_UNDEF - Success
+-- Performing Test HAVE_C_WNO_SIGN_COMPARE
+-- Performing Test HAVE_C_WNO_SIGN_COMPARE - Success
+-- Performing Test HAVE_C_WNO_STRICT_PROTOTYPES
+-- Performing Test HAVE_C_WNO_STRICT_PROTOTYPES - Success
+-- ADE: Downloading v0.1.2d.zip from https://github.com/opencv/ade/archive/v0.1.2d.zip
+-- Checking for module 'gtk+-3.0'
+--   No package 'gtk+-3.0' found
+-- Checking for module 'gtk+-2.0'
+--   No package 'gtk+-2.0' found
+-- Checking for module 'gthread-2.0>=2.32'
+--   Found gthread-2.0, version 2.80.4
+-- Performing Test HAVE_CXX_WNO_UNDEF
+-- Performing Test HAVE_CXX_WNO_UNDEF - Success
+-- Performing Test HAVE_CXX_WNO_MISSING_DECLARATIONS
+-- Performing Test HAVE_CXX_WNO_MISSING_DECLARATIONS - Success
+-- Performing Test HAVE_CXX_WNO_SHADOW
+-- Performing Test HAVE_CXX_WNO_SHADOW - Success
+-- Performing Test HAVE_CXX_WNO_STRICT_ALIASING
+-- Performing Test HAVE_CXX_WNO_STRICT_ALIASING - Success
+-- Checking for modules 'libavcodec;libavformat;libavutil;libswscale'
+--   Found libavcodec, version 60.31.102
+--   Found libavformat, version 60.16.100
+--   Found libavutil, version 58.29.100
+--   Found libswscale, version 7.5.100
+-- Checking for module 'libavresample'
+--   No package 'libavresample' found
+-- Checking for module 'gstreamer-base-1.0'
+--   Found gstreamer-base-1.0, version 1.24.3
+-- Checking for module 'gstreamer-app-1.0'
+--   Found gstreamer-app-1.0, version 1.24.3
+-- Checking for module 'gstreamer-riff-1.0'
+--   Found gstreamer-riff-1.0, version 1.24.3
+-- Checking for module 'gstreamer-pbutils-1.0'
+--   Found gstreamer-pbutils-1.0, version 1.24.3
+-- Checking for module 'gstreamer-video-1.0'
+--   Found gstreamer-video-1.0, version 1.24.3
+-- Checking for module 'gstreamer-audio-1.0'
+--   Found gstreamer-audio-1.0, version 1.24.3
+-- Checking for module 'libdc1394-2'
+--   No package 'libdc1394-2' found
+-- Performing Test HAVE_CXX_WNO_SIGN_COMPARE
+-- Performing Test HAVE_CXX_WNO_SIGN_COMPARE - Success
+-- Performing Test HAVE_CXX_WNO_ENUM_COMPARE
+-- Performing Test HAVE_CXX_WNO_ENUM_COMPARE - Success
+-- Performing Test HAVE_CXX_WNO_UNUSED_PARAMETER
+-- Performing Test HAVE_CXX_WNO_UNUSED_PARAMETER - Success
+-- Performing Test HAVE_CXX_WNO_UNINITIALIZED
+-- Performing Test HAVE_CXX_WNO_UNINITIALIZED - Success
+-- Performing Test HAVE_CXX_WNO_DEPRECATED_DECLARATIONS
+-- Performing Test HAVE_CXX_WNO_DEPRECATED_DECLARATIONS - Success
+-- Performing Test HAVE_CXX_WNO_TAUTOLOGICAL_COMPARE
+-- Performing Test HAVE_CXX_WNO_TAUTOLOGICAL_COMPARE - Success
+-- Performing Test HAVE_CXX_WNO_UNUSED_FUNCTION
+-- Performing Test HAVE_CXX_WNO_UNUSED_FUNCTION - Success
+-- Performing Test HAVE_CXX_WNO_UNUSED_VARIABLE
+-- Performing Test HAVE_CXX_WNO_UNUSED_VARIABLE - Success
+-- Performing Test HAVE_CXX_WNO_SUGGEST_OVERRIDE
+-- Performing Test HAVE_CXX_WNO_SUGGEST_OVERRIDE - Success
+-- Checking for module 'freetype2'
+--   No package 'freetype2' found
+-- Checking for module 'harfbuzz'
+--   No package 'harfbuzz' found
+-- freetype2:   NO
+-- harfbuzz:    NO
+-- HDF5 C compiler wrapper is unable to compile a minimal HDF5 program.
+-- Found HDF5: /nix/store/77pvfwma9pw1xdiclx9rd4qd3xrjqn6q-hdf5-cpp-1.14.4.3/lib/libhdf5.so (found version "1.14.4.3")
+-- Performing Test HAVE_CXX_WNO_INVALID_OFFSETOF
+-- Performing Test HAVE_CXX_WNO_INVALID_OFFSETOF - Success
+-- Julia not found. Not compiling Julia Bindings. 
+-- Module opencv_ovis disabled because OGRE3D was not found
+-- Failed to find glog - Could not find glog include directory, set GLOG_INCLUDE_DIR to directory containing glog/logging.h
+-- Module opencv_sfm disabled because the following dependencies are not found: Glog/Gflags
+-- Checking for module 'tesseract'
+--   No package 'tesseract' found
+-- Tesseract:   NO
+-- Allocator metrics storage type: 'long long'
+-- Performing Test HAVE_CXX_WNO_UNUSED_BUT_SET_VARIABLE
+-- Performing Test HAVE_CXX_WNO_UNUSED_BUT_SET_VARIABLE - Success
+-- Excluding from source files list: <BUILD>/modules/core/test/test_intrin256.lasx.cpp
+-- HDF5 C compiler wrapper is unable to compile a minimal HDF5 program.
+-- Excluding from source files list: modules/imgproc/src/imgwarp.lasx.cpp
+-- Excluding from source files list: modules/imgproc/src/resize.lasx.cpp
+-- Registering hook 'INIT_MODULE_SOURCES_opencv_dnn': /build/source/modules/dnn/cmake/hooks/INIT_MODULE_SOURCES_opencv_dnn.cmake
+-- Performing Test HAVE_CXX_WNO_DEPRECATED
+-- Performing Test HAVE_CXX_WNO_DEPRECATED - Success
+-- Performing Test HAVE_CXX_WNO_MISSING_PROTOTYPES
+-- Performing Test HAVE_CXX_WNO_MISSING_PROTOTYPES - Failed
+-- Performing Test HAVE_CXX_WNO_ARRAY_BOUNDS
+-- Performing Test HAVE_CXX_WNO_ARRAY_BOUNDS - Success
+-- opencv_dnn: filter out cuda4dnn source code
+-- Excluding from source files list: modules/dnn/src/layers/cpu_kernels/conv_winograd_f63.neon.cpp
+-- Excluding from source files list: <BUILD>/modules/dnn/layers/layers_common.rvv.cpp
+-- Excluding from source files list: <BUILD>/modules/dnn/layers/layers_common.lasx.cpp
+-- Excluding from source files list: <BUILD>/modules/dnn/int8layers/layers_common.lasx.cpp
+-- Excluding from source files list: <BUILD>/modules/dnn/layers/cpu_kernels/conv_block.neon.cpp
+-- Excluding from source files list: <BUILD>/modules/dnn/layers/cpu_kernels/conv_block.neon_fp16.cpp
+-- Excluding from source files list: <BUILD>/modules/dnn/layers/cpu_kernels/conv_depthwise.rvv.cpp
+-- Excluding from source files list: <BUILD>/modules/dnn/layers/cpu_kernels/conv_depthwise.lasx.cpp
+-- Excluding from source files list: <BUILD>/modules/dnn/layers/cpu_kernels/conv_winograd_f63.neon_fp16.cpp
+-- Excluding from source files list: <BUILD>/modules/dnn/layers/cpu_kernels/fast_gemm_kernels.neon.cpp
+-- Excluding from source files list: <BUILD>/modules/dnn/layers/cpu_kernels/fast_gemm_kernels.lasx.cpp
+-- Performing Test HAVE_CXX_WNO_OVERLOADED_VIRTUAL
+-- Performing Test HAVE_CXX_WNO_OVERLOADED_VIRTUAL - Success
+[33mCMake Warning at opencv_contrib/cudacodec/CMakeLists.txt:26 (message):
+  cudacodec::VideoReader requires Nvidia Video Codec SDK.  Please resolve
+  dependency or disable WITH_NVCUVID=OFF
+
+[0m
+[33mCMake Warning at opencv_contrib/cudacodec/CMakeLists.txt:30 (message):
+  cudacodec::VideoWriter requires Nvidia Video Codec SDK.  Please resolve
+  dependency or disable WITH_NVCUVENC=OFF
+
+[0m
+-- Performing Test HAVE_CXX_WNO_IMPLICIT_FALLTHROUGH
+-- Performing Test HAVE_CXX_WNO_IMPLICIT_FALLTHROUGH - Success
+-- highgui: using builtin backend: NONE
+-- Performing Test Iconv_IS_BUILT_IN
+-- Performing Test Iconv_IS_BUILT_IN - Success
+-- wechat_qrcode: Downloading detect.caffemodel from https://raw.githubusercontent.com/WeChatCV/opencv_3rdparty/a8b69ccc738421293254aec5ddb38bd523503252/detect.caffemodel
+-- wechat_qrcode: Downloading detect.prototxt from https://raw.githubusercontent.com/WeChatCV/opencv_3rdparty/a8b69ccc738421293254aec5ddb38bd523503252/detect.prototxt
+-- wechat_qrcode: Downloading sr.caffemodel from https://raw.githubusercontent.com/WeChatCV/opencv_3rdparty/a8b69ccc738421293254aec5ddb38bd523503252/sr.caffemodel
+-- wechat_qrcode: Downloading sr.prototxt from https://raw.githubusercontent.com/WeChatCV/opencv_3rdparty/a8b69ccc738421293254aec5ddb38bd523503252/sr.prototxt
+-- xfeatures2d/boostdesc: Downloading boostdesc_bgm.i from https://raw.githubusercontent.com/opencv/opencv_3rdparty/34e4206aef44d50e6bbcd0ab06354b52e7466d26/boostdesc_bgm.i
+-- xfeatures2d/boostdesc: Downloading boostdesc_bgm_bi.i from https://raw.githubusercontent.com/opencv/opencv_3rdparty/34e4206aef44d50e6bbcd0ab06354b52e7466d26/boostdesc_bgm_bi.i
+-- xfeatures2d/boostdesc: Downloading boostdesc_bgm_hd.i from https://raw.githubusercontent.com/opencv/opencv_3rdparty/34e4206aef44d50e6bbcd0ab06354b52e7466d26/boostdesc_bgm_hd.i
+-- xfeatures2d/boostdesc: Downloading boostdesc_binboost_064.i from https://raw.githubusercontent.com/opencv/opencv_3rdparty/34e4206aef44d50e6bbcd0ab06354b52e7466d26/boostdesc_binboost_064.i
+-- xfeatures2d/boostdesc: Downloading boostdesc_binboost_128.i from https://raw.githubusercontent.com/opencv/opencv_3rdparty/34e4206aef44d50e6bbcd0ab06354b52e7466d26/boostdesc_binboost_128.i
+-- xfeatures2d/boostdesc: Downloading boostdesc_binboost_256.i from https://raw.githubusercontent.com/opencv/opencv_3rdparty/34e4206aef44d50e6bbcd0ab06354b52e7466d26/boostdesc_binboost_256.i
+-- xfeatures2d/boostdesc: Downloading boostdesc_lbgm.i from https://raw.githubusercontent.com/opencv/opencv_3rdparty/34e4206aef44d50e6bbcd0ab06354b52e7466d26/boostdesc_lbgm.i
+-- xfeatures2d/vgg: Downloading vgg_generated_48.i from https://raw.githubusercontent.com/opencv/opencv_3rdparty/fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d/vgg_generated_48.i
+-- xfeatures2d/vgg: Downloading vgg_generated_64.i from https://raw.githubusercontent.com/opencv/opencv_3rdparty/fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d/vgg_generated_64.i
+-- xfeatures2d/vgg: Downloading vgg_generated_80.i from https://raw.githubusercontent.com/opencv/opencv_3rdparty/fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d/vgg_generated_80.i
+-- xfeatures2d/vgg: Downloading vgg_generated_120.i from https://raw.githubusercontent.com/opencv/opencv_3rdparty/fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d/vgg_generated_120.i
+-- data: Downloading face_landmark_model.dat from https://raw.githubusercontent.com/opencv/opencv_3rdparty/8afa57abc8229d611c4937165d20e2a2d9fc5a12/face_landmark_model.dat
+-- Found 'misc' Python modules from /build/source/modules/python/package/extra_modules
+-- Found 'mat_wrapper;utils' Python modules from /build/source/modules/core/misc/python/package
+-- Found 'gapi' Python modules from /build/source/modules/gapi/misc/python/package
+-- 
+-- General configuration for OpenCV 4.9.0 =====================================
+--   Version control:               unknown
+-- 
+--   Extra modules:
+--     Location (extra):            /build/source/opencv_contrib
+--     Version control (extra):     unknown
+-- 
+--   Platform:
+--     Timestamp:                   1980-01-01T00:00:00Z
+--     Host:                        Linux 6.10.5-zen1 x86_64
+--     CMake:                       3.29.6
+--     CMake generator:             Unix Makefiles
+--     CMake build tool:            /nix/store/nkza13k6khbmm7z2j6vj40k7081w6c9q-gnumake-4.4.1/bin/make
+--     Configuration:               Release
+-- 
+--   CPU/HW features:
+--     Baseline:                    SSE SSE2 SSE3
+--       requested:                 SSE3
+--     Dispatched code generation:  SSE4_1 SSE4_2 FP16 AVX AVX2 AVX512_SKX
+--       requested:                 SSE4_1 SSE4_2 AVX FP16 AVX2 AVX512_SKX
+--       SSE4_1 (18 files):         + SSSE3 SSE4_1
+--       SSE4_2 (2 files):          + SSSE3 SSE4_1 POPCNT SSE4_2
+--       FP16 (1 files):            + SSSE3 SSE4_1 POPCNT SSE4_2 FP16 AVX
+--       AVX (9 files):             + SSSE3 SSE4_1 POPCNT SSE4_2 AVX
+--       AVX2 (38 files):           + SSSE3 SSE4_1 POPCNT SSE4_2 FP16 FMA3 AVX AVX2
+--       AVX512_SKX (8 files):      + SSSE3 SSE4_1 POPCNT SSE4_2 FP16 FMA3 AVX AVX2 AVX_512F AVX512_COMMON AVX512_SKX
+-- 
+--   C/C++:
+--     Built as dynamic libs?:      YES
+--     C++ standard:                11
+--     C++ Compiler:                /nix/store/zlvn0bc69jkzrbm8ravkcp6407snv195-gcc-wrapper-13.3.0/bin/g++  (ver 13.3.0)
+--     C++ flags (Release):         -fsigned-char -W -Wall -Wreturn-type -Wnon-virtual-dtor -Waddress -Wsequence-point -Wformat -Wformat-security -Wmissing-declarations -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Wsuggest-override -Wno-delete-non-virtual-dtor -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -Wno-long-long -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 -msse3 -fvisibility=hidden -fvisibility-inlines-hidden -fopenmp -O3 -DNDEBUG  -DNDEBUG
+--     C++ flags (Debug):           -fsigned-char -W -Wall -Wreturn-type -Wnon-virtual-dtor -Waddress -Wsequence-point -Wformat -Wformat-security -Wmissing-declarations -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Wsuggest-override -Wno-delete-non-virtual-dtor -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -Wno-long-long -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 -msse3 -fvisibility=hidden -fvisibility-inlines-hidden -fopenmp -g  -O0 -DDEBUG -D_DEBUG
+--     C Compiler:                  /nix/store/zlvn0bc69jkzrbm8ravkcp6407snv195-gcc-wrapper-13.3.0/bin/gcc
+--     C flags (Release):           -fsigned-char -W -Wall -Wreturn-type -Waddress -Wsequence-point -Wformat -Wformat-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wuninitialized -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -Wno-long-long -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 -msse3 -fvisibility=hidden -fopenmp -O3 -DNDEBUG  -DNDEBUG
+--     C flags (Debug):             -fsigned-char -W -Wall -Wreturn-type -Waddress -Wsequence-point -Wformat -Wformat-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wuninitialized -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -Wno-long-long -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 -msse3 -fvisibility=hidden -fopenmp -g  -O0 -DDEBUG -D_DEBUG
+--     Linker flags (Release):      -Wl,--gc-sections -Wl,--as-needed -Wl,--no-undefined  
+--     Linker flags (Debug):        -Wl,--gc-sections -Wl,--as-needed -Wl,--no-undefined  
+--     ccache:                      NO
+--     Precompiled headers:         NO
+--     Extra dependencies:          m pthread cudart_static dl rt nppc nppial nppicc nppidei nppif nppig nppim nppist nppisu nppitc npps cublas cufft -L/nix/store/blir9nw83akkwd45d01csxwfbagknbss-cuda_cudart-12.4.99-static/lib -L/nix/store/5adwdl39g3k9a2j0qadvirnliv4r7pwd-glibc-2.39-52/lib -L/nix/store/a1h7dlc4y6vn0cfskas32m81fh9gn075-libnpp-12.2.5.2-lib/lib -L/nix/store/5wiv9brgqdhcmb0kgri520wydb8925pl-libcublas-12.4.2.65-lib/lib -L/nix/store/h8swqpyxqkinkfw3iyy6b3jcrsxv76xn-libcufft-11.2.0.44-lib/lib
+--     3rdparty dependencies:
+-- 
+--   OpenCV modules:
+--     To be built:                 alphamat aruco bgsegm bioinspired calib3d ccalib core cudaarithm cudabgsegm cudacodec cudafeatures2d cudafilters cudaimgproc cudalegacy cudaobjdetect cudaoptflow cudastereo cudawarping cudev datasets dnn dnn_objdetect dnn_superres dpm face features2d flann fuzzy gapi hdf hfs highgui img_hash imgcodecs imgproc intensity_transform line_descriptor mcc ml objdetect optflow phase_unwrapping photo plot quality rapid reg rgbd saliency shape stereo stitching structured_light superres surface_matching text tracking ts video videoio videostab wechat_qrcode xfeatures2d ximgproc xobjdetect xphoto
+--     Disabled:                    world
+--     Disabled by dependency:      -
+--     Unavailable:                 cannops cvv freetype java julia matlab ovis python2 python3 sfm viz
+--     Applications:                tests apps
+--     Documentation:               NO
+--     Non-free algorithms:         NO
+-- 
+--   GUI:                           NONE
+--     GTK+:                        NO
+--     VTK support:                 NO
+-- 
+--   Media I/O: 
+--     ZLib:                        /nix/store/zm7nh67qxgyski4j23vyd993kbmw3248-zlib-1.3.1/lib/libz.so (ver 1.3.1)
+--     JPEG:                        /nix/store/2qpll37ivpkkfrsnrplfcs70wg6a3mkp-libjpeg-turbo-3.0.3/lib/libjpeg.so (ver 62)
+--     WEBP:                        /nix/store/5kl32whi42ilx1qa6hgyh8r4k0hld9da-libwebp-1.4.0/lib/libwebp.so (ver encoder: 0x020f)
+--     PNG:                         /nix/store/3rmghpv8fapbmng692rm66b2d46px4bk-libpng-apng-1.6.43/lib/libpng.so (ver 1.6.43)
+--     TIFF:                        /nix/store/8c3hfhx3qrx2y4av9bgva8whpafcfsv8-libtiff-4.6.0/lib/libtiff.so (ver 42 / 4.6.0)
+--     JPEG 2000:                   OpenJPEG (ver 2.5.2)
+--     OpenEXR:                     IlmImf-2_5 Imath-2_5 Half-2_5 Iex-2_5 IexMath-2_5 IlmThread-2_5 (ver 2.5.10)
+--     HDR:                         YES
+--     SUNRASTER:                   YES
+--     PXM:                         YES
+--     PFM:                         YES
+-- 
+--   Video I/O:
+--     DC1394:                      NO
+--     FFMPEG:                      YES
+--       avcodec:                   YES (60.31.102)
+--       avformat:                  YES (60.16.100)
+--       avutil:                    YES (58.29.100)
+--       swscale:                   YES (7.5.100)
+--       avresample:                NO
+--     GStreamer:                   YES (1.24.3)
+--     v4l/v4l2:                    YES (linux/videodev2.h)
+-- 
+--   Parallel framework:            OpenMP
+-- 
+--   Trace:                         YES (with Intel ITT)
+-- 
+--   Other third-party libraries:
+--     VA:                          YES
+--     Lapack:                      YES (/nix/store/3bsp5s8bxj06gd2c7rqqb9abv5hv2qp6-openblas-0.3.27/lib/libopenblas.so)
+--     Eigen:                       YES (ver 3.4.0)
+--     Custom HAL:                  NO
+--     Protobuf:                    /nix/store/yf9c4zdlzi3v8xxzzx04phz28r9lqm15-protobuf-21.12/lib/libprotobuf.so.3.21.12.0 (3.21.12.0)
+--     Flatbuffers:                 builtin/3rdparty (23.5.9)
+-- 
+--   NVIDIA CUDA:                   YES (ver 12.4, CUFFT CUBLAS FAST_MATH)
+--     NVIDIA GPU arch:             60 61 70 75 80 86 89 90 90
+--     NVIDIA PTX archs:            90
+-- 
+--   OpenCL:                        YES (INTELVA)
+--     Include path:                /build/source/3rdparty/include/opencl/1.2
+--     Link libraries:              /nix/store/0wq6jx9p4g78r8hk7rbbc64jml8qgb61-ocl-icd-2.3.2/lib/libOpenCL.so
+-- 
+--   Python (for build):            NO
+-- 
+--   Java:                          
+--     ant:                         NO
+--     Java:                        NO
+--     JNI:                         NO
+--     Java wrappers:               NO
+--     Java tests:                  NO
+-- 
+--   Install to:                    /nix/store/3hayq79a8vpy39dw3m51c19ghpfqp132-opencv-4.9.0
+-- -----------------------------------------------------------------
+-- 
+-- Configuring done (108.7s)
+-- Generating done (0.8s)
+-- Build files have been written to: /build/source/build
+cmake: enabled parallel building
+cmake: enabled parallel installing
+configurePhase completed in 1 minutes 53 seconds
+Running phase: buildPhase
+@nix { "action": "setPhase", "phase": "buildPhase" }
+build flags: -j12 SHELL=/nix/store/4bj2kxdm1462fzcc2i2s4dn33g2angcc-bash-5.2p32/bin/bash
+[  0%] Built target opencv_dnn_plugins
+[  0%] Built target opencv_highgui_plugins
+[  0%] [32mBuilding C object 3rdparty/ittnotify/CMakeFiles/ittnotify.dir/src/ittnotify/ittnotify_static.c.o[0m
+[  0%] [32mBuilding C object 3rdparty/ittnotify/CMakeFiles/ittnotify.dir/src/ittnotify/jitprofiling.c.o[0m
+[  0%] Built target opencv_videoio_plugins
+[  0%] [32mBuilding CXX object modules/cudev/CMakeFiles/opencv_cudev.dir/src/stub.cpp.o[0m
+[  0%] [34m[1mGenerate opencv4.pc[0m
+[  0%] [32mBuilding CXX object CMakeFiles/ade.dir/3rdparty/ade/ade-0.1.2d/sources/ade/source/alloc.cpp.o[0m
+[  0%] [32mBuilding CXX object CMakeFiles/ade.dir/3rdparty/ade/ade-0.1.2d/sources/ade/source/check_cycles.cpp.o[0m
+[  0%] [32mBuilding CXX object CMakeFiles/ade.dir/3rdparty/ade/ade-0.1.2d/sources/ade/source/execution_engine.cpp.o[0m
+[  0%] [32mBuilding CXX object CMakeFiles/ade.dir/3rdparty/ade/ade-0.1.2d/sources/ade/source/edge.cpp.o[0m
+[  0%] [32mBuilding CXX object CMakeFiles/ade.dir/3rdparty/ade/ade-0.1.2d/sources/ade/source/graph.cpp.o[0m
+[  0%] [32mBuilding CXX object CMakeFiles/ade.dir/3rdparty/ade/ade-0.1.2d/sources/ade/source/memory_accessor.cpp.o[0m
+[  0%] [32mBuilding CXX object CMakeFiles/ade.dir/3rdparty/ade/ade-0.1.2d/sources/ade/source/assert.cpp.o[0m
+[  0%] [32mBuilding CXX object CMakeFiles/ade.dir/3rdparty/ade/ade-0.1.2d/sources/ade/source/memory_descriptor.cpp.o[0m
+[0mCMake Deprecation Warning at /build/source/cmake/OpenCVGenPkgconfig.cmake:113 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+[0m
+[  0%] Built target gen-pkgconfig
+[  0%] [32mBuilding CXX object CMakeFiles/ade.dir/3rdparty/ade/ade-0.1.2d/sources/ade/source/memory_descriptor_ref.cpp.o[0m
+[  0%] [32mBuilding CXX object CMakeFiles/ade.dir/3rdparty/ade/ade-0.1.2d/sources/ade/source/memory_descriptor_view.cpp.o[0m
+[  0%] [32mBuilding CXX object CMakeFiles/ade.dir/3rdparty/ade/ade-0.1.2d/sources/ade/source/metadata.cpp.o[0m
+[  0%] [32mBuilding CXX object CMakeFiles/ade.dir/3rdparty/ade/ade-0.1.2d/sources/ade/source/metatypes.cpp.o[0m
+[  0%] [32m[1mLinking CXX shared library ../../lib/libopencv_cudev.so[0m
+[  0%] Built target opencv_cudev
+[  0%] [32mBuilding CXX object CMakeFiles/ade.dir/3rdparty/ade/ade-0.1.2d/sources/ade/source/node.cpp.o[0m
+[  0%] [32mBuilding CXX object CMakeFiles/ade.dir/3rdparty/ade/ade-0.1.2d/sources/ade/source/passes/communications.cpp.o[0m
+[  0%] [32mBuilding CXX object CMakeFiles/ade.dir/3rdparty/ade/ade-0.1.2d/sources/ade/source/search.cpp.o[0m
+[  0%] [32mBuilding CXX object CMakeFiles/ade.dir/3rdparty/ade/ade-0.1.2d/sources/ade/source/subgraphs.cpp.o[0m
+[  0%] [32m[1mLinking C static library ../lib/libittnotify.a[0m
+[  0%] [32mBuilding CXX object CMakeFiles/ade.dir/3rdparty/ade/ade-0.1.2d/sources/ade/source/topological_sort.cpp.o[0m
+[  0%] Built target ittnotify
+[  0%] [34m[1mProcessing OpenCL kernels (core)[0m
+[  0%] [34m[1mBuilding NVCC (Device) object modules/core/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_gpu_mat.cu.o[0m
+[  0%] [34m[1mBuilding NVCC (Device) object modules/core/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_gpu_mat_nd.cu.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  0%] [32m[1mLinking CXX static library 3rdparty/lib/libade.a[0m
+[  0%] Built target ade
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  0%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/alloc.cpp.o[0m
+[  0%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/algorithm.cpp.o[0m
+[  0%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/arithm.cpp.o[0m
+[  0%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/arithm.dispatch.cpp.o[0m
+[  0%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/array.cpp.o[0m
+[  0%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/batch_distance.cpp.o[0m
+[  0%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/async.cpp.o[0m
+[  0%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/bindings_utils.cpp.o[0m
+[  0%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/channels.cpp.o[0m
+[  0%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/buffer_area.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/command_line_parser.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/check.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/conjugate_gradient.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/convert.dispatch.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/convert_c.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/convert_scale.dispatch.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/copy.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/count_non_zero.dispatch.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/cuda_gpu_mat.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/cuda_gpu_mat_nd.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/cuda_host_mem.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/cuda_info.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/cuda_stream.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/datastructs.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/directx.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/downhill_simplex.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/dxt.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/gl_core_3_1.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/glob.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/hal_internal.cpp.o[0m
+[  1%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/has_non_zero.dispatch.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/kmeans.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/lapack.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/lda.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/logger.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/lut.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/lpsolver.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/mathfuncs.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/mathfuncs_core.dispatch.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/matmul.dispatch.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix_c.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix_decomp.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix_expressions.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix_iterator.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix_operations.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix_sparse.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix_transform.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/matrix_wrap.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/mean.dispatch.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/merge.dispatch.cpp.o[0m
+[  2%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/minmax.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/norm.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/ocl.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/opencl/runtime/opencl_clblas.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/opencl/runtime/opencl_clfft.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/opencl/runtime/opencl_core.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/opengl.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/out.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/ovx.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/parallel.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/parallel/parallel.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/parallel/parallel_openmp.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/parallel/parallel_tbb.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/parallel_impl.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/pca.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/persistence.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/persistence_base64_encoding.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/persistence_json.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/persistence_types.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/persistence_xml.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/persistence_yml.cpp.o[0m
+[  3%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/rand.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/softfloat.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/split.dispatch.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/stat.dispatch.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/stat_c.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/stl.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/sum.dispatch.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/system.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/tables.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/trace.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/types.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/umatrix.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/utils/datafile.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/utils/filesystem.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/utils/logtagconfigparser.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/utils/logtagmanager.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/utils/samples.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/src/va_intel.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/opencl_kernels_core.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/arithm.sse4_1.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/matmul.sse4_1.cpp.o[0m
+[  4%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/stat.sse4_2.cpp.o[0m
+[  5%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/mathfuncs_core.avx.cpp.o[0m
+[  5%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/mathfuncs_core.avx2.cpp.o[0m
+[  5%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/stat.avx2.cpp.o[0m
+[  5%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/arithm.avx2.cpp.o[0m
+[  5%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/convert.avx2.cpp.o[0m
+[  5%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/convert_scale.avx2.cpp.o[0m
+[  5%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/count_non_zero.avx2.cpp.o[0m
+[  5%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/has_non_zero.avx2.cpp.o[0m
+[  5%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/matmul.avx2.cpp.o[0m
+[  5%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/mean.avx2.cpp.o[0m
+[  5%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/merge.avx2.cpp.o[0m
+[  5%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/split.avx2.cpp.o[0m
+[  5%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/sum.avx2.cpp.o[0m
+[  5%] [32mBuilding CXX object modules/core/CMakeFiles/opencv_core.dir/matmul.avx512_skx.cpp.o[0m
+[  5%] [32m[1mLinking CXX shared library ../../lib/libopencv_core.so[0m
+[  5%] Built target opencv_core
+[  5%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_transpose.cu.o[0m
+[  5%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_absdiff_mat.cu.o[0m
+[  5%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_add_mat.cu.o[0m
+[  5%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_absdiff_scalar.cu.o[0m
+[  5%] [34m[1mProcessing OpenCL kernels (imgproc)[0m
+[  5%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_add_scalar.cu.o[0m
+[  5%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_add_weighted.cu.o[0m
+[  5%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_bitwise_mat.cu.o[0m
+[  6%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_bitwise_scalar.cu.o[0m
+[  6%] [32mBuilding CXX object modules/hdf/CMakeFiles/opencv_hdf.dir/src/hdf5.cpp.o[0m
+[  6%] [32mBuilding CXX object modules/flann/CMakeFiles/opencv_flann.dir/src/flann.cpp.o[0m
+[  6%] [32mBuilding CXX object modules/ml/CMakeFiles/opencv_ml.dir/src/ann_mlp.cpp.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  6%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/accum.cpp.o[0m
+[  6%] [32m[1mLinking CXX shared library ../../lib/libopencv_hdf.so[0m
+[  6%] [32mBuilding CXX object modules/flann/CMakeFiles/opencv_flann.dir/src/miniflann.cpp.o[0m
+[  6%] Built target opencv_hdf
+[  6%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/accum.dispatch.cpp.o[0m
+[  6%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/approx.cpp.o[0m
+[  6%] [32mBuilding CXX object modules/ml/CMakeFiles/opencv_ml.dir/src/boost.cpp.o[0m
+[  6%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/bilateral_filter.dispatch.cpp.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  6%] [32mBuilding CXX object modules/ml/CMakeFiles/opencv_ml.dir/src/data.cpp.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  6%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/blend.cpp.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  6%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_cmp_mat.cu.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  6%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/box_filter.dispatch.cpp.o[0m
+[  6%] [32mBuilding CXX object modules/ml/CMakeFiles/opencv_ml.dir/src/em.cpp.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  6%] [32mBuilding CXX object modules/ml/CMakeFiles/opencv_ml.dir/src/gbt.cpp.o[0m
+[  6%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/canny.cpp.o[0m
+[  6%] [32mBuilding CXX object modules/ml/CMakeFiles/opencv_ml.dir/src/inner_functions.cpp.o[0m
+[  6%] [32mBuilding CXX object modules/ml/CMakeFiles/opencv_ml.dir/src/kdtree.cpp.o[0m
+[  6%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/clahe.cpp.o[0m
+[  6%] [32mBuilding CXX object modules/ml/CMakeFiles/opencv_ml.dir/src/knearest.cpp.o[0m
+[  6%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/color.cpp.o[0m
+[  6%] [32m[1mLinking CXX shared library ../../lib/libopencv_flann.so[0m
+[  6%] [32mBuilding CXX object modules/ml/CMakeFiles/opencv_ml.dir/src/lr.cpp.o[0m
+[  6%] Built target opencv_flann
+[  6%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/color_hsv.dispatch.cpp.o[0m
+[  6%] [32mBuilding CXX object apps/version/CMakeFiles/opencv_version.dir/opencv_version.cpp.o[0m
+[  7%] [32m[1mLinking CXX executable ../../bin/opencv_version[0m
+[  7%] Built target opencv_version
+[  7%] [32mBuilding CXX object modules/ml/CMakeFiles/opencv_ml.dir/src/nbayes.cpp.o[0m
+[  8%] [32mBuilding CXX object modules/surface_matching/CMakeFiles/opencv_surface_matching.dir/src/icp.cpp.o[0m
+[  8%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/color_lab.cpp.o[0m
+[  8%] [32mBuilding CXX object modules/ml/CMakeFiles/opencv_ml.dir/src/rtrees.cpp.o[0m
+[  8%] [32mBuilding CXX object modules/surface_matching/CMakeFiles/opencv_surface_matching.dir/src/pose_3d.cpp.o[0m
+[  8%] [32mBuilding CXX object modules/surface_matching/CMakeFiles/opencv_surface_matching.dir/src/ppf_helpers.cpp.o[0m
+[  8%] [32mBuilding CXX object modules/ml/CMakeFiles/opencv_ml.dir/src/svm.cpp.o[0m
+[  8%] [32mBuilding CXX object modules/surface_matching/CMakeFiles/opencv_surface_matching.dir/src/ppf_match_3d.cpp.o[0m
+[  8%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/color_rgb.dispatch.cpp.o[0m
+[  8%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/color_yuv.dispatch.cpp.o[0m
+[  8%] [32mBuilding CXX object modules/ml/CMakeFiles/opencv_ml.dir/src/svmsgd.cpp.o[0m
+[  8%] [32mBuilding CXX object modules/surface_matching/CMakeFiles/opencv_surface_matching.dir/src/t_hash_int.cpp.o[0m
+[  8%] [32mBuilding CXX object modules/ml/CMakeFiles/opencv_ml.dir/src/testset.cpp.o[0m
+[  8%] [32mBuilding CXX object modules/ml/CMakeFiles/opencv_ml.dir/src/tree.cpp.o[0m
+[  8%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/colormap.cpp.o[0m
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/connectedcomponents.cpp.o[0m
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/contours.cpp.o[0m
+[  9%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_cmp_scalar.cu.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  9%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_copy_make_border.cu.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  9%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_countnonzero.cu.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  9%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_div_mat.cu.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  9%] [32m[1mLinking CXX shared library ../../lib/libopencv_surface_matching.so[0m
+[  9%] [32m[1mLinking CXX shared library ../../lib/libopencv_ml.so[0m
+[  9%] Built target opencv_surface_matching
+[  9%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_div_scalar.cu.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  9%] Built target opencv_ml
+[  9%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_in_range.cu.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/convhull.cpp.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  9%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_integral.cu.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/corner.cpp.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/cornersubpix.cpp.o[0m
+[  9%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_lut.cu.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  9%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_math.cu.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/demosaicing.cpp.o[0m
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/deriv.cpp.o[0m
+[  9%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_minmax.cu.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/distransform.cpp.o[0m
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/drawing.cpp.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/emd.cpp.o[0m
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/featureselect.cpp.o[0m
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/filter.dispatch.cpp.o[0m
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/floodfill.cpp.o[0m
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/detail/reduce.hpp(379): error: no instance of overloaded function "cv::cudev::blockReduce" matches the argument list
+            argument types are: (cuda::std::__4::tuple<volatile int *, volatile int *>, cuda::std::__4::tuple<int &, int &>, int, cuda::std::__4::tuple<cv::cudev::minimum<int>, cv::cudev::maximum<int>>)
+              blockReduce<BLOCK_SIZE>(smem_tuple(sminval, smaxval), tie(mymin, mymax), tid, make_tuple(minOp, maxOp));
+              ^
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/block/reduce.hpp(72): note #3327-D: candidate function template "cv::cudev::blockReduce<N,P0,P1,P2,P3,P4,P5,P6,P7,P8,P9,R0,R1,R2,R3,R4,R5,R6,R7,R8,R9,Op0,Op1,Op2,Op3,Op4,Op5,Op6,Op7,Op8,Op9>(const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<P0, P1, P2, P3, P4, P5, P6, P7, P8, P9> &, const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<R0, R1, R2, R3, R4, R5, R6, R7, R8, R9> &, uint, const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<Op0, Op1, Op2, Op3, Op4, Op5, Op6, Op7, Op8, Op9> &)" failed deduction
+                            void blockReduce(const tuple<P0, P1, P2, P3, P4, P5, P6, P7, P8, P9>& smem,
+                                 ^
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/block/reduce.hpp(63): note #3327-D: candidate function template "cv::cudev::blockReduce<N,T,Op>(volatile T *, T &, uint, const Op &)" failed deduction
+                            void blockReduce(volatile T* smem, T& val, uint tid, const Op& op)
+                                 ^
+          detected during:
+            instantiation of "void cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, src_type, work_type>::reduceGrid<BLOCK_SIZE>(work_type *, int) [with src_type=uchar, work_type=int, BLOCK_SIZE=256]" at line 412
+            instantiation of "void cv::cudev::grid_reduce_detail::reduce<Reductor,BLOCK_SIZE,PATCH_X,PATCH_Y,SrcPtr,ResType,MaskPtr>(SrcPtr, ResType *, MaskPtr, int, int) [with Reductor=cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, uchar, int>, BLOCK_SIZE=256, PATCH_X=4, PATCH_Y=4, SrcPtr=cv::cudev::GlobPtr<uchar>, ResType=int, MaskPtr=cv::cudev::WithOutMask]" at line 421
+            instantiation of "void cv::cudev::grid_reduce_detail::reduce<Reductor,Policy,SrcPtr,ResType,MaskPtr>(const SrcPtr &, ResType *, const MaskPtr &, int, int, cudaStream_t) [with Reductor=cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, uchar, int>, Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GlobPtr<uchar>, ResType=int, MaskPtr=cv::cudev::WithOutMask]" at line 460
+            instantiation of "void cv::cudev::grid_reduce_detail::minMaxVal<Policy,SrcPtr,ResType,MaskPtr>(const SrcPtr &, ResType *, const MaskPtr &, int, int, cudaStream_t) [with Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GlobPtr<uchar>, ResType=int, MaskPtr=cv::cudev::WithOutMask]" at line 206 of /build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/reduce.hpp
+            instantiation of "void cv::cudev::gridFindMinMaxVal_<Policy,SrcPtr,ResType>(const SrcPtr &, cv::cudev::GpuMat_<ResType> &, cv::cuda::Stream &) [with Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GpuMat_<uchar>, ResType=int]" at line 349 of /build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/reduce.hpp
+            instantiation of "void cv::cudev::gridFindMinMaxVal(const SrcPtr &, cv::cudev::GpuMat_<ResType> &, cv::cuda::Stream &) [with SrcPtr=cv::cudev::GpuMat_<uchar>, ResType=int]" at line 68 of /build/source/opencv_contrib/cudaarithm/src/cuda/minmax.cu
+            instantiation of "void <unnamed>::minMaxImpl<T,R>(const cv::cuda::GpuMat &, const cv::cuda::GpuMat &, cv::cuda::GpuMat &, cv::cuda::Stream &) [with T=uchar, R=int]" at line 92 of /build/source/opencv_contrib/cudaarithm/src/cuda/minmax.cu
+
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/detail/reduce.hpp(379): error: no instance of overloaded function "cv::cudev::blockReduce" matches the argument list
+            argument types are: (cuda::std::__4::tuple<volatile int *, volatile int *>, cuda::std::__4::tuple<int &, int &>, int, cuda::std::__4::tuple<cv::cudev::minimum<int>, cv::cudev::maximum<int>>)
+              blockReduce<BLOCK_SIZE>(smem_tuple(sminval, smaxval), tie(mymin, mymax), tid, make_tuple(minOp, maxOp));
+              ^
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/block/reduce.hpp(72): note #3327-D: candidate function template "cv::cudev::blockReduce<N,P0,P1,P2,P3,P4,P5,P6,P7,P8,P9,R0,R1,R2,R3,R4,R5,R6,R7,R8,R9,Op0,Op1,Op2,Op3,Op4,Op5,Op6,Op7,Op8,Op9>(const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<P0, P1, P2, P3, P4, P5, P6, P7, P8, P9> &, const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<R0, R1, R2, R3, R4, R5, R6, R7, R8, R9> &, uint, const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<Op0, Op1, Op2, Op3, Op4, Op5, Op6, Op7, Op8, Op9> &)" failed deduction
+                            void blockReduce(const tuple<P0, P1, P2, P3, P4, P5, P6, P7, P8, P9>& smem,
+                                 ^
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/block/reduce.hpp(63): note #3327-D: candidate function template "cv::cudev::blockReduce<N,T,Op>(volatile T *, T &, uint, const Op &)" failed deduction
+                            void blockReduce(volatile T* smem, T& val, uint tid, const Op& op)
+                                 ^
+          detected during:
+            instantiation of "void cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, src_type, work_type>::reduceGrid<BLOCK_SIZE>(work_type *, int) [with src_type=schar, work_type=int, BLOCK_SIZE=256]" at line 412
+            instantiation of "void cv::cudev::grid_reduce_detail::reduce<Reductor,BLOCK_SIZE,PATCH_X,PATCH_Y,SrcPtr,ResType,MaskPtr>(SrcPtr, ResType *, MaskPtr, int, int) [with Reductor=cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, schar, int>, BLOCK_SIZE=256, PATCH_X=4, PATCH_Y=4, SrcPtr=cv::cudev::GlobPtr<schar>, ResType=int, MaskPtr=cv::cudev::WithOutMask]" at line 421
+            instantiation of "void cv::cudev::grid_reduce_detail::reduce<Reductor,Policy,SrcPtr,ResType,MaskPtr>(const SrcPtr &, ResType *, const MaskPtr &, int, int, cudaStream_t) [with Reductor=cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, schar, int>, Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GlobPtr<schar>, ResType=int, MaskPtr=cv::cudev::WithOutMask]" at line 460
+            instantiation of "void cv::cudev::grid_reduce_detail::minMaxVal<Policy,SrcPtr,ResType,MaskPtr>(const SrcPtr &, ResType *, const MaskPtr &, int, int, cudaStream_t) [with Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GlobPtr<schar>, ResType=int, MaskPtr=cv::cudev::WithOutMask]" at line 206 of /build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/reduce.hpp
+            instantiation of "void cv::cudev::gridFindMinMaxVal_<Policy,SrcPtr,ResType>(const SrcPtr &, cv::cudev::GpuMat_<ResType> &, cv::cuda::Stream &) [with Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GpuMat_<schar>, ResType=int]" at line 349 of /build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/reduce.hpp
+            instantiation of "void cv::cudev::gridFindMinMaxVal(const SrcPtr &, cv::cudev::GpuMat_<ResType> &, cv::cuda::Stream &) [with SrcPtr=cv::cudev::GpuMat_<schar>, ResType=int]" at line 68 of /build/source/opencv_contrib/cudaarithm/src/cuda/minmax.cu
+            instantiation of "void <unnamed>::minMaxImpl<T,R>(const cv::cuda::GpuMat &, const cv::cuda::GpuMat &, cv::cuda::GpuMat &, cv::cuda::Stream &) [with T=schar, R=int]" at line 93 of /build/source/opencv_contrib/cudaarithm/src/cuda/minmax.cu
+
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/detail/reduce.hpp(379): error: no instance of overloaded function "cv::cudev::blockReduce" matches the argument list
+            argument types are: (cuda::std::__4::tuple<volatile int *, volatile int *>, cuda::std::__4::tuple<int &, int &>, int, cuda::std::__4::tuple<cv::cudev::minimum<int>, cv::cudev::maximum<int>>)
+              blockReduce<BLOCK_SIZE>(smem_tuple(sminval, smaxval), tie(mymin, mymax), tid, make_tuple(minOp, maxOp));
+              ^
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/block/reduce.hpp(72): note #3327-D: candidate function template "cv::cudev::blockReduce<N,P0,P1,P2,P3,P4,P5,P6,P7,P8,P9,R0,R1,R2,R3,R4,R5,R6,R7,R8,R9,Op0,Op1,Op2,Op3,Op4,Op5,Op6,Op7,Op8,Op9>(const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<P0, P1, P2, P3, P4, P5, P6, P7, P8, P9> &, const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<R0, R1, R2, R3, R4, R5, R6, R7, R8, R9> &, uint, const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<Op0, Op1, Op2, Op3, Op4, Op5, Op6, Op7, Op8, Op9> &)" failed deduction
+                            void blockReduce(const tuple<P0, P1, P2, P3, P4, P5, P6, P7, P8, P9>& smem,
+                                 ^
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/block/reduce.hpp(63): note #3327-D: candidate function template "cv::cudev::blockReduce<N,T,Op>(volatile T *, T &, uint, const Op &)" failed deduction
+                            void blockReduce(volatile T* smem, T& val, uint tid, const Op& op)
+                                 ^
+          detected during:
+            instantiation of "void cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, src_type, work_type>::reduceGrid<BLOCK_SIZE>(work_type *, int) [with src_type=ushort, work_type=int, BLOCK_SIZE=256]" at line 412
+            instantiation of "void cv::cudev::grid_reduce_detail::reduce<Reductor,BLOCK_SIZE,PATCH_X,PATCH_Y,SrcPtr,ResType,MaskPtr>(SrcPtr, ResType *, MaskPtr, int, int) [with Reductor=cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, ushort, int>, BLOCK_SIZE=256, PATCH_X=4, PATCH_Y=4, SrcPtr=cv::cudev::GlobPtr<ushort>, ResType=int, MaskPtr=cv::cudev::WithOutMask]" at line 421
+            instantiation of "void cv::cudev::grid_reduce_detail::reduce<Reductor,Policy,SrcPtr,ResType,MaskPtr>(const SrcPtr &, ResType *, const MaskPtr &, int, int, cudaStream_t) [with Reductor=cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, ushort, int>, Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GlobPtr<ushort>, ResType=int, MaskPtr=cv::cudev::WithOutMask]" at line 460
+            instantiation of "void cv::cudev::grid_reduce_detail::minMaxVal<Policy,SrcPtr,ResType,MaskPtr>(const SrcPtr &, ResType *, const MaskPtr &, int, int, cudaStream_t) [with Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GlobPtr<ushort>, ResType=int, MaskPtr=cv::cudev::WithOutMask]" at line 206 of /build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/reduce.hpp
+            instantiation of "void cv::cudev::gridFindMinMaxVal_<Policy,SrcPtr,ResType>(const SrcPtr &, cv::cudev::GpuMat_<ResType> &, cv::cuda::Stream &) [with Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GpuMat_<ushort>, ResType=int]" at line 349 of /build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/reduce.hpp
+            instantiation of "void cv::cudev::gridFindMinMaxVal(const SrcPtr &, cv::cudev::GpuMat_<ResType> &, cv::cuda::Stream &) [with SrcPtr=cv::cudev::GpuMat_<ushort>, ResType=int]" at line 68 of /build/source/opencv_contrib/cudaarithm/src/cuda/minmax.cu
+            instantiation of "void <unnamed>::minMaxImpl<T,R>(const cv::cuda::GpuMat &, const cv::cuda::GpuMat &, cv::cuda::GpuMat &, cv::cuda::Stream &) [with T=ushort, R=int]" at line 94 of /build/source/opencv_contrib/cudaarithm/src/cuda/minmax.cu
+
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/detail/reduce.hpp(379): error: no instance of overloaded function "cv::cudev::blockReduce" matches the argument list
+            argument types are: (cuda::std::__4::tuple<volatile int *, volatile int *>, cuda::std::__4::tuple<int &, int &>, int, cuda::std::__4::tuple<cv::cudev::minimum<int>, cv::cudev::maximum<int>>)
+              blockReduce<BLOCK_SIZE>(smem_tuple(sminval, smaxval), tie(mymin, mymax), tid, make_tuple(minOp, maxOp));
+              ^
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/block/reduce.hpp(72): note #3327-D: candidate function template "cv::cudev::blockReduce<N,P0,P1,P2,P3,P4,P5,P6,P7,P8,P9,R0,R1,R2,R3,R4,R5,R6,R7,R8,R9,Op0,Op1,Op2,Op3,Op4,Op5,Op6,Op7,Op8,Op9>(const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<P0, P1, P2, P3, P4, P5, P6, P7, P8, P9> &, const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<R0, R1, R2, R3, R4, R5, R6, R7, R8, R9> &, uint, const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<Op0, Op1, Op2, Op3, Op4, Op5, Op6, Op7, Op8, Op9> &)" failed deduction
+                            void blockReduce(const tuple<P0, P1, P2, P3, P4, P5, P6, P7, P8, P9>& smem,
+                                 ^
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/block/reduce.hpp(63): note #3327-D: candidate function template "cv::cudev::blockReduce<N,T,Op>(volatile T *, T &, uint, const Op &)" failed deduction
+                            void blockReduce(volatile T* smem, T& val, uint tid, const Op& op)
+                                 ^
+          detected during:
+            instantiation of "void cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, src_type, work_type>::reduceGrid<BLOCK_SIZE>(work_type *, int) [with src_type=short, work_type=int, BLOCK_SIZE=256]" at line 412
+            instantiation of "void cv::cudev::grid_reduce_detail::reduce<Reductor,BLOCK_SIZE,PATCH_X,PATCH_Y,SrcPtr,ResType,MaskPtr>(SrcPtr, ResType *, MaskPtr, int, int) [with Reductor=cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, short, int>, BLOCK_SIZE=256, PATCH_X=4, PATCH_Y=4, SrcPtr=cv::cudev::GlobPtr<short>, ResType=int, MaskPtr=cv::cudev::WithOutMask]" at line 421
+            instantiation of "void cv::cudev::grid_reduce_detail::reduce<Reductor,Policy,SrcPtr,ResType,MaskPtr>(const SrcPtr &, ResType *, const MaskPtr &, int, int, cudaStream_t) [with Reductor=cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, short, int>, Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GlobPtr<short>, ResType=int, MaskPtr=cv::cudev::WithOutMask]" at line 460
+            instantiation of "void cv::cudev::grid_reduce_detail::minMaxVal<Policy,SrcPtr,ResType,MaskPtr>(const SrcPtr &, ResType *, const MaskPtr &, int, int, cudaStream_t) [with Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GlobPtr<short>, ResType=int, MaskPtr=cv::cudev::WithOutMask]" at line 206 of /build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/reduce.hpp
+            instantiation of "void cv::cudev::gridFindMinMaxVal_<Policy,SrcPtr,ResType>(const SrcPtr &, cv::cudev::GpuMat_<ResType> &, cv::cuda::Stream &) [with Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GpuMat_<short>, ResType=int]" at line 349 of /build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/reduce.hpp
+            instantiation of "void cv::cudev::gridFindMinMaxVal(const SrcPtr &, cv::cudev::GpuMat_<ResType> &, cv::cuda::Stream &) [with SrcPtr=cv::cudev::GpuMat_<short>, ResType=int]" at line 68 of /build/source/opencv_contrib/cudaarithm/src/cuda/minmax.cu
+            instantiation of "void <unnamed>::minMaxImpl<T,R>(const cv::cuda::GpuMat &, const cv::cuda::GpuMat &, cv::cuda::GpuMat &, cv::cuda::Stream &) [with T=short, R=int]" at line 95 of /build/source/opencv_contrib/cudaarithm/src/cuda/minmax.cu
+
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/detail/reduce.hpp(379): error: no instance of overloaded function "cv::cudev::blockReduce" matches the argument list
+            argument types are: (cuda::std::__4::tuple<volatile int *, volatile int *>, cuda::std::__4::tuple<int &, int &>, int, cuda::std::__4::tuple<cv::cudev::minimum<int>, cv::cudev::maximum<int>>)
+              blockReduce<BLOCK_SIZE>(smem_tuple(sminval, smaxval), tie(mymin, mymax), tid, make_tuple(minOp, maxOp));
+              ^
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/block/reduce.hpp(72): note #3327-D: candidate function template "cv::cudev::blockReduce<N,P0,P1,P2,P3,P4,P5,P6,P7,P8,P9,R0,R1,R2,R3,R4,R5,R6,R7,R8,R9,Op0,Op1,Op2,Op3,Op4,Op5,Op6,Op7,Op8,Op9>(const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<P0, P1, P2, P3, P4, P5, P6, P7, P8, P9> &, const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<R0, R1, R2, R3, R4, R5, R6, R7, R8, R9> &, uint, const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<Op0, Op1, Op2, Op3, Op4, Op5, Op6, Op7, Op8, Op9> &)" failed deduction
+                            void blockReduce(const tuple<P0, P1, P2, P3, P4, P5, P6, P7, P8, P9>& smem,
+                                 ^
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/block/reduce.hpp(63): note #3327-D: candidate function template "cv::cudev::blockReduce<N,T,Op>(volatile T *, T &, uint, const Op &)" failed deduction
+                            void blockReduce(volatile T* smem, T& val, uint tid, const Op& op)
+                                 ^
+          detected during:
+            instantiation of "void cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, src_type, work_type>::reduceGrid<BLOCK_SIZE>(work_type *, int) [with src_type=int, work_type=int, BLOCK_SIZE=256]" at line 412
+            instantiation of "void cv::cudev::grid_reduce_detail::reduce<Reductor,BLOCK_SIZE,PATCH_X,PATCH_Y,SrcPtr,ResType,MaskPtr>(SrcPtr, ResType *, MaskPtr, int, int) [with Reductor=cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, int, int>, BLOCK_SIZE=256, PATCH_X=4, PATCH_Y=4, SrcPtr=cv::cudev::GlobPtr<int>, ResType=int, MaskPtr=cv::cudev::WithOutMask]" at line 421
+            instantiation of "void cv::cudev::grid_reduce_detail::reduce<Reductor,Policy,SrcPtr,ResType,MaskPtr>(const SrcPtr &, ResType *, const MaskPtr &, int, int, cudaStream_t) [with Reductor=cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, int, int>, Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GlobPtr<int>, ResType=int, MaskPtr=cv::cudev::WithOutMask]" at line 460
+            instantiation of "void cv::cudev::grid_reduce_detail::minMaxVal<Policy,SrcPtr,ResType,MaskPtr>(const SrcPtr &, ResType *, const MaskPtr &, int, int, cudaStream_t) [with Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GlobPtr<int>, ResType=int, MaskPtr=cv::cudev::WithOutMask]" at line 206 of /build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/reduce.hpp
+            instantiation of "void cv::cudev::gridFindMinMaxVal_<Policy,SrcPtr,ResType>(const SrcPtr &, cv::cudev::GpuMat_<ResType> &, cv::cuda::Stream &) [with Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GpuMat_<int>, ResType=int]" at line 349 of /build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/reduce.hpp
+            instantiation of "void cv::cudev::gridFindMinMaxVal(const SrcPtr &, cv::cudev::GpuMat_<ResType> &, cv::cuda::Stream &) [with SrcPtr=cv::cudev::GpuMat_<int>, ResType=int]" at line 68 of /build/source/opencv_contrib/cudaarithm/src/cuda/minmax.cu
+            instantiation of "void <unnamed>::minMaxImpl<T,R>(const cv::cuda::GpuMat &, const cv::cuda::GpuMat &, cv::cuda::GpuMat &, cv::cuda::Stream &) [with T=int, R=int]" at line 96 of /build/source/opencv_contrib/cudaarithm/src/cuda/minmax.cu
+
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/detail/reduce.hpp(379): error: no instance of overloaded function "cv::cudev::blockReduce" matches the argument list
+            argument types are: (cuda::std::__4::tuple<volatile float *, volatile float *>, cuda::std::__4::tuple<float &, float &>, int, cuda::std::__4::tuple<cv::cudev::minimum<float>, cv::cudev::maximum<float>>)
+              blockReduce<BLOCK_SIZE>(smem_tuple(sminval, smaxval), tie(mymin, mymax), tid, make_tuple(minOp, maxOp));
+              ^
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/block/reduce.hpp(72): note #3327-D: candidate function template "cv::cudev::blockReduce<N,P0,P1,P2,P3,P4,P5,P6,P7,P8,P9,R0,R1,R2,R3,R4,R5,R6,R7,R8,R9,Op0,Op1,Op2,Op3,Op4,Op5,Op6,Op7,Op8,Op9>(const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<P0, P1, P2, P3, P4, P5, P6, P7, P8, P9> &, const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<R0, R1, R2, R3, R4, R5, R6, R7, R8, R9> &, uint, const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<Op0, Op1, Op2, Op3, Op4, Op5, Op6, Op7, Op8, Op9> &)" failed deduction
+                            void blockReduce(const tuple<P0, P1, P2, P3, P4, P5, P6, P7, P8, P9>& smem,
+                                 ^
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/block/reduce.hpp(63): note #3327-D: candidate function template "cv::cudev::blockReduce<N,T,Op>(volatile T *, T &, uint, const Op &)" failed deduction
+                            void blockReduce(volatile T* smem, T& val, uint tid, const Op& op)
+                                 ^
+          detected during:
+            instantiation of "void cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, src_type, work_type>::reduceGrid<BLOCK_SIZE>(work_type *, int) [with src_type=float, work_type=float, BLOCK_SIZE=256]" at line 412
+            instantiation of "void cv::cudev::grid_reduce_detail::reduce<Reductor,BLOCK_SIZE,PATCH_X,PATCH_Y,SrcPtr,ResType,MaskPtr>(SrcPtr, ResType *, MaskPtr, int, int) [with Reductor=cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, float, float>, BLOCK_SIZE=256, PATCH_X=4, PATCH_Y=4, SrcPtr=cv::cudev::GlobPtr<float>, ResType=float, MaskPtr=cv::cudev::WithOutMask]" at line 421
+            instantiation of "void cv::cudev::grid_reduce_detail::reduce<Reductor,Policy,SrcPtr,ResType,MaskPtr>(const SrcPtr &, ResType *, const MaskPtr &, int, int, cudaStream_t) [with Reductor=cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, float, float>, Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GlobPtr<float>, ResType=float, MaskPtr=cv::cudev::WithOutMask]" at line 460
+            instantiation of "void cv::cudev::grid_reduce_detail::minMaxVal<Policy,SrcPtr,ResType,MaskPtr>(const SrcPtr &, ResType *, const MaskPtr &, int, int, cudaStream_t) [with Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GlobPtr<float>, ResType=float, MaskPtr=cv::cudev::WithOutMask]" at line 206 of /build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/reduce.hpp
+            instantiation of "void cv::cudev::gridFindMinMaxVal_<Policy,SrcPtr,ResType>(const SrcPtr &, cv::cudev::GpuMat_<ResType> &, cv::cuda::Stream &) [with Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GpuMat_<float>, ResType=float]" at line 349 of /build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/reduce.hpp
+            instantiation of "void cv::cudev::gridFindMinMaxVal(const SrcPtr &, cv::cudev::GpuMat_<ResType> &, cv::cuda::Stream &) [with SrcPtr=cv::cudev::GpuMat_<float>, ResType=float]" at line 68 of /build/source/opencv_contrib/cudaarithm/src/cuda/minmax.cu
+            instantiation of "void <unnamed>::minMaxImpl<T,R>(const cv::cuda::GpuMat &, const cv::cuda::GpuMat &, cv::cuda::GpuMat &, cv::cuda::Stream &) [with T=float, R=float]" at line 97 of /build/source/opencv_contrib/cudaarithm/src/cuda/minmax.cu
+
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/detail/reduce.hpp(379): error: no instance of overloaded function "cv::cudev::blockReduce" matches the argument list
+            argument types are: (cuda::std::__4::tuple<volatile double *, volatile double *>, cuda::std::__4::tuple<double &, double &>, int, cuda::std::__4::tuple<cv::cudev::minimum<double>, cv::cudev::maximum<double>>)
+              blockReduce<BLOCK_SIZE>(smem_tuple(sminval, smaxval), tie(mymin, mymax), tid, make_tuple(minOp, maxOp));
+              ^
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/block/reduce.hpp(72): note #3327-D: candidate function template "cv::cudev::blockReduce<N,P0,P1,P2,P3,P4,P5,P6,P7,P8,P9,R0,R1,R2,R3,R4,R5,R6,R7,R8,R9,Op0,Op1,Op2,Op3,Op4,Op5,Op6,Op7,Op8,Op9>(const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<P0, P1, P2, P3, P4, P5, P6, P7, P8, P9> &, const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<R0, R1, R2, R3, R4, R5, R6, R7, R8, R9> &, uint, const thrust::THRUST_200301_600_610_700_750_800_860_890_900_NS::tuple<Op0, Op1, Op2, Op3, Op4, Op5, Op6, Op7, Op8, Op9> &)" failed deduction
+                            void blockReduce(const tuple<P0, P1, P2, P3, P4, P5, P6, P7, P8, P9>& smem,
+                                 ^
+/build/source/opencv_contrib/cudev/include/opencv2/cudev/block/reduce.hpp(63): note #3327-D: candidate function template "cv::cudev::blockReduce<N,T,Op>(volatile T *, T &, uint, const Op &)" failed deduction
+                            void blockReduce(volatile T* smem, T& val, uint tid, const Op& op)
+                                 ^
+          detected during:
+            instantiation of "void cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, src_type, work_type>::reduceGrid<BLOCK_SIZE>(work_type *, int) [with src_type=double, work_type=double, BLOCK_SIZE=256]" at line 412
+            instantiation of "void cv::cudev::grid_reduce_detail::reduce<Reductor,BLOCK_SIZE,PATCH_X,PATCH_Y,SrcPtr,ResType,MaskPtr>(SrcPtr, ResType *, MaskPtr, int, int) [with Reductor=cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, double, double>, BLOCK_SIZE=256, PATCH_X=4, PATCH_Y=4, SrcPtr=cv::cudev::GlobPtr<double>, ResType=double, MaskPtr=cv::cudev::WithOutMask]" at line 421
+            instantiation of "void cv::cudev::grid_reduce_detail::reduce<Reductor,Policy,SrcPtr,ResType,MaskPtr>(const SrcPtr &, ResType *, const MaskPtr &, int, int, cudaStream_t) [with Reductor=cv::cudev::grid_reduce_detail::MinMaxReductor<cv::cudev::grid_reduce_detail::both, double, double>, Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GlobPtr<double>, ResType=double, MaskPtr=cv::cudev::WithOutMask]" at line 460
+            instantiation of "void cv::cudev::grid_reduce_detail::minMaxVal<Policy,SrcPtr,ResType,MaskPtr>(const SrcPtr &, ResType *, const MaskPtr &, int, int, cudaStream_t) [with Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GlobPtr<double>, ResType=double, MaskPtr=cv::cudev::WithOutMask]" at line 206 of /build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/reduce.hpp
+            instantiation of "void cv::cudev::gridFindMinMaxVal_<Policy,SrcPtr,ResType>(const SrcPtr &, cv::cudev::GpuMat_<ResType> &, cv::cuda::Stream &) [with Policy=cv::cudev::DefaultGlobReducePolicy, SrcPtr=cv::cudev::GpuMat_<double>, ResType=double]" at line 349 of /build/source/opencv_contrib/cudev/include/opencv2/cudev/grid/reduce.hpp
+            instantiation of "void cv::cudev::gridFindMinMaxVal(const SrcPtr &, cv::cudev::GpuMat_<ResType> &, cv::cuda::Stream &) [with SrcPtr=cv::cudev::GpuMat_<double>, ResType=double]" at line 68 of /build/source/opencv_contrib/cudaarithm/src/cuda/minmax.cu
+            instantiation of "void <unnamed>::minMaxImpl<T,R>(const cv::cuda::GpuMat &, const cv::cuda::GpuMat &, cv::cuda::GpuMat &, cv::cuda::Stream &) [with T=double, R=double]" at line 98 of /build/source/opencv_contrib/cudaarithm/src/cuda/minmax.cu
+
+7 errors detected in the compilation of "/build/source/opencv_contrib/cudaarithm/src/cuda/minmax.cu".
+[  9%] [34m[1mBuilding NVCC (Device) object modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_minmax_mat.cu.o[0m
+[31mCMake Error at cuda_compile_1_generated_minmax.cu.o.Release.cmake:280 (message):
+  Error generating file
+  /build/source/build/modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/./cuda_compile_1_generated_minmax.cu.o
+
+[0m
+make[2]: *** [modules/cudaarithm/CMakeFiles/opencv_cudaarithm.dir/build.make:196: modules/cudaarithm/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_minmax.cu.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/gabor.cpp.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/generalized_hough.cpp.o[0m
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/geometry.cpp.o[0m
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/grabcut.cpp.o[0m
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/hershey_fonts.cpp.o[0m
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/histogram.cpp.o[0m
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/hough.cpp.o[0m
+nvcc warning : incompatible redefinition for option 'compiler-bindir', the last value of this option was used
+[  9%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/imgwarp.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/intelligent_scissors.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/intersection.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/linefit.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/lsd.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/main.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/matchcontours.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/median_blur.dispatch.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/min_enclosing_triangle.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/moments.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/morph.dispatch.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/phasecorr.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/pyramids.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/resize.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/rotcalipers.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/samplers.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/segmentation.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/shapedescr.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/smooth.dispatch.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/spatialgradient.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/stackblur.cpp.o[0m
+[ 10%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/subdivision2d.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/sumpixels.dispatch.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/tables.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/templmatch.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/thresh.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/utils.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/opencl_kernels_imgproc.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/imgwarp.sse4_1.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/resize.sse4_1.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/accum.sse4_1.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/box_filter.sse4_1.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/filter.sse4_1.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/color_hsv.sse4_1.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/color_rgb.sse4_1.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/color_yuv.sse4_1.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/median_blur.sse4_1.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/morph.sse4_1.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/smooth.sse4_1.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/corner.avx.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/accum.avx.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/imgwarp.avx2.cpp.o[0m
+[ 11%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/src/resize.avx2.cpp.o[0m
+[ 12%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/accum.avx2.cpp.o[0m
+[ 12%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/bilateral_filter.avx2.cpp.o[0m
+[ 12%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/box_filter.avx2.cpp.o[0m
+[ 12%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/filter.avx2.cpp.o[0m
+[ 12%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/color_hsv.avx2.cpp.o[0m
+[ 12%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/color_rgb.avx2.cpp.o[0m
+[ 12%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/color_yuv.avx2.cpp.o[0m
+[ 12%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/median_blur.avx2.cpp.o[0m
+[ 12%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/morph.avx2.cpp.o[0m
+[ 12%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/smooth.avx2.cpp.o[0m
+[ 12%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/sumpixels.avx2.cpp.o[0m
+[ 12%] [32mBuilding CXX object modules/imgproc/CMakeFiles/opencv_imgproc.dir/sumpixels.avx512_skx.cpp.o[0m
+[ 12%] [32m[1mLinking CXX shared library ../../lib/libopencv_imgproc.so[0m
+make[1]: *** [CMakeFiles/Makefile2:3788: modules/cudaarithm/CMakeFiles/opencv_cudaarithm.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+[ 12%] Built target opencv_imgproc
+make: *** [Makefile:166: all] Error 2
