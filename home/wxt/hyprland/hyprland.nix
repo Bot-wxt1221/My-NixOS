@@ -97,9 +97,7 @@
       $terminal = konsole
       $fileManager = nautilus -w
       $menu = fuzzel
-      layout {
-        no_gaps_when_only=0 # disables gaps and borders when only window on screen
-      }
+      dwindle.no_gaps_when_only=1
       env = XCURSOR_THEME,macOS-BigSur
       exec-once = hyprctl setcursor "macOS-BigSur" 28
       env = XDG_CURRENT_DESKTOP, hyprland
