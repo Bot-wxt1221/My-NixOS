@@ -282,16 +282,16 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1724819573,
-        "narHash": "sha256-GnR7/ibgIH1vhoy8cYdmXE6iyZqKqFxQSVkFgosBh6w=",
-        "owner": "NixOS",
+        "lastModified": 1725171844,
+        "narHash": "sha256-9Vq8Z35rdckxIjDLpUVYyvfEEe8x8Ofiae+9hDLKA4Q=",
+        "owner": "Bot-wxt1221",
         "repo": "nixpkgs",
-        "rev": "71e91c409d1e654808b2621f28a327acfdad8dc2",
+        "rev": "6f760b3544c88ca653c9c32090d9fb83584c0282",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
+        "owner": "Bot-wxt1221",
+        "ref": "todesk",
         "repo": "nixpkgs",
         "type": "github"
       }
