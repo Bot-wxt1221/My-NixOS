@@ -22,6 +22,7 @@ in
   home.packages = with pkgs; [
     cachix
     neofetch
+    yazi
     konsole
     gnome-logs
     kitty
