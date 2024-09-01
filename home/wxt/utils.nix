@@ -62,7 +62,7 @@ in
     })
     wl-clipboard
     (pkgs.microsoft-edge.override {
-      commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime --process-per-site --enable-zero-copy --enable-features=WebUIDarkMode,UseOzonePlatform,VaapiVideoDecodeLinuxGL,VaapiVideoDecoder,WebRTCPipeWireCapturer,WaylandWindowDecorations";
+      commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime --process-per-site --enable-zero-copy";
     })
     (
       (pkgs.qq.override { commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime"; })
