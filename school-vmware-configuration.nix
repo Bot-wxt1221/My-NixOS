@@ -28,4 +28,5 @@
     ];
     packages = with pkgs; [ ];
   };
+  services.xserver.desktopManager.gnome.enable = true;
 }
