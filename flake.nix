@@ -2,7 +2,7 @@
   description = "Main config";
 
   inputs = {
-    nixpkgs.url = "github:Bot-wxt1221/nixpkgs/todesk";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     neovim-src.url = "github:neovim/neovim";

@@ -235,11 +235,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1725152180,
-        "narHash": "sha256-Yiu4B0cySI33CTiu2OdvO3GdRvzEoPVUfcO6z8szeKo=",
+        "lastModified": 1725183924,
+        "narHash": "sha256-W11wMsSFLVAZN4WGU2D8k3QiAbnFIHLWAfTA5WexfCY=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "9762c5e3406cab8152d8dd161c0178965d841676",
+        "rev": "9b983e5f6cbfeaaf491ad57912518042be650b6d",
         "type": "github"
       },
       "original": {
@@ -282,16 +282,16 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1725174934,
-        "narHash": "sha256-0NrXTg0cDdhRXSDLwAk3c36hl4xMI/UJxWWl6JgtRxc=",
-        "owner": "Bot-wxt1221",
+        "lastModified": 1724819573,
+        "narHash": "sha256-GnR7/ibgIH1vhoy8cYdmXE6iyZqKqFxQSVkFgosBh6w=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3bb9693691dad9b06c202f80e013646ea0e6dcf9",
+        "rev": "71e91c409d1e654808b2621f28a327acfdad8dc2",
         "type": "github"
       },
       "original": {
-        "owner": "Bot-wxt1221",
-        "ref": "todesk",
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
