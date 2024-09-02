@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-main.url = "github:NixOS/nixpkgs/master";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     neovim-src.url = "github:neovim/neovim";
@@ -22,6 +23,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs-main,
       home-manager,
       neovim,
       nvchad,
@@ -33,6 +35,10 @@
         system = "x86_64-linux";
         specialArgs = {
           nixpkgs = nixpkgs;
+          pkgs-main = import nixpkgs-main {
+            inherit system;
+            config.allowUnfree = true;
+          };
         };
         modules = [
           ./g3-configuration.nix
@@ -45,6 +51,10 @@
               inherit neovim;
               inherit nvchad;
               inherit luogu-gcc;
+              pkgs-main = import nixpkgs-main {
+                inherit system;
+                config.allowUnfree = true;
+              };
             };
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
@@ -55,6 +65,10 @@
         system = "x86_64-linux";
         specialArgs = {
           nixpkgs = nixpkgs;
+          pkgs-main = import nixpkgs-main {
+            inherit system;
+            config.allowUnfree = true;
+          };
         };
         modules = [
           ./school-vmware-configuration.nix
@@ -67,6 +81,10 @@
               inherit neovim;
               inherit nvchad;
               inherit luogu-gcc;
+              pkgs-main = import nixpkgs-main {
+                inherit system;
+                config.allowUnfree = true;
+              };
             };
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
