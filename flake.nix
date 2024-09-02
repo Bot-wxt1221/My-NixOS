@@ -35,10 +35,6 @@
         system = "x86_64-linux";
         specialArgs = {
           nixpkgs = nixpkgs;
-          pkgs-main = import nixpkgs-main {
-            inherit system;
-            config.allowUnfree = true;
-          };
         };
         modules = [
           ./g3-configuration.nix
@@ -65,10 +61,6 @@
         system = "x86_64-linux";
         specialArgs = {
           nixpkgs = nixpkgs;
-          pkgs-main = import nixpkgs-main {
-            inherit system;
-            config.allowUnfree = true;
-          };
         };
         modules = [
           ./school-vmware-configuration.nix
