@@ -7,6 +7,7 @@
   lib,
   pkgs,
   nixpkgs,
+  pkgs-main,
   ...
 }:
 

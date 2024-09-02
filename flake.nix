@@ -35,6 +35,10 @@
         system = "x86_64-linux";
         specialArgs = {
           nixpkgs = nixpkgs;
+          pkgs-main = import nixpkgs-main {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
         };
         modules = [
           ./g3-configuration.nix
@@ -48,7 +52,7 @@
               inherit nvchad;
               inherit luogu-gcc;
               pkgs-main = import nixpkgs-main {
-                inherit system;
+                system = "x86_64-linux";
                 config.allowUnfree = true;
               };
             };
@@ -61,6 +65,10 @@
         system = "x86_64-linux";
         specialArgs = {
           nixpkgs = nixpkgs;
+          pkgs-main = import nixpkgs-main {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
         };
         modules = [
           ./school-vmware-configuration.nix
@@ -74,7 +82,7 @@
               inherit nvchad;
               inherit luogu-gcc;
               pkgs-main = import nixpkgs-main {
-                inherit system;
+                system = "x86_64-linux";
                 config.allowUnfree = true;
               };
             };

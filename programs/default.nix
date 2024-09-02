@@ -3,6 +3,7 @@
   lib,
   pkgs,
   nixpkgs,
+  pkgs-main,
   ...
 }:
 {
@@ -13,7 +14,7 @@
     ./openssh.nix
     ./virutalbox.nix
     ./fuse.nix
-#    ./todesk.nix
+    #    ./todesk.nix
     ./miner-gpu.nix
     ./appimage-run.nix
     ./dbus.nix

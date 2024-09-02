@@ -23,7 +23,7 @@
     cantarell-fonts
     dejavu_fonts
     source-code-pro # Default monospace font in 3.32
-        source-sans
+    source-sans
     (nerdfonts.override {
       fonts = [
         "FiraCode"
