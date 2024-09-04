@@ -25,4 +25,5 @@
   programs.gnome-disks.enable = true;
   services.devmon.enable = true;
   services.gvfs.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 }

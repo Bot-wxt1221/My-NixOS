@@ -81,6 +81,7 @@ in
     gh
     scrcpy
     android-tools
+    fractal
     zip
     xz
     obs-studio
