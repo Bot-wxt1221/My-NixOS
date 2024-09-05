@@ -11,7 +11,9 @@ stdenv.mkDerivation (finalAttrs: {
 
   nativeBuildInputs = [ makeShellWrapper ];
 
-  buildPhase = ''
+  phases = [ "installPhase" ];
+
+  installPhase = ''
     cp -r ${element-desktop}/* $out
     wrapProgramShell "$out/bin/element-desktop" --add-flags "--ozone-platform-hint=wayland --enable-wayland-ime";
   '';
