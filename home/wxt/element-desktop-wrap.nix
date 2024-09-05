@@ -7,6 +7,7 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "element-desktop-wrap";
+  version = "0.0.0";
 
   nativeBuildInputs = [ makeShellWrapper ];
 
