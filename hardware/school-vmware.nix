@@ -8,5 +8,7 @@
 
 {
   imports = [ ./school-vmware-hardware-configuration.nix ];
-  services.xserver.videoDrivers = [ "vmware" ];
+  environment.systemPackages = with pkgs;[
+    xorg.xf86videovmware
+  ];
 }

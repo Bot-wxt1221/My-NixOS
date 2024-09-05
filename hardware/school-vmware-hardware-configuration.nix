@@ -19,7 +19,7 @@
     "ahci"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [ "vmwgfx" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
