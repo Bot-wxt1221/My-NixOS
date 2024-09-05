@@ -25,7 +25,7 @@
     enable = true;
     configPackages = [
       xdg-desktop-portal-gtk
-      pkgs-main.xdg-desktop-portal-hyprland
+      xdg-desktop-portal-hyprland
       xdg-desktop-portal
       xdg-desktop-portal-wlr
     ];

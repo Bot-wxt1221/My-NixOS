@@ -20,7 +20,7 @@
   programs.dconf.enable = true;
   programs.hyprland.enable = true;
   programs.hyprland.xwayland.enable = true;
-  programs.hyprland.portalPackage = pkgs-main.xdg-desktop-portal-hyprland;
+  programs.hyprland.portalPackage = pkgs.xdg-desktop-portal-hyprland;
   programs.light.enable = true;
   services.power-profiles-daemon.enable = true;
   programs.gnome-disks.enable = true;

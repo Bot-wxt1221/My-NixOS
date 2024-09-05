@@ -15,6 +15,6 @@
     preload = [ "${config.home.homeDirectory}/.config/hypr/wallpaper.jpeg" ];
     wallpaper = [ ",${config.home.homeDirectory}/.config/hypr/wallpaper.jpeg" ];
   };
-  services.hyprpaper.package = pkgs-main.hyprpaper;
-  home.packages = with pkgs-main; [ hyprpaper ];
+  services.hyprpaper.package = pkgs.hyprpaper;
+  home.packages = with pkgs; [ hyprpaper ];
 }
