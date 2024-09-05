@@ -109,6 +109,8 @@
       env = QT_IM_MODULE, fcitx5
       env = GTK_IM_MODULE, fcitx5
       env = SDL_VIDEODRIVER, wayland
+      env = QT_QPA_PLATFORMTHEME,gnome
+      env = QT_STYLE_OVERRIDE,breeze
 
       general { 
         gaps_in = 5
