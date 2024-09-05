@@ -9,7 +9,7 @@
   imports = [
 
   ];
-  services.xserver.enable = true;
+  #services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   environment.systemPackages = with pkgs; [
     dconf
@@ -19,6 +19,7 @@
   ];
   programs.dconf.enable = true;
   programs.hyprland.enable = true;
+  programs.hyprland.xwayland.enable = true;
   programs.hyprland.portalPackage = pkgs-main.xdg-desktop-portal-hyprland;
   programs.light.enable = true;
   services.power-profiles-daemon.enable = true;
