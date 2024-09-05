@@ -51,5 +51,5 @@
   # networking.interfaces.Mihomo.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  virtualisation.virtualbox.guest.enable = true;
+  virtualisation.vmware.guest.enable = true;
 }
