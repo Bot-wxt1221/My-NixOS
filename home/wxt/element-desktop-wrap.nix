@@ -5,7 +5,7 @@
   makeShellWrapper,
 }:
 
-stdenv.mkDerivarion (finalAttrs: {
+stdenv.mkDerivation (finalAttrs: {
   pname = "element-desktop-wrap";
 
   nativeBuildInputs = [ makeShellWrapper ];
