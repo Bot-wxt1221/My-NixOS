@@ -8,7 +8,7 @@
 
 {
   imports = [ ./school-vmware-hardware-configuration.nix ];
-  environment.systemPackages = with pkgs;[
+  environment.systemPackages = with pkgs; [
     xorg.xf86videovmware
   ];
 }

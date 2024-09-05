@@ -27,7 +27,7 @@
   home.homeDirectory = "/home/wxt";
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
-  home.packages = with pkgs;[
-    element-desktop
+  home.packages = with pkgs; [
+    (pkgs.callPackage ./element-desktop-wrap.nix { })
   ];
 }
