@@ -17,6 +17,7 @@ stdenv.mkDerivation (finalAttrs: {
     mkdir -p $out
     cp -r ${element-desktop}/* $out
     chmod 777 $out/bin/element-desktop
+    chmod 777 $out/bin
     wrapProgramShell "$out/bin/element-desktop" --add-flags "--ozone-platform-hint=wayland --enable-wayland-ime";
   '';
 })
