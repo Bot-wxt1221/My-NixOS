@@ -105,9 +105,9 @@
       exec-once = hyprctl setcursor "macOS-BigSur" 28
       env = XDG_CURRENT_DESKTOP, hyprland
       env = XCURSOR_SIZE, 28
-      # env = XDG_SESSION_TYPE,wayland
+      env = XDG_SESSION_TYPE,wayland
       env = QT_IM_MODULE, fcitx5
-      # env = GTK_IM_MODULE, fcitx5
+      env = GTK_IM_MODULE, fcitx5
       env = SDL_VIDEODRIVER, wayland
 
       general { 
