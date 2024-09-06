@@ -16,9 +16,9 @@
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
-    x11.defaultCursor = "macOS-BigSur";
+    x11.defaultCursor = "macOS";
     package = pkgs.apple-cursor;
-    name = "macOS-BigSur";
+    name = "macOS";
   };
   xdg.enable = true;
   xdg.portal = with pkgs; {
