@@ -20,12 +20,12 @@
   programs.dconf.enable = true;
   programs.hyprland.enable = true;
   programs.hyprland.package = pkgs.hyprland.overrideAttrs(finalAttrs:{
-    src = fetchFromGitHub {
+    src = pkgs.fetchFromGitHub {
       owner = "hyprwm";
       repo = finalAttrs.pname;
       fetchSubmodules = true;
       rev = "b0fca6eaf00a2c5061f499c76ec8d60772b6a719";
-      hash = "sha256-JmfnYz+9a4TjNl3mAus1VpoWtTI9d1xkW9MHbkcV0Po=";
+      hash = "sha256-JmfnYz+9a4TjNL3mAus1VpoWtTI9d1xkW9MHbkcV0Po=";
     };
     }
   );
