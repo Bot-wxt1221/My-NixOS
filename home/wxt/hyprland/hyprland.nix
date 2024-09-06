@@ -102,8 +102,8 @@
       dwindle{
         no_gaps_when_only=1
         }
-      env = XCURSOR_THEME,macOS-BigSur
-      exec-once = hyprctl setcursor "macOS-BigSur" 28
+      env = XCURSOR_THEME,macOS
+      exec-once = hyprctl setcursor "macOS" 28
       env = XDG_CURRENT_DESKTOP, hyprland
       env = XCURSOR_SIZE, 28
       env = XDG_SESSION_TYPE,wayland
