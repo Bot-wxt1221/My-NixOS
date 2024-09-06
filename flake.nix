@@ -18,7 +18,7 @@
     nvchad.inputs.nvchad-starter.follows = "starter";
     luogu-gcc.url = "github:luogu-dev/judge-env";
     hyprland = {
-      url = "github:hyprwm/hyprland/main";
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
