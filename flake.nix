@@ -17,6 +17,10 @@
     starter.flake = false;
     nvchad.inputs.nvchad-starter.follows = "starter";
     luogu-gcc.url = "github:luogu-dev/judge-env";
+    hyprland = {
+      url = "github:hyprwm/hyprland/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -28,13 +32,18 @@
       neovim,
       nvchad,
       luogu-gcc,
+      hyprland,
       ...
     }@inputs:
     {
+      nixpkgs.overlays = [
+        hyprland.overlays.default
+      ];
       nixosConfigurations.wxt-g3 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
           nixpkgs = nixpkgs;
+          hyprland = hyprland;
           pkgs-main = import nixpkgs-main {
             system = "x86_64-linux";
             config.allowUnfree = true;
@@ -65,6 +74,7 @@
         system = "x86_64-linux";
         specialArgs = {
           nixpkgs = nixpkgs;
+          hyprland = hyprland;
           pkgs-main = import nixpkgs-main {
             system = "x86_64-linux";
             config.allowUnfree = true;

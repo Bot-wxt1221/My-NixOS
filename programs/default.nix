@@ -4,6 +4,7 @@
   pkgs,
   nixpkgs,
   pkgs-main,
+  hyprland,
   ...
 }:
 {

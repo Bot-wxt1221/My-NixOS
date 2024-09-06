@@ -3,6 +3,7 @@
   lib,
   pkgs,
   pkgs-main,
+  hyprland,
   ...
 }:
 {
