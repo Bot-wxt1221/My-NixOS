@@ -25,7 +25,7 @@
       repo = finalAttrs.pname;
       fetchSubmodules = true;
       rev = "b0fca6eaf00a2c5061f499c76ec8d60772b6a719";
-      hash = "sha256-JmfnYz+9a4TjNL3mAus1VpoWtTI9d1xkW9MHbkcV0Po=";
+      hash = "sha256-0g6lzfyIcRaHlDuiWTVy9ZGWtIhIpdqHUTTGtAVR+4Q=";
     };
     }
   );
