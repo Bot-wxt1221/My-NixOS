@@ -13,7 +13,7 @@
   };
   config = lib.mkIf config.Enablepulseaudio {
     hardware.pulseaudio.enable = true;
-    hardware.pipewire.enable = false;
+    services.pipewire.enable = false;
     hardware.firmware = [
       pkgs.alsa-firmware
       pkgs.sof-firmware
