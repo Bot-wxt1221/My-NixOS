@@ -27,8 +27,8 @@
       rev = "b0fca6eaf00a2c5061f499c76ec8d60772b6a719";
       hash = "sha256-JmfnYz+9a4TjNl3mAus1VpoWtTI9d1xkW9MHbkcV0Po=";
     };
-    };
-  )l
+    }
+  );
   programs.hyprland.xwayland.enable = true;
   programs.hyprland.portalPackage = pkgs.xdg-desktop-portal-hyprland;
   programs.light.enable = true;
