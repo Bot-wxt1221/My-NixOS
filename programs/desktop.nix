@@ -20,7 +20,7 @@
   ];
   programs.dconf.enable = true;
   programs.hyprland.enable = true;
-  programs.hyprland.package = hyprland.packages.${pkg.system}.hyprland;
+  programs.hyprland.package = hyprland.packages.${pkgs.system}.hyprland;
   programs.hyprland.xwayland.enable = true;
   programs.hyprland.portalPackage = pkgs.xdg-desktop-portal-hyprland;
   programs.light.enable = true;
