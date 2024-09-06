@@ -64,14 +64,15 @@ in
     (pkgs.microsoft-edge.override {
       commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime --process-per-site";
     })
-    (
-      (pkgs.qq.override { commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime"; })
-      .overrideAttrs
-      (previousAttrs: {
-        src = src-nw-qq;
-        version = sources-qq.version;
-      })
-    )
+  #  (
+  #    (pkgs.qq.override { commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime"; })
+ #     .overrideAttrs
+ #     (previousAttrs: {
+ #       src = src-nw-qq;
+ #       version = sources-qq.version;
+ #     })
+ #   )
+    (pkgs.qq.override { commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime"; })
     resources
     obs-studio
     intel-gpu-tools
