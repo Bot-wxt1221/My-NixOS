@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-main.url = "github:NixOS/nixpkgs/master";
+    nixpkgs-main.url = "github:NixOS/nixpkgs/nixos-24.05";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     neovim-src.url = "github:neovim/neovim";
@@ -18,8 +18,7 @@
     nvchad.inputs.nvchad-starter.follows = "starter";
     luogu-gcc.url = "github:luogu-dev/judge-env";
     hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland&rev=918d8340afd652b011b937d29d5eea0be08467f5?submodules=1";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "git+https://github.com/hyprwm/Hyprland?ref=refs/tags/v0.41.2&submodules=1";
     };
   };
 
