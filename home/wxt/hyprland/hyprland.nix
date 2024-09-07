@@ -3,6 +3,7 @@
   lib,
   pkgs,
   pkgs-main,
+  hyprland,
   ...
 }:
 {
@@ -87,7 +88,7 @@
     };
   wayland.windowManager.hyprland = {
     enable = true;
-    package = pkgs.hyprland;
+    #package = hyprland.packages.${pkgs.system}.hyprland;
     systemd = {
       enable = true;
       enableXdgAutostart = true;

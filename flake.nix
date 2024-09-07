@@ -18,7 +18,7 @@
     nvchad.inputs.nvchad-starter.follows = "starter";
     luogu-gcc.url = "github:luogu-dev/judge-env";
     hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland?ref=016da234d0e852de3ef20eb2e89ac58d2a85f6e7&submodules=1";
+      url = "git+https://github.com/hyprwm/Hyprland?rev=016da234d0e852de3ef20eb2e89ac58d2a85f6e7&submodules=1&branch=main";
     };
   };
 
@@ -58,7 +58,7 @@
             home-manager.extraSpecialArgs = {
               inherit neovim;
               inherit nvchad;
-              inherit luogu-gcc;
+              inherit luogu-gcc hyprland;
               pkgs-main = import nixpkgs-main {
                 system = "x86_64-linux";
                 config.allowUnfree = true;
@@ -89,7 +89,7 @@
             home-manager.extraSpecialArgs = {
               inherit neovim;
               inherit nvchad;
-              inherit luogu-gcc;
+              inherit luogu-gcc hyprland;
               pkgs-main = import nixpkgs-main {
                 system = "x86_64-linux";
                 config.allowUnfree = true;

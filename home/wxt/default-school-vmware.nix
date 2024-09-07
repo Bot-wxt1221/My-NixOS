@@ -4,6 +4,7 @@
   neovim,
   nvchad,
   pkgs-main,
+  hyprland,
   ...
 }:
 
