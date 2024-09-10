@@ -13,7 +13,7 @@
     enable = true;
     description = "clash verge rev";
     serviceConfig = {
-      ExecStart = "${pkgs.clash-verge-rev}/lib/clash-verge/resources/clash-verge-service";
+      ExecStart = "${pkgs.clash-verge-rev}/bin/clash-verge-service";
     };
     wantedBy = [ "multi-user.target" ];
   };

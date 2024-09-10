@@ -48,7 +48,6 @@
     packages = with pkgs; [ ];
   };
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-  virtualisation.vmware.host.enable = true;
   # specialisation = {
   #   test-kernel = {
   #     configuration = {
