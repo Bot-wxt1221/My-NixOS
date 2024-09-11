@@ -30,4 +30,5 @@
     ];
     packages = with pkgs; [ ];
   };
+  services.turn-rs.enable = true;
 }
