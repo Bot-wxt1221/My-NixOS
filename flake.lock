@@ -298,8 +298,8 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1726020332,
-        "narHash": "sha256-Vq4NHM3ZZnkt98ltvd3hIPfgYArSuZQmw/HaXaIJmYA=",
+        "lastModified": 1726020751,
+        "narHash": "sha256-3QPKPJospisFI8uxmKZR07WnZ74jWDIaraH7j2rADj4=",
         "path": "/home/wxt/nixpkgs/turn-rs",
         "type": "path"
       },
