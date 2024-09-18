@@ -31,5 +31,5 @@
   };
   services.turn-rs = {
     enable = true;
-  }
+  };
 }
