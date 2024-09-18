@@ -27,15 +27,4 @@
     ];
     packages = with pkgs; [ ];
   };
-  services.turn-rs = {
-    enable = true;
-    settings = {
-      extraConfig = ''
-        [[turn.interfaces]]
-        transport = "udp"
-        bind = "127.0.0.1:3478"
-        external = "127.0.0.1:3478"
-      '';
-    };
-  };
 }
