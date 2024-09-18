@@ -18,8 +18,6 @@
     ./network
     ./hardware/g3.nix
     ./security
-    ./printing.nix
-    ./font.nix
     ./programs
     ./system
   ];

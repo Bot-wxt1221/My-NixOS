@@ -64,21 +64,21 @@ in
     (pkgs.microsoft-edge.override {
       commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime --process-per-site";
     })
-  #  (
-  #    (pkgs.qq.override { commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime"; })
- #     .overrideAttrs
- #     (previousAttrs: {
- #       src = src-nw-qq;
- #       version = sources-qq.version;
- #     })
- #   )
-    (pkgs.qq.override { commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime"; })
+    #  (
+    #    (pkgs.qq.override { commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime"; })
+    #     .overrideAttrs
+    #     (previousAttrs: {
+    #       src = src-nw-qq;
+    #       version = sources-qq.version;
+    #     })
+    #   )
+    (pkgs.qq.override {
+      commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime";
+    })
     resources
     obs-studio
     intel-gpu-tools
-    vscode-extensions.ms-vscode.cpptools
     hmcl
-    gnome-2048
     gh
     scrcpy
     android-tools
@@ -91,7 +91,6 @@ in
     spotify
     keepassxc
     motrix
-    krdc
     ripgrep # recursively searches directories for a regex pattern
     jq # A lightweight and flexible command-line JSON processor
     eza # A modern replacement for ‘ls’
@@ -108,8 +107,6 @@ in
     socat # replacement of openbsd-netcat
     nmap # A utility for network discovery and security auditing
     ipcalc # it is a calculator for the IPv4/v6 addresses
-    alsa-firmware
-    # misc
     cowsay
     file
     which

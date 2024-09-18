@@ -11,7 +11,6 @@
     ./hardware/school-vmware.nix
     ./network
     ./security
-    ./font.nix
     ./programs
     ./system
   ];
