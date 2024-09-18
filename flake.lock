@@ -299,7 +299,7 @@
     "nixpkgs_3": {
       "locked": {
         "lastModified": 0,
-        "narHash": "sha256-W4AOfiJqO5AWlqMNdbk/yzWN2ZpjRAPXlx3n/pgd7BE=",
+        "narHash": "sha256-WtpMhhKsqdksjLS6XG6L/h23pjtZMeDDFI3VBLx3XnU=",
         "path": "/home/wxt/nixpkgs/turn-rs",
         "type": "path"
       },
