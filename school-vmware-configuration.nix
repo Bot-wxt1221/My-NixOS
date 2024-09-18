@@ -34,6 +34,7 @@
         [[turn.interfaces]]
         transport = "udp"
         bind = "127.0.0.1:3478"
+        external = "127.0.0.1:3478"
       '';
     };
   };
