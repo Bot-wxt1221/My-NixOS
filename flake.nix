@@ -2,8 +2,8 @@
   description = "Main config";
 
   inputs = {
-    #nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs.url = "path:/home/wxt/nixpkgs/turn-rs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    #nixpkgs.url = "path:/home/wxt/nixpkgs/turn-rs";
     nixpkgs-main.url = "github:NixOS/nixpkgs/nixos-24.05";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
