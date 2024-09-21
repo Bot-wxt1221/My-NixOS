@@ -203,6 +203,7 @@
       exec-once=sleep 5 && ponymix -t sink  --device "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink" set-default && ponymix -t sink  --device "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink" mute && ponymix -t sink  --device "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink" unmute
       exec-once=clash-verge
       exec-once=vmhgfs-fuse .host:/ /mnt/ -o allow_other 
+      exec-once=${polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
       exec-once=hyprpaper
       exec-once=waybar
       exec-once=wl-clip-persist --clipboard regular
