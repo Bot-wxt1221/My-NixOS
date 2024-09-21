@@ -22,7 +22,7 @@
     jetbrains-mono
     cantarell-fonts
     dejavu_fonts
-    source-code-pro # Default monospace font in 3.32
+    source-code-pro
     source-sans
     (nerdfonts.override {
       fonts = [

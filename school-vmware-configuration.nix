@@ -15,7 +15,6 @@
     ./system
   ];
   time.timeZone = "Asia/Shanghai";
-  Enablepulseaudio = true;
   Ownhostname = "wxt-school-vmware";
   users.users.wxt = {
     isNormalUser = true;
@@ -25,7 +24,6 @@
       "adbusers"
       "video"
       "networkmanager"
-      "vboxsf"
     ];
     packages = with pkgs; [ ];
   };
