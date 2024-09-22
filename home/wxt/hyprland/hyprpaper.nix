@@ -9,14 +9,14 @@
   imports = [
 
   ];
-  home.file.".config/hypr/wallpaper.svg".source = pkgs.fetchurl {
+  home.file.".config/hypr/wallpaper.png".source = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/refs/heads/master/wallpapers/nixos-wallpaper-catppuccin-latte.png";
-    hash = "sha256-rR2XXN82UBPPxWoLU5DppZO8ei9m8nrO/y3VxSKDP2k=";
+    hash = "sha256-Y6WCwmHOLBStj1D9mcU2082y1fhAFHna01ajfUHxehk=";
   };
   services.hyprpaper.enable = true;
   services.hyprpaper.settings = {
-    preload = [ "${config.home.homeDirectory}/.config/hypr/wallpaper.svg" ];
-    wallpaper = [ ",${config.home.homeDirectory}/.config/hypr/wallpaper.svg" ];
+    preload = [ "${config.home.homeDirectory}/.config/hypr/wallpaper.png" ];
+    wallpaper = [ ",${config.home.homeDirectory}/.config/hypr/wallpaper.png" ];
   };
   services.hyprpaper.package = pkgs.hyprpaper;
   home.packages = with pkgs; [ hyprpaper ];
