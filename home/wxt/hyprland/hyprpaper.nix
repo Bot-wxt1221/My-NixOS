@@ -10,8 +10,8 @@
 
   ];
   home.file.".config/hypr/wallpaper.svg".source = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/refs/heads/master/wallpapers/nixos-wallpaper-catppuccin-latte.svg";
-    hash = "sha256-rR2XXN82UBPPxWoLn5DppZO8ei9m8nrO/y3VxSKDP2k=";
+    url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/refs/heads/master/wallpapers/nixos-wallpaper-catppuccin-latte.png";
+    hash = "sha256-rR2XXN82UBPPxWoLU5DppZO8ei9m8nrO/y3VxSKDP2k=";
   };
   services.hyprpaper.enable = true;
   services.hyprpaper.settings = {
