@@ -7,11 +7,8 @@
     nixpkgs-main.url = "github:NixOS/nixpkgs/nixos-24.05";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    neovim-src.url = "github:neovim/neovim";
-    neovim-src.flake = false;
     neovim.url = "github:nix-community/neovim-nightly-overlay/master";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
-    neovim.inputs.neovim-src.follows = "neovim-src";
     nvchad.url = "github:nix-community/nix4nvchad";
     nvchad.inputs.nixpkgs.follows = "nixpkgs";
     starter.url = "github:Bot-wxt1221/Bot-wxt1221-NvChad";

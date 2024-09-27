@@ -210,9 +210,7 @@
         "flake-parts": "flake-parts",
         "git-hooks": "git-hooks",
         "hercules-ci-effects": "hercules-ci-effects",
-        "neovim-src": [
-          "neovim-src"
-        ],
+        "neovim-src": "neovim-src",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -356,7 +354,6 @@
         "home-manager": "home-manager",
         "luogu-gcc": "luogu-gcc",
         "neovim": "neovim",
-        "neovim-src": "neovim-src",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-main": "nixpkgs-main",
         "nvchad": "nvchad",
