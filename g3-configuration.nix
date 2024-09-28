@@ -33,7 +33,6 @@
   EnableCuda = true;
   EnableKubo = true;
   EnableDocker = true;
-  EnableKubo = true;
   users.users.wxt = {
     isNormalUser = true;
     extraGroups = [

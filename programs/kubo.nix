@@ -14,9 +14,9 @@
   };
   config = lib.mkIf config.EnableKubo {
     services.kubo = {
-      enable = false;
+      enable = true;
       user = "wxt";
-      enableGC = false;
+      enableGC = true;
       autoMount = true;
       settings.Addresses.API = [ "/ip4/127.0.0.1/tcp/5001" ];
       settings.Datastore.StorageMax = "100GB";
