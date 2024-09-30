@@ -5,6 +5,7 @@
   nixpkgs,
   pkgs-main,
   hyprland,
+  niri,
   ...
 }:
 {

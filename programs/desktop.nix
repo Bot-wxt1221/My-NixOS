@@ -4,6 +4,7 @@
   pkgs,
   pkgs-main,
   hyprland,
+  niri,
   ...
 }:
 {
@@ -12,6 +13,7 @@
   ];
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
+  services.displayManager.sessionPackages = [ niri.packages.niri ];
   environment.systemPackages = with pkgs; [
     dconf
     gnome-terminal
