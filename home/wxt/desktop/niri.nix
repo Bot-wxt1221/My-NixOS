@@ -83,6 +83,5 @@
         "video/webm" = mp;
       };
     };
-  programs.niri.enable = false; 
   programs.niri.config = builtins.readFile ./niri.kdl;
 }
