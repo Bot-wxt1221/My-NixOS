@@ -19,6 +19,7 @@
     gnome-system-monitor
   ];
   programs.niri.enable = true;
+  programs.niri.config = null;
   programs.dconf.enable = true;
   programs.light.enable = true;
   services.power-profiles-daemon.enable = true;
