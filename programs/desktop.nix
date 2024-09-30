@@ -13,13 +13,14 @@
   ];
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
-  services.displayManager.sessionPackages = [ niri.packages.${pkgs.system}.niri ];
   environment.systemPackages = with pkgs; [
     dconf
+    niri.packages.${pkgs.system}.niri
     gnome-terminal
     gnome-tweaks
     gnome-system-monitor
   ];
+  systemd.user.services.niri-flake-polkit.enable = false;
   programs.dconf.enable = true;
   programs.light.enable = true;
   services.power-profiles-daemon.enable = true;
