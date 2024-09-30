@@ -247,8 +247,6 @@ binds {
     Alt+F4 { close-window; }
 
     Mod+Left  { focus-column-left; }
-    Mod+Down  { focus-window-down; }
-    Mod+Up    { focus-window-up; }
     Mod+Right { focus-column-right; }
 
     Mod+Shift+Left  { move-column-left; }
@@ -261,8 +259,8 @@ binds {
     Mod+Shift+Home { move-column-to-first; }
     Mod+Shift+End  { move-column-to-last; }
 
-    Mod+Shift+Up              { focus-workspace-down; }
-    Mod+Shift+Down              { focus-workspace-up; }
+    Mod+Up              { focus-workspace-down; }
+    Mod+Down              { focus-workspace-up; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
