@@ -51,7 +51,7 @@ in
         makeWrapper ${pkgs.electron_30}/bin/electron $out/bin/bilibili \
           --argv0 "bilibili" \
           --add-flags "$out/opt/app.asar" \
-          --add-flags "--ozone-platform-hint=wayland --enable-wayland-ime"
+          --add-flags "--ozone-platform-hint=wayland --enable-wayland-ime --wayland-text-input-version=3"
         runHook postInstall
       '';
       unpackPhase = ''
@@ -62,10 +62,10 @@ in
     })
     wl-clipboard
     (pkgs.microsoft-edge.override {
-      commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime --process-per-site";
+      commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime --process-per-site --wayland-text-input-version=3";
     })
     #  (
-    #    (pkgs.qq.override { commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime"; })
+    #    (pkgs.qq.override { commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime --wayland-text-input-version=3"; })
     #     .overrideAttrs
     #     (previousAttrs: {
     #       src = src-nw-qq;
@@ -73,7 +73,7 @@ in
     #     })
     #   )
     (pkgs.qq.override {
-      commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime";
+      commandLineArgs = "--wayland-text-input-version=3";
     })
     resources
     obs-studio
