@@ -231,7 +231,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Q { spawn "QT_QPA_PLATFORM=wayland konsole"; }
+    Mod+Q { spawn "konsole"; }
     Mod+R { spawn "fuzzel"; }
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
