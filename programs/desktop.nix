@@ -21,6 +21,7 @@
   programs.dconf.enable = true;
   programs.light.enable = true;
   services.power-profiles-daemon.enable = true;
+  xdg.portal.enable = true;
   programs.gnome-disks.enable = true;
   services.devmon.enable = true;
   services.gvfs.enable = true;
