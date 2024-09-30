@@ -20,6 +20,10 @@
     gnome-tweaks
     gnome-system-monitor
   ];
+  environment.sessionVariables = {
+    QT_QPA_PLATFORM = "wayland";
+    NIXOS_OZONE_WL = "1";
+  };
   systemd.user.services.niri-flake-polkit.enable = false;
   programs.dconf.enable = true;
   programs.light.enable = true;
