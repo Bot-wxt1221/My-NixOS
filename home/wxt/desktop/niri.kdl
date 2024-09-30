@@ -320,9 +320,7 @@ binds {
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
 
-    Mod+R { switch-preset-column-width; }
-    Mod+Shift+R { switch-preset-window-height; }
-    Mod+Ctrl+R { reset-window-height; }
+    Mod+R { reset-window-height; }
     Mod+S { maximize-column; }
     Mod+Shift+S { fullscreen-window; }
     Mod+C { center-column; }
