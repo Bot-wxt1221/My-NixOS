@@ -7,8 +7,9 @@
   ...
 }:
 {
-  imports = [
-  ];
+  imports =
+    [
+    ];
   home.packages = with pkgs; [
     fuzzel
   ];
