@@ -27,7 +27,6 @@
   };
   environment.sessionVariables = {
     QT_QPA_PLATFORM = "wayland";
-    NIXOS_OZONE_WL = "1";
     QT_IM_MODULE = "fcitx5";
     GTK_IM_MODULE = "fcitx5";
   };

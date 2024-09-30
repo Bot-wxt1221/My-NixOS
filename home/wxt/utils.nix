@@ -36,33 +36,10 @@ in
     nixfmt-rfc-style
     wayvnc
     realvnc-vnc-viewer
-    (pkgs.bilibili.overrideAttrs {
-      src = pkgs.fetchurl {
-        url = "https://github.com/msojocs/bilibili-linux/releases/download/v1.14.0-2/io.github.msojocs.bilibili_1.14.0-2_amd64.deb";
-        hash = "sha256-QQMdEpKE7r/fPMaX/yEoaa7KjilhiPMYLRvGPkv1jds=";
-      };
-      installPhase = ''
-        runHook preInstall
-
-        mkdir -p $out/bin
-        cp -r usr/share $out/share
-        sed -i "s|Exec=.*|Exec=$out/bin/bilibili|" $out/share/applications/*.desktop
-        cp -r opt/apps/io.github.msojocs.bilibili/files/bin/app $out/opt
-        makeWrapper ${pkgs.electron_30}/bin/electron $out/bin/bilibili \
-          --argv0 "bilibili" \
-          --add-flags "$out/opt/app.asar" \
-          --add-flags "--ozone-platform-hint=wayland --enable-wayland-ime --wayland-text-input-version=3"
-        runHook postInstall
-      '';
-      unpackPhase = ''
-        runHook preUnpack
-        ${pkgs.dpkg}/bin/dpkg -x $src ./
-        runHook postUnpack
-      '';
-    })
+    bilibili
     wl-clipboard
     (pkgs.microsoft-edge.override {
-      commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime --process-per-site --wayland-text-input-version=3";
+      commandLineArgs = "--process-per-site";
     })
     #  (
     #    (pkgs.qq.override { commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime --wayland-text-input-version=3"; })
@@ -72,9 +49,7 @@ in
     #       version = sources-qq.version;
     #     })
     #   )
-    (pkgs.qq.override {
-      commandLineArgs = "--wayland-text-input-version=3";
-    })
+    qq
     resources
     obs-studio
     intel-gpu-tools
