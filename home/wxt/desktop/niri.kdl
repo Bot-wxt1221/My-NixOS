@@ -18,7 +18,7 @@ spawn-at-startup "fcitx5 -d --replace"
 input {
     keyboard {
         xkb {
-            layout "zh,cn"
+            layout "us,ru"
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
         }
     }
@@ -307,7 +307,7 @@ binds {
     Mod+Ctrl+8 { move-column-to-workspace 8; }
     Mod+Ctrl+9 { move-column-to-workspace 9; }
 
-    Mod+R { switch-preset-window-height; }
+    //Mod+R { switch-preset-window-height; }
     Mod+S { maximize-column; }
     Mod+Shift+S { fullscreen-window; }
     Mod+C { center-column; }
