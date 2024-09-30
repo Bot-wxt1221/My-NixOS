@@ -8,7 +8,7 @@
 }:
 {
   imports = [
-    niri.homeModules.stylix
+    niri.homeModules.config
   ];
   home.packages = with pkgs; [
     fuzzel
