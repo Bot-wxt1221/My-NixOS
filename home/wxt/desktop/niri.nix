@@ -8,7 +8,6 @@
 }:
 {
   imports = [
-    niri.homeModules.config
   ];
   home.packages = with pkgs; [
     fuzzel
