@@ -21,6 +21,10 @@
     gnome-tweaks
     gnome-system-monitor
   ];
+  programs.xwayland = {
+    enable = true;
+    package = pkgs.xwayland-satellite;
+  };
   environment.sessionVariables = {
     QT_QPA_PLATFORM = "wayland";
     NIXOS_OZONE_WL = "1";
