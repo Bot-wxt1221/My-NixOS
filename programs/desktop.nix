@@ -13,6 +13,7 @@
   ];
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
+  services.displayManager.sessionPackages = [niri.packages.${pkgs.system}.niri-stable];
   environment.systemPackages = with pkgs; [
     dconf
     niri.packages.${pkgs.system}.niri-stable
