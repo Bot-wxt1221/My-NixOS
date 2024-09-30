@@ -15,7 +15,7 @@
   services.xserver.displayManager.gdm.enable = true;
   environment.systemPackages = with pkgs; [
     dconf
-    niri.packages.${pkgs.system}.niri
+    niri.packages.${pkgs.system}.niri-stable
     gnome-terminal
     gnome-tweaks
     gnome-system-monitor
