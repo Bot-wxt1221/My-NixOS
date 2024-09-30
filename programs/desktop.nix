@@ -13,7 +13,7 @@
   ];
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
-  services.displayManager.sessionPackages = [ niri.packages.niri ];
+  services.displayManager.sessionPackages = [ niri.packages.${pkgs.system}.niri ];
   environment.systemPackages = with pkgs; [
     dconf
     gnome-terminal
