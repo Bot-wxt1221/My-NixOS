@@ -18,11 +18,8 @@
     gnome-tweaks
     gnome-system-monitor
   ];
+  programs.niri.enable = true;
   programs.dconf.enable = true;
-  programs.hyprland.enable = true;
-  #programs.hyprland.package = hyprland.packages.${pkgs.system}.hyprland;
-  programs.hyprland.xwayland.enable = true;
-  #programs.hyprland.portalPackage = pkgs.xdg-desktop-portal-hyprland;
   programs.light.enable = true;
   services.power-profiles-daemon.enable = true;
   programs.gnome-disks.enable = true;

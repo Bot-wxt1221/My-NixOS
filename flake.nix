@@ -15,6 +15,10 @@
     starter.flake = false;
     nvchad.inputs.nvchad-starter.follows = "starter";
     luogu-gcc.url = "github:luogu-dev/judge-env";
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -25,6 +29,7 @@
       home-manager,
       neovim,
       nvchad,
+      niri,
       luogu-gcc,
       ...
     }@inputs:
@@ -40,6 +45,7 @@
         };
         modules = [
           ./g3-configuration.nix
+          niri.nixosModules.niri
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -48,6 +54,7 @@
             home-manager.extraSpecialArgs = {
               inherit neovim;
               inherit nvchad;
+              inherit niri;
               inherit luogu-gcc;
               pkgs-main = import nixpkgs-main {
                 system = "x86_64-linux";
@@ -70,6 +77,7 @@
         };
         modules = [
           ./school-vmware-configuration.nix
+          niri.nixosModules.niri
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -78,6 +86,7 @@
             home-manager.extraSpecialArgs = {
               inherit neovim;
               inherit nvchad;
+              inherit niri;
               inherit luogu-gcc;
               pkgs-main = import nixpkgs-main {
                 system = "x86_64-linux";

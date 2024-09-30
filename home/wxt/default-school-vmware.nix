@@ -2,6 +2,7 @@
   config,
   pkgs,
   neovim,
+  niri,
   nvchad,
   pkgs-main,
   ...
@@ -11,7 +12,7 @@
   imports = [
     ./gpg.nix
     ./neovim.nix
-    ./hyprland
+    ./desktop
     ./debug-cc.nix
     ./virt.nix
     ./waydroid.nix
