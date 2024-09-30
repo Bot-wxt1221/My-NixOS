@@ -77,15 +77,14 @@
       };
     };
     "niri/workspaces" = {
-
-  format= "{icon}";
-	format-icons= {
-		browser= "";
-		discord= "";
-		chat"= "<b></b>";
-		active= "";
-		default= ";
-	};
+      format = "{icon}";
+      format-icons = {
+        browser = "";
+        discord = "";
+        chat = "<b></b>";
+        active = "";
+        default = "";
+      };
     };
     bluetooth = {
       format-on = "";
