@@ -21,6 +21,10 @@
     gnome-tweaks
     gnome-system-monitor
   ];
+  environment.etc."auth-agent" = {
+    enable = true;
+    source = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+  };
   programs.xwayland = {
     enable = true;
     package = pkgs.xwayland-satellite;
