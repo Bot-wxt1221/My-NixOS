@@ -17,6 +17,10 @@ spawn-at-startup "swaync"
 spawn-at-startup "fcitx5 -d --replace"
 spawn-at-startup "hyprpaper"
 
+environment {
+    DISPLAY ":0"
+}
+
 input {
     keyboard {
         xkb {
