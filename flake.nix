@@ -37,7 +37,7 @@
       nixosConfigurations.wxt-g3 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit niri;
+          niri = niri;
           nixpkgs = nixpkgs;
           pkgs-main = import nixpkgs-main {
             system = "x86_64-linux";
