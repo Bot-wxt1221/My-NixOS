@@ -21,6 +21,10 @@
     name = "macOS";
   };
   xdg.enable = true;
+  environment.etc."auth-agent" = {
+    enable = true;
+    source = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+  }
   xdg.portal = with pkgs; {
     enable = true;
     configPackages = [
