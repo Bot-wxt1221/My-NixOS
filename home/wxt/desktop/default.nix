@@ -9,7 +9,7 @@
 {
   imports = [
     ./hyprpaper.nix
-    ./hyprland.nix
+    ./niri.nix
     ./waybar.nix
     ./swaync.nix
     ./clipboard.nix
