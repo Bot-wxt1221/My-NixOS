@@ -10,7 +10,6 @@
 spawn-at-startup "waydroid session start"
 spawn-at-startup "clash-verge"
 spawn-at-startup "vmhgfs-fuse .host:/ /mnt/ -o allow_other"
-spawn-at-startup "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
 spawn-at-startup "waybar"
 spawn-at-startup "wl-clip-persist --clipboard regular"
 spawn-at-startup "swaync"

@@ -3,11 +3,12 @@
   lib,
   pkgs,
   pkgs-main,
+  niri,
   ...
 }:
 {
   imports = [
-
+    niri.homeModules.stylix
   ];
   home.packages = with pkgs; [
     fuzzel
