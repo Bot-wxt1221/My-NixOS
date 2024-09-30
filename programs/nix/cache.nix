@@ -16,6 +16,7 @@
     "https://cuda-maintainers.cachix.org"
     "https://luogu-judge.cachix.org"
     "https://hyprland.cachix.org"
+    "https://niri.cachix.org"
   ];
   nix.settings.trusted-users = [
     "root"
@@ -27,5 +28,6 @@
     "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
     "luogu-judge.cachix.org-1:vBoiA0n//KfYZ5Xp5HhcujXcdT7dK3+rEK3U4zw66TQ="
     "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+    "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
   ];
 }
