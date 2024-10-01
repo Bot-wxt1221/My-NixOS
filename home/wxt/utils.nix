@@ -24,6 +24,7 @@ in
     neofetch
     yazi
     konsole
+    fd
     gnome-logs
     kitty
     helvum
