@@ -47,32 +47,32 @@
     packages = with pkgs; [ ];
   };
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-  # specialisation = {
-  #   test-kernel = {
-  #     configuration = {
-  #       system.nixos.tags = [ "test-kernel" ];
-  #       boot.kernelPackages = pkgs.linuxPackagesFor (
-  #         pkgs.buildLinux {
-  #           version = "6.11-rc2";
-  #           extraMeta.branch = "6.11";
-  #           kernelPatches = [
-  #             {
-  #               name = "bridge-stp-helper";
-  #               patch = "${nixpkgs}/pkgs/os-specific/linux/kernel/bridge-stp-helper.patch";
-  #             }
-  #             {
-  #               name = "request-key-helper";
-  #               patch = "${nixpkgs}/pkgs/os-specific/linux/kernel/request-key-helper.patch";
-  #             }
-  #           ];
-  #           src = pkgs.fetchzip {
-  #             url = "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-6.11-rc2.tar.gz";
-  #             hash = "sha256-+nfCerBqzOtf3xYVQfXA24r557V7v0Pe9J9p/R0DXOs=";
-  #           };
-  #         }
-  #       );
-  #     };
-  #     inheritParentConfig = true;
-  #   };
-  # };
+  specialisation = {
+    test-kernel = {
+      configuration = {
+        system.nixos.tags = [ "test-kernel" ];
+        boot.kernelPackages = pkgs.linuxPackagesFor (
+          pkgs.buildLinux {
+            version = "6.12-rc1";
+            extraMeta.branch = "6.12";
+            kernelPatches = [
+              {
+                name = "bridge-stp-helper";
+                patch = "${nixpkgs}/pkgs/os-specific/linux/kernel/bridge-stp-helper.patch";
+              }
+              {
+                name = "request-key-helper";
+                patch = "${nixpkgs}/pkgs/os-specific/linux/kernel/request-key-helper.patch";
+              }
+            ];
+            src = pkgs.fetchzip {
+              url = "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-6.12-rc1.tar.gz";
+              hash = "sha256-+nfCerBqzOtf3xYVQfXA24r557V7v0Pe9J9p/R8DXOs=";
+            };
+          }
+        );
+      };
+      inheritParentConfig = true;
+    };
+  };
 }
