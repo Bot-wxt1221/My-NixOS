@@ -67,7 +67,7 @@
             ];
             src = pkgs.fetchzip {
               url = "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-6.12-rc1.tar.gz";
-              hash = "sha256-+nfCerBqzOtf3xYVQfXA24r557V7v0Pe9J9p/R8DXOs=";
+              hash = "sha256-olfaNFVQD9qyF/5I0ynv2xa0zxQag/4jyLvZt5nc/Js=";
             };
           }
         );
