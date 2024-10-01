@@ -266,8 +266,8 @@ binds {
 
     Mod+Down              { focus-workspace-down; }
     Mod+Up              { focus-workspace-up; }
-    Mod+Shift+Down              { move-column-down; }
-    Mod+Shift+Up              { move-column-up; }
+    Mod+Shift+Down              { move-window-down; }
+    Mod+Shift+Up              { move-window-up; }
 
 
     // Alternatively, there are commands to move just a single window:
