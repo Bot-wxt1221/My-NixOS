@@ -18,7 +18,6 @@
       pkgs.alsa-firmware
       pkgs.sof-firmware
     ];
-
     environment.etc."wxt/panel/bin".source = "${pkgs.pavucontrol}/bin/pavucontrol";
   };
 }

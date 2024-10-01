@@ -17,6 +17,7 @@
   ];
   time.timeZone = "Asia/Shanghai";
   Ownhostname = "wxt-school-vmware";
+  Enablepulseaudio = true;
   users.users.wxt = {
     isNormalUser = true;
     extraGroups = [
