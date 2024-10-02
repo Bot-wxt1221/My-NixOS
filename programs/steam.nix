@@ -6,9 +6,9 @@
 }:
 {
   options = {
-    enableSteam = lib.mkEnableOption "Steam";
+    Enablesteam = lib.mkEnableOption "Steam";
   };
-  config = lib.mkIf config.enableSteam {
+  config = lib.mkIf config.Enablesteam {
     programs.steam = {
       enable = true;
     };
