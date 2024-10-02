@@ -24,6 +24,7 @@
   ];
   time.timeZone = "Asia/Shanghai";
   Ownhostname = "wxt-g3";
+  Enablesteam = true;
   Enablepipewire = true;
   EnableWaydroid = true;
   EnableVirt = true;

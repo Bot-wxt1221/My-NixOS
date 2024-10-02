@@ -16,6 +16,7 @@
     ./openssh.nix
     ./virutalbox.nix
     ./fuse.nix
+    ./steam.nix
     #    ./todesk.nix
     ./miner-gpu.nix
     ./appimage-run.nix
