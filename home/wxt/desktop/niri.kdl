@@ -239,7 +239,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Q { spawn "konsole"; }
-    Mod+E { spawn "nautilus -w"; }
+    Mod+E { spawn "nautilus" "-w"; }
     Mod+R { spawn "fuzzel"; }
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
