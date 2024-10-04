@@ -40,7 +40,7 @@ in
     bilibili
     wl-clipboard
     (pkgs.microsoft-edge.override {
-      commandLineArgs = "--process-per-site";
+      commandLineArgs = "--process-per-site --ozone-platform-hint=wayland --enable-wayland-ime --wayland-text-input-version=3";
     })
     #  (
     #    (pkgs.qq.override { commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime --wayland-text-input-version=3"; })
