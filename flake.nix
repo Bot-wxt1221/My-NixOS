@@ -22,7 +22,7 @@
     };
     clipboard = {
       url = "github:dnut/clipboard-sync";
-      inputs.nixpkgs.follow = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
