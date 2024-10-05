@@ -7,15 +7,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1727075863,
-        "narHash": "sha256-kMICeoMIBWzWeATKPK2CjL8JQrDRzbKTMbaCTtSsELQ=",
-        "owner": "dnut",
+        "lastModified": 1728094622,
+        "narHash": "sha256-SfFOLy+U/fhNsgqScCoycVTtK0MfoHih76jf49ptqPw=",
+        "owner": "Bot-wxt1221",
         "repo": "clipboard-sync",
-        "rev": "a79e6ad41faafbeb0db974fc08b3a8e6207ac6d5",
+        "rev": "13e263a7c884ac8330e9a4e53ac2d8674af99208",
         "type": "github"
       },
       "original": {
-        "owner": "dnut",
+        "owner": "Bot-wxt1221",
         "repo": "clipboard-sync",
         "type": "github"
       }
