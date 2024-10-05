@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "clipboard": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1727075863,
+        "narHash": "sha256-kMICeoMIBWzWeATKPK2CjL8JQrDRzbKTMbaCTtSsELQ=",
+        "owner": "dnut",
+        "repo": "clipboard-sync",
+        "rev": "a79e6ad41faafbeb0db974fc08b3a8e6207ac6d5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dnut",
+        "repo": "clipboard-sync",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -442,6 +462,7 @@
     },
     "root": {
       "inputs": {
+        "clipboard": "clipboard",
         "home-manager": "home-manager",
         "luogu-gcc": "luogu-gcc",
         "neovim": "neovim",
