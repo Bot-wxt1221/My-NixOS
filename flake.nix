@@ -21,7 +21,7 @@
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
     clipboard = {
-      url = "https://github:dnut/clipboard-sync";
+      url = "github:dnut/clipboard-sync";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
