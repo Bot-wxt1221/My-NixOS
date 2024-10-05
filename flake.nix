@@ -32,7 +32,6 @@
       nixpkgs,
       nixpkgs-main,
       home-manager,
-      nager,
       neovim,
       nvchad,
       niri,
