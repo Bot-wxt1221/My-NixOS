@@ -33,6 +33,7 @@
     QT_QPA_PLATFORM = "wayland";
     QT_IM_MODULE = "fcitx5";
     GTK_IM_MODULE = "fcitx5";
+    NIXOS_OZONE_WL = 1;
   };
   systemd.user.services.niri-flake-polkit.enable = false;
   programs.dconf.enable = true;
