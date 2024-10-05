@@ -4,6 +4,7 @@
   pkgs,
   pkgs-main,
   niri,
+  clipboard,
   ...
 }:
 {
@@ -13,6 +14,7 @@
   home.packages = with pkgs; [
     fuzzel
     xsel
+    clipboard.packages.${pkgs.system}.default
   ];
   home.pointerCursor = {
     gtk.enable = true;

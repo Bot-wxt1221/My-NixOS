@@ -16,6 +16,7 @@ spawn-at-startup "/etc/auth-agent"
 spawn-at-startup "swaync"
 spawn-at-startup "fcitx5 -d --replace"
 spawn-at-startup "hyprpaper"
+spawn-at-startup "clipboard-sync --hide-timestamp"
 
 environment {
     DISPLAY ":0"

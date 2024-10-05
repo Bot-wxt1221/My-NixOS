@@ -53,7 +53,6 @@
         modules = [
           ./g3-configuration.nix
           niri.nixosModules.niri-flake
-          clipboard.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -63,6 +62,7 @@
               inherit neovim;
               inherit nvchad;
               inherit niri;
+              inherit clipboard;
               inherit luogu-gcc;
               pkgs-main = import nixpkgs-main {
                 system = "x86_64-linux";
@@ -87,7 +87,6 @@
         modules = [
           ./school-vmware-configuration.nix
           niri.nixosModules.niri
-          clipboard.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -97,6 +96,7 @@
               inherit neovim;
               inherit nvchad;
               inherit niri;
+              inherit clipboard;
               inherit luogu-gcc;
               pkgs-main = import nixpkgs-main {
                 system = "x86_64-linux";
