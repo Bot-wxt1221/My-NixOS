@@ -20,6 +20,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
+    clipboard = {
+      url = "https://github:dnut/clipboard-sync";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -28,10 +32,12 @@
       nixpkgs,
       nixpkgs-main,
       home-manager,
+      nager,
       neovim,
       nvchad,
       niri,
       luogu-gcc,
+      clipboard,
       ...
     }@inputs:
     {
@@ -48,6 +54,7 @@
         modules = [
           ./g3-configuration.nix
           niri.nixosModules.niri-flake
+          clipboard.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -81,6 +88,7 @@
         modules = [
           ./school-vmware-configuration.nix
           niri.nixosModules.niri
+          clipboard.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

@@ -41,6 +41,7 @@
   xdg.portal.enable = true;
   xdg.portal.config.common.default = "*";
   programs.gnome-disks.enable = true;
+  services.clipboard-sync.enable = true;
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.gnome.gnome-keyring.enable = true;
