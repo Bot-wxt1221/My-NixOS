@@ -263,6 +263,9 @@ binds {
     Mod+End  { focus-column-last; }
     Mod+Shift+Home { move-column-to-first; }
     Mod+Shift+End  { move-column-to-last; }
+    Mod+Shift+C { spawn "sh" "-c" "env DISPLAY=:0 xsel -ob | wl-copy"; }
+    Mod+Shift+V { spawn "sh" "-c" "wl-paste -n | env DISPLAY=:0 xsel -ib"; }
+
 
     Mod+Down              { focus-workspace-down; }
     Mod+Up              { focus-workspace-up; }

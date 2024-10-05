@@ -12,6 +12,7 @@
     ];
   home.packages = with pkgs; [
     fuzzel
+    xsel
   ];
   home.pointerCursor = {
     gtk.enable = true;
