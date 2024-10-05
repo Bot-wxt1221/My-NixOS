@@ -52,7 +52,6 @@
         };
         modules = [
           ./g3-configuration.nix
-          niri.nixosModules.niri-flake
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
