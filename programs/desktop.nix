@@ -39,7 +39,6 @@
   programs.light.enable = true;
   services.power-profiles-daemon.enable = true;
   xdg.portal.enable = true;
-  services.clipboard-sync.enable = true;
   xdg.portal.config.common.default = "*";
   programs.gnome-disks.enable = true;
   services.devmon.enable = true;

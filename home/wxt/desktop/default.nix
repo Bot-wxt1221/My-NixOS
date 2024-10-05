@@ -12,6 +12,6 @@
     ./niri.nix
     ./waybar.nix
     ./swaync.nix
-    ./clipboard.nix
+#    ./clipboard.nix
   ];
 }
