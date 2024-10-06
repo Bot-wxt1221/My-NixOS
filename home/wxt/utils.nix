@@ -1,4 +1,9 @@
-{ configs, pkgs, ... }:
+{
+  configs,
+  pkgs,
+  pkgs-main,
+  ...
+}:
 let
   sources-qq = import ./sources-qq.nix;
   srcs-qq = {
@@ -21,7 +26,7 @@ in
   ];
   home.packages = with pkgs; [
     cachix
-    neofetch
+    fastfetch
     yazi
     konsole
     fd
@@ -68,19 +73,11 @@ in
     keepassxc
     motrix
     ripgrep # recursively searches directories for a regex pattern
-    jq # A lightweight and flexible command-line JSON processor
-    eza # A modern replacement for ‘ls’
-    fzf # A command-line fuzzy finder
-
-    # networking tools
     mtr # A network diagnostic tool
     iperf3
-    project-lemonlime
+    pkgs-main.project-lemonlime
     wpsoffice-cn
     glxinfo
-    dnsutils # `dig` + `nslookup`
-    ldns # replacement of `dig`, it provide the command `drill`
-    aria2 # A lightweight multi-protocol & multi-source command-line download utility
     socat # replacement of openbsd-netcat
     nmap # A utility for network discovery and security auditing
     ipcalc # it is a calculator for the IPv4/v6 addresses
@@ -96,7 +93,6 @@ in
 
     nix-output-monitor
 
-    hugo # static site generator
     glow # markdown previewer in terminal
 
     # system call monitoring
