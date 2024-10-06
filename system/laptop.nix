@@ -8,7 +8,12 @@
   imports = [
 
   ];
-  services.thermald.enable = true;
-  powerManagement.powertop.enable = true;
-  environment.systemPackages = [ pkgs.powertop ];
+  options = {
+    Laptop = lib.mkEnableOption "laptop";
+  };
+  config = lib.mkIf config.Laptop {
+    services.thermald.enable = true;
+    powerManagement.powertop.enable = true;
+    environment.systemPackages = [ pkgs.powertop ];
+  };
 }

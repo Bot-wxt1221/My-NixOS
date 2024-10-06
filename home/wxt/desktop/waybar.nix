@@ -40,12 +40,14 @@
         "disk"
         "pulseaudio"
         "backlight"
-        "battery"
         "network"
         "custom/notification"
       ]
       ++ lib.optionals osConfig.EnableBluetooth [
         "bluetooth"
+      ]
+      ++ lib.optionals osConfig.Laptop [
+        "battery"
       ];
     backlight = {
       device = "intel_backlight";
@@ -138,7 +140,7 @@
       scroll-step = 5;
       on-click = "/etc/wxt/panel/bin";
     };
-    battery = {
+    battery = lib.mkIf osConfig.Laptop {
       format = "{icon} {capacity}%";
       format-icons = [
         " "
