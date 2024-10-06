@@ -11,8 +11,8 @@
   nix.optimise.dates = [ "12:00" ]; # Optional; allows customizing optimisation schedule
   nix.gc = {
     automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 14d";
+    dates = "dayly";
+    options = "--delete-older-than 1d";
   };
   nix.settings.experimental-features = [
     "nix-command"
