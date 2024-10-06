@@ -8,6 +8,7 @@
   imports = [
     ./grub.nix
     ./kernel.nix
+    ./laptop.nix
     ./audio-pipewire.nix
     ./audio-pulse.nix
     ./console.nix
