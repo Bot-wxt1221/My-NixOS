@@ -75,6 +75,7 @@ in
     # networking tools
     mtr # A network diagnostic tool
     iperf3
+    project-lemonlime
     wpsoffice-cn
     glxinfo
     dnsutils # `dig` + `nslookup`
