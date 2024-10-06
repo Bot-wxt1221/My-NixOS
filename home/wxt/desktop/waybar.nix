@@ -31,19 +31,22 @@
       "niri/workspaces"
     ];
     modules-center = [ "clock" ];
-    modules-right = [
-      "tray"
-      "temperature"
-      "cpu"
-      "memory"
-      "disk"
-      "pulseaudio"
-      "bluetooth"
-      "backlight"
-      "battery"
-      "network"
-      "custom/notification"
-    ];
+    modules-right =
+      [
+        "tray"
+        "temperature"
+        "cpu"
+        "memory"
+        "disk"
+        "pulseaudio"
+        "backlight"
+        "battery"
+        "network"
+        "custom/notification"
+      ]
+      ++ lib.optionals osConfig.EnableBluetooth [
+        "bluetooth"
+      ];
     backlight = {
       device = "intel_backlight";
       format = "{icon} {percent}%";
