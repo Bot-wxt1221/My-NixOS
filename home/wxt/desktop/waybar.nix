@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  osConfig,
   ...
 }:
 {
@@ -86,7 +87,7 @@
         default = "";
       };
     };
-    bluetooth = {
+    bluetooth = lib.mkIf osConfig.EnableBluetooth {
       format-on = "";
       format-off = "󰂲";
       format-disabled = "󰂲";
