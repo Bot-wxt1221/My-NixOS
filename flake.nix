@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     #nixpkgs.url = "path:/home/wxt/nixpkgs/turn-rs";
-    nixpkgs-main.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs-main.url = "github:NixOS/nixpkgs/master";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     neovim.url = "github:nix-community/neovim-nightly-overlay/master";
