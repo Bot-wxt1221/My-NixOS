@@ -75,7 +75,7 @@ in
     ripgrep # recursively searches directories for a regex pattern
     mtr # A network diagnostic tool
     iperf3
-    pkgs-main.project-lemonlime
+    project-lemonlime
     wpsoffice-cn
     glxinfo
     socat # replacement of openbsd-netcat
