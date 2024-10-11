@@ -31,7 +31,7 @@
     (pkgs.microsoft-edge.override {
       commandLineArgs = "--process-per-site --ozone-platform-hint=wayland --enable-wayland-ime --wayland-text-input-version=3";
     })
-    (qq.override.overrideAttrs (previousAttrs: {
+    (qq.overrideAttrs (previousAttrs: {
       postInstall = ''
              rm -rf $out/bin/qq
               makeShellWrapper $out/opt/QQ/qq $out/bin/qq \
