@@ -4,22 +4,6 @@
   pkgs-main,
   ...
 }:
-let
-  sources-qq = import ./sources-qq.nix;
-  srcs-qq = {
-    x86_64-linux = pkgs.fetchurl {
-      url = sources-qq.amd64_url;
-      hash = sources-qq.amd64_hash;
-    };
-    aarch64-linux = pkgs.fetchurl {
-      url = sources-qq.arm64_url;
-      hash = sources-qq.arm64_hash;
-    };
-  };
-  src-nw-qq =
-    srcs-qq.${pkgs.stdenv.hostPlatform.system}
-      or (throw "Unsupported system: ${pkgs.stdenv.hostPlatform.system}");
-in
 {
   imports = [
 
@@ -47,15 +31,22 @@ in
     (pkgs.microsoft-edge.override {
       commandLineArgs = "--process-per-site --ozone-platform-hint=wayland --enable-wayland-ime --wayland-text-input-version=3";
     })
-    #  (
-    #    (pkgs.qq.override { commandLineArgs = "--ozone-platform-hint=wayland --enable-wayland-ime --wayland-text-input-version=3"; })
-    #     .overrideAttrs
-    #     (previousAttrs: {
-    #       src = src-nw-qq;
-    #       version = sources-qq.version;
-    #     })
-    #   )
-    qq
+    (qq.override.overrideAttrs (previousAttrs: {
+      postInstall = ''
+             rm -rf $out/bin/qq
+              makeShellWrapper $out/opt/QQ/qq $out/bin/qq \
+        --prefix XDG_DATA_DIRS : "$GSETTINGS_SCHEMAS_PATH" \
+        --prefix LD_PRELOAD : "${lib.makeLibraryPath [ pkgs.libssh2 ]}/libssh2.so.1" \
+        --prefix LD_LIBRARY_PATH : "${
+          lib.makeLibraryPath [
+            pkgs.libGL
+            pkgs.libuuid
+          ]
+        }" \
+        "''${gappsWrapperArgs[@]}"
+      '';
+    }))
+    #qq
     resources
     obs-studio
     intel-gpu-tools
