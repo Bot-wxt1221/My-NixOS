@@ -14,22 +14,23 @@
 
   boot.initrd.availableKernelModules = [
     "ata_piix"
-    "ohci_pci"
+    "mptspi"
+    "uhci_hcd"
     "ehci_pci"
-    "ahci"
     "sd_mod"
+    "sr_mod"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/d93a7208-ff8a-42c7-9534-cfea52f6b1d1";
+    device = "/dev/disk/by-uuid/bd2248cb-5fec-4d68-8171-08b98d21a26d";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/12CE-A600";
+    device = "/dev/disk/by-uuid/34C0-5AD2";
     fsType = "vfat";
     options = [
       "fmask=0022"
@@ -38,7 +39,7 @@
   };
 
   swapDevices = [
-    { device = "/dev/disk/by-uuid/079e9c90-245b-4418-be4f-f06af168fef1"; }
+    { device = "/dev/disk/by-uuid/e33e2fd4-84d0-43ea-bbd1-f42d738dde7c"; }
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -46,9 +47,7 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp0s3.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp0s8.useDHCP = lib.mkDefault true;
-  # networking.interfaces.Mihomo.useDHCP = lib.mkDefault true;
+  # networking.interfaces.ens33.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   virtualisation.vmware.guest.enable = true;
