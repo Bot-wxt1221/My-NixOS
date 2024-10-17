@@ -17,6 +17,7 @@
     "https://luogu-judge.cachix.org"
     "https://hyprland.cachix.org"
     "https://niri.cachix.org"
+    "https://cache.garnix.io"
   ];
   nix.settings.trusted-users = [
     "root"
@@ -29,5 +30,6 @@
     "luogu-judge.cachix.org-1:vBoiA0n//KfYZ5Xp5HhcujXcdT7dK3+rEK3U4zw66TQ="
     "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+    "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
   ];
 }
