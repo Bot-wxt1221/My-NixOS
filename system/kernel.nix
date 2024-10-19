@@ -8,6 +8,6 @@
   imports = [
 
   ];
-  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_stable;
   hardware.firmware = [ pkgs.linux-firmware ];
 }
