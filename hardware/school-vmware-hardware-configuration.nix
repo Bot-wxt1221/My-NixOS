@@ -17,6 +17,8 @@
     "mptspi"
     "uhci_hcd"
     "ehci_pci"
+    "xhci_pci"
+    "usb_storage"
     "sd_mod"
     "sr_mod"
   ];
@@ -25,12 +27,12 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/bd2248cb-5fec-4d68-8171-08b98d21a26d";
+    device = "/dev/disk/by-uuid/d127b919-45d7-4229-a75c-713a784ba043";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/34C0-5AD2";
+    device = "/dev/disk/by-uuid/4F13-CE9E";
     fsType = "vfat";
     options = [
       "fmask=0022"
@@ -39,7 +41,7 @@
   };
 
   swapDevices = [
-    { device = "/dev/disk/by-uuid/e33e2fd4-84d0-43ea-bbd1-f42d738dde7c"; }
+    { device = "/dev/disk/by-uuid/33746194-1c33-4c0e-b0ed-ba2f3f623ccc"; }
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -50,5 +52,4 @@
   # networking.interfaces.ens33.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  virtualisation.vmware.guest.enable = true;
 }
