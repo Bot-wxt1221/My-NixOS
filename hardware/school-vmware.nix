@@ -17,4 +17,5 @@
       intel-ocl
     ];
   };
+  virtualisation.vmware.guest.enable = true;
 }
