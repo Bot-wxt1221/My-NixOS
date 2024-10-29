@@ -5,6 +5,7 @@
   pkgs-main,
   hyprland,
   niri,
+  pkgs-arm64,
   ...
 }:
 {
@@ -29,4 +30,8 @@
     ];
     packages = with pkgs; [ ];
   };
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  environment.systemPackages = [
+    pkgs-arm64.nodejs
+  ];
 }
