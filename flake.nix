@@ -83,10 +83,6 @@
             system = "x86_64-linux";
             config.allowUnfree = true;
           };
-          pkgs-arm64 = import nixpkgs {
-            system = "aarch64-linux";
-            config.allowUnfree = true;
-          };
         };
         modules = [
           ./school-vmware-configuration.nix
