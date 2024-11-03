@@ -28,4 +28,12 @@
   home.homeDirectory = "/home/wxt";
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
+  programs.git.extraConfig = {
+    commit = {
+      gpgsign = true;
+    };
+    user = {
+      signingKey = "EF9846DDF6C89DBC294F7741F62181757D8BF693";
+    };
+  };
 }
