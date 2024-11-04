@@ -10,7 +10,8 @@
   imports = [
 
   ];
-  home.file."gcc-9" = lib.getExe luogu-gcc.packages.x86_64-linux.gcc-930;
+  home.file."g++-9".source = "${luogu-gcc.packages.x86_64-linux.gcc-930}/bin/g++";
+  home.file."g++-9".executable = true;
   home.packages = with pkgs; [
     cachix
     fastfetch
