@@ -1,13 +1,16 @@
 {
   configs,
   pkgs,
+  lib,
   pkgs-main,
+  luogu-gcc,
   ...
 }:
 {
   imports = [
 
   ];
+  home.file."gcc-9" = lib.getExe luogu-gcc.packages.x86_64-linux.gcc-930;
   home.packages = with pkgs; [
     cachix
     fastfetch
