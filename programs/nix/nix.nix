@@ -19,7 +19,9 @@
     "flakes"
   ];
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowInsecure = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-30.5.1"
+  ];
   nix.registry.nixpkgs.flake = nixpkgs;
   environment.etc."nix/inputs/nixpkgs".source = "${nixpkgs}";
   nix.settings.nix-path = lib.mkForce "nixpkgs=/etc/nix/inputs/nixpkgs";
