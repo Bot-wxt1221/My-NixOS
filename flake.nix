@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small"
     #nixpkgs.url = "path:/home/wxt/nixpkgs/turn-rs";
     nixpkgs-main.url = "github:NixOS/nixpkgs/master";
     home-manager.url = "github:nix-community/home-manager/master";
@@ -40,11 +41,11 @@
       ...
     }@inputs:
     {
-      nixosConfigurations.wxt-g3 = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.wxt-g3 = nixpkgs-small.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
           niri = niri;
-          nixpkgs = nixpkgs;
+          nixpkgs = nixpkgs-small;
           pkgs-main = import nixpkgs-main {
             system = "x86_64-linux";
             config.allowUnfree = true;
