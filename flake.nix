@@ -34,6 +34,7 @@
       nixpkgs-main,
       home-manager,
       neovim,
+      nixpkgs-small,
       nvchad,
       niri,
       luogu-gcc,
