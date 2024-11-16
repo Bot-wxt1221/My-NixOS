@@ -26,6 +26,9 @@
   nixpkgs.overlays = [
     (self: super: rec {
       bazel_7 = pkgs-bazel.bazel_7;
+      fcitx5-mozc = pkgs.fcitx5-mozc.override{
+        bazel_7 = pkgs-bazel.bazel_7;
+      };
     })
   ];
 }
