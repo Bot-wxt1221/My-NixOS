@@ -1,7 +1,7 @@
 {
   description = "Main config";
 
-  inputs = {
+  inputs = rec {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixpkgs-rustdesk.url = "github:Bot-wxt1221/nixpkgs/rustdesk";
