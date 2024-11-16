@@ -342,22 +342,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-bazel": {
-      "locked": {
-        "lastModified": 1731522657,
-        "narHash": "sha256-wauNt55Ijuw9iDyqLvBwIfQr54Reru5Er8jBUnSOs+o=",
-        "owner": "boltzmannrain",
-        "repo": "nixpkgs",
-        "rev": "82c4c76594a56c6251663bbbcc33e889296b2fbe",
-        "type": "github"
-      },
-      "original": {
-        "owner": "boltzmannrain",
-        "ref": "bazel_7.4.1",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-main": {
       "locked": {
         "lastModified": 1731756070,
@@ -469,7 +453,6 @@
         "neovim": "neovim",
         "niri": "niri",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-bazel": "nixpkgs-bazel",
         "nixpkgs-main": "nixpkgs-main",
         "nixpkgs-small": "nixpkgs-small",
         "nvchad": "nvchad",
