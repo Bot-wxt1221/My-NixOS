@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-bazel.url = "github:boltzmannrain/nixpkgs/bazel_7.4.1";
     nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     #nixpkgs.url = "path:/home/wxt/nixpkgs/turn-rs";
     nixpkgs-main.url = "github:NixOS/nixpkgs/master";
@@ -51,6 +52,10 @@
             system = "x86_64-linux";
             config.allowUnfree = true;
           };
+          pkgs-bazel = import nixpkgs-bazel {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
         };
         modules = [
           ./g3-configuration.nix
@@ -82,6 +87,10 @@
           inherit niri;
           nixpkgs = nixpkgs;
           pkgs-main = import nixpkgs-main {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+          pkgs-bazel = import nixpkgs-bazel {
             system = "x86_64-linux";
             config.allowUnfree = true;
           };
