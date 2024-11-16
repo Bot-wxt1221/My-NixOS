@@ -17,7 +17,6 @@
   environment.systemPackages = with pkgs; [
     dconf
     niri.packages.${pkgs.system}.niri-stable
-    gnome-terminal
     gnome-tweaks
     gnome-system-monitor
   ];
