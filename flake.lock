@@ -344,16 +344,32 @@
     },
     "nixpkgs-main": {
       "locked": {
-        "lastModified": 1731756070,
-        "narHash": "sha256-ha0w3QC4Wmy82fwnbSW0RHq3IEG00zdEUG/l0qYOnqs=",
+        "lastModified": 1731758504,
+        "narHash": "sha256-Y7DHI5IKxwT26x1fzXIwNRW8Mkh7vH5hjYHqtyd53n4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8bb2a40c9030ff4a3f48125c6908744d6878a5cc",
+        "rev": "e3ae6ff898fbc83103dd984189ccdb7190d1ff01",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-rustdesk": {
+      "locked": {
+        "lastModified": 1731759082,
+        "narHash": "sha256-DxqHoN/lqpx7IdOQJ1YiwcBrkQlJL8Fn6Xtaoz8A3aY=",
+        "owner": "Bot-wxt1221",
+        "repo": "nixpkgs",
+        "rev": "32163fe293a2743ca91562560d86a4d269cd8a66",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Bot-wxt1221",
+        "ref": "rustdesk",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -454,6 +470,7 @@
         "niri": "niri",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-main": "nixpkgs-main",
+        "nixpkgs-rustdesk": "nixpkgs-rustdesk",
         "nixpkgs-small": "nixpkgs-small",
         "nvchad": "nvchad",
         "starter": "starter"
