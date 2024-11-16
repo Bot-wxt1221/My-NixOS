@@ -23,24 +23,24 @@
     fcitx5.waylandFrontend = true;
   };
   nixpkgs.overlays = [
-    (self: super: {
-      bazel_7 = darwin.apple_sdk_11_0.callPackage ./bazel.nix {
-        inherit (darwin) sigtool;
-        inherit (darwin.apple_sdk_11_0.frameworks)
+    (self: super: rec {
+      bazel_7 = pkgs.darwin.apple_sdk_11_0.callPackage ./bazel.nix {
+        inherit (pkgs.darwin) sigtool;
+        inherit (pkgs.darwin.apple_sdk_11_0.frameworks)
           CoreFoundation
           CoreServices
           Foundation
           IOKit
           ;
-        buildJdk = jdk21_headless;
-        runJdk = jdk21_headless;
+        buildJdk = pkgs.jdk21_headless;
+        runJdk = pkgs.jdk21_headless;
         stdenv =
-          if stdenv.hostPlatform.isDarwin then
-            darwin.apple_sdk_11_0.stdenv
-          else if stdenv.cc.isClang then
-            llvmPackages.stdenv
+          if pkgs.stdenv.hostPlatform.isDarwin then
+            pkgs.darwin.apple_sdk_11_0.stdenv
+          else if pkgs.stdenv.cc.isClang then
+            pkgs.llvmPackages.stdenv
           else
-            stdenv;
+            pkgs.stdenv;
         bazel_self = bazel_7;
       };
     })
