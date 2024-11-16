@@ -32,7 +32,7 @@
       url = niri.url;
       inputs.nixpkgs.follows = "nixpkgs-small";
       inputs.nixpkgs-stable.follows = "nixpkgs-small";
-    }
+    };
     clipboard = {
       url = "github:Bot-wxt1221/clipboard-sync";
       inputs.nixpkgs.follows = "nixpkgs";
