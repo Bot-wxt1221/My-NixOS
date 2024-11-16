@@ -24,7 +24,7 @@
   };
   nixpkgs.overlays = [
     (self: super: {
-      bazel_7 = pkgs.callPackage ./bazel.nix;
+      bazel_7 = pkgs.callPackage ./bazel.nix { };
     })
   ];
 }
