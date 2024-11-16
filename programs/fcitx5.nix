@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  nixpkgs,
   ...
 }:
 {
@@ -21,4 +22,9 @@
     ];
     fcitx5.waylandFrontend = true;
   };
+  nixpkgs.overlays = [
+    (self: super: {
+      bezel_7 = pkgs.callPackage ./bazel.nix;
+    })
+  ];
 }
