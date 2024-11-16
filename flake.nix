@@ -7,12 +7,18 @@
     nixpkgs-rustdesk.url = "github:Bot-wxt1221/nixpkgs/rustdesk";
     #nixpkgs.url = "path:/home/wxt/nixpkgs/turn-rs";
     nixpkgs-main.url = "github:NixOS/nixpkgs/master";
+
+
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager-small.url = home-manager.url;
+    home-manager-small.inputs.nixpkgs.follows = "nixpkgs-small";
+
     neovim.url = "github:nix-community/neovim-nightly-overlay/master";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
     nvchad.url = "github:nix-community/nix4nvchad";
     nvchad.inputs.nixpkgs.follows = "nixpkgs";
+
     starter.url = "github:Bot-wxt1221/Bot-wxt1221-NvChad";
     starter.flake = false;
     nvchad.inputs.nvchad-starter.follows = "starter";
@@ -22,6 +28,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
+    niri-small = {
+      url = niri.url;
+      inputs.nixpkgs.follows = "nixpkgs-small";
+      inputs.nixpkgs-stable.follows = "nixpkgs-small";
+    }
     clipboard = {
       url = "github:Bot-wxt1221/clipboard-sync";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,6 +45,8 @@
       nixpkgs,
       nixpkgs-main,
       home-manager,
+      home-manager-small,
+      niri-small,
       neovim,
       nixpkgs-small,
       nvchad,
@@ -47,7 +60,7 @@
       nixosConfigurations.wxt-g3 = nixpkgs-small.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          niri = niri;
+          niri = niri-small;
           nixpkgs = nixpkgs-small;
           pkgs-main = import nixpkgs-main {
             system = "x86_64-linux";
@@ -60,8 +73,8 @@
         };
         modules = [
           ./g3-configuration.nix
-          niri.nixosModules.niri
-          home-manager.nixosModules.home-manager
+          niri-small.nixosModules.niri
+          home-manager-small.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
@@ -69,7 +82,7 @@
             home-manager.extraSpecialArgs = {
               inherit neovim;
               inherit nvchad;
-              inherit niri;
+              niri = niri-small;
               inherit clipboard;
               inherit luogu-gcc;
               pkgs-main = import nixpkgs-main {
