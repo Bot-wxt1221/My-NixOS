@@ -40,6 +40,7 @@
       niri,
       luogu-gcc,
       clipboard,
+      nixpkgs-bazel,
       ...
     }@inputs:
     {
