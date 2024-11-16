@@ -11,7 +11,7 @@
 
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager-small.url = home-manager.url;
+    home-manager-small.url = "github:nix-community/home-manager/master";
     home-manager-small.inputs.nixpkgs.follows = "nixpkgs-small";
 
     neovim.url = "github:nix-community/neovim-nightly-overlay/master";
@@ -29,7 +29,7 @@
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
     niri-small = {
-      url = niri.url;
+      url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs-small";
       inputs.nixpkgs-stable.follows = "nixpkgs-small";
     };
