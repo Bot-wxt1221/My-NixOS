@@ -199,7 +199,7 @@
         escape = true;
       };
       "temperature" = lib.optionals (!builtins.isNull config.cpuTempDevice) {
-        hwmon-path = cpuTempDevice;
+        hwmon-path = config.cpuTempDevice;
         critical-threshold = 80;
         format-critical = " {temperatureC}°C";
         format = " {temperatureC}°C";
