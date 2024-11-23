@@ -4,8 +4,6 @@
   inputs = rec {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-    #nixpkgs.url = "path:/home/wxt/nixpkgs/turn-rs";
-    nixpkgs-main.url = "github:NixOS/nixpkgs/master";
 
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -41,7 +39,6 @@
     {
       self,
       nixpkgs,
-      nixpkgs-main,
       home-manager,
       home-manager-small,
       niri-small,
@@ -59,10 +56,6 @@
         specialArgs = {
           niri = niri-small;
           nixpkgs = nixpkgs-small;
-          pkgs-main = import nixpkgs-main {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
         };
         modules = [
           ./g3-configuration.nix
@@ -78,10 +71,6 @@
               niri = niri-small;
               inherit clipboard;
               inherit luogu-gcc;
-              pkgs-main = import nixpkgs-main {
-                system = "x86_64-linux";
-                config.allowUnfree = true;
-              };
             };
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
@@ -93,10 +82,6 @@
         specialArgs = {
           inherit niri;
           nixpkgs = nixpkgs;
-          pkgs-main = import nixpkgs-main {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
         };
         modules = [
           ./school-vmware-configuration.nix
@@ -112,10 +97,6 @@
               inherit niri;
               inherit clipboard;
               inherit luogu-gcc;
-              pkgs-main = import nixpkgs-main {
-                system = "x86_64-linux";
-                config.allowUnfree = true;
-              };
             };
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix

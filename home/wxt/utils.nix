@@ -2,7 +2,6 @@
   configs,
   pkgs,
   lib,
-  pkgs-main,
   luogu-gcc,
   ...
 }:

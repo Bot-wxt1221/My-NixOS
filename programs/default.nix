@@ -3,7 +3,6 @@
   lib,
   pkgs,
   nixpkgs,
-  pkgs-main,
   hyprland,
   niri,
   ...

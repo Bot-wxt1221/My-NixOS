@@ -3,7 +3,6 @@
   lib,
   pkgs,
   niri,
-  pkgs-main,
   ...
 }:
 {

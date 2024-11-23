@@ -4,7 +4,6 @@
   neovim,
   nvchad,
   niri,
-  pkgs-main,
   ...
 }:
 
