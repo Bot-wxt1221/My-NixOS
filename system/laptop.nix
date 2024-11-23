@@ -14,7 +14,7 @@
   config = lib.mkIf config.Laptop {
     services.thermald.enable = true;
     powerManagement.powertop.enable = true;
-    environment.systemPackaes = [ pkgs.powertop ];
+    environment.systemPackages = [ pkgs.powertop ];
     services.power-profiles-daemon.enable = true;
   };
 }
