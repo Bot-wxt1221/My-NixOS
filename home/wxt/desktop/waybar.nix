@@ -7,8 +7,8 @@
 }:
 {
   options = {
-    temperatureDevice = lib.mkOption {
-      type = lib.types.str or lib.type.null;
+    cpuTempeDevice = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
       default = null;
     };
   };
@@ -42,7 +42,7 @@
         [
           "tray"
         ]
-        ++ lib.optionals (!builtins.isNull config.temperatureDevice) [
+        ++ lib.optionals (!builtins.isNull config.cpuTempDevice) [
           "temperature"
         ]
         ++ [
@@ -198,8 +198,8 @@
         on-click-right = "swaync-client -d -sw";
         escape = true;
       };
-      "temperature" = lib.optionals (!builtins.isNull config.temperatureDevice) {
-        hwmon-path = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input";
+      "temperature" = lib.optionals (!builtins.isNull config.cpuTempDevice) {
+        hwmon-path = cpuTempDevice;
         critical-threshold = 80;
         format-critical = " {temperatureC}°C";
         format = " {temperatureC}°C";
