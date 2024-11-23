@@ -8,7 +8,6 @@
     #nixpkgs.url = "path:/home/wxt/nixpkgs/turn-rs";
     nixpkgs-main.url = "github:NixOS/nixpkgs/master";
 
-
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager-small.url = "github:nix-community/home-manager/master";

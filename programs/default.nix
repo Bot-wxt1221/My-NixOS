@@ -28,8 +28,6 @@
     ./qt.nix
     ./desktop.nix
     ./fcitx5.nix
-    ./cc.nix
-    ./adb.nix
     ./waydroid.nix
     ./miner.nix
     ./root-utils.nix

@@ -16,7 +16,6 @@
     ./debug-cc.nix
     ./virt.nix
     ./waydroid.nix
-    ./archive.nix
     ./java.nix
     ./nix.nix
     ./utils.nix
@@ -26,7 +25,6 @@
   nixpkgs.config.allowUnfree = true;
   home.username = "wxt";
   home.homeDirectory = "/home/wxt";
-  home.stateVersion = "24.11";
   programs.home-manager.enable = true;
   programs.git.extraConfig = {
     commit = {

@@ -20,10 +20,6 @@
     gnome-tweaks
     gnome-system-monitor
   ];
-  environment.etc."auth-agent" = {
-    enable = true;
-    source = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-  };
   programs.xwayland = {
     enable = true;
     package = pkgs.xwayland-satellite;
@@ -37,7 +33,6 @@
   systemd.user.services.niri-flake-polkit.enable = false;
   programs.dconf.enable = true;
   programs.light.enable = true;
-  services.power-profiles-daemon.enable = true;
   xdg.portal.enable = true;
   xdg.portal.config.common.default = "*";
   programs.gnome-disks.enable = true;

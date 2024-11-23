@@ -17,6 +17,11 @@
     fastfetch
     yazi
     konsole
+    gcc
+    gdb
+    clang
+    cmake
+    gnumake
     fd
     gnome-logs
     kitty
@@ -35,22 +40,7 @@
     (pkgs.microsoft-edge.override {
       commandLineArgs = "--process-per-site --ozone-platform-hint=wayland --enable-wayland-ime --wayland-text-input-version=3";
     })
-    (qq.overrideAttrs (previousAttrs: {
-      postInstall = ''
-             rm -rf $out/bin/qq
-              makeShellWrapper $out/opt/QQ/qq $out/bin/qq \
-        --prefix XDG_DATA_DIRS : "$GSETTINGS_SCHEMAS_PATH" \
-        --prefix LD_PRELOAD : "${lib.makeLibraryPath [ pkgs.libssh2 ]}/libssh2.so.1" \
-        --prefix LD_LIBRARY_PATH : "${
-          lib.makeLibraryPath [
-            pkgs.libGL
-            pkgs.libuuid
-          ]
-        }" \
-        "''${gappsWrapperArgs[@]}"
-      '';
-    }))
-    #qq
+    qq
     resources
     obs-studio
     intel-gpu-tools
