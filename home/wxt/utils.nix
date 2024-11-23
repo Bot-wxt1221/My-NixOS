@@ -19,7 +19,6 @@
     konsole
     gcc
     gdb
-    (lib.lowPrio clang)
     cmake
     gnumake
     fd
