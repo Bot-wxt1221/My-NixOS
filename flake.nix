@@ -4,7 +4,6 @@
   inputs = rec {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-    nixpkgs-rustdesk.url = "github:Bot-wxt1221/nixpkgs/rustdesk";
     #nixpkgs.url = "path:/home/wxt/nixpkgs/turn-rs";
     nixpkgs-main.url = "github:NixOS/nixpkgs/master";
 
@@ -51,7 +50,6 @@
       nvchad,
       niri,
       luogu-gcc,
-      nixpkgs-rustdesk,
       clipboard,
       ...
     }@inputs:
@@ -62,10 +60,6 @@
           niri = niri-small;
           nixpkgs = nixpkgs-small;
           pkgs-main = import nixpkgs-main {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
-          pkgs-rustdesk = import nixpkgs-rustdesk {
             system = "x86_64-linux";
             config.allowUnfree = true;
           };
@@ -100,10 +94,6 @@
           inherit niri;
           nixpkgs = nixpkgs;
           pkgs-main = import nixpkgs-main {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
-          pkgs-rustdesk = import nixpkgs-rustdesk {
             system = "x86_64-linux";
             config.allowUnfree = true;
           };

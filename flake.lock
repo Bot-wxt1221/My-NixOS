@@ -439,22 +439,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-rustdesk": {
-      "locked": {
-        "lastModified": 1731837089,
-        "narHash": "sha256-5yc1pQReEERxX4vLV+Q5ybW8hUO9SwdnVUPdqexYRgw=",
-        "owner": "Bot-wxt1221",
-        "repo": "nixpkgs",
-        "rev": "b932f695ed895e02c8687a2bafaa215332bcae30",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Bot-wxt1221",
-        "ref": "rustdesk",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-small": {
       "locked": {
         "lastModified": 1732267161,
@@ -553,7 +537,6 @@
         "niri-small": "niri-small",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-main": "nixpkgs-main",
-        "nixpkgs-rustdesk": "nixpkgs-rustdesk",
         "nixpkgs-small": "nixpkgs-small",
         "nvchad": "nvchad",
         "starter": "starter"

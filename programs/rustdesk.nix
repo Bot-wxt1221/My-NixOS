@@ -3,7 +3,6 @@
   lib,
   pkgs,
   nixpkgs,
-  pkgs-rustdesk,
   ...
 }:
 {
@@ -27,9 +26,4 @@
     after = [ "display-manager.service" ];
   };
   environment.systemPackages = with pkgs; [ rustdesk-flutter ];
-  nixpkgs.overlays = [
-    (final: prev: {
-      rustdesk-flutter = pkgs-rustdesk.rustdesk-flutter;
-    })
-  ];
 }
