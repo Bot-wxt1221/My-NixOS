@@ -89,7 +89,7 @@
   programs.niri.config = builtins.readFile (
     pkgs.substituteAll {
       src = ./niri.kdl;
-      auth-agent = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      authAgent = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
     }
   );
 }
