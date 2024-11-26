@@ -14,10 +14,10 @@
     neovim.inputs.nixpkgs.follows = "nixpkgs";
     nvchad.url = "github:nix-community/nix4nvchad";
     nvchad.inputs.nixpkgs.follows = "nixpkgs";
-
     starter.url = "github:Bot-wxt1221/Bot-wxt1221-NvChad";
     starter.flake = false;
     nvchad.inputs.nvchad-starter.follows = "starter";
+
     luogu-gcc.url = "github:luogu-dev/judge-env";
     niri = {
       url = "github:sodiboo/niri-flake";
