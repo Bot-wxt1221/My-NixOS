@@ -24,11 +24,7 @@
     dejavu_fonts
     source-code-pro
     source-sans
-    (nerdfonts.override {
-      fonts = [
-        "FiraCode"
-        "JetBrainsMono"
-      ];
-    })
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
   ];
 }
