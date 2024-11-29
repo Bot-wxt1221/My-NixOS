@@ -9,8 +9,8 @@ stdenvNoCC.mkDerivation rec {
 
   src = ./STSong.TTF;
 
-  doUnpack = false;
-  doBuild = false;
+  dontUnpack = true;
+  dontBuild = true;
 
   installPhase = ''
     install -Dm644 ${src} $out/share/fonts/truetype/STSong.ttf
