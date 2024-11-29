@@ -3,7 +3,7 @@
   lib,
 }:
 
-stdenvNoCC.mkDerivation {
+stdenvNoCC.mkDerivation rec {
   pname = "STSong";
   version = "1.0.0";
 
