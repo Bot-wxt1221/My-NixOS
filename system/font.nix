@@ -26,5 +26,6 @@
     source-sans
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
+    (pkgs.callPackage ./STSong.nix { })
   ];
 }
