@@ -3,12 +3,9 @@
 
   inputs = rec {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager-small.url = "github:nix-community/home-manager/master";
-    home-manager-small.inputs.nixpkgs.follows = "nixpkgs-small";
 
     neovim.url = "github:nix-community/neovim-nightly-overlay/master";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
@@ -24,11 +21,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
-    niri-small = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs-small";
-      inputs.nixpkgs-stable.follows = "nixpkgs-small";
-    };
     clipboard = {
       url = "github:Bot-wxt1221/clipboard-sync";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,10 +32,7 @@
       self,
       nixpkgs,
       home-manager,
-      home-manager-small,
-      niri-small,
       neovim,
-      nixpkgs-small,
       nvchad,
       niri,
       luogu-gcc,
@@ -51,16 +40,16 @@
       ...
     }@inputs:
     {
-      nixosConfigurations.wxt-g3 = nixpkgs-small.lib.nixosSystem {
+      nixosConfigurations.wxt-g3 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          niri = niri-small;
-          nixpkgs = nixpkgs-small;
+          niri = niri;
+          nixpkgs = nixpkgs;
         };
         modules = [
           ./g3-configuration.nix
-          niri-small.nixosModules.niri
-          home-manager-small.nixosModules.home-manager
+          niri.nixosModules.niri
+          home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
@@ -68,7 +57,7 @@
             home-manager.extraSpecialArgs = {
               inherit neovim;
               inherit nvchad;
-              niri = niri-small;
+              niri = niri;
               inherit clipboard;
               inherit luogu-gcc;
             };
