@@ -1,0 +1,29 @@
+name: build
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: '0 2 * * *'
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v3
+    - uses: cachix/install-nix-action@v20
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+    - run: nix flake update
+    - run: |
+        git config --local user.email "3264117476@qq.com"
+        git config --local user.name "github-actions[bot]"
+        git add .
+        git commit -m "Update flakes"
+        git remote add remote https://github.com/Bot-wxt1221/clipboard-sync.git
+        git pull remote master --rebase
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
