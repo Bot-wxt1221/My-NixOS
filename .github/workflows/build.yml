@@ -1,5 +1,8 @@
 name: build
 on:
+  push:
+    branches:
+      - master
   schedule:
     - cron: '0 16 * * *'
 jobs:
@@ -12,12 +15,21 @@ jobs:
     - uses: cachix/install-nix-action@v20
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
-    - run: nix flake update
+    - run: |
+        wget -O iso/config.yaml ${{secrets.VPN_URL}}
+        nix flake update
+        nix build .#iso-image
+    - name: Upload images artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Boot.iso
+        path: result/iso/*
     - run: |
         git config --local user.email "3264117476@qq.com"
         git config --local user.name "github-actions[bot]"
+        rm -rf iso/config.yaml
         git add .
-        git commit -m "Update flakes"
+        git commit -m "Update flakes" || true
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:

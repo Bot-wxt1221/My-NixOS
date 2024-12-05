@@ -66,6 +66,16 @@
           }
         ];
       };
+      packages.x86_64-linux.iso-image = self.nixosConfigurations.iso-image.config.system.build.isoImage;
+      nixosConfigurations.iso-image = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit nixpkgs;
+        };
+        modules = [
+          ./iso
+        ];
+      };
       nixosConfigurations.wxt-school-vmware = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {

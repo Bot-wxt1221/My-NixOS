@@ -11,6 +11,7 @@
   imports = [
     ./gpg.nix
     ./neovim.nix
+    ./direnv.nix
     ./desktop
     ./debug-cc.nix
     ./virt.nix
