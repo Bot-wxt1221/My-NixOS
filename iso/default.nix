@@ -35,6 +35,8 @@ with rec {
   );
   mihomoBash = pkgs.writeText "a.sh" ''
     ${pkgs.coreutils}/bin/cp ${./geoip.metadb} /root/geoip.metadb
+    mkdir /root/config
+    cp -r /etc/config/* /root/config/
     ${lib.getExe pkgs.mihomo} -f ${config} -d /root
   '';
 };
