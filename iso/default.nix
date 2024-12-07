@@ -47,6 +47,10 @@ with rec {
     ../programs/root-utils.nix
   ];
   config = {
+    documentation.man.enable = false;
+    hardware.enableRedistributableFirmware = true;
+    isoImage.makeUsbBootable = true;
+    isoImage.makeEfiBootable = true;
     environment.systemPackages = with pkgs; [
       mihomo
     ];
