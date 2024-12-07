@@ -16,10 +16,10 @@ jobs:
         nix flake update
         nix build .#iso-image
     - name: Upload images artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: Boot.iso
-          path: result/iso/*
+      uses: actions/upload-artifact@v4
+      with:
+        name: Boot.iso
+        path: result/iso/*
     - run: |
         git config --local user.email "3264117476@qq.com"
         git config --local user.name "github-actions[bot]"
