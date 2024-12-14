@@ -33,12 +33,8 @@ with rec {
     ''
     + (builtins.readFile ./config.yaml)
   );
-  geoip = pkgs.fetchurl {
-    url = "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.metadb";
-    hash = "sha256-XbzNUSvOBiBjpY2SPd3/X1SXRfghpzamIHZw2vlUaLg=";
-  };
   mihomoBash = pkgs.writeText "a.sh" ''
-    ${pkgs.coreutils}/bin/cp ${geoip} /root/geoip.metadb
+    ${pkgs.coreutils}/bin/cp ${./geoip.metadb} /root/geoip.metadb
     mkdir /root/config
     cp -r /etc/config/* /root/config/
     ${lib.getExe pkgs.mihomo} -f ${config} -d /root
