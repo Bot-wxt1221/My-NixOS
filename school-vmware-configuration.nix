@@ -26,6 +26,7 @@
       "video"
       "networkmanager"
     ];
+    hashedPassword = "$y$j9T$XjbKBaxc32Pc.Mj4HQ.tu/$mxn7xvy5I/1/bv/eF64cwMSakLuFM1YgjU44r249I7/";
     packages = with pkgs; [ ];
   };
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
