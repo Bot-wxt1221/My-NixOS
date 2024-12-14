@@ -14,6 +14,7 @@
     ./console.nix
     ./font.nix
     ./printing.nix
+    ./etc.nix
     ./bluetooth.nix
   ];
 }
