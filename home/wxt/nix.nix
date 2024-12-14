@@ -12,7 +12,7 @@
   '';
   home.file."update.sh".executable = true;
   home.file."update2.sh".text = ''
-    sudo nixos-rebuild switch --log-format internal-json -v
+    sudo nixos-rebuild switch --flake . --log-format internal-json -v
   '';
   home.file."update2.sh".executable = true;
 
