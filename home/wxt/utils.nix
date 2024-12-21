@@ -42,7 +42,7 @@
       installPhase = old.installPhase + 
         ''
           wrapProgram $out/bin/qq \
-            --prefix NIXOS_OZONE_WL : '0'
+            --unset NIXOS_OZONE_WL
         '';
       }))
     resources
