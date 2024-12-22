@@ -38,13 +38,14 @@
     (pkgs.microsoft-edge.override {
       commandLineArgs = "--process-per-site --ozone-platform-hint=wayland --enable-wayland-ime --wayland-text-input-version=3";
     })
-    (qq.overrideAttrs(old:{
-      installPhase = old.installPhase + 
-        ''
+    (qq.overrideAttrs (old: {
+      installPhase =
+        old.installPhase
+        + ''
           wrapProgram $out/bin/qq \
             --unset NIXOS_OZONE_WL
         '';
-      }))
+    }))
     resources
     obs-studio
     intel-gpu-tools
