@@ -59,7 +59,6 @@
     obs-studio
     unzip
     p7zip
-    spotify
     keepassxc
     motrix
     ripgrep # recursively searches directories for a regex pattern
