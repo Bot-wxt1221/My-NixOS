@@ -33,6 +33,7 @@ with rec {
     ''
     + (builtins.readFile ./config.yaml)
   );
+
   mihomoBash = pkgs.writeText "a.sh" ''
     ${pkgs.coreutils}/bin/cp ${./geoip.metadb} /root/geoip.metadb
     mkdir /root/config
@@ -54,6 +55,8 @@ with rec {
     environment.systemPackages = with pkgs; [
       mihomo
     ];
+    networking.networkmanager.enable = true;
+    networking.useNetworkd = false;
     environment.etc."config" = {
       enable = true;
       source = ./..;
