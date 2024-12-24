@@ -57,6 +57,7 @@ with rec {
     ];
     networking.networkmanager.enable = true;
     networking.useNetworkd = false;
+    networking.wireless.enable = false;
     environment.etc."config" = {
       enable = true;
       source = ./..;
