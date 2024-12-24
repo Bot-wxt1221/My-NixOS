@@ -16,7 +16,7 @@ jobs:
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - run: |
-        wget -O iso/config.yaml ${{secrets.VPN_URL}}
+        curl ${{secrets.VPN_URL}} > iso/config.yaml
         git add .
         nix flake update
         nix build .#iso-image
