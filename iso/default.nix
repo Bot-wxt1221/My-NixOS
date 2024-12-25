@@ -62,6 +62,14 @@ with rec {
       enable = true;
       source = ./..;
     };
+    environment.etc."resolv.conf" = {
+      enable = true;
+      text = ''
+        nameserver 223.5.5.5
+        nameserver 8.8.8.8
+        nameserver 1.1.1.1
+      '';
+    };
     systemd.services.mihomo = {
       enable = true;
 
