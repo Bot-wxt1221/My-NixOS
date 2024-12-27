@@ -27,6 +27,7 @@
   Enablepipewire = true;
   EnableWaydroid = true;
   EnableVirt = true;
+
   EnableMineGPU = false;
   EnableVirtualBox = false;
   EnableBluetooth = true;
