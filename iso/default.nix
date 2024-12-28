@@ -35,7 +35,9 @@ with rec {
   );
 
   mihomoBash = pkgs.writeText "a.sh" ''
-    ${pkgs.coreutils}/bin/cp ${./geoip.metadb} /root/geoip.metadb
+    ln -s ${pkgs.v2ray-geoip}/share/v2ray/geoip.dat $out/lib/clash-verge/resources/geoip.dat
+    ln -s ${pkgs.v2ray-domain-list-community}/share/v2ray/geosite.dat $out/lib/clash-verge/resources/geosite.dat
+    ln -s ${pkgs.dbip-country-lite.mmdb} $out/lib/clash-verge/resources/Country.mmdb
     mkdir /root/config
     cp -r /etc/config/* /root/config/
     ${lib.getExe pkgs.mihomo} -f ${config} -d /root
