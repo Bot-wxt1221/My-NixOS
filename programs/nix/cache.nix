@@ -8,7 +8,7 @@
   imports = [
 
   ];
-  system.stateVersion = "unstable"; # Did you read the comment?
+  system.stateVersion = lib.trivial.release;
   nix.settings.substituters = [
     "https://mirrors.ustc.edu.cn/nix-channels/store"
     "https://nix-community.cachix.org"
