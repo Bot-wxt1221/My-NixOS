@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  niri,
   pkgs,
   ...
 }:
