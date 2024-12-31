@@ -12,6 +12,7 @@
     ./network
     ./security
     ./programs
+    ./system/etc.nix
     ./system
   ];
   time.timeZone = "Asia/Shanghai";

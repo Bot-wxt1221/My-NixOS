@@ -12,6 +12,7 @@
     ./gpg.nix
     ./neovim.nix
     ./desktop
+    ./persist.nix
     ./debug-cc.nix
     ./virt.nix
     ./waydroid.nix

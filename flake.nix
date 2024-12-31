@@ -6,6 +6,13 @@
 
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    impermanence = {
+      url = "github:nix-community/impermanence";
+    };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     neovim.url = "github:nix-community/neovim-nightly-overlay/master";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
@@ -33,9 +40,11 @@
       nixpkgs,
       home-manager,
       neovim,
+      disko,
       nvchad,
       niri,
       luogu-gcc,
+      impermanence,
       clipboard,
       ...
     }@inputs:
@@ -49,6 +58,8 @@
         modules = [
           ./g3-configuration.nix
           niri.nixosModules.niri
+          impermanence.nixosModules.impermanence
+          disko.nixosModules.disko
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -57,6 +68,7 @@
             home-manager.extraSpecialArgs = {
               inherit neovim;
               inherit nvchad;
+              inherit impermanence;
               niri = niri;
               inherit clipboard;
               inherit luogu-gcc;
