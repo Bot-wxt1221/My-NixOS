@@ -40,6 +40,11 @@
       ".zplug"
 
       ".config/bilibili"
+
+      ".config/pulse"
+      ".config/keepassxc"
+      ".config/direnv"
+      ".local/share/direnv"
     ];
     files = [ ".wakatime.cfg" ];
     allowOther = true;
