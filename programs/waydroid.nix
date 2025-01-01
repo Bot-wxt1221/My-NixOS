@@ -17,5 +17,11 @@
   config = lib.mkIf config.EnableWaydroid {
     virtualisation.waydroid.enable = true;
     environment.systemPackages = with pkgs; [ waydroid ];
+    environment.persistence."/persist" = {
+      hideMounts = true;
+      directories = [
+        "/var/lib/waydroid"
+      ];
+    };
   };
 }

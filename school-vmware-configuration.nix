@@ -11,6 +11,7 @@
     ./hardware/school-vmware.nix
     ./network
     ./security
+    ./persist.nix
     ./programs
     ./system
   ];

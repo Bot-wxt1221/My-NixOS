@@ -19,6 +19,7 @@
     ./hardware/g3.nix
     ./security
     ./programs
+    ./persist.nix
     ./system
   ];
   time.timeZone = "Asia/Shanghai";

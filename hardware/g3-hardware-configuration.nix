@@ -34,7 +34,7 @@
     ];
   };
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/102fc740-21cb-493c-8e86-7ec4499690b0";
+    device = config.fileSystems."/".device;
     fsType = "btrfs";
     options = [
       "subvol=nix"
@@ -42,7 +42,7 @@
     ];
   };
   fileSystems."/persist" = {
-    device = "/dev/disk/by-uuid/102fc740-21cb-493c-8e86-7ec4499690b0";
+    device = config.fileSystems."/".device;
     fsType = "btrfs";
     options = [
       "subvol=persist"

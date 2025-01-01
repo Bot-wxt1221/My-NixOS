@@ -96,7 +96,7 @@
         };
         modules = [
           ./school-vmware-configuration.nix
-	  impermanence.nixosModules.impermanence
+          impermanence.nixosModules.impermanence
           niri.nixosModules.niri
           home-manager.nixosModules.home-manager
           {
