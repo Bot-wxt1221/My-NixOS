@@ -21,5 +21,10 @@
       };
     }))
   ];
+  environment.persistence."/persist" = {
+    directories = [
+      "/var/lib/cups"
+    ];
+  };
   services.printing.enable = true;
 }

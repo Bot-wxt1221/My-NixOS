@@ -23,4 +23,9 @@
     history.size = 100000;
     history.path = "${config.xdg.dataHome}/zsh/history";
   };
+  home.persistence."/persist/home/wxt" = {
+    directories = [
+      ".local/share/zsh"
+    ];
+  };
 }

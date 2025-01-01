@@ -12,7 +12,6 @@
   environment.persistence."/persist" = {
     hideMounts = true;
     directories = [
-      "/etc/nixos"
       "/var/log"
       "/var/lib/nixos"
       "/var/lib/NetworkManager"

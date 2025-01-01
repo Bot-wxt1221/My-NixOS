@@ -19,4 +19,10 @@
     extraPackages = with pkgs; [ clang-tools ];
   };
   home.packages = with pkgs; [ clang-tools ];
+  home.persistence."/persist/home/wxt" = {
+    directories = [
+      ".local/share/nvim"
+      ".local/state/nvim"
+    ];
+  };
 }

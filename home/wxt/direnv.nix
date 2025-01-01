@@ -17,4 +17,10 @@
       zsh.enable = true;
     };
   };
+  home.persistence."/persist/home/wxt" = {
+    directories = [
+      ".config/direnv"
+      ".local/share/direnv"
+    ];
+  };
 }

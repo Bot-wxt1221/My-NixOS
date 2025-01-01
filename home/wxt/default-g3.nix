@@ -10,7 +10,6 @@
 {
   imports = [
     ./gpg.nix
-    ./neovim.nix
     ./desktop
     ./persist.nix
     ./debug-cc.nix

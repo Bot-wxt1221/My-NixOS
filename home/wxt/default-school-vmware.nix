@@ -10,7 +10,6 @@
 {
   imports = [
     ./gpg.nix
-    ./neovim.nix
     ./direnv.nix
     ./desktop
     ./programs

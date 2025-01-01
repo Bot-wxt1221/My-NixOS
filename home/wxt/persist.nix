@@ -20,33 +20,7 @@
       "Videos"
       ".gnupg"
       ".ssh"
-      ".local/share/zsh"
-      ".wakatime"
-
-      ".local/share/io.github.clash-verge-rev.clash-verge-rev"
-      ".local/share/clash-verge"
-
-      ".local/share/fcitx5"
-      ".config/QQ"
-      ".config/microsoft-edge"
-
-      ".local/share/nvim"
-      ".local/share/keyrings"
-      ".local/state/nvim"
-
-      ".local/share/fractal"
-      ".cache/fractal"
-
-      ".zplug"
-
-      ".config/bilibili"
-
-      ".config/pulse"
-      ".config/keepassxc"
-      ".config/direnv"
-      ".local/share/direnv"
     ];
-    files = [ ".wakatime.cfg" ];
     allowOther = true;
   };
 }
