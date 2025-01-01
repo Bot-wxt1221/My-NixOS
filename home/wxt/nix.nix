@@ -2,7 +2,7 @@
 {
 
   home.file."update.sh".text = ''
-    cd ~/config
+    cd ~/Working/config
     git pull
     git add .
     sudo echo hello

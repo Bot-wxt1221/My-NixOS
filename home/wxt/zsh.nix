@@ -19,7 +19,6 @@
     };
     shellAliases = {
       l = "ls -l";
-      rm = "${pkgs.trash-cli}/bin/trash-put";
     };
     history.size = 100000;
     history.path = "${config.xdg.dataHome}/zsh/history";

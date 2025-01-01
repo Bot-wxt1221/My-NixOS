@@ -33,7 +33,7 @@
   EnableBluetooth = true;
   EnableMineCPU = false;
   EnableCuda = true;
-  EnableKubo = true;
+  EnableKubo = false;
   EnableDocker = true;
   users.users.wxt = {
     isNormalUser = true;

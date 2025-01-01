@@ -13,6 +13,7 @@
     ./neovim.nix
     ./direnv.nix
     ./desktop
+    ./programs
     ./debug-cc.nix
     ./virt.nix
     ./waydroid.nix

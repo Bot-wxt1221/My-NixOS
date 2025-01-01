@@ -15,6 +15,7 @@
     ./persist.nix
     ./debug-cc.nix
     ./virt.nix
+    ./programs
     ./waydroid.nix
     ./direnv.nix
     ./java.nix
@@ -34,7 +35,7 @@
       gpgsign = true;
     };
     user = {
-      signingKey = "7D01C38E6B886424C0A51B348281D5EE2D1825A4";
+      signingKey = "394F3D16BB4C7ED9652A97F7CD52BEC2EFE360C8";
     };
   };
 }

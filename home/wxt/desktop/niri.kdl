@@ -8,10 +8,10 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 
 spawn-at-startup "waydroid session start"
-spawn-at-startup "clash-verge"
+spawn-at-startup "bash" "@startClashVerge@"
 spawn-at-startup "vmhgfs-fuse .host:/ /mnt/ -o allow_other"
 spawn-at-startup "waybar"
-spawn-at-startup "xwayland-satellite" ":1"
+spawn-at-startup "bash" "@startXwayland@"
 spawn-at-startup "@authAgent@"
 spawn-at-startup "swaync"
 spawn-at-startup "fcitx5" "-d" "--replace"
@@ -19,7 +19,7 @@ spawn-at-startup "hyprpaper"
 spawn-at-startup "clipboard-sync" "--hide-timestamp"
 
 environment {
-    DISPLAY ":1"
+    DISPLAY ":0"
 }
 
 input {
