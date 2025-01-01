@@ -16,11 +16,11 @@
       bash.enable = true;
       zsh.enable = true;
     };
-  };
-  home.persistence."/persist/home/wxt" = {
-    directories = [
-      ".config/direnv"
-      ".local/share/direnv"
-    ];
+    home.persistence."/persist/home/wxt" = {
+      directories = [
+        ".config/direnv"
+        ".local/share/direnv"
+      ];
+    };
   };
 }
