@@ -96,6 +96,7 @@
         };
         modules = [
           ./school-vmware-configuration.nix
+	  impermanence.nixosModules.impermanence
           niri.nixosModules.niri
           home-manager.nixosModules.home-manager
           {
@@ -105,6 +106,7 @@
             home-manager.extraSpecialArgs = {
               inherit neovim;
               inherit nvchad;
+              inherit impermanence;
               inherit niri;
               inherit clipboard;
               inherit luogu-gcc;

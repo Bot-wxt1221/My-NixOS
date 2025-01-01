@@ -15,6 +15,7 @@
     ./desktop
     ./programs
     ./debug-cc.nix
+    ./persist.nix
     ./virt.nix
     ./waydroid.nix
     ./java.nix
