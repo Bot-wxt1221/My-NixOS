@@ -35,7 +35,7 @@
       gpgsign = true;
     };
     user = {
-      signingKey = "394F3D16BB4C7ED9652A97F7CD52BEC2EFE360C8";
+      signingKey = "E834B5093C621EFE92D7CC1AF41E2366C0EDC8BC";
     };
   };
 }

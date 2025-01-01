@@ -13,7 +13,7 @@
   '';
   home.file."update.sh".executable = true;
   home.file."update2.sh".text = ''
-    sudo nixos-rebuild switch --flake . --log-format internal-json -v --option narinfo-cache-negative-ttl 0
+    sudo nixos-rebuild switch --flake . --log-format internal-json -v --option narinfo-cache-negative-ttl 1200
   '';
   home.file."update2.sh".executable = true;
 

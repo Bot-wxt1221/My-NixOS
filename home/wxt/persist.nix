@@ -21,7 +21,6 @@
       ".gnupg"
       ".ssh"
       ".local/share/zsh"
-      ".wakatime.cfg"
       ".wakatime"
 
       ".local/share/io.github.clash-verge-rev.clash-verge-rev"
@@ -42,6 +41,7 @@
 
       ".config/bilibili"
     ];
+    files = [ ".wakatime.cfg" ];
     allowOther = true;
   };
 }
