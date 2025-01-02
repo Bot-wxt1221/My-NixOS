@@ -18,6 +18,7 @@
     "https://hyprland.cachix.org"
     "https://niri.cachix.org"
     "https://cache.garnix.io"
+    "https://cache.nixos.org"
     "https://nixpkgs-update-cache.nix-community.org"
   ];
   nix.settings.trusted-users = [
