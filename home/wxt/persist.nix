@@ -14,7 +14,10 @@
     directories = [
       "Downloads"
       "Music"
-      "Working"
+      {
+        directory = "Working";
+        method = "symlink";
+      }
       "Pictures"
       "Documents"
       "Videos"

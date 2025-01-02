@@ -39,7 +39,7 @@
   boot.initrd.systemd.services.rollback = {
     description = "Reset BTRFS root subvolume to empty snapshot";
     # initrd target: root filesystem device is available but not yet mounted. So ensure that this happens in that window.
-    wantedBy = [ "initrd.target" ];    
+    wantedBy = [ "initrd.target" ];
     # ensure this happens before mounting root
     before = [ "sysroot.mount" ];
     # Don't establish any dependencies not defined here
