@@ -9,7 +9,7 @@
 
   ];
   fileSystems."/persist".neededForBoot = true;
-  fileSystems."/persist/".label = "persist";
+  fileSystems."/persist".label = "persist";
   environment.persistence."/persist" = {
     hideMounts = true;
     directories = [
