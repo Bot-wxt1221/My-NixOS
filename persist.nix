@@ -9,7 +9,6 @@
 
   ];
   fileSystems."/persist".neededForBoot = true;
-  fileSystems."/persist".label = "persist";
   environment.persistence."/persist" = {
     hideMounts = true;
     directories = [
@@ -41,9 +40,6 @@
     description = "Reset BTRFS root subvolume to empty snapshot";
     # initrd target: root filesystem device is available but not yet mounted. So ensure that this happens in that window.
     wantedBy = [ "initrd.target" ];    
-    # ensure the btrfs device is available
-    requires = [  ];
-    after = [  ];
     # ensure this happens before mounting root
     before = [ "sysroot.mount" ];
     # Don't establish any dependencies not defined here
@@ -51,6 +47,7 @@
     # run once and wait for completion before running subsequent systemd units
     serviceConfig.Type = "oneshot";
     script = ''
+      while [ ! -f ${config.fileSystems."/".device} ]; do sleep 1; done
       mkdir /btrfs_tmp
       mount ${config.fileSystems."/".device} /btrfs_tmp
       if [[ -e /btrfs_tmp/root ]]; then
