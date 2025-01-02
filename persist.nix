@@ -47,7 +47,7 @@
     # run once and wait for completion before running subsequent systemd units
     serviceConfig.Type = "oneshot";
     script = ''
-      while [ ! -f ${config.fileSystems."/".device} ]; do sleep 1; done
+      while [ ! -e ${config.fileSystems."/".device} ]; do sleep 1; done
       mkdir /btrfs_tmp
       mount ${config.fileSystems."/".device} /btrfs_tmp
       if [[ -e /btrfs_tmp/root ]]; then
