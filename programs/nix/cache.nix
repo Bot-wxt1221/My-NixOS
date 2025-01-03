@@ -9,8 +9,9 @@
 
   ];
   system.stateVersion = lib.trivial.release;
-  nix.settings.substituters = [
+  nix.settings.substituters = lib.mkForce [
     "https://mirrors.ustc.edu.cn/nix-channels/store"
+    "https://cache.nixos.org"
     "https://nix-community.cachix.org"
     "https://wxt1221.cachix.org"
     "https://cuda-maintainers.cachix.org"
@@ -18,7 +19,6 @@
     "https://hyprland.cachix.org"
     "https://niri.cachix.org"
     "https://cache.garnix.io"
-    "https://cache.nixos.org"
     "https://nixpkgs-update-cache.nix-community.org"
   ];
   nix.settings.trusted-users = [
