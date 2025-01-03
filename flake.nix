@@ -9,10 +9,6 @@
     impermanence = {
       url = "github:nix-community/impermanence";
     };
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     neovim.url = "github:nix-community/neovim-nightly-overlay/master";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
