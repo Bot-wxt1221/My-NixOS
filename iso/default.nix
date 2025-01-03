@@ -38,8 +38,6 @@ with rec {
     ln -s ${pkgs.v2ray-geoip}/share/v2ray/geoip.dat /root/geoip.dat
     ln -s ${pkgs.v2ray-domain-list-community}/share/v2ray/geosite.dat /root/geosite.dat
     ln -s ${pkgs.dbip-country-lite.mmdb} /root/Country.mmdb
-    mkdir /root/config
-    cp -r /etc/config/* /root/config/
     ${lib.getExe pkgs.mihomo} -f ${config} -d /root
   '';
 };
@@ -63,6 +61,14 @@ with rec {
     environment.etc."config" = {
       enable = true;
       source = ./..;
+    };
+    environment.etc."perpare.sh" = {
+      enable = true;
+      text = ''
+        cd /mnt
+        git clone https://github.com/Bot-wxt1221/My-NixOS
+      '';
+      mode = "7777";
     };
     environment.etc."resolv.conf" = {
       enable = true;

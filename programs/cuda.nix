@@ -11,7 +11,6 @@
       type = lib.types.bool;
       default = false;
     };
-
   };
   config = lib.mkIf config.EnableCuda {
     environment.systemPackages = with pkgs; [

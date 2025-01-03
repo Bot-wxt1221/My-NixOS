@@ -25,6 +25,7 @@
     ./virt
     ./flatpak.nix
     ./qt.nix
+    ./cuda.nix
     ./desktop.nix
     ./fcitx5.nix
     ./waydroid.nix
