@@ -27,12 +27,10 @@
     configPackages = [
       xdg-desktop-portal-gtk
       xdg-desktop-portal
-      xdg-desktop-portal-wlr
     ];
     extraPortals = [
       xdg-desktop-portal-gtk
       xdg-desktop-portal
-      xdg-desktop-portal-wlr
     ];
     xdgOpenUsePortal = true;
   };
