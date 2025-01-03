@@ -19,7 +19,6 @@
     "https://hyprland.cachix.org"
     "https://niri.cachix.org"
     "https://cache.garnix.io"
-    "https://nixpkgs-update-cache.nix-community.org"
   ];
   nix.settings.trusted-users = [
     "root"
@@ -33,6 +32,5 @@
     "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
     "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-    "nixpkgs-update-cache.nix-community.org-1:U8d6wiQecHUPJFSqHN9GSSmNkmdiFW7GW7WNAnHW0SM="
   ];
 }
