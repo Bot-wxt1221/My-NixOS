@@ -9,17 +9,7 @@
 
   ];
   services.printing.drivers = [
-    (pkgs.hplipWithPlugin.overrideAttrs (old: {
-      env = {
-        NIX_CFLAGS_COMPILE = toString [
-          "-Wno-error=implicit-int"
-          "-Wno-error=implicit-function-declaration"
-          "-Wno-error=return-mismatch"
-          "-Wno-error=int-conversion"
-          "-Wno-error=incompatible-pointer-types"
-        ];
-      };
-    }))
+    pkgs.hplipWithPlugin
   ];
   environment.persistence."/persist" = {
     directories = [
