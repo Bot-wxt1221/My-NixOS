@@ -11,6 +11,7 @@
     ./g3-hardware-configuration.nix
     ../system/laptop.nix
     ../system/libinput.nix
+    ./persist-config.nix
   ];
   boot.initrd.kernelModules = [
     "i915"

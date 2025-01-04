@@ -7,7 +7,10 @@
 }:
 
 {
-  imports = [ ./school-vmware-hardware-configuration.nix ];
+  imports = [
+    ./school-vmware-hardware-configuration.nix
+    ./persist-config.nix
+  ];
   environment.systemPackages = with pkgs; [
     xorg.xf86videovmware
   ];

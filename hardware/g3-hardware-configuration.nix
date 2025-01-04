@@ -28,35 +28,6 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/102fc740-21cb-493c-8e86-7ec4499690b0";
     fsType = "btrfs";
-    options = [
-      "subvol=root"
-      "compress=zstd"
-    ];
-  };
-  fileSystems."/nix" = {
-    device = config.fileSystems."/".device;
-    fsType = "btrfs";
-    options = [
-      "subvol=nix"
-      "compress=zstd"
-    ];
-  };
-  fileSystems."/persist" = {
-    device = config.fileSystems."/".device;
-    fsType = "btrfs";
-    options = [
-      "subvol=persist"
-      "compress=zstd"
-    ];
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/C519-C5AE";
-    fsType = "vfat";
-    options = [
-      "fmask=0022"
-      "dmask=0022"
-    ];
   };
 
   swapDevices = [
