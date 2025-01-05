@@ -28,6 +28,9 @@
 
       ".config/pulse"
       ".config/keepassxc"
+
+      ".cache/dconf"
+      ".config/dconf"
     ];
     files = [ ".wakatime.cfg" ];
   };
