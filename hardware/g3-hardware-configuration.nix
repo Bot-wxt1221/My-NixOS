@@ -30,6 +30,15 @@
     fsType = "btrfs";
   };
 
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/C519-C5AE";
+    fsType = "vfat";
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
+  };
+
   swapDevices = [
     { device = "/dev/disk/by-uuid/056efdb0-e963-44d7-82ae-3c8a58cab197"; }
   ];
