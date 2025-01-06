@@ -17,7 +17,7 @@
     services.displayManager.sessionPackages = [ niri.packages.${pkgs.system}.niri-stable ];
     environment.systemPackages = with pkgs; [
       dconf
-      niri.packages.${pkgs.system}.niri-stable
+      niri.packages.${pkgs.system}.niri-unstable
       gnome-tweaks
       gnome-system-monitor
     ];

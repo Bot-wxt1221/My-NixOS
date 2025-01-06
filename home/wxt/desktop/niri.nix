@@ -26,10 +26,12 @@
     enable = true;
     configPackages = [
       xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
       xdg-desktop-portal
     ];
     extraPortals = [
       xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
       xdg-desktop-portal
     ];
     xdgOpenUsePortal = true;
