@@ -51,5 +51,4 @@
       intel-media-driver
     ];
   };
-
 }

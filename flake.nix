@@ -84,7 +84,8 @@
           ./iso
         ];
       };
-      packages.x86_64-linux.iso-image-gpu = self.nixosConfigurations.iso-image.config.system.build.isoImage;
+      packages.x86_64-linux.iso-image-gpu =
+        self.nixosConfigurations.iso-image.config.system.build.isoImage;
       nixosConfigurations.iso-image-gpu = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
