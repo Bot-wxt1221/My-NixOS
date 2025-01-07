@@ -84,6 +84,17 @@
           ./iso
         ];
       };
+      packages.x86_64-linux.iso-image-gpu = self.nixosConfigurations.iso-image.config.system.build.isoImage;
+      nixosConfigurations.iso-image-gpu = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit nixpkgs;
+        };
+        modules = [
+          ./iso
+          ./iso/gpu.nix
+        ];
+      };
       nixosConfigurations.wxt-school-vmware = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {

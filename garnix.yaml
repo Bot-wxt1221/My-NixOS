@@ -2,6 +2,8 @@ builds:
   exclude: 
   - 'packages.x86_64-linux.iso-image'
   - 'nixosConfigurations.iso-image'
+  - 'packages.x86_64-linux.iso-image-gpu'
+  - 'nixosConfigurations.iso-image-gpu'
   include:
   - '*.x86_64-linux.*'
   - defaultPackage.x86_64-linux
