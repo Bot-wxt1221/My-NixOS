@@ -36,7 +36,6 @@
       nixpkgs,
       home-manager,
       neovim,
-      disko,
       nvchad,
       niri,
       luogu-gcc,
@@ -55,7 +54,6 @@
           ./g3-configuration.nix
           niri.nixosModules.niri
           impermanence.nixosModules.impermanence
-          disko.nixosModules.disko
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
