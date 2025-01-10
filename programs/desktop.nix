@@ -18,7 +18,7 @@
     environment.systemPackages = with pkgs; [
       dconf
       (niri.packages.${pkgs.system}.niri-unstable.overrideAttrs (old: {
-        doCheck = false;
+        doCheck = true;
       }))
       gnome-tweaks
       gnome-system-monitor
