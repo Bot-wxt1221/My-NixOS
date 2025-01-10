@@ -14,7 +14,6 @@
 
 {
   imports = [
-    # Include the results of the hardware scan.
     ./network
     ./hardware/g3.nix
     ./security
