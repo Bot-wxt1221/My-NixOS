@@ -31,6 +31,8 @@
 
       ".cache/dconf"
       ".config/dconf"
+      ".local/share/flatpak"
+      ".var"
     ];
     files = [ ".wakatime.cfg" ];
   };

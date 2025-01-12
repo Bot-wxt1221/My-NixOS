@@ -6,6 +6,11 @@
   niri,
   ...
 }:
+let
+  niri-use = niri.packages.${pkgs.system}.niri-unstable.overrideAttrs (old: {
+    doCheck = false;
+  });
+in
 {
   imports = [
 
@@ -14,12 +19,10 @@
     services.xserver.enable = true;
     services.xserver.displayManager.gdm.enable = true;
     services.xserver.displayManager.gdm.wayland = true;
-    services.displayManager.sessionPackages = [ niri.packages.${pkgs.system}.niri-unstable ];
+    services.displayManager.sessionPackages = [ niri-use ];
     environment.systemPackages = with pkgs; [
       dconf
-      (niri.packages.${pkgs.system}.niri-unstable.overrideAttrs (old: {
-        doCheck = false;
-      }))
+      niri-use
       gnome-tweaks
       gnome-system-monitor
     ];
