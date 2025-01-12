@@ -14,7 +14,7 @@
     services.xserver.enable = true;
     services.xserver.displayManager.gdm.enable = true;
     services.xserver.displayManager.gdm.wayland = true;
-    services.displayManager.sessionPackages = [ niri.packages.${pkgs.system}.niri-stable ];
+    services.displayManager.sessionPackages = [ niri.packages.${pkgs.system}.niri-unstable ];
     environment.systemPackages = with pkgs; [
       dconf
       (niri.packages.${pkgs.system}.niri-unstable.overrideAttrs (old: {
