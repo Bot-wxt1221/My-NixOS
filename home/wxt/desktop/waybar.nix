@@ -11,6 +11,10 @@
       type = lib.types.nullOr lib.types.str;
       default = null;
     };
+    haveBacklight = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+    };
   };
   imports = [ ./waybar-style.nix ];
   config = {
@@ -28,7 +32,7 @@
     programs.waybar.settings.mainBar = {
       position = "bottom";
       layer = "top";
-      height = 5;
+      height = 27;
       margin-top = 0;
       margin-bottom = 0;
       margin-left = 0;
@@ -50,7 +54,11 @@
           "memory"
           "disk"
           "pulseaudio"
+        ]
+        ++ lib.optionals config.haveBacklight [
           "backlight"
+        ]
+        ++ [
           "network"
         ]
         ++ lib.optionals osConfig.EnableBluetooth [
@@ -62,7 +70,7 @@
         ++ [
           "custom/notification"
         ];
-      backlight = {
+      backlight = lib.optionals config.haveBacklight {
         device = "intel_backlight";
         format = "{icon} {percent}%";
         format-icons = [
