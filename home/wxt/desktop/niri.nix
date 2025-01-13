@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  niri,
   clipboard,
   ...
 }:
@@ -85,7 +84,7 @@
         "video/webm" = mp;
       };
     };
-  programs.niri.config = builtins.readFile (
+   xdg.configFile."niri/config.kdl".text = builtins.readFile (
     pkgs.substituteAll {
       src = ./niri.kdl;
       authAgent = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";

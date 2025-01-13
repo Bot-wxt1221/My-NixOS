@@ -32,7 +32,6 @@
       home-manager,
       neovim,
       nvchad,
-      niri,
       luogu-gcc,
       impermanence,
       clipboard,
@@ -42,12 +41,10 @@
       nixosConfigurations.wxt-g3 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          niri = niri;
           nixpkgs = nixpkgs;
         };
         modules = [
           ./g3-configuration.nix
-          niri.nixosModules.niri
           impermanence.nixosModules.impermanence
           home-manager.nixosModules.home-manager
           {
@@ -58,7 +55,6 @@
               inherit neovim;
               inherit nvchad;
               inherit impermanence;
-              niri = niri;
               inherit clipboard;
               inherit luogu-gcc;
             };
@@ -92,13 +88,11 @@
       nixosConfigurations.wxt-school-vmware = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit niri;
           nixpkgs = nixpkgs;
         };
         modules = [
           ./school-vmware-configuration.nix
           impermanence.nixosModules.impermanence
-          niri.nixosModules.niri
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -108,7 +102,6 @@
               inherit neovim;
               inherit nvchad;
               inherit impermanence;
-              inherit niri;
               inherit clipboard;
               inherit luogu-gcc;
             };
