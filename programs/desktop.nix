@@ -7,9 +7,7 @@
   ...
 }:
 let
-  niri-use = niri.packages.${pkgs.system}.niri-unstable.overrideAttrs (old: {
-    doCheck = false;
-  });
+  niri-use = pkgs.niri;
 in
 {
   imports = [

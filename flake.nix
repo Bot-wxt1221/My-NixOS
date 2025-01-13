@@ -19,11 +19,6 @@
     nvchad.inputs.nvchad-starter.follows = "starter";
 
     luogu-gcc.url = "github:luogu-dev/judge-env";
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
-    };
     clipboard = {
       url = "github:Bot-wxt1221/clipboard-sync";
       inputs.nixpkgs.follows = "nixpkgs";
