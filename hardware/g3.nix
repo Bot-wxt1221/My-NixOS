@@ -55,8 +55,12 @@
     powerManagement.enable = true;
     powerManagement.finegrained = false;
     open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    nvidiaSettings = false;
+    package = config.boot.kernelPackages.nvidiaPackages.beta.overrideAttrs (old: {
+      patches = (old.patches or [ ]) ++ [
+        ../fix-for-linux-6.13.patch
+      ];
+    });
     prime = {
       offload = {
         enable = true;
@@ -80,5 +84,9 @@
     "nvidia"
   ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    (acpi_call.overrideAttrs (old: {
+      preBuild = (old.preBuild or "") + "export buildRoot=.";
+    }))
+  ];
 }

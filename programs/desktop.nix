@@ -2,10 +2,11 @@
   config,
   lib,
   pkgs,
+  niri,
   ...
 }:
 let
-  niri-use = pkgs.niri;
+  niri-use = niri.packages.${pkgs.system}.niri-unstable;
 in
 {
   imports = [

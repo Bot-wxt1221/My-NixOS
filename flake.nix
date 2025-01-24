@@ -23,6 +23,11 @@
       url = "github:Bot-wxt1221/clipboard-sync";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    niri = {
+      url = "github:sodiboo/niri-flake/52d45f71b06afe12efc34bf2d9bfe32bfa16cecd";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -31,6 +36,7 @@
       nixpkgs,
       home-manager,
       neovim,
+      niri,
       nvchad,
       luogu-gcc,
       impermanence,
@@ -42,6 +48,7 @@
         system = "x86_64-linux";
         specialArgs = {
           nixpkgs = nixpkgs;
+          inherit niri;
         };
         modules = [
           ./g3-configuration.nix
@@ -89,6 +96,7 @@
         system = "x86_64-linux";
         specialArgs = {
           nixpkgs = nixpkgs;
+          inherit niri;
         };
         modules = [
           ./school-vmware-configuration.nix
