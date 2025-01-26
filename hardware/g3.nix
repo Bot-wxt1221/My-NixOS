@@ -55,7 +55,7 @@
     powerManagement.enable = true;
     powerManagement.finegrained = true;
     open = true;
-    nvidiaSettings = false;
+    nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
     prime = {
       offload = {
