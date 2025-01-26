@@ -24,11 +24,13 @@
   xdg.portal = with pkgs; {
     enable = true;
     configPackages = [
+      xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk
       xdg-desktop-portal-gnome
       xdg-desktop-portal
     ];
     extraPortals = [
+      xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk
       xdg-desktop-portal-gnome
       xdg-desktop-portal

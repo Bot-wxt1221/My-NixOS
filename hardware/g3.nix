@@ -53,14 +53,10 @@
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
-    powerManagement.finegrained = false;
-    open = false;
+    powerManagement.finegrained = true;
+    open = true;
     nvidiaSettings = false;
-    package = config.boot.kernelPackages.nvidiaPackages.beta.overrideAttrs (old: {
-      patches = (old.patches or [ ]) ++ [
-        ../fix-for-linux-6.13.patch
-      ];
-    });
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
     prime = {
       offload = {
         enable = true;
