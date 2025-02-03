@@ -71,6 +71,33 @@
           }
         ];
       };
+      nixosConfigurations.wxt-bazhong = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          nixpkgs = nixpkgs;
+          inherit niri;
+        };
+        modules = [
+          ./bazhong-configuration.nix
+          impermanence.nixosModules.impermanence
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.wxt = import ./home/wxt/default-bazhong.nix;
+            home-manager.extraSpecialArgs = {
+              inherit neovim;
+              inherit nvchad;
+              inherit impermanence;
+              inherit clipboard;
+              inherit luogu-gcc;
+            };
+            # Optionally, use home-manager.extraSpecialArgs to pass
+            # arguments to home.nix
+          }
+        ];
+      };
+
       packages.x86_64-linux.iso-image = self.nixosConfigurations.iso-image.config.system.build.isoImage;
       nixosConfigurations.iso-image = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

@@ -57,7 +57,6 @@
     mtr # A network diagnostic tool
     iperf3
     project-lemonlime
-    wpsoffice-cn
     glxinfo
     socat # replacement of openbsd-netcat
     nmap # A utility for network discovery and security auditing

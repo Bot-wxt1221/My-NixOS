@@ -2,6 +2,7 @@ builds:
   exclude: 
   - 'packages.x86_64-linux.iso-image'
   - 'nixosConfigurations.iso-image'
+  - 'nixosConfigurations.wxt-g3'
   - 'packages.x86_64-linux.iso-image-gpu'
   - 'nixosConfigurations.iso-image-gpu'
   include:
