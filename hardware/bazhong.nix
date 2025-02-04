@@ -21,9 +21,6 @@
     "acpi_call"
     "snd_aloop"
   ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    rtl8821ce
-  ];
   environment.systemPackages = [
     pkgs.linuxKernel.packages.linux_zen.rtl8821ce
   ];
@@ -53,6 +50,7 @@
   ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
+    rtl8821ce
     (acpi_call.overrideAttrs (old: {
       preBuild = (old.preBuild or "") + "export buildRoot=.";
     }))
