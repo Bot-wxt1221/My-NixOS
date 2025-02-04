@@ -35,6 +35,10 @@
     ];
     xdgOpenUsePortal = true;
   };
+  home.activation."mimeapps-remove" = {
+    before = [ "checkLinkTargets" ];
+    data = "rm -f ${config.home.homeDirectory}/.config/mimeapps.list";
+  };
   xdg.mimeApps =
     let
       br = "microsoft-edge.desktop";
