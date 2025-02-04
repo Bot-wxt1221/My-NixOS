@@ -35,8 +35,6 @@
     ];
     xdgOpenUsePortal = true;
   };
-  home.file.".config/mimeapps.list".force = true;
-
   xdg.mimeApps =
     let
       br = "microsoft-edge.desktop";
