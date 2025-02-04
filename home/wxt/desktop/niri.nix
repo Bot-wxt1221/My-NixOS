@@ -35,7 +35,7 @@
     ];
     xdgOpenUsePortal = true;
   };
-  home.activation."mimeapps-remove" = {
+  home.activation.mimeapps-remove = {
     before = [ "checkLinkTargets" ];
     data = "rm -f ${config.home.homeDirectory}/.config/mimeapps.list";
   };
