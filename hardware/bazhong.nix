@@ -46,6 +46,7 @@
     "i915.enable_guc=3"
     "i915.enable_fbc=1"
     "i915.enable_execlists=0"
+    "modprobe.blacklist=rtw88_8821ce" 
   ];
   services.xserver.videoDrivers = [
     "modesettings"
