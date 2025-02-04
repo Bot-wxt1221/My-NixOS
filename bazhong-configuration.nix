@@ -32,7 +32,7 @@
   EnableMineCPU = false;
   EnableCuda = false;
   EnableKubo = false;
-  EnableDocker = false;
+  EnableDocker = true;
   Laptop = false;
   users.users.wxt = {
     isNormalUser = true;
