@@ -43,18 +43,18 @@
     "i915.enable_guc=3"
     "i915.enable_fbc=1"
     "i915.enable_execlists=0"
-    "modprobe.blacklist=rtw88_8821ce" 
+    "modprobe.blacklist=rtw88_8821ce"
   ];
   services.xserver.videoDrivers = [
     "modesettings"
   ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
-    rtl8821ce.overrideAttrs (old: {
-      env.NIX_CFLAGS_COMPILE = toString[
+    (rtl8821ce.overrideAttrs (old: {
+      env.NIX_CFLAGS_COMPILE = toString [
         "-Wno-error=incompatible-pointer-types"
       ];
-      })
+    }))
     (acpi_call.overrideAttrs (old: {
       preBuild = (old.preBuild or "") + "export buildRoot=.";
     }))
