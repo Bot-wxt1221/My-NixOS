@@ -242,7 +242,7 @@ binds {
     Mod+Q { spawn "konsole"; }
     Mod+E { spawn "nautilus" "-w"; }
     Mod+R { spawn "fuzzel"; }
-    Mod+L { spawn "swaylock --screenshots --clock --font \"WenQuanYi Micro Hei\""}
+    Mod+L { spawn "swaylock" "--screenshots" "--clock" "--font" "\"WenQuanYi Micro Hei\""; }
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
     // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
