@@ -8,7 +8,6 @@
 {
   imports = [
     ./hyprpaper.nix
-    ./swaylock.nix
     ./niri.nix
     ./waybar.nix
     ./swaync.nix

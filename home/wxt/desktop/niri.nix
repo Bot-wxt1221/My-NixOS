@@ -27,6 +27,7 @@ in
   home.packages = with pkgs; [
     fuzzel
     xsel
+    pkgs.swaylock-effects
     clipboard.packages.${pkgs.system}.default
   ];
   home.pointerCursor = {
@@ -126,6 +127,10 @@ in
       startClashVerge = pkgs.writeText "a.sh" ''
         sleep 5
         clash-verge
+      '';
+      swaylockscript = pkgs.writeText "a.sh" ''
+        ${lib.getExe pkgs.swaylock-effects} --screenshots --clock --font "WenQuanYi Micro Hei"
+        niri msg action power-off-monitors
       '';
     }
   );
