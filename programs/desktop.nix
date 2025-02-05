@@ -13,6 +13,7 @@ in
 
   ];
   config = {
+    security.pam.services.swaylock = {};
     services.xserver.enable = true;
     services.xserver.displayManager.gdm.enable = true;
     services.xserver.displayManager.gdm.wayland = true;
