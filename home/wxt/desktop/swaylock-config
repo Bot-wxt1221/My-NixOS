@@ -5,6 +5,7 @@ image=~/.config/hypr/wallpaper.png
 
 clock
 datestr=%d.%m.%Y
+font="JetBrainsMono Nerd Font";
 
 grace=2
 fade-in=0.2

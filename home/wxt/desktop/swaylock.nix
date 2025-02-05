@@ -8,7 +8,7 @@
   imports = [
 
   ];
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     swaylock-effects
   ];
   home.file = {
