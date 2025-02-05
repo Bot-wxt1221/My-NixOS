@@ -12,7 +12,7 @@
     };
   };
   config = lib.mkIf config.Enablepipewire {
-    environment.systemPackages = with pkgs; [ alsa-firmware ];
+    environment.systemPackages = with pkgs; [ alsa-firmware sof-firmware ];
     environment.etc."wxt/panel/bin".source = "${pkgs.pwvucontrol}/bin/pwvucontrol";
     services.pulseaudio.enable = false;
     security.rtkit.enable = true;

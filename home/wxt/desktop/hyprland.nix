@@ -23,15 +23,19 @@
   xdg.portal = with pkgs; {
     enable = true;
     configPackages = [
+      (xdg-desktop-portal-wlr.overrideAttrs (old: {
+        patches = (old.patches or [ ]) ++ [ ../../../325.patch ];
+      }))
       xdg-desktop-portal-gtk
       xdg-desktop-portal-hyprland
       xdg-desktop-portal
-      xdg-desktop-portal-wlr
     ];
     extraPortals = [
+      (xdg-desktop-portal-wlr.overrideAttrs (old: {
+        patches = (old.patches or [ ]) ++ [ ../../../325.patch ];
+      }))
       xdg-desktop-portal-gtk
       xdg-desktop-portal
-      xdg-desktop-portal-wlr
     ];
     xdgOpenUsePortal = true;
   };
