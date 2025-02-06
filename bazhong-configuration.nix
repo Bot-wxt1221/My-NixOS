@@ -16,6 +16,7 @@
     ./hardware/bazhong.nix
     ./security
     ./programs
+    ./programs/ollama
     ./persist.nix
     ./system
   ];
