@@ -59,8 +59,6 @@ in
           "gtk"
         ];
         "org.freedesktop.impl.portal.RemoteDesktop" = [ "wlr" ];
-        "org.freedesktop.impl.portal.Screenshot" = ["wlr"];
-        "org.freedesktop.impl.portal.ScreenCast" = ["wlr"];
       };
     };
     xdgOpenUsePortal = true;
@@ -129,8 +127,8 @@ in
         clash-verge
       '';
       swaylockscript = pkgs.writeText "a.sh" ''
-        ${lib.getExe pkgs.swaylock-effects} --screenshots --clock --font "WenQuanYi Micro Hei"
         niri msg action power-off-monitors
+        ${lib.getExe pkgs.swaylock-effects} --screenshots --clock --font "WenQuanYi Micro Hei"
       '';
     }
   );
