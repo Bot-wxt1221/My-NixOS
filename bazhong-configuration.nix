@@ -45,7 +45,7 @@
       "video"
       "networkmanager"
     ];
-    hashedPassword = "$y$j9T$Xtqkbq9JFHwbncm/owCr20$KBHWdrrABADdLYWarvlUcTyBUOtLqL7qZcrlJTtjtx.";
+    hashedPassword = "$y$j9T$ym72DO4CZPcnMiHfpMEHI/$62LY4Ff3mOGi0MmD20y8jvcugO49xm7Xv9x3/txxWmC";
   };
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   #  specialisation = {
