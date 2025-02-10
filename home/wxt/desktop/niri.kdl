@@ -259,7 +259,7 @@ binds {
     Mod+Left  { focus-column-left; }
     Mod+Right { focus-column-right; }
     Mod+Page_Up    { focus-window-up; }
-    Mod+Page_Down { focus-windows-down; }
+    Mod+Page_Down { focus-window-down; }
 
     Mod+Shift+Left  { move-column-left; }
     Mod+Shift+Right { move-column-right; }
