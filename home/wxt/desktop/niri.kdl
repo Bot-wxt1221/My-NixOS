@@ -325,6 +325,7 @@ binds {
     Mod+S { maximize-column; }
     Mod+Shift+S { fullscreen-window; }
     Mod+C { center-column; }
+    Mod+W { toggle-column-tabbed-display; }
 
     // Finer width adjustments.
     // This command can also:
