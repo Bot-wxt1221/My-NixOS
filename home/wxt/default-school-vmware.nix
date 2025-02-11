@@ -4,6 +4,7 @@
   neovim,
   niri,
   nvchad,
+  osConfig,
   ...
 }:
 
@@ -26,7 +27,7 @@
   nixpkgs.config.allowUnfree = true;
   home.username = "wxt";
   home.homeDirectory = "/home/wxt";
-  home.stateVersion = "25.05";
+  home.stateVersion = osConfig.system.stateVersion;
   programs.home-manager.enable = true;
   programs.git.extraConfig = {
     commit = {
