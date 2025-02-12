@@ -357,6 +357,10 @@ binds {
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
     Mod+Shift+E { quit; }
+    // Consume one window from the right to the bottom of the focused column.
+    Mod+Shift+Insert  { consume-window-into-column; }
+    // Expel the bottom window from the focused column to the right.
+    Mod+Shift+Delete { expel-window-from-column; }
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
