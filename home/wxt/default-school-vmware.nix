@@ -3,7 +3,6 @@
   pkgs,
   neovim,
   niri,
-  nvchad,
   osConfig,
   ...
 }:

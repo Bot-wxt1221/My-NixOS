@@ -8,7 +8,7 @@
   imports = [
     ./konsole.nix
     ./qq.nix
-    ./neovim.nix
+    ../neovim
     ./fcitx5.nix
     ./more.nix
   ];

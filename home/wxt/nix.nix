@@ -1,6 +1,15 @@
-{ config, pkgs, ... }:
 {
-
+  config,
+  pkgs,
+  nix-colors,
+  lib,
+  ...
+}:
+{
+  imports = [
+    nix-colors.homeManagerModules.colorScheme
+  ];
+  colorScheme = lib.mkDefault nix-colors.colorSchemes.primer-dark-dimmed;
   home.file."update.sh".text = ''
     cd ~/Working/config
     git pull
