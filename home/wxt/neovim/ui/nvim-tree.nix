@@ -78,7 +78,7 @@ in
 
     keymaps = [
       {
-        key = "<A-l>";
+        key = "<leader>e";
         action = "<cmd>NvimTreeToggle<CR>";
         options = {
           desc = "Nvimtree Toggle window";

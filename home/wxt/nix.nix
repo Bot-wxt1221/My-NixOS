@@ -9,7 +9,7 @@
   imports = [
     nix-colors.homeManagerModules.colorScheme
   ];
-  colorScheme = lib.mkDefault nix-colors.colorSchemes.solarized-light;
+  colorScheme = lib.mkDefault nix-colors.colorSchemes.google-light;
   home.file."update.sh".text = ''
     cd ~/Working/config
     git pull
