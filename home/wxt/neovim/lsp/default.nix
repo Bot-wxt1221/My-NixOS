@@ -4,9 +4,6 @@
   pkgs,
   ...
 }:
-let
-  colors = import ../colors.nix { inherit config lib; };
-in
 {
   imports = [
     ./c.nix
@@ -22,105 +19,6 @@ in
       gd = "definition";
       gi = "implementation";
       gt = "type_definition";
-    };
-  };
-
-  programs.nixvim.highlight = {
-    LspReferenceText = {
-      fg = colors.darker_black;
-      bg = colors.white;
-    };
-    LspReferenceRead = {
-      fg = colors.darker_black;
-      bg = colors.white;
-    };
-    LspReferenceWrite = {
-      fg = colors.darker_black;
-      bg = colors.white;
-    };
-    DiagnosticHint = {
-      fg = colors.purple;
-    };
-    DiagnosticError = {
-      fg = colors.red;
-    };
-    DiagnosticWarn = {
-      fg = colors.yellow;
-    };
-    DiagnosticInformation = {
-      fg = colors.green;
-    };
-    LspSignatureActiveParameter = {
-      fg = colors.black;
-      bg = colors.green;
-    };
-    RenamerTitle = {
-      fg = colors.black;
-      bg = colors.red;
-    };
-    RenamerBorder = {
-      fg = colors.red;
-    };
-    SagaBorder = {
-      bg = colors.darker_black;
-    };
-    SagaNormal = {
-      bg = colors.darker_black;
-    };
-
-    "@lsp.type.class" = {
-      link = "Structure";
-    };
-    "@lsp.type.decorator" = {
-      link = "Function";
-    };
-    "@lsp.type.enum" = {
-      link = "Type";
-    };
-    "@lsp.type.enumMember" = {
-      link = "Constant";
-    };
-    "@lsp.type.function" = {
-      link = "@function";
-    };
-    "@lsp.type.interface" = {
-      link = "Structure";
-    };
-    "@lsp.type.macro" = {
-      link = "@macro";
-    };
-    "@lsp.type.method" = {
-      link = "@function.method";
-    };
-    "@lsp.type.namespace" = {
-      link = "@module";
-    };
-    "@lsp.type.parameter" = {
-      link = "@variable.parameter";
-    };
-    "@lsp.type.property" = {
-      link = "@property";
-    };
-    "@lsp.type.struct" = {
-      link = "Structure";
-    };
-    "@lsp.type.type" = {
-      link = "@type";
-    };
-    "@lsp.type.typeParamater" = {
-      link = "TypeDef";
-    };
-    "@lsp.type.variable" = {
-      link = "@variable";
-    };
-    "@event" = {
-      fg = colors.base08;
-    };
-    "@modifier" = {
-      fg = colors.base08;
-    };
-    "@regexp" = {
-      fg = colors.base0F;
     };
   };
 

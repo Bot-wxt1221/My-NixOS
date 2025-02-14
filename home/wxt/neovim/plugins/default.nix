@@ -10,6 +10,8 @@
     ./visual-multi.nix
     ./which-key.nix
     ./competitest.nix
+    ./nvim-tree.nix
+    ./telescope.nix
   ];
 
   # proper <C-S-...> selections from insert and normal modes

@@ -34,7 +34,6 @@
     wayvnc
     realvnc-vnc-viewer
     bilibili
-    wl-clipboard
     (pkgs.microsoft-edge.override {
       commandLineArgs = "--process-per-site --ozone-platform-hint=wayland --enable-wayland-ime --wayland-text-input-version=3";
     })

@@ -36,7 +36,7 @@
   programs.nixvim = {
     enable = true;
     package = neovim.packages.${pkgs.system}.default;
-lobals = {
+    globals = {
       mapleader = " ";
       maplocalleader = " ";
     };
