@@ -40,5 +40,9 @@
       mapleader = " ";
       maplocalleader = " ";
     };
+    extraConfigLua = ''
+      vim.cmd("nnoremap d \"_d")
+      vim.cmd("xnoremap d \"_d")
+    '';
   };
 }
