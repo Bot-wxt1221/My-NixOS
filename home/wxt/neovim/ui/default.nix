@@ -100,6 +100,22 @@
       };
     }
     {
+      mode = [ "n" "i" ];
+      key = "<S-Up>";
+      action = "<cmd>:m-5<CR>";
+      options = {
+        desc = "Move up";
+      };
+    }
+    {
+      mode = [ "n" "i" ];
+      key = "<S-Down>";
+      action = "<cmd>:m+5<CR>";
+      options = {
+        desc = "Move down";
+      };
+    }
+    {
       mode = [ "n" ];
       key = "<leader>rn";
       action = "<cmd>set rnu!<CR>";
