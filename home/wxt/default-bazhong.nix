@@ -28,4 +28,5 @@
   home.homeDirectory = "/home/wxt";
   home.stateVersion = "25.05";
   programs.home-manager.enable = true;
+  programs.git.signing.format = "gpg";
 }
