@@ -26,15 +26,19 @@
   #  ];
   #};
   imports = [
-    ./ui
     ./lsp
     ./dap
     ./plugins
     ./treesitter.nix
+    ./ui
     nixVim.homeManagerModules.nixvim
   ];
   programs.nixvim = {
     enable = true;
     package = neovim.packages.${pkgs.system}.default;
+lobals = {
+      mapleader = " ";
+      maplocalleader = " ";
+    };
   };
 }
