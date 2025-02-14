@@ -35,37 +35,6 @@
 
   programs.nixvim.extraConfigLua = # lua
     ''
-    vim.diagnostic.config {
-      virtual_text = { prefix = "" },
-      signs = { text = { [x.ERROR] = "󰅙", [x.WARN] = "", [x.INFO] = "󰋼", [x.HINT] = "󰌵" } },
-      underline = true,
-      float = { border = "single" },
-    }
-
-    -- Default border style
-    local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-    function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-      opts = opts or {}
-      opts.border = "rounded"
-      return orig_util_open_floating_preview(contents, syntax, opts, ...)
-    end
-      lspSymbol("Error", "󰅙")
-      lspSymbol("Info", "󰋼")
-      lspSymbol("Hint", "󰌵")
-      lspSymbol("Warn", "")
-
-      vim.diagnostic.config {
-        virtual_text = {
-          prefix = "",
-        },
-        signs = true,
-        underline = true,
-
-        float = {
-          border = "single",
-        },
-      }
-
       --  LspInfo window borders
       local win = require "lspconfig.ui.windows"
       local _default_opts = win.default_opts
