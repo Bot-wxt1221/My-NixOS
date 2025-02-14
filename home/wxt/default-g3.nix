@@ -36,5 +36,5 @@
       signingKey = "E834B5093C621EFE92D7CC1AF41E2366C0EDC8BC";
     };
   };
-  programs.git.signing.format = "gpg";
+  programs.git.signing.format = "opengpg";
 }
