@@ -90,6 +90,10 @@
       transparent_mode = false;
     };
   };
+  programs.nixvim.extraConfigVim = ''
+    nnoremap <S-Up> <PageUp>
+    nnoremap <S-Down> <PageDown>
+  '';
   programs.nixvim.keymaps = [
     {
       mode = [ "n" ];
@@ -97,22 +101,6 @@
       action = "<cmd>set nu!<CR>";
       options = {
         desc = "Toggle Line number";
-      };
-    }
-    {
-      mode = [ "n" "i" ];
-      key = "<S-Up>";
-      action = "<cmd>:m-5<CR>";
-      options = {
-        desc = "Move up";
-      };
-    }
-    {
-      mode = [ "n" "i" ];
-      key = "<S-Down>";
-      action = "<cmd>:m+5<CR>";
-      options = {
-        desc = "Move down";
       };
     }
     {

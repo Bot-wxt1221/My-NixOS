@@ -37,6 +37,7 @@
     (pkgs.microsoft-edge.override {
       commandLineArgs = "--process-per-site --ozone-platform-hint=wayland --enable-wayland-ime --wayland-text-input-version=3";
     })
+    wl-clipboard
     resources
     obs-studio
     intel-gpu-tools
