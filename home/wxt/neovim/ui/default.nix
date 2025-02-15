@@ -121,7 +121,7 @@
     }
     {
       mode = [ "n" ];
-      key = "<Tab>";
+      key = "<S-Tab>";
       action = "<cmd>:bprevious<CR>";
       options = {
         desc = "Previous Buffer";
