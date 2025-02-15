@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   programs.nixvim.plugins.dap-ui = {
     enable = true;
@@ -50,6 +55,18 @@
       dapLogPoint = {
         text = "◆";
         texthl = "DapLogPoint";
+      };
+    };
+    configurations = {
+      adapters = {
+        executables = {
+          # lldb = {
+          # 	command = "${pkgs.lldb_18}/bin/lldb-vscode";
+          # };
+          gdb = {
+            command = "${pkgs.vscode-extensions.ms-vscode.cpptools}/share/vscode/extensions/ms-vscode.cpptools/debugAdapters/bin/OpenDebugAD7";
+          };
+        };
       };
     };
   };
