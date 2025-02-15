@@ -105,6 +105,30 @@
     }
     {
       mode = [ "n" ];
+      key = "<leader>x";
+      action = "<cmd>:bdelete<CR>";
+      options = {
+        desc = "Delete Buffer";
+      };
+    }
+    {
+      mode = [ "n" ];
+      key = "<Tab>";
+      action = "<cmd>:bnext<CR>";
+      options = {
+        desc = "Next Buffer";
+      };
+    }
+    {
+      mode = [ "n" ];
+      key = "<Tab>";
+      action = "<cmd>:bprevious<CR>";
+      options = {
+        desc = "Previous Buffer";
+      };
+    }
+    {
+      mode = [ "n" ];
       key = "<leader>rn";
       action = "<cmd>set rnu!<CR>";
       options = {
