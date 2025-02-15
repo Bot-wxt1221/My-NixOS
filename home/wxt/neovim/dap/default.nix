@@ -64,7 +64,15 @@
         # 	command = "${pkgs.lldb_18}/bin/lldb-vscode";
         # };
         "cppdbg" = {
-          command = "${pkgs.vscode-extensions.ms-vscode.cpptools}/share/vscode/extensions/ms-vscode.cpptools/debugAdapters/bin/OpenDebugAD7";
+          command = "${
+            (pkgs.vscode-extensions.ms-vscode.cpptools.overrideAttrs (old: {
+              postPatch =
+                old.postPatch
+                + ''
+                  cp debugAdapters/bin/cppdbg.ad7Engine.json debugAdapters/bin/nvim-dap.ad7Engine.json
+                '';
+            }))
+          }/share/vscode/extensions/ms-vscode.cpptools/debugAdapters/bin/OpenDebugAD7";
         };
       };
     };
