@@ -23,7 +23,6 @@
     ./zsh.nix
     ./git.nix
   ];
-  nixpkgs.config.allowUnfree = true;
   home.username = "wxt";
   home.homeDirectory = "/home/wxt";
   home.stateVersion = osConfig.system.stateVersion;
