@@ -13,7 +13,6 @@ spawn-at-startup "vmhgfs-fuse .host:/ /mnt/ -o allow_other"
 spawn-at-startup "waybar"
 spawn-at-startup "wayvnc" "-g" "0.0.0.0"
 spawn-at-startup "bash" "@startXwayland@"
-spawn-at-startup "@authAgent@"
 spawn-at-startup "swaync"
 spawn-at-startup "fcitx5" "-d" "--replace"
 spawn-at-startup "hyprpaper"
@@ -344,7 +343,7 @@ binds {
     Mod+Shift+Equal { set-window-height "+9%"; }
 
     Mod+V       { toggle-window-floating; }
-    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+    Mod+Ctrl+V { switch-focus-between-floating-and-tiling; }
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
     Mod+Ctrl+Shift+R { switch-preset-column-width; }

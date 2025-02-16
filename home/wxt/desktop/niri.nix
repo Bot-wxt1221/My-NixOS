@@ -117,7 +117,6 @@ in
   xdg.configFile."niri/config.kdl".text = builtins.readFile (
     pkgs.substituteAll {
       src = ./niri.kdl;
-      authAgent = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
       startXwayland = pkgs.writeText "a.sh" ''
         sleep 3
         xwayland-satellite :0
