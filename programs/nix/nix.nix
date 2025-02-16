@@ -17,6 +17,11 @@
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
+    "auto-allocate-uids"
+    "ca-derivations"
+    "cgroups"
+    "dynamic-derivations"
+    "git-hashing"
   ];
   nixpkgs.config.allowUnfree = true;
   system.rebuild.enableNg = true;
