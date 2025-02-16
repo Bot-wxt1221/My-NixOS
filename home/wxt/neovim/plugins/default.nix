@@ -10,6 +10,7 @@
     ./visual-multi.nix
     ./which-key.nix
     ./competitest.nix
+    ./editorconfig.nix
     ./nvim-tree.nix
     ./telescope.nix
   ];
