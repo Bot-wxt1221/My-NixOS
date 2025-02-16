@@ -34,6 +34,10 @@
       ".local/share/flatpak"
       ".var"
     ];
-    files = [ ".wakatime.cfg" ];
+    files = [
+      ".wakatime.cfg"
+      ".config/keepassxc/keepassxc.ini"
+      ""
+    ];
   };
 }
