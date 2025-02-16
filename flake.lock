@@ -447,7 +447,9 @@
     "niri": {
       "inputs": {
         "niri-stable": "niri-stable",
-        "niri-unstable": "niri-unstable",
+        "niri-unstable": [
+          "niri-source"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -468,7 +470,23 @@
       "original": {
         "owner": "sodiboo",
         "repo": "niri-flake",
-        "rev": "b4f7ae09bc209e76944fed4648191dac8381ca76",
+        "type": "github"
+      }
+    },
+    "niri-source": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1739625307,
+        "narHash": "sha256-BVTlrmelSAq+rlxwlRvsyZxHrmcviRu3aHJYG37Yq8c=",
+        "owner": "YaLTeR",
+        "repo": "niri",
+        "rev": "f01c840ebe71f152906dbc6212f077fc72626f89",
+        "type": "github"
+      },
+      "original": {
+        "owner": "YaLTeR",
+        "repo": "niri",
+        "rev": "f01c840ebe71f152906dbc6212f077fc72626f89",
         "type": "github"
       }
     },
@@ -485,22 +503,6 @@
       "original": {
         "owner": "YaLTeR",
         "ref": "v25.01",
-        "repo": "niri",
-        "type": "github"
-      }
-    },
-    "niri-unstable": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1739201373,
-        "narHash": "sha256-6upEicgdJH3JaS1oXS+wsgLToU14XL8/aOyL2KcS3KY=",
-        "owner": "YaLTeR",
-        "repo": "niri",
-        "rev": "20769b4c2f843566880f020f117e7bde36edc332",
-        "type": "github"
-      },
-      "original": {
-        "owner": "YaLTeR",
         "repo": "niri",
         "type": "github"
       }
@@ -685,6 +687,7 @@
         "luogu-gcc": "luogu-gcc",
         "neovim": "neovim",
         "niri": "niri",
+        "niri-source": "niri-source",
         "nix-colors": "nix-colors",
         "nixVim": "nixVim",
         "nixpkgs": "nixpkgs_3"
@@ -801,11 +804,11 @@
     "xwayland-satellite-unstable": {
       "flake": false,
       "locked": {
-        "lastModified": 1737837494,
-        "narHash": "sha256-wIMowP8Juas4ZwMRcpc+58sZ0kKTDu8fm13THPmv/F8=",
+        "lastModified": 1739246919,
+        "narHash": "sha256-/hBM43/Gd0/tW+egrhlWgOIISeJxEs2uAOIYVpfDKeU=",
         "owner": "Supreeeme",
         "repo": "xwayland-satellite",
-        "rev": "3944c9a0e40e5629f16ad023bbc90dac80d35a0f",
+        "rev": "44590a416d4a3e8220e19e29e0b6efe64a80315d",
         "type": "github"
       },
       "original": {
