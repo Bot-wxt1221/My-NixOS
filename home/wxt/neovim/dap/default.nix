@@ -40,7 +40,6 @@
     };
   };
   programs.nixvim.plugins.dap-python.enable = true;
-  programs.nixvim.plugins.dap-virtual-text.enable = true;
   programs.nixvim.plugins.dap = {
     enable = true;
     signs = {

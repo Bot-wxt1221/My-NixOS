@@ -27,6 +27,7 @@
     gnome-graphs
     cpu-x
     nautilus
+    gnome-calculator
     weston
     file-roller
     pigz
@@ -55,13 +56,8 @@
     motrix
     ripgrep # recursively searches directories for a regex pattern
     mtr # A network diagnostic tool
-    iperf3
     project-lemonlime
     glxinfo
-    socat # replacement of openbsd-netcat
-    nmap # A utility for network discovery and security auditing
-    ipcalc # it is a calculator for the IPv4/v6 addresses
-    cowsay
     file
     which
     tree
@@ -73,9 +69,6 @@
 
     nix-output-monitor
 
-    glow # markdown previewer in terminal
-
-    # system call monitoring
     strace # system call monitoring
     ltrace # library call monitoring
     lsof # list open files

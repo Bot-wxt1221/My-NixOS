@@ -37,7 +37,6 @@
     files = [
       ".wakatime.cfg"
       ".config/keepassxc/keepassxc.ini"
-      ""
     ];
   };
 }
