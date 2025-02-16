@@ -7,7 +7,6 @@
 }:
 {
   imports = [
-
   ];
   home.file."g++-9".source = "${luogu-gcc.packages.x86_64-linux.gcc-930}/bin/g++";
   home.file."g++-9".executable = true;

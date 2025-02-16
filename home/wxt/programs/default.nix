@@ -8,8 +8,9 @@
   imports = [
     ./konsole.nix
     ./qq.nix
-    ../neovim
+    ./neovim
     ./fcitx5.nix
     ./more.nix
+    ./nix-index.nix
   ];
 }

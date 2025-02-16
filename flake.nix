@@ -12,11 +12,6 @@
 
     neovim.url = "github:nix-community/neovim-nightly-overlay/master";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
-    # nvchad.url = "github:nix-community/nix4nvchad";
-    # nvchad.inputs.nixpkgs.follows = "nixpkgs";
-    # starter.url = "github:Bot-wxt1221/Bot-wxt1221-NvChad";
-    # starter.flake = false;
-    # nvchad.inputs.nvchad-starter.follows = "starter";
 
     nixVim = {
       url = "github:nix-community/nixvim";
@@ -42,6 +37,9 @@
       inputs.nixpkgs-stable.follows = "nixpkgs";
       inputs.niri-unstable.follows = "niri-source";
     };
+
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -56,6 +54,7 @@
       impermanence,
       clipboard,
       nixVim,
+      nix-index-database,
       ...
     }@inputs:
     {
@@ -81,6 +80,7 @@
                 nix-colors
                 impermanence
                 neovim
+                nix-index-database
                 ;
 
             };
@@ -111,6 +111,7 @@
                 impermanence
                 neovim
                 nix-colors
+                nix-index-database
                 ;
             };
             # Optionally, use home-manager.extraSpecialArgs to pass
@@ -163,6 +164,7 @@
                 impermanence
                 neovim
                 nix-colors
+                nix-index-database
                 ;
             };
             # Optionally, use home-manager.extraSpecialArgs to pass
