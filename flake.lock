@@ -458,17 +458,17 @@
         "xwayland-satellite-unstable": "xwayland-satellite-unstable"
       },
       "locked": {
-        "lastModified": 1739206396,
-        "narHash": "sha256-dfU3l47sxFQbqLe5R9um//V5hplv/MhSwsZJR7JzBrg=",
+        "lastModified": 1739627445,
+        "narHash": "sha256-fl1kOwskXXa5dJsRcly9e+UaOTdjdvy8Jqg9WhKe0Nw=",
         "owner": "sodiboo",
         "repo": "niri-flake",
-        "rev": "9f15e7ace2dea798ce3490d2f723095ad4cce0d4",
+        "rev": "b4f7ae09bc209e76944fed4648191dac8381ca76",
         "type": "github"
       },
       "original": {
         "owner": "sodiboo",
         "repo": "niri-flake",
-        "rev": "9f15e7ace2dea798ce3490d2f723095ad4cce0d4",
+        "rev": "b4f7ae09bc209e76944fed4648191dac8381ca76",
         "type": "github"
       }
     },
