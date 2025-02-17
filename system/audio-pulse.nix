@@ -18,6 +18,10 @@
       pkgs.alsa-firmware
       pkgs.sof-firmware
     ];
+    systemd.tmpfiles.rules = [
+      "w! /sys/class/rtc/rtc0/max_user_freq - - - - 3072"
+      "w! /proc/sys/dev/hpet/max-user-freq  - - - - 3072"
+    ];
     environment.etc."wxt/panel/bin".source = "${pkgs.pavucontrol}/bin/pavucontrol";
   };
 }
