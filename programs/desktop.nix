@@ -38,7 +38,7 @@ in
       GTK_IM_MODULE = "fcitx5";
       NIXOS_OZONE_WL = 1;
     };
-    systemd.user.services.niri-flake-polkit.enable = false;
+    systemd.user.services.niri-flake-polkit.enable = true;
     programs.dconf.enable = true;
     programs.light.enable = true;
     xdg.portal.enable = true;
