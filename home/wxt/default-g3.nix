@@ -1,7 +1,7 @@
 {
   config,
   pkgs,
-  neovim,
+  lib,
   ...
 }:
 
@@ -35,5 +35,5 @@
       signingKey = "E834B5093C621EFE92D7CC1AF41E2366C0EDC8BC";
     };
   };
-  programs.git.signing.format = "openpgp";
+  programs.git.signing.format = lib.mkForce "openpgp";
 }
