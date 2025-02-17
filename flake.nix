@@ -27,7 +27,7 @@
     };
 
     niri-source = {
-      url = "github:YaLTeR/niri/05e0e44a778ffa1bf843067610fd49347a0e6e34";
+      url = "github:YaLTeR/niri/078383ea8208337d3c9ea89118aa615d7fbbab17";
       flake = false;
     };
 
