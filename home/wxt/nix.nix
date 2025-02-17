@@ -15,6 +15,7 @@
     git pull
     git add .
     sudo echo hello
+    nix flake prefetch
     bash "/home/wxt/update2.sh" |& nom --json
     git add .
     git commit -m "Update"
