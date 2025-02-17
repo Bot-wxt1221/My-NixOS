@@ -1,7 +1,7 @@
 {
   description = "Main config";
 
-  inputs = rec {
+  inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     home-manager.url = "github:nix-community/home-manager/master";
@@ -57,13 +57,37 @@
       nix-index-database,
       ...
     }@inputs:
+    let
+      HmSpecialArgs = {
+        inherit
+          clipboard
+          nixVim
+          luogu-gcc
+          nix-colors
+          impermanence
+          neovim
+          nix-index-database
+          niri
+          ;
+      };
+      SystemSpecialArgs = {
+        inherit
+          nixpkgs
+          clipboard
+          nixVim
+          luogu-gcc
+          nix-colors
+          impermanence
+          neovim
+          nix-index-database
+          niri
+          ;
+      };
+    in
     {
       nixosConfigurations.wxt-g3 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {
-          nixpkgs = nixpkgs;
-          inherit niri;
-        };
+        specialArgs = SystemSpecialArgs;
         modules = [
           ./g3-configuration.nix
           impermanence.nixosModules.impermanence
@@ -72,29 +96,13 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.wxt = import ./home/wxt/default-g3.nix;
-            home-manager.extraSpecialArgs = {
-              inherit
-                clipboard
-                nixVim
-                luogu-gcc
-                nix-colors
-                impermanence
-                neovim
-                nix-index-database
-                ;
-
-            };
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
+            home-manager.extraSpecialArgs = HmSpecialArgs;
           }
         ];
       };
       nixosConfigurations.wxt-bazhong = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {
-          nixpkgs = nixpkgs;
-          inherit niri;
-        };
+        specialArgs = SystemSpecialArgs;
         modules = [
           ./bazhong-configuration.nix
           impermanence.nixosModules.impermanence
@@ -103,23 +111,25 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.wxt = import ./home/wxt/default-bazhong.nix;
-            home-manager.extraSpecialArgs = {
-              inherit
-                clipboard
-                nixVim
-                luogu-gcc
-                impermanence
-                neovim
-                nix-colors
-                nix-index-database
-                ;
-            };
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
+            home-manager.extraSpecialArgs = HmSpecialArgs;
           }
         ];
       };
-
+      nixosConfigurations.wxt-school-vmware = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = SystemSpecialArgs;
+        modules = [
+          ./school-vmware-configuration.nix
+          impermanence.nixosModules.impermanence
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.wxt = import ./home/wxt/default-school-vmware.nix;
+            home-manager.extraSpecialArgs = HmSpecialArgs;
+          }
+        ];
+      };
       packages.x86_64-linux.iso-image = self.nixosConfigurations.iso-image.config.system.build.isoImage;
       nixosConfigurations.iso-image = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -140,36 +150,6 @@
         modules = [
           ./iso
           ./iso/gpu.nix
-        ];
-      };
-      nixosConfigurations.wxt-school-vmware = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          nixpkgs = nixpkgs;
-          inherit niri;
-        };
-        modules = [
-          ./school-vmware-configuration.nix
-          impermanence.nixosModules.impermanence
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.wxt = import ./home/wxt/default-school-vmware.nix;
-            home-manager.extraSpecialArgs = {
-              inherit
-                clipboard
-                nixVim
-                luogu-gcc
-                impermanence
-                neovim
-                nix-colors
-                nix-index-database
-                ;
-            };
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
-          }
         ];
       };
     };
