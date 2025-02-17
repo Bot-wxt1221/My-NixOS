@@ -3,6 +3,7 @@ builds:
   - 'packages.x86_64-linux.iso-image'
   - 'nixosConfigurations.iso-image'
   - 'nixosConfigurations.wxt-g3'
+  - 'nixosConfigurations.wxt-school-vmware'
   - 'packages.x86_64-linux.iso-image-gpu'
   - 'nixosConfigurations.iso-image-gpu'
   include:
