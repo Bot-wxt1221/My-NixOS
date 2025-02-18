@@ -1,0 +1,7 @@
+{
+  stylix,
+  pkgs,
+  config
+}:
+
+
