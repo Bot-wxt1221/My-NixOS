@@ -185,7 +185,7 @@
             }:
             {
               environment.systemPackages = [
-                self.nixosConfigurations.wxt-mininal-config
+                self.nixosConfigurations.wxt-mininal-config.config.system.build.vm
               ];
             }
           )
