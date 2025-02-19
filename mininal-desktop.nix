@@ -15,6 +15,7 @@
   ];
   time.timeZone = "Asia/Shanghai";
   Ownhostname = "wxt-mininal-config";
+  Enablepipewire = true;
   users.users.wxt = {
     isNormalUser = true;
     extraGroups = [
