@@ -21,7 +21,6 @@
     "ca-derivations"
     "cgroups"
     "dynamic-derivations"
-    "git-hashing"
   ];
   nixpkgs.config.allowUnfree = true;
   system.rebuild.enableNg = true;
