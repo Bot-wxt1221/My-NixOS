@@ -26,16 +26,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    niri-source = {
-      url = "github:YaLTeR/niri/078383ea8208337d3c9ea89118aa615d7fbbab17";
-      flake = false;
-    };
-
     niri = {
-      url = "github:sodiboo/niri-flake";
+      url = "github:sodiboo/niri-flake/8bfb763f07fd9106e032590d071c30450e3b80f6";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs";
-      inputs.niri-unstable.follows = "niri-source";
     };
 
     nix-index-database.url = "github:nix-community/nix-index-database";

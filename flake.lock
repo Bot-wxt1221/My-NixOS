@@ -447,9 +447,7 @@
     "niri": {
       "inputs": {
         "niri-stable": "niri-stable",
-        "niri-unstable": [
-          "niri-source"
-        ],
+        "niri-unstable": "niri-unstable",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -460,33 +458,17 @@
         "xwayland-satellite-unstable": "xwayland-satellite-unstable"
       },
       "locked": {
-        "lastModified": 1739897676,
-        "narHash": "sha256-KmUgfOAfv5pX7SJ/mJx5SQh5ASJ5VvGybK1z4PM9uV4=",
+        "lastModified": 1739944956,
+        "narHash": "sha256-qGOyv8cudQw1KIHNckU/eo09zjcc4NPis8J4v+XeXDE=",
         "owner": "sodiboo",
         "repo": "niri-flake",
-        "rev": "e58e05180fc2acdb44e3eeed4b727150f2c53cea",
+        "rev": "8bfb763f07fd9106e032590d071c30450e3b80f6",
         "type": "github"
       },
       "original": {
         "owner": "sodiboo",
         "repo": "niri-flake",
-        "type": "github"
-      }
-    },
-    "niri-source": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1739787518,
-        "narHash": "sha256-F9zVBxjj8H11TjXhbMNC/nXJVAvksrrasouxTxPbju4=",
-        "owner": "YaLTeR",
-        "repo": "niri",
-        "rev": "078383ea8208337d3c9ea89118aa615d7fbbab17",
-        "type": "github"
-      },
-      "original": {
-        "owner": "YaLTeR",
-        "repo": "niri",
-        "rev": "078383ea8208337d3c9ea89118aa615d7fbbab17",
+        "rev": "8bfb763f07fd9106e032590d071c30450e3b80f6",
         "type": "github"
       }
     },
@@ -503,6 +485,22 @@
       "original": {
         "owner": "YaLTeR",
         "ref": "v25.01",
+        "repo": "niri",
+        "type": "github"
+      }
+    },
+    "niri-unstable": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1739940569,
+        "narHash": "sha256-r624MtdcINkMlyXvvizg8b6Ig1fv4lLvjdgKM2ejaS0=",
+        "owner": "YaLTeR",
+        "repo": "niri",
+        "rev": "74787843430cff26c5308e95051b7e9f5dc4252c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "YaLTeR",
         "repo": "niri",
         "type": "github"
       }
@@ -723,7 +721,6 @@
         "luogu-gcc": "luogu-gcc",
         "neovim": "neovim",
         "niri": "niri",
-        "niri-source": "niri-source",
         "nix-colors": "nix-colors",
         "nix-index-database": "nix-index-database",
         "nixVim": "nixVim",
