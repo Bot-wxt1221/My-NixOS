@@ -40,6 +40,11 @@
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    sosp-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -55,6 +60,7 @@
       clipboard,
       nixVim,
       nix-index-database,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -68,6 +74,7 @@
           neovim
           nix-index-database
           niri
+          sops-nix
           ;
       };
       SystemSpecialArgs = {
@@ -81,6 +88,7 @@
           neovim
           nix-index-database
           niri
+          sops-nix
           ;
       };
     in

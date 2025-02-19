@@ -1,0 +1,11 @@
+keys:
+  - &admin_wxt age1kjc9nyxnnsgytwug46ue7wx2e6z5mxugaa9ntm5umsd0fmnpu3lqerpurc
+creation_rules:
+  - path_regex: home/wxt/secret/*
+    key_groups:
+    - age:
+      - *admin_wxt
+  - path_regex: security/sops/*
+    key_groups:
+    - age:
+      - *admin_wxt

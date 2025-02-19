@@ -21,6 +21,7 @@
     ./nix.nix
     ./zsh.nix
     ./git.nix
+    ./secret
   ];
   home.username = "wxt";
   home.homeDirectory = "/home/wxt";

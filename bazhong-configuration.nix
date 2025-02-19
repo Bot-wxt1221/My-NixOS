@@ -19,6 +19,7 @@
     ./programs/ollama
     ./persist.nix
     ./system
+    ./security/sops/bazhong
   ];
   time.timeZone = "Asia/Shanghai";
   Ownhostname = "wxt-bazhong";
@@ -45,7 +46,7 @@
       "video"
       "networkmanager"
     ];
-    hashedPassword = "$y$j9T$ym72DO4CZPcnMiHfpMEHI/$62LY4Ff3mOGi0MmD20y8jvcugO49xm7Xv9x3/txxWmC";
+    hashedPasswordFile = config.sops.secrets.wxt-password.path;
   };
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   #  specialisation = {

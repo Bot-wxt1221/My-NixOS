@@ -14,6 +14,7 @@
     cachix
     fastfetch
     yazi
+    sops
     konsole
     gcc
     gdb

@@ -20,6 +20,7 @@
     ./utils.nix
     ./zsh.nix
     ./git.nix
+    ./secret
   ];
   cpuTempDevice = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input";
   haveBacklight = true;

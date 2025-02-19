@@ -9,5 +9,6 @@
     #    ./tpm.nix
     ./sudo.nix
     ./ssh.nix
+    ./sops
   ];
 }
