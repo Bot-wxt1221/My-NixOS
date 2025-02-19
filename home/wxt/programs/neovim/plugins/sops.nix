@@ -14,7 +14,7 @@
       enabled = true,
       debug = true,
     })
-    vim.keymap.set("n", "<leader>ef", vim.cmd.SopsEncrypt, { desc = "[E]ncrypt [F]ile" })
-    vim.keymap.set("n", "<leader>df", vim.cmd.SopsDecrypt, { desc = "[D]ecrypt [F]ile" })
+    vim.keymap.set("n", "<leader>qe", vim.cmd.SopsEncrypt, { desc = "[E]ncrypt [F]ile" })
+    vim.keymap.set("n", "<leader>qd", vim.cmd.SopsDecrypt, { desc = "[D]ecrypt [F]ile" })
   '';
 }
