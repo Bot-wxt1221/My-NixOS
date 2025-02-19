@@ -13,6 +13,7 @@
     ./editorconfig.nix
     ./nvim-tree.nix
     ./telescope.nix
+    ./sops.nix
   ];
 
   # proper <C-S-...> selections from insert and normal modes
