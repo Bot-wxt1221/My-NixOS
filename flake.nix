@@ -171,7 +171,7 @@
         ];
       };
       packages.x86_64-linux.iso-image-with-mininal-config =
-        self.nixosconfigurations.iso-image-gpu.config.system.build.isoimage;
+        self.nixosconfigurations.iso-image-with-mininal-config.config.system.build.isoimage;
       nixosconfigurations.iso-image-with-mininal-config = nixpkgs.lib.nixossystem {
         system = "x86_64-linux";
         specialargs = {
