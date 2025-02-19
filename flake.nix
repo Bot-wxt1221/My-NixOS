@@ -133,6 +133,21 @@
           }
         ];
       };
+      nixosConfigurations.wxt-mininal-config = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = SystemSpecialArgs;
+        modules = [
+          ./mininal-desktop.nix
+          impermanence.nixosModules.impermanence
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.wxt = import ./home/wxt/default-mininal-config.nix;
+            home-manager.extraSpecialArgs = HmSpecialArgs;
+          }
+        ];
+      };
       packages.x86_64-linux.iso-image = self.nixosconfigurations.iso-image.config.system.build.isoimage;
       nixosconfigurations.iso-image = nixpkgs.lib.nixossystem {
         system = "x86_64-linux";
@@ -166,12 +181,12 @@
           ./iso
           (
             {
-              pkgs,
-              config,
-              lib,
+              ...
             }:
             {
-
+              environment.systemPackages = [
+                self.nixosConfigurations.wxt-mininal-config
+              ];
             }
           )
         ];
