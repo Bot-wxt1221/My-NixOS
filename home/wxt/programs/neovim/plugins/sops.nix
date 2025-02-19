@@ -5,7 +5,8 @@
 }:
 
 {
-  programs.nixvim.extraPlugins = with pkgs[
-    
-  ]
+  programs.nixvim.extraPlugins = with pkgs.vimPlugins; [
+    nvim-sops
+  ];
+  extraConfigLuaPost = "require('nvim_sops').setup()";
 }
