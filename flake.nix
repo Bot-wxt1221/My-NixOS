@@ -148,10 +148,10 @@
           }
         ];
       };
-      packages.x86_64-linux.iso-image = self.nixosconfigurations.iso-image.config.system.build.isoimage;
-      nixosconfigurations.iso-image = nixpkgs.lib.nixossystem {
+      packages.x86_64-linux.iso-image = self.nixosConfigurations.iso-image.config.system.build.isoImage;
+      nixosConfigurations.iso-image = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialargs = {
+        specialArgs = {
           inherit nixpkgs;
         };
         modules = [
@@ -159,10 +159,10 @@
         ];
       };
       packages.x86_64-linux.iso-image-gpu =
-        self.nixosconfigurations.iso-image-gpu.config.system.build.isoimage;
-      nixosconfigurations.iso-image-gpu = nixpkgs.lib.nixossystem {
+        self.nixosConfigurations.iso-image-gpu.config.system.build.isoImage;
+      nixosConfigurations.iso-image-gpu = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialargs = {
+        specialArgs = {
           inherit nixpkgs;
         };
         modules = [
@@ -171,10 +171,10 @@
         ];
       };
       packages.x86_64-linux.iso-image-with-mininal-config =
-        self.nixosconfigurations.iso-image-with-mininal-config.config.system.build.isoimage;
-      nixosconfigurations.iso-image-with-mininal-config = nixpkgs.lib.nixossystem {
+        self.nixosConfigurations.iso-image-with-mininal-config.config.system.build.isoImage;
+      nixosConfigurations.iso-image-with-mininal-config = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialargs = {
+        specialArgs = {
           inherit nixpkgs;
         };
         modules = [
