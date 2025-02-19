@@ -18,7 +18,6 @@
   ];
   services.ollama = {
     enable = true;
-    acceleration = false;
     user = "ollama";
     group = "ollama";
   };
