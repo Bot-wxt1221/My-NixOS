@@ -1,10 +1,13 @@
 builds:
   exclude: 
-  - 'packages.x86_64-linux.iso-image*'
-  - 'nixosConfigurations.iso-image*'
+  - 'packages.x86_64-linux.iso-image'
+  - 'nixosConfigurations.iso-imag'
   - 'nixosConfigurations.wxt-g3'
   - 'nixosConfigurations.wxt-school-vmware'
-  - 'nixosConfigurations.wxt-mininal-config'
+  - 'packages.x86_64-linux.iso-image-gpu'
+  - 'nixosConfigurations.iso-image-gpu'
+  - 'packages.x86_64-linux.iso-image-with-mininal-config'
+  - 'nixosConfigurations.iso-image-with-mininal-config'
   include:
   - '*.x86_64-linux.*'
   - defaultPackage.x86_64-linux
