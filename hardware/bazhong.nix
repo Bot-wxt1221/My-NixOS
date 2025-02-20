@@ -3,6 +3,7 @@
   lib,
   pkgs,
   modulesPath,
+  nixos-facter-modules,
   ...
 }:
 
@@ -12,7 +13,9 @@
     ../system/laptop.nix
     ../system/libinput.nix
     ./persist-config.nix
+    nixos-facter-modules.nixosModules.facter
   ];
+  config.facter.reportPath = ./facter-bazhong.json;
   boot.initrd.kernelModules = [
     "i915"
     "vfio-iommu-type1"

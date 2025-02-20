@@ -6,6 +6,7 @@
 
     nix-colors.url = "github:misterio77/nix-colors";
     luogu-gcc.url = "github:luogu-dev/judge-env";
+    nixos-facter-modules.url = "github:nix-community/nixos-facter-modules";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -56,6 +57,7 @@
       nixVim,
       nix-index-database,
       sops-nix,
+      nixos-facter-modules,
       ...
     }@inputs:
     let
@@ -70,6 +72,7 @@
           nix-index-database
           niri
           sops-nix
+          nixos-facter-modules
           ;
       };
       SystemSpecialArgs = {
@@ -84,6 +87,7 @@
           nix-index-database
           niri
           sops-nix
+          nixos-facter-modules
           ;
       };
     in
