@@ -8,7 +8,6 @@
 {
   imports = [
     ./hyprpaper.nix
-    ./niri.nix
     ./waybar.nix
     ./swaync.nix
     #    ./clipboard.nix
