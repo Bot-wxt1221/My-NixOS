@@ -15,7 +15,7 @@
     ./persist-config.nix
     nixos-facter-modules.nixosModules.facter
   ];
-  config.facter.reportPath = ./facter-bazhong.json;
+  facter.reportPath = ./facter-bazhong.json;
   boot.initrd.kernelModules = [
     "i915"
     "vfio-iommu-type1"
