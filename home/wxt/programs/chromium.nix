@@ -1,0 +1,6 @@
+{
+  ...
+}:
+{
+  enableChromium = true;
+}

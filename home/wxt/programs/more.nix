@@ -15,7 +15,6 @@
       ".local/share/clash-verge"
 
       ".local/share/fcitx5"
-      ".config/microsoft-edge"
 
       ".local/share/keyrings"
 
