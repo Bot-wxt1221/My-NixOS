@@ -28,6 +28,7 @@
       javascript
       just
       json
+      nix
       jsonc
       typescript
       markdown
