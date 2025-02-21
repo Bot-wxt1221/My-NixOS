@@ -12,7 +12,7 @@
   environment.persistence."/persist".directories = [ "/var/lib/flatpak" ];
   systemd.services.flatpak-repo = {
     wantedBy = [ "multi-user.target" ];
-    after = [ "display-manager.service" ];
+    after = [ "NetworkManager-wait-online.service" ];
     path = [ pkgs.flatpak ];
     serviceConfig.Type = "oneshot";
     script = ''
