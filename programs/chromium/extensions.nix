@@ -4,7 +4,7 @@
     id = "kpbnombpnpcffllnianjibmpadjolanh";
     crxPath = pkgs.fetchurl {
       url = "https://clients2.googleusercontent.com/crx/blobs/ASuc5oiT4dhXdTA7WDRw0Nud9W9Wi928GYoz4phma1YQHik957A4602tFMysQI25u7SixzvTGvpd5162Yu7DAWA_Fw7ewVMFsYTZXm1PFk-A9z1XLUbD2jq-aM80XgxMqyOeAMZSmuWnLeX0cnAwvDZpFTy3-gQj8RBXmw/KPBNOMBPNPCFFLLNIANJIBMPADJOLANH_2_8_19_0.crx";
-      name = "kpbnombpnpcffllnianjibmpadjolanh.crx";
+      name = "kpbnombpnpcffllnianjibmpadjolanh.cr";
       hash = "sha256-r1Gw3PngCjVscR1cdV/Cp5cqxZU/XnQ/3hQlpXOxiiY=";
     };
     version = "2.8.19";
