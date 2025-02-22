@@ -21,6 +21,18 @@
         };
         config = lib.mkIf config.enableChromium {
           programs.chromium.enable = true;
+          programs.chromium.commandLineArgs = [
+            "--process-per-site"
+            "--ozone-platform-hint=wayland"
+            "--enable-wayland-ime"
+            "--wayland-text-input-version=3"
+            "--gtk-version=4"
+            "--enable-features=AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,Vulkan,DefaultANGLEVulkan,VulkanFromANGLE"
+            "--enable-features=VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport"
+            "--enable-features=UseMultiPlaneFormatForHardwareVideo"
+            "--ignore-gpu-blocklist"
+            "--enable-zero-copy"
+          ];
           programs.chromium.package = pkgs.ungoogled-chromium;
           programs.chromium.extensions = import ./chromium-extensions.nix {
             inherit pkgs lib;
