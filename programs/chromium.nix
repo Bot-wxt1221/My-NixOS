@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   ...
 }:
 {
@@ -21,33 +22,22 @@
         config = lib.mkIf config.enableChromium {
           programs.chromium.enable = true;
           programs.chromium.package = pkgs.ungoogled-chromium;
-          programs.chromium.dictionaries = [
-            pkgs.hunspellDictsChromium.en_US
-          ];
-          programs.chromium.extensions = [
-            { id = "kpbnombpnpcffllnianjibmpadjolanh"; } # bilibili
-            { id = "fpnmgdkabkmnadcjpehmlllkndpkmiak"; } # Wayback Machine
-            { id = "bfbmjmiodbnnpllbbbfblcplfjjepjdn"; } # Turn off light for videos
-            { id = "dhdgffkkebhmkfjojejmpbldmpobfkfo"; } # Tampermonkey
-            { id = "ajkhmmldknmfjnmeedkbkkojgobmljda"; } # CRX Extractor/Downloader
-            { id = "gakohpplicjdhhfllilcjpfildodfnnn"; } # Carrot
-            { id = "cjnmckjndlpiamhfimnnjmnckgghkjbl"; } # Competitive Companion
-            { id = "oboonakemofpalcgghocfoadofidjkkk"; } # KeePassXC
-            { id = "jnbbnacmeggbgdjgaoojpmhdlkkpblgi"; } # WakaTime
-          ];
+          programs.chromium.extensions = import ./chromium-extensions.nix {
+            inherit pkgs lib;
+          };
         };
       }
     )
   ];
+  programs.chromium.defaultSearchProviderSuggestURL = "https://www.bing.com/osjson.aspx?query={searchTerms}";
+  programs.chromium.defaultSearchProviderSearchURL = "https://www.bing.com/search?q={searchTerms}";
+  programs.chromium.defaultSearchProviderEnabled = true;
   programs.chromium.extraOpts = {
     "BrowserSignin" = 0;
     "SyncDisabled" = true;
     "PasswordManagerEnabled" = false;
     "SpellcheckEnabled" = true;
-    "HomePageLocation" = "about:blank";
-    "NewTabPageLocation" = "about:blank";
-    "DefaultSearchProviderName" = "bing";
-    "DefaultSearchProviderSearchURL" = "https://www.bing.com/search?q={searchTerms}";
-    "DefaultSearchProviderKeyword" = "bing";
+    "HomePageLocation" = "https://www.bing.com";
+    "NewTabPageLocation" = "https://www.bing.com";
   };
 }
