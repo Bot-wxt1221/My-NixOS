@@ -18,6 +18,7 @@ jobs:
     - run: |
         cd programs/chromium
         nix-env -iA nixpkgs.nixfmt-rfc-style
+        nix-env -iA jq
         ./update.sh | nixfmt > extensions.nix
         curl ${{secrets.VPN_URL}} > iso/config.yaml
         git add .

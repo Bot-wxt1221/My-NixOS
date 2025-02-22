@@ -1,0 +1,31 @@
+HTTP/2 302 
+content-security-policy: script-src 'report-sample' 'none';report-uri https://csp.withgoogle.com/csp/clientupdate-aus/1
+cache-control: no-cache, no-store, max-age=0, must-revalidate
+pragma: no-cache
+expires: Mon, 01 Jan 1990 00:00:00 GMT
+date: Sat, 22 Feb 2025 07:59:30 GMT
+location: https://clients2.googleusercontent.com/crx/blobs/ASuc5ogG7icbEuMbY4H3Q7EUFzUOw098MQYcD3Yjg01T4ThUHo3eebdEcg3q_JRHoKwmichptevluDxBQ9XAq7NJDS5oEzBy4fvkhhnGtkrZWnbVben5MVz5TGdTPQUXLDAAxlKa5RoruKfe5urGaYib7xYOQki4dCd_/OBOONAKEMOFPALCGGHOCFOADOFIDJKKK_1_9_6_0.crx
+content-type: text/html; charset=UTF-8
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+server: GSE
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+accept-ranges: none
+vary: Accept-Encoding
+
+HTTP/2 200 
+x-guploader-uploadid: AHMx-iHLXBTqsG50KP3QW9lVeVyFPCZQV-SKfJcdS1ASdYMdKMLeiOnsFDbg-YUVGVZWYpKxdqEBY-8
+accept-ranges: bytes
+content-length: 966577
+x-goog-hash: crc32c=FQ3t1g==
+server: UploadServer
+date: Fri, 21 Feb 2025 13:05:52 GMT
+expires: Sat, 21 Feb 2026 13:05:52 GMT
+cache-control: public, max-age=31536000
+age: 68021
+last-modified: Wed, 25 Dec 2024 15:11:31 GMT
+etag: fc4edb83_d8b10be1_04935bea_cfe1d7a0_5d4bc30e
+content-type: application/x-chrome-extension
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+
