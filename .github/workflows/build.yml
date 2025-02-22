@@ -33,6 +33,7 @@ jobs:
         git config --local user.email "3264117476@qq.com"
         git config --local user.name "github-actions[bot]"
         rm -rf iso/config.yaml
+        git restore --staged iso/config.yaml
         git add flake.lock
         git add programs/chromium/extensions.nix
         git commit -m "Update flakes" || true
