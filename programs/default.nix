@@ -10,7 +10,7 @@
     ./kubo.nix
     ./nix/nix.nix
     ./rustdesk.nix
-    ./chromium.nix
+    ./chromium
     ./openssh.nix
     ./virutalbox.nix
     ./fuse.nix

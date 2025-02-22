@@ -16,6 +16,9 @@ jobs:
       with:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - run: |
+        cd programs/chromium
+        nix-env -iA nixpkgs.nixfmt-rfc-style
+        ./update.sh | nixfmt > extensions.nix
         curl ${{secrets.VPN_URL}} > iso/config.yaml
         git add .
         nix flake update

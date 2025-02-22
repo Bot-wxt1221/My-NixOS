@@ -33,7 +33,7 @@
             "--enable-zero-copy"
           ];
           programs.chromium.package = pkgs.ungoogled-chromium;
-          programs.chromium.extensions = import ./chromium-extensions.nix {
+          programs.chromium.extensions = import ./extensions.nix {
             inherit pkgs lib;
           };
         };
