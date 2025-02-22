@@ -7,7 +7,7 @@ do
   finalurl=$(curl -w "%{url_effective}\n" -I -L -s -S https://clients2.google.com/service/update2/crx\?response\=redirect\&acceptformat\=crx2,crx3\&prodversion\=133\&x\=id%3D${line}%26installsource%3Dondemand%26uc -o /tmp/extensions.crx)
   hash=$(nix-prefetch-url $finalurl)
   hash=$(nix hash to-sri --type sha256 "$hash")
-  echo "{id=\"$line\";crxPath=pkgs.fetchurl{url = \"$finalurl\";hash = \"$hash\";};}"
+  echo "{id=\"$line\";crxPath=pkgs.fetchurl{url = \"$finalurl\";hash = \"$hash\";};version = \"0.0.0\";}"
 done < ./extensions-list
 
 echo \]
