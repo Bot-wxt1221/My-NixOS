@@ -26,7 +26,6 @@
             "--ozone-platform-hint=wayland"
             "--enable-wayland-ime"
             "--wayland-text-input-version=3"
-            "--gtk-version=4"
             "--enable-features=AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,Vulkan,DefaultANGLEVulkan,VulkanFromANGLE"
             "--enable-features=VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport"
             "--enable-features=UseMultiPlaneFormatForHardwareVideo"
