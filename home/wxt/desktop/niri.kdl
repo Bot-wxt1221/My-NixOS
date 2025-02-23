@@ -18,7 +18,7 @@ spawn-at-startup "swaync"
 spawn-at-startup "fcitx5" "-d" "--replace"
 spawn-at-startup "hyprpaper"
 spawn-at-startup "clipboard-sync" "--hide-timestamp"
-spawn-at-startup "bash" "@SetupAudio@"
+spawn-at-startup "bash" "@setupAudio@"
 
 environment {
     DISPLAY ":0"

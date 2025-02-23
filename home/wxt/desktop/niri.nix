@@ -137,7 +137,7 @@ in
           niri msg action power-off-monitors
           ${lib.getExe pkgs.swaylock-effects} --screenshots --clock --font "WenQuanYi Micro Hei"
         '';
-        SetupAudio = pkgs.writeText "a.sh" config.audioProcess;
+        setupAudio = pkgs.writeText "a.sh" config.audioProcess;
       }
     );
   };
