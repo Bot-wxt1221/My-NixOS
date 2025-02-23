@@ -15,6 +15,7 @@
     ./persist-config.nix
     nixos-facter-modules.nixosModules.facter
   ];
+  facter.reportPath = ./facter-g3.json;
   boot.initrd.kernelModules = [
     "i915"
     "vfio-iommu-type1"

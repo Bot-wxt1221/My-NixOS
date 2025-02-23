@@ -21,8 +21,4 @@
     user = "ollama";
     group = "ollama";
   };
-  systemd.services.ollama = {
-    serviceConfig.BindReadOnlyPaths = [ "/proc/meminfo:${./meminfo.txt}" ];
-    serviceConfig.ProcSubset = lib.mkForce false;
-  };
 }
