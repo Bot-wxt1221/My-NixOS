@@ -3,6 +3,7 @@
   lib,
   pkgs,
   modulesPath,
+  nixos-facter-modules,
   ...
 }:
 
@@ -12,6 +13,7 @@
     ../system/laptop.nix
     ../system/libinput.nix
     ./persist-config.nix
+    nixos-facter-modules.nixosModules.facter
   ];
   boot.initrd.kernelModules = [
     "i915"

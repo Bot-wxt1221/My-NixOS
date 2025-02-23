@@ -19,6 +19,7 @@
     ./persist.nix
     ./system
     ./security/sops/g3
+    ./programs/ollama
   ];
   time.timeZone = "Asia/Shanghai";
   Ownhostname = "wxt-g3";
