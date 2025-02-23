@@ -12,6 +12,7 @@
     ./persist.nix
     ./programs
     ./system
+    ./security/sops/school-vmware
   ];
   time.timeZone = "Asia/Shanghai";
   Ownhostname = "wxt-school-vmware";

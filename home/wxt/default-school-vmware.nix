@@ -22,6 +22,7 @@
     ./zsh.nix
     ./git.nix
     ./secret
+    ./secret/school-vmware
   ];
   home.username = "wxt";
   home.homeDirectory = "/home/wxt";
