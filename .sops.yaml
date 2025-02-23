@@ -1,11 +1,14 @@
 keys:
-  - &admin_wxt age1kjc9nyxnnsgytwug46ue7wx2e6z5mxugaa9ntm5umsd0fmnpu3lqerpurc
+  - &admin_wxt_g3 age1kjc9nyxnnsgytwug46ue7wx2e6z5mxugaa9ntm5umsd0fmnpu3lqerpurc
+  - &admin_wxt_school_vmware age1us06lgsjn0z0xpzfmej3ryujau6jfdhgrmgsdqec4fkd54pwj4xsfm2jvt
 creation_rules:
   - path_regex: home/wxt/secret/*
     key_groups:
     - age:
-      - *admin_wxt
+      - *admin_wxt_g3
+      - *admin_wxt_school_vmware
   - path_regex: security/sops/*
     key_groups:
     - age:
-      - *admin_wxt
+      - *admin_wxt_g3
+      - *admin_wxt_school_vmware

@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  nixpkgs,
+  nixos-facter-modules,
   ...
 }:
 
@@ -10,7 +10,9 @@
   imports = [
     ./school-vmware-hardware-configuration.nix
     ./persist-config.nix
+    nixos-facter-modules.nixosModules.facter
   ];
+  facter.reportPath = ./facter-school-vmware.json;
   environment.systemPackages = with pkgs; [
     xorg.xf86videovmware
   ];
