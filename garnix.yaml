@@ -2,8 +2,7 @@ builds:
   exclude: 
   - 'packages.x86_64-linux.iso-image'
   - 'nixosConfigurations.iso-image'
-  - 'nixosConfigurations.wxt-g3'
-  - 'nixosConfigurations.wxt-school-vmware'
+  - 'nixosConfigurations.wxt-bazhong'
   - 'packages.x86_64-linux.iso-image-gpu'
   - 'nixosConfigurations.iso-image-gpu'
   - 'packages.x86_64-linux.iso-image-with-mininal-config'

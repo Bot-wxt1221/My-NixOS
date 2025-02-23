@@ -5011,30 +5011,6 @@
         }
       }
     ],
-    "memory_64_error": [
-      {
-        "handle": 282,
-        "error_type": {
-          "hex": "0003",
-          "name": "OK",
-          "value": 3
-        },
-        "granularity": {
-          "hex": "0002",
-          "name": "Unknown",
-          "value": 2
-        },
-        "operation": {
-          "hex": "0002",
-          "name": "Unknown",
-          "value": 2
-        },
-        "syndrome": 0,
-        "array_address": 9223372036854775808,
-        "device_address": 9223372036854775808,
-        "range": 2147483648
-      }
-    ],
     "memory_array": [
       {
         "handle": 144,
