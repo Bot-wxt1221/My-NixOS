@@ -16,15 +16,10 @@
     git add .
     sudo echo hello
     nix flake prefetch
-    bash "/home/wxt/update2.sh" |& nom --json
+    nh os switch . -- --log-format internal-json -v --option narinfo-cache-negative-ttl 1200
     git add .
     git commit -m "Update"
     git push origin master
   '';
   home.file."update.sh".executable = true;
-  home.file."update2.sh".text = ''
-    sudo nixos-rebuild switch --flake . --log-format internal-json -v --option narinfo-cache-negative-ttl 1200
-  '';
-  home.file."update2.sh".executable = true;
-
 }

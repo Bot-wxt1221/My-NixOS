@@ -19,6 +19,7 @@
     gcc
     gdb
     cmake
+    nh
     gnumake
     fd
     gnome-logs
