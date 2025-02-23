@@ -21,6 +21,7 @@
     ./zsh.nix
     ./git.nix
     ./secret
+    ./secret/g3
   ];
   cpuTempDevice = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input";
   haveBacklight = true;

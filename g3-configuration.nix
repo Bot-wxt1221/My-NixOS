@@ -18,6 +18,7 @@
     ./programs
     ./persist.nix
     ./system
+    ./security/sops/g3
   ];
   time.timeZone = "Asia/Shanghai";
   Ownhostname = "wxt-g3";
@@ -44,7 +45,7 @@
       "video"
       "networkmanager"
     ];
-    hashedPassword = "$y$j9T$Xtqkbq9JFHwbncm/owCr20$KBHWdrrABADdLYWarvlUcTyBUOtLqL7qZcrlJTtjtx.";
+    hashedPasswordFile = config.sops.secrets.wxt-password.path;
   };
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   #  specialisation = {
