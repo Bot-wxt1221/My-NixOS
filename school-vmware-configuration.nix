@@ -9,7 +9,6 @@
     ./hardware/school-vmware.nix
     ./network
     ./security
-    ./programs/ejabberd.nix
     ./programs/irc.nix
     ./persist.nix
     ./programs
