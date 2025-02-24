@@ -8,6 +8,25 @@
   imports = [
 
   ];
+  fonts.fontconfig = {
+    defaultFonts = {
+      emoji = [
+        "Noto Color Emoji"
+      ];
+      monospace = [
+        "Source Code Pro"
+        "emoji"
+      ];
+      sansSerif = [
+        "Noto Sans"
+        "emoji"
+      ];
+      serif = [
+        "Noto Serif"
+        "emoji"
+      ];
+    };
+  };
   fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [
     noto-fonts
