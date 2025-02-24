@@ -48,7 +48,7 @@
 	# listen. Default values are:
 	# "0.0.0.0" or (if compiled with IPv6 support) "::,0.0.0.0"
 	# so the server listens on all IP addresses of the system by default.
-	;Listen = 127.0.0.1,192.168.0.1
+	Listen = 0.0.0.0
 
 	# Text file with the "message of the day" (MOTD). This message will
 	# be shown to all users connecting to the server: Default: a built-in
@@ -127,6 +127,7 @@
 	# normal operation, so values greater than 1 rarely make sense.
 	;MaxPenaltyTime = -1
 
+:qa!
 	# Maximum number of channels returned in response to a /list
 	# command (0: unlimited):
 	;MaxListSize = 100
@@ -224,7 +225,7 @@
 	# Use PAM if ngIRCd has been compiled with support for it.
 	# Users identified using PAM are registered without the "~" character
 	# prepended to their user name.
-	;PAM = yes
+	PAM = no
 
 	# When PAM is enabled, all clients are required to be authenticated
 	# using PAM; connecting to the server without successful PAM
