@@ -10,7 +10,7 @@
     enable = true;
     imagemagick = true;
     configFile = ./ejabberd.yml;
-    ctlConfig = ./ejabberdctl.cfg;
+    ctlConfig = builtins.readFile ./ejabberdctl.cfg;
   };
   environment.persistence."/persist" = {
     directories = [
