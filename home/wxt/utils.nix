@@ -15,7 +15,7 @@
     fastfetch
     yazi
     sops
-    konsole
+    libsForQt5.konsole
     gcc
     gdb
     cmake
