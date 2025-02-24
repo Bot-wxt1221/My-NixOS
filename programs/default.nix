@@ -11,6 +11,7 @@
     ./nix/nix.nix
     ./rustdesk.nix
     ./chromium
+    ./irc.nix
     ./openssh.nix
     ./virutalbox.nix
     ./fuse.nix
