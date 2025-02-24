@@ -107,19 +107,19 @@
 
 	# Maximum number of simultaneous in- and outbound connections the
 	# server is allowed to accept (0: unlimited):
-	;MaxConnections = 0
+	MaxConnections = 0
 
 	# Maximum number of simultaneous connections from a single IP address
 	# the server will accept (0: unlimited):
-	;MaxConnectionsIP = 5
+	MaxConnectionsIP = 0
 
 	# Maximum number of channels a user can be member of (0: no limit):
-	;MaxJoins = 10
+	MaxJoins = 0
 
 	# Maximum length of an user nickname (Default: 9, as in RFC 2812).
 	# Please note that all servers in an IRC network MUST use the same
 	# maximum nickname length!
-	;MaxNickLength = 9
+	MaxNickLength = 0
 
 	# Maximum penalty time increase in seconds, per penalty event. Set to -1
 	# for no limit (the default), 0 to disable penalties altogether. The
