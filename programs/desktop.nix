@@ -6,7 +6,7 @@
   ...
 }:
 let
-  niri-use = niri.packages.${pkgs.system}.niri-unstable.overrideAttrs (old: {
+  niri-use = niri.packages.${pkgs.system}.niri-stable.overrideAttrs (old: {
     patches = (old.patches or [ ]) ++ [
       ./niri-make-chrome-happy.patch
     ];
