@@ -32,7 +32,7 @@ listen:
     max_stanza_size: 262144
     shaper: c2s_shaper
     access: c2s
-    starttls_required: true
+    starttls_required: false
   -
     port: 5223
     ip: "::"
@@ -40,7 +40,7 @@ listen:
     max_stanza_size: 262144
     shaper: c2s_shaper
     access: c2s
-    tls: true
+    tls: false
   -
     port: 5269
     ip: "::"
@@ -51,7 +51,7 @@ listen:
     port: 5443
     ip: "::"
     module: ejabberd_http
-    tls: true
+    tls: false
     request_handlers:
       /admin: ejabberd_web_admin
       /api: mod_http_api
