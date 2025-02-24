@@ -119,7 +119,7 @@
 	# Maximum length of an user nickname (Default: 9, as in RFC 2812).
 	# Please note that all servers in an IRC network MUST use the same
 	# maximum nickname length!
-	MaxNickLength = 0
+	MaxNickLength = 100
 
 	# Maximum penalty time increase in seconds, per penalty event. Set to -1
 	# for no limit (the default), 0 to disable penalties altogether. The
