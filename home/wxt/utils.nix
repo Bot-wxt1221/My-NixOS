@@ -15,6 +15,7 @@
     fastfetch
     yazi
     sops
+    libsForQt5.konversation
     libsForQt5.konsole
     gcc
     gdb
