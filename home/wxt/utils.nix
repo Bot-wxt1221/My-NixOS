@@ -3,6 +3,7 @@
   pkgs,
   lib,
   luogu-gcc,
+  nur,
   ...
 }:
 {
@@ -19,6 +20,7 @@
     libsForQt5.konsole
     gcc
     gdb
+    nur.repos.bot-wxt1221.ddz_py
     cmake
     nh
     gnumake

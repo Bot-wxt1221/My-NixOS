@@ -41,12 +41,17 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
       self,
       nixpkgs,
+      nur,
       home-manager,
       neovim,
       niri,
@@ -67,6 +72,7 @@
           nixVim
           luogu-gcc
           nix-colors
+          nur
           impermanence
           neovim
           nix-index-database
@@ -82,6 +88,7 @@
           nixVim
           luogu-gcc
           nix-colors
+          nur
           impermanence
           neovim
           nix-index-database
