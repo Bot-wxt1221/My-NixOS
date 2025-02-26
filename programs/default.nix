@@ -3,10 +3,12 @@
   lib,
   pkgs,
   nixpkgs,
+  nur,
   ...
 }:
 {
   imports = [
+    nur.modules.nixos.default
     ./kubo.nix
     ./nix/nix.nix
     ./rustdesk.nix

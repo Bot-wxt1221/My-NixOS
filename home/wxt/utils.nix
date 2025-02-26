@@ -20,7 +20,7 @@
     libsForQt5.konsole
     gcc
     gdb
-    nur.repos.bot-wxt1221.ddz_py
+    (pkgs.nur.repos.bot-wxt1221.ddz_py)
     cmake
     nh
     gnumake
