@@ -14,5 +14,6 @@
     script = ''
       touch /var/db/sudo/lectured/1000
     '';
+    wantedBy = [ "multi-user.target" ];
   };
 }
