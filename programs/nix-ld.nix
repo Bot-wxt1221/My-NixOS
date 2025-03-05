@@ -25,6 +25,11 @@
       libsodium
       libssh
       libunwind
+      systemd
+      pipewire
+      (lib.lowPrio ncurses5) # xgdb from xilinx vitis
+      ncurses
+      libxcrypt
       libusb1
       libuuid
       nspr
