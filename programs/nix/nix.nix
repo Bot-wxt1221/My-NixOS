@@ -13,6 +13,7 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 2d --keep 3";
+    dates = "*-*-* 12:00:00 UTC";
     flake = "/home/wxt/Working/config";
   };
   nix.settings.experimental-features = [
