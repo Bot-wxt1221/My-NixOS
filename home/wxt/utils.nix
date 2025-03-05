@@ -22,7 +22,6 @@
     gdb
     (pkgs.nur.repos.bot-wxt1221.ddz_py)
     cmake
-    nh
     gnumake
     fd
     gnome-logs

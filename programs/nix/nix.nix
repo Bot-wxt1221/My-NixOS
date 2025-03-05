@@ -9,10 +9,11 @@
   imports = [ ./cache.nix ];
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "12:00" ]; # Optional; allows customizing optimisation schedule
-  nix.gc = {
-    automatic = true;
-    dates = "daily";
-    options = "--delete-older-than 1d";
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 2d --keep 3";
+    flake = "/home/wxt/Working/config";
   };
   nix.settings.experimental-features = [
     "nix-command"
