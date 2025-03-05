@@ -3,6 +3,7 @@
   lib,
   pkgs,
   clipboard,
+  niri,
   ...
 }:
 let
@@ -48,10 +49,7 @@ in
     xdg.portal = with pkgs; {
       enable = true;
       configPackages = [
-        wlr-xdg-desktop
-        xdg-desktop-portal-gnome
-        xdg-desktop-portal-gtk
-        xdg-desktop-portal
+        niri.packages.${pkgs.system}.niri-stable
       ];
       extraPortals = [
         wlr-xdg-desktop
