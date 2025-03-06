@@ -73,10 +73,10 @@ in
     ] ''rm -f ${config.home.homeDirectory}/.config/mimeapps.list'';
     xdg.mimeApps =
       let
-        br = "microsoft-edge.desktop";
+        br = "chromium-browser.desktop";
         fm = "org.gnome.Nautilus.desktop";
-        iv = "microsoft-edge.desktop";
-        mp = "microsoft-edge.desktop";
+        iv = "chromium-browser.desktop";
+        mp = "chromium-browser.desktop";
         te = "nvim.desktop";
       in
       rec {
