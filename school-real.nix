@@ -48,7 +48,6 @@
     ];
     hashedPasswordFile = config.sops.secrets.wxt-password.path;
   };
-users.users.root.hashedPasswordFile = config.sops.secrets.wxt-password.path;
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   #  specialisation = {
   #    test-kernel = {

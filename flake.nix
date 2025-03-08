@@ -58,7 +58,7 @@
       neovim,
       niri,
       luogu-gcc,
-    nixinate,
+      nixinate,
       nix-colors,
       impermanence,
       clipboard,
@@ -102,7 +102,7 @@
       };
     in
     {
-    apps = nixinate.nixinate.x86_64-linux self;
+      apps = nixinate.nixinate.x86_64-linux self;
       nixosConfigurations.wxt-g3 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = SystemSpecialArgs;
@@ -161,7 +161,7 @@
             home-manager.users.wxt = import ./home/wxt/default-school-real.nix;
             home-manager.extraSpecialArgs = HmSpecialArgs;
           }
-{
+          {
             _module.args.nixinate = {
               host = "192.168.41.128";
               sshUser = "root";

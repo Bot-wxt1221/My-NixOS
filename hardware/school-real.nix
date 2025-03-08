@@ -12,7 +12,9 @@
     ./school-real-hardware-configuration.nix
     ../system/libinput.nix
     ./persist-config.nix
+    nixos-facter-modules.nixosModules.facter  
   ];
+  facter.reportPath = ./school-real-factor.json;
   boot.initrd.kernelModules = [
     "i915"
     "vfio-iommu-type1"
