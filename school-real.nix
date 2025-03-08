@@ -30,7 +30,7 @@
 
   EnableMineGPU = false;
   EnableVirtualBox = false;
-  EnableBluetooth = true;
+  EnableBluetooth = false;
   EnableMineCPU = false;
   EnableCuda = false;
   EnableKubo = false;
