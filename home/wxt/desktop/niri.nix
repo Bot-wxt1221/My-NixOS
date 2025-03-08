@@ -49,7 +49,7 @@ in
     xdg.portal = with pkgs; {
       enable = true;
       configPackages = [
-        niri.packages.${pkgs.system}.niri-stable
+        pkgs.niri
       ];
       extraPortals = [
         wlr-xdg-desktop
