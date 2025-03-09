@@ -28,7 +28,6 @@
     fsType = "btrfs";
     options = [
       "subvol=persist"
-      "compress=zstd"
     ];
   };
 }
