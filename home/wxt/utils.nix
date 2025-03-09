@@ -16,8 +16,8 @@
     fastfetch
     yazi
     sops
-    libsForQt5.konversation
-    libsForQt5.konsole
+    kdePackages.konversation
+    kdePackages.konsole
     gcc
     gdb
     (pkgs.nur.repos.bot-wxt1221.ddz_py)
