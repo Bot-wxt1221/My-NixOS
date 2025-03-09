@@ -64,6 +64,7 @@ in
             "gtk"
           ];
           "org.freedesktop.impl.portal.RemoteDesktop" = [ "wlr" ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
         };
       };
       xdgOpenUsePortal = true;
