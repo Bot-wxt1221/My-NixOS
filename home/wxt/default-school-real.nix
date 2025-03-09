@@ -22,8 +22,10 @@
     ./zsh.nix
     ./git.nix
     ./secret
-    ./secret/school-vmware
+    ./secret/school-real
   ];
+  cpuTempDevice = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input";
+  haveBacklight = true;
   home.username = "wxt";
   home.homeDirectory = "/home/wxt";
   home.stateVersion = osConfig.system.stateVersion;

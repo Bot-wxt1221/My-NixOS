@@ -14,7 +14,7 @@
     ./persist-config.nix
     nixos-facter-modules.nixosModules.facter
   ];
-  facter.reportPath = ./school-real-factor.json;
+  facter.reportPath = ./factor-school-real.json;
   boot.initrd.kernelModules = [
     "i915"
     "vfio-iommu-type1"

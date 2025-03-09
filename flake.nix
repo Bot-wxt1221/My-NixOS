@@ -212,6 +212,7 @@
                 self.nixosConfigurations.wxt-g3.config.system.build.toplevel
                 self.nixosConfigurations.wxt-school-vmware.config.system.build.toplevel
                 self.nixosConfigurations.wxt-bazhong.config.system.build.toplevel
+                self.nixosConfigurations.wxt-school-real.config.system.build.toplevel
               ];
             }
           )

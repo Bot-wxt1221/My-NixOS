@@ -19,7 +19,7 @@
     ./programs/ollama
     ./persist.nix
     ./system
-    ./security/sops/bazhong
+    ./security/sops/school-real
   ];
   time.timeZone = "Asia/Shanghai";
   Ownhostname = "wxt-school-real";

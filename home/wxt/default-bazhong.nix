@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  osConfig,
   lib,
   ...
 }:
@@ -27,7 +28,7 @@
   haveBacklight = true;
   home.username = "wxt";
   home.homeDirectory = "/home/wxt";
-  home.stateVersion = "25.05";
+  home.stateVersion = osConfig.system.stateVersion;
   programs.home-manager.enable = true;
   programs.git.signing.format = lib.mkForce "openpgp";
 }
