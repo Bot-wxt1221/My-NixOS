@@ -13,7 +13,7 @@
 {
   imports = [
     ./network
-    ./hardware/school-real.nix
+    ./hardware/school-real
     ./security
     ./programs
     ./programs/ollama

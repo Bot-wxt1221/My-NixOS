@@ -6,7 +6,7 @@
 }:
 {
   imports = [
-    ./hardware/school-vmware.nix
+    ./hardware/school-vmware
     ./network
     ./security
     ./programs/irc.nix

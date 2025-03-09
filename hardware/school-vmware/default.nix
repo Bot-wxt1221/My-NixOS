@@ -9,7 +9,7 @@
 {
   imports = [
     ./school-vmware-hardware-configuration.nix
-    ./persist-config.nix
+    ../persist-config.nix
     nixos-facter-modules.nixosModules.facter
   ];
   facter.reportPath = ./facter-school-vmware.json;

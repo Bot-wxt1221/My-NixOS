@@ -9,13 +9,12 @@
 
 {
   imports = [
-    ./bazhong-hardware-configuration.nix
-    ../system/laptop.nix
-    ../system/libinput.nix
-    ./persist-config.nix
+    ./school-real-hardware-configuration.nix
+    ../../system/libinput.nix
+    ../persist-config.nix
     nixos-facter-modules.nixosModules.facter
   ];
-  facter.reportPath = ./facter-bazhong.json;
+  facter.reportPath = ./factor-school-real.json;
   boot.initrd.kernelModules = [
     "i915"
     "vfio-iommu-type1"

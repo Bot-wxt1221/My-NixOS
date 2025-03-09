@@ -13,7 +13,7 @@
 {
   imports = [
     ./network
-    ./hardware/g3.nix
+    ./hardware/g3
     ./security
     ./programs
     ./persist.nix

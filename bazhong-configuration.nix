@@ -13,7 +13,7 @@
 {
   imports = [
     ./network
-    ./hardware/bazhong.nix
+    ./hardware/bazhong
     ./security
     ./programs
     ./programs/ollama
