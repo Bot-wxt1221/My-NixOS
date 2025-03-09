@@ -24,7 +24,7 @@
     ./secret
     ./secret/school-real
   ];
-  cpuTempDevice = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input";
+  cpuTempDevice = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input";
   haveBacklight = true;
   home.username = "wxt";
   home.homeDirectory = "/home/wxt";
