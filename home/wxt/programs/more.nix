@@ -32,6 +32,8 @@
       ".config/dconf"
       ".local/share/flatpak"
       ".var"
+
+      ".local/share/waydroid"
     ];
     files = [
       ".wakatime.cfg"
