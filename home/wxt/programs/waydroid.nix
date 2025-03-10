@@ -18,5 +18,11 @@
       Categories=X-WayDroid-App;
       X-Purism-FormFactor=Workstation;Mobile;
     '';
+    systemd.user.startServices = "sd-switch";
+    home.persistence."/persist/home/wxt" = {
+      directories = [
+        ".local/share/waydroid"
+      ];
+    };
   };
 }
