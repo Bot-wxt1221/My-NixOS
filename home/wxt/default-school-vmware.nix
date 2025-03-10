@@ -15,7 +15,6 @@
     ./debug-cc.nix
     ./persist.nix
     ./virt.nix
-    ./waydroid.nix
     ./java.nix
     ./utils.nix
     ./nix.nix

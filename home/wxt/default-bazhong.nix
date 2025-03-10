@@ -14,7 +14,6 @@
     ./debug-cc.nix
     ./virt.nix
     ./programs
-    ./waydroid.nix
     ./direnv.nix
     ./java.nix
     ./nix.nix

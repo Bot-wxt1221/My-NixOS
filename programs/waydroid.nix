@@ -21,6 +21,7 @@
       hideMounts = true;
       directories = [
         "/var/lib/waydroid"
+        "/home/wxt/.local/share/waydroid"
       ];
     };
   };
