@@ -13,6 +13,7 @@
   home.file."g++-9".executable = true;
   home.packages = with pkgs; [
     comma
+    nix-du
     cachix
     fastfetch
     yazi
