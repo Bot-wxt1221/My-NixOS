@@ -60,15 +60,16 @@
   services.xserver.videoDrivers = [
     "modesettings"
   ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [
+    "kvm-intel"
+    "acpi_call"
+  ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
     (rtl8821ce.overrideAttrs (old: {
       env.NIX_CFLAGS_COMPILE = toString [
         "-Wno-error=incompatible-pointer-types"
       ];
     }))
-    (acpi_call.overrideAttrs (old: {
-      preBuild = (old.preBuild or "") + "export buildRoot=.";
-    }))
+    acpi_call
   ];
 }

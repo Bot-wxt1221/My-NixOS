@@ -82,10 +82,11 @@
     "modesettings"
     "nvidia"
   ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [
+    "kvm-intel"
+    "acpi_call"
+  ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
-    (acpi_call.overrideAttrs (old: {
-      preBuild = (old.preBuild or "") + "export buildRoot=.";
-    }))
+    acpi_call
   ];
 }
