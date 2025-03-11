@@ -69,6 +69,12 @@ in
       };
       xdgOpenUsePortal = true;
     };
+    home.file = {
+      ".config/wayvnc/config".text = ''
+        enable_auth=true
+        enable_pam=true
+      '';
+    };
     home.activation.mimeapps-remove = lib.hm.dag.entryBefore [
       "checkLinkTargets"
     ] ''rm -f ${config.home.homeDirectory}/.config/mimeapps.list'';
