@@ -18,6 +18,12 @@ in
   ];
   config = {
     security.pam.services.swaylock = { };
+    security.pam.services.wayvnc = {
+      text = ''
+        auth    required pam_unix.so nodelay deny=3 unlock_time=600
+        account required pam_unix.so nodelay deny=3 unlock_time=600
+      '';
+    };
     services.xserver.enable = true;
     services.xserver.displayManager.gdm.enable = true;
     services.xserver.displayManager.gdm.wayland = true;
