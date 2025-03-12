@@ -44,8 +44,8 @@ with rec {
 {
   imports = [
     (modulesPath + "/installer/cd-dvd/installation-cd-minimal-new-kernel-no-zfs.nix")
-    ../programs/nix/nix.nix
-    ../programs/root-utils.nix
+    ../nixos-modules/programs/nix
+    ../nixos-modules/programs/root-utils.nix
   ];
   config = {
     documentation.man.enable = false;

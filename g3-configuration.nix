@@ -12,14 +12,8 @@
 
 {
   imports = [
-    ./network
-    ./hardware/g3
-    ./security
-    ./programs
-    ./persist.nix
-    ./system
-    ./security/sops/g3
-    ./programs/ollama
+    ./machine/g3
+    ./nixos-modules
   ];
   time.timeZone = "Asia/Shanghai";
   Ownhostname = "wxt-g3";
@@ -28,6 +22,7 @@
   EnableWaydroid = true;
   EnableVirt = true;
 
+  EnableOllama = true;
   EnableMineGPU = false;
   EnableVirtualBox = false;
   EnableBluetooth = true;

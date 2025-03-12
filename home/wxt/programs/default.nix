@@ -12,7 +12,6 @@
     ./fcitx5.nix
     ./more.nix
     ./nix-index.nix
-    ./chromium.nix
     ./waydroid.nix
   ];
 }

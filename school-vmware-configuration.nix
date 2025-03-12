@@ -6,18 +6,13 @@
 }:
 {
   imports = [
-    ./hardware/school-vmware
-    ./network
-    ./security
-    ./programs/irc.nix
-    ./persist.nix
-    ./programs
-    ./system
-    ./security/sops/school-vmware
+    ./machine/school-vmware
+    ./nixos-modules
   ];
   time.timeZone = "Asia/Shanghai";
   Ownhostname = "wxt-school-vmware";
   Enablepulseaudio = true;
+  EnableIRC = true;
   users.users.wxt = {
     isNormalUser = true;
     extraGroups = [
@@ -28,7 +23,6 @@
       "networkmanager"
     ];
     hashedPassword = "$y$j9T$XjbKBaxc32Pc.Mj4HQ.tu/$mxn7xvy5I/1/bv/eF64cwMSakLuFM1YgjU44r249I7/";
-    packages = with pkgs; [ ];
   };
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 }

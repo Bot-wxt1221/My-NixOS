@@ -1,0 +1,10 @@
+{
+  ...
+}:
+{
+  imports = [
+    ./hardware
+    ./programs
+    ./security
+  ];
+}

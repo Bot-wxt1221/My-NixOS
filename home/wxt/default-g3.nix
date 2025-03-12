@@ -8,20 +8,10 @@
 
 {
   imports = [
-    ./gpg.nix
-    ./desktop
-    ./persist.nix
-    ./debug-cc.nix
-    ./virt.nix
-    ./programs
-    ./direnv.nix
-    ./java.nix
-    ./nix.nix
-    ./utils.nix
-    ./zsh.nix
-    ./git.nix
     ./secret
     ./secret/g3
+
+    ./shared-modules.nix
   ];
   cpuTempDevice = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input";
   haveBacklight = true;

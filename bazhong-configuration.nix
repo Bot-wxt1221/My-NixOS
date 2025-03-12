@@ -12,14 +12,8 @@
 
 {
   imports = [
-    ./network
-    ./hardware/bazhong
-    ./security
-    ./programs
-    ./programs/ollama
-    ./persist.nix
-    ./system
-    ./security/sops/bazhong
+    ./machine/bazhong
+    ./nixos-modules
   ];
   time.timeZone = "Asia/Shanghai";
   Ownhostname = "wxt-bazhong";
@@ -28,6 +22,7 @@
   EnableWaydroid = true;
   EnableVirt = false;
 
+  EnableOllama = true;
   EnableMineGPU = false;
   EnableVirtualBox = false;
   EnableBluetooth = true;

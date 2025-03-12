@@ -12,14 +12,8 @@
 
 {
   imports = [
-    ./network
-    ./hardware/school-real
-    ./security
-    ./programs
-    ./programs/ollama
-    ./persist.nix
-    ./system
-    ./security/sops/school-real
+    ./machine/school-real
+    ./nixos-modules
   ];
   time.timeZone = "Asia/Shanghai";
   Ownhostname = "wxt-school-real";
@@ -28,6 +22,7 @@
   EnableWaydroid = true;
   EnableVirt = false;
 
+  EnableOllama = true;
   EnableMineGPU = false;
   EnableVirtualBox = false;
   EnableBluetooth = false;
