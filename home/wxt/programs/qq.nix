@@ -14,6 +14,7 @@
   };
   home.packages = with pkgs; [
     (qq.overrideAttrs (old: {
+      preferLocalBuild = true;
       installPhase =
         old.installPhase
         + ''
