@@ -537,6 +537,7 @@
           "ept_ad",
           "fsgsbase",
           "tsc_adjust",
+          "sgx",
           "bmi1",
           "avx2",
           "smep",
@@ -704,200 +705,6 @@
           "value": 133
         },
         "slot": {
-          "bus": 0,
-          "number": 0
-        },
-        "base_class": {
-          "hex": "0106",
-          "name": "Mass Storage Device",
-          "value": 262
-        },
-        "sub_class": {
-          "hex": "0000",
-          "name": "Disk",
-          "value": 0
-        },
-        "vendor": {
-          "hex": "0000",
-          "name": "KINGSTON",
-          "value": 0
-        },
-        "device": {
-          "hex": "0000",
-          "name": "SA400S3",
-          "value": 0
-        },
-        "revision": {
-          "hex": "0000",
-          "name": "62C3",
-          "value": 0
-        },
-        "serial": "50026B768537ED56",
-        "model": "KINGSTON SA400S3",
-        "sysfs_id": "/class/block/sdb",
-        "sysfs_bus_id": "0:0:0:0",
-        "sysfs_device_link": "/devices/pci0000:00/0000:00:17.0/ata1/host0/target0:0:0/0:0:0:0",
-        "unix_device_name": "/dev/sdb",
-        "unix_device_number": {
-          "type": 98,
-          "major": 8,
-          "minor": 16,
-          "range": 16
-        },
-        "unix_device_names": [
-          "/dev/disk/by-diskseq/3",
-          "/dev/disk/by-id/ata-KINGSTON_SA400S37240G_50026B768537ED56",
-          "/dev/disk/by-id/wwn-0x50026b768537ed56",
-          "/dev/disk/by-path/pci-0000:00:17.0-ata-1",
-          "/dev/disk/by-path/pci-0000:00:17.0-ata-1.0",
-          "/dev/sdb"
-        ],
-        "resources": [
-          {
-            "type": "disk_geo",
-            "cylinders": 29185,
-            "heads": 255,
-            "sectors": 63,
-            "size": 0,
-            "geo_type": "logical"
-          },
-          {
-            "type": "size",
-            "unit": "sectors",
-            "value_1": 468862128,
-            "value_2": 512
-          }
-        ],
-        "driver": "ahci",
-        "driver_module": "ahci",
-        "drivers": [
-          "ahci",
-          "sd"
-        ],
-        "driver_modules": [
-          "ahci",
-          "sd_mod"
-        ]
-      },
-      {
-        "index": 30,
-        "attached_to": 24,
-        "class_list": [
-          "disk",
-          "usb",
-          "scsi",
-          "block_device"
-        ],
-        "bus_type": {
-          "hex": "0084",
-          "name": "SCSI",
-          "value": 132
-        },
-        "slot": {
-          "bus": 6,
-          "number": 0
-        },
-        "base_class": {
-          "hex": "0106",
-          "name": "Mass Storage Device",
-          "value": 262
-        },
-        "sub_class": {
-          "hex": "0000",
-          "name": "Disk",
-          "value": 0
-        },
-        "vendor": {
-          "hex": "0951",
-          "name": "Kingston",
-          "value": 2385
-        },
-        "device": {
-          "hex": "1666",
-          "name": "DataTraveler 3.0",
-          "value": 5734
-        },
-        "revision": {
-          "hex": "0000",
-          "name": "0000",
-          "value": 0
-        },
-        "serial": "0000000005",
-        "model": "Kingston DataTraveler 3.0",
-        "sysfs_id": "/class/block/sdc",
-        "sysfs_bus_id": "6:0:0:0",
-        "sysfs_device_link": "/devices/pci0000:00/0000:00:14.0/usb1/1-2/1-2:1.0/host6/target6:0:0/6:0:0:0",
-        "unix_device_name": "/dev/sdc",
-        "unix_device_number": {
-          "type": 98,
-          "major": 8,
-          "minor": 32,
-          "range": 16
-        },
-        "unix_device_names": [
-          "/dev/disk/by-diskseq/4",
-          "/dev/disk/by-id/usb-Kingston_DataTraveler_3.0_E0D55E696FA4168168631064-0:0",
-          "/dev/disk/by-path/pci-0000:00:14.0-usb-0:2:1.0-scsi-0:0:0:0",
-          "/dev/disk/by-path/pci-0000:00:14.0-usbv2-0:2:1.0-scsi-0:0:0:0",
-          "/dev/sdc"
-        ],
-        "unix_device_name2": "/dev/sg2",
-        "unix_device_number2": {
-          "type": 99,
-          "major": 21,
-          "minor": 2,
-          "range": 1
-        },
-        "resources": [
-          {
-            "type": "baud",
-            "speed": 480000000,
-            "bits": 0,
-            "stop_bits": 0,
-            "parity": 0,
-            "handshake": 0
-          },
-          {
-            "type": "disk_geo",
-            "cylinders": 29560,
-            "heads": 64,
-            "sectors": 32,
-            "size": 0,
-            "geo_type": "logical"
-          },
-          {
-            "type": "size",
-            "unit": "sectors",
-            "value_1": 60538881,
-            "value_2": 512
-          }
-        ],
-        "driver": "usb-storage",
-        "driver_module": "usb_storage",
-        "drivers": [
-          "sd",
-          "usb-storage"
-        ],
-        "driver_modules": [
-          "sd_mod",
-          "usb_storage"
-        ],
-        "module_alias": "usb:v0951p1666d0200dc00dsc00dp00ic08isc06ip50in00"
-      },
-      {
-        "index": 31,
-        "attached_to": 11,
-        "class_list": [
-          "disk",
-          "ide",
-          "block_device"
-        ],
-        "bus_type": {
-          "hex": "0085",
-          "name": "IDE",
-          "value": 133
-        },
-        "slot": {
           "bus": 2,
           "number": 0
         },
@@ -928,24 +735,24 @@
         },
         "serial": "WD-WCC6Y3JDS17X",
         "model": "WDC WD10EZEX-08W",
-        "sysfs_id": "/class/block/sda",
+        "sysfs_id": "/class/block/sdb",
         "sysfs_bus_id": "2:0:0:0",
         "sysfs_device_link": "/devices/pci0000:00/0000:00:17.0/ata3/host2/target2:0:0/2:0:0:0",
-        "unix_device_name": "/dev/sda",
+        "unix_device_name": "/dev/sdb",
         "unix_device_number": {
           "type": 98,
           "major": 8,
-          "minor": 0,
+          "minor": 16,
           "range": 16
         },
         "unix_device_names": [
-          "/dev/disk/by-diskseq/2",
+          "/dev/disk/by-diskseq/3",
           "/dev/disk/by-id/ata-WDC_WD10EZEX-08WN4A0_WD-WCC6Y3JDS17X",
           "/dev/disk/by-id/wwn-0x50014ee267cddef9",
           "/dev/disk/by-path/pci-0000:00:17.0-ata-3",
           "/dev/disk/by-path/pci-0000:00:17.0-ata-3.0",
           "/dev/disk/by-uuid/1edf4027-aa3e-4203-b637-e1c0a5757314",
-          "/dev/sda"
+          "/dev/sdb"
         ],
         "resources": [
           {
@@ -960,6 +767,95 @@
             "type": "size",
             "unit": "sectors",
             "value_1": 1953525168,
+            "value_2": 512
+          }
+        ],
+        "driver": "ahci",
+        "driver_module": "ahci",
+        "drivers": [
+          "ahci",
+          "sd"
+        ],
+        "driver_modules": [
+          "ahci",
+          "sd_mod"
+        ]
+      },
+      {
+        "index": 30,
+        "attached_to": 11,
+        "class_list": [
+          "disk",
+          "ide",
+          "block_device"
+        ],
+        "bus_type": {
+          "hex": "0085",
+          "name": "IDE",
+          "value": 133
+        },
+        "slot": {
+          "bus": 0,
+          "number": 0
+        },
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "vendor": {
+          "hex": "0000",
+          "name": "KINGSTON",
+          "value": 0
+        },
+        "device": {
+          "hex": "0000",
+          "name": "SA400S3",
+          "value": 0
+        },
+        "revision": {
+          "hex": "0000",
+          "name": "62C3",
+          "value": 0
+        },
+        "serial": "50026B768537ED56",
+        "model": "KINGSTON SA400S3",
+        "sysfs_id": "/class/block/sda",
+        "sysfs_bus_id": "0:0:0:0",
+        "sysfs_device_link": "/devices/pci0000:00/0000:00:17.0/ata1/host0/target0:0:0/0:0:0:0",
+        "unix_device_name": "/dev/sda",
+        "unix_device_number": {
+          "type": 98,
+          "major": 8,
+          "minor": 0,
+          "range": 16
+        },
+        "unix_device_names": [
+          "/dev/disk/by-diskseq/2",
+          "/dev/disk/by-id/ata-KINGSTON_SA400S37240G_50026B768537ED56",
+          "/dev/disk/by-id/wwn-0x50026b768537ed56",
+          "/dev/disk/by-path/pci-0000:00:17.0-ata-1",
+          "/dev/disk/by-path/pci-0000:00:17.0-ata-1.0",
+          "/dev/sda"
+        ],
+        "resources": [
+          {
+            "type": "disk_geo",
+            "cylinders": 29185,
+            "heads": 255,
+            "sectors": 63,
+            "size": 0,
+            "geo_type": "logical"
+          },
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 468862128,
             "value_2": 512
           }
         ],
@@ -1093,7 +989,7 @@
     ],
     "hub": [
       {
-        "index": 36,
+        "index": 33,
         "attached_to": 24,
         "class_list": [
           "usb",
@@ -1115,7 +1011,7 @@
         },
         "vendor": {
           "hex": "1d6b",
-          "name": "Linux 6.13.5 xhci-hcd",
+          "name": "Linux 6.13.6 xhci-hcd",
           "value": 7531
         },
         "device": {
@@ -1129,7 +1025,7 @@
           "value": 0
         },
         "serial": "0000:00:14.0",
-        "model": "Linux 6.13.5 xhci-hcd xHCI Host Controller",
+        "model": "Linux 6.13.6 xhci-hcd xHCI Host Controller",
         "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-0:1.0",
         "sysfs_bus_id": "1-0:1.0",
         "resources": [
@@ -1176,7 +1072,7 @@
         "module_alias": "usb:v1D6Bp0002d0613dc09dsc00dp01ic09isc00ip00in00"
       },
       {
-        "index": 37,
+        "index": 35,
         "attached_to": 24,
         "class_list": [
           "usb",
@@ -1198,7 +1094,7 @@
         },
         "vendor": {
           "hex": "1d6b",
-          "name": "Linux 6.13.5 xhci-hcd",
+          "name": "Linux 6.13.6 xhci-hcd",
           "value": 7531
         },
         "device": {
@@ -1212,7 +1108,7 @@
           "value": 0
         },
         "serial": "0000:00:14.0",
-        "model": "Linux 6.13.5 xhci-hcd xHCI Host Controller",
+        "model": "Linux 6.13.6 xhci-hcd xHCI Host Controller",
         "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb2/2-0:1.0",
         "sysfs_bus_id": "2-0:1.0",
         "detail": {
@@ -1251,8 +1147,8 @@
     ],
     "keyboard": [
       {
-        "index": 33,
-        "attached_to": 36,
+        "index": 34,
+        "attached_to": 33,
         "class_list": [
           "keyboard",
           "usb"
@@ -1292,20 +1188,20 @@
           "value": 0
         },
         "model": "Usb KeyBoard",
-        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-10/1-10:1.0",
-        "sysfs_bus_id": "1-10:1.0",
-        "unix_device_name": "/dev/input/event2",
+        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.0",
+        "sysfs_bus_id": "1-8:1.0",
+        "unix_device_name": "/dev/input/event1",
         "unix_device_number": {
           "type": 99,
           "major": 13,
-          "minor": 66,
+          "minor": 65,
           "range": 1
         },
         "unix_device_names": [
           "/dev/input/by-id/usb-Usb_KeyBoard_Usb_KeyBoard-event-kbd",
-          "/dev/input/by-path/pci-0000:00:14.0-usb-0:10:1.0-event-kbd",
-          "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:10:1.0-event-kbd",
-          "/dev/input/event2"
+          "/dev/input/by-path/pci-0000:00:14.0-usb-0:8:1.0-event-kbd",
+          "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:8:1.0-event-kbd",
+          "/dev/input/event1"
         ],
         "resources": [
           {
@@ -1382,14 +1278,14 @@
           {
             "type": "mem",
             "base": 0,
-            "range": 12433350656,
+            "range": 16529129472,
             "enabled": true,
             "access": "read_write",
             "prefetch": "unknown"
           },
           {
             "type": "phys_mem",
-            "range": 12884901888
+            "range": 16106127360
           }
         ]
       }
@@ -1616,7 +1512,7 @@
     "mouse": [
       {
         "index": 32,
-        "attached_to": 36,
+        "attached_to": 33,
         "class_list": [
           "mouse",
           "usb"
@@ -1658,8 +1554,8 @@
         "compat_vendor": "Unknown",
         "compat_device": "Generic USB Mouse",
         "model": "PixArt USB Optical Mouse",
-        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-9/1-9:1.0",
-        "sysfs_bus_id": "1-9:1.0",
+        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0",
+        "sysfs_bus_id": "1-7:1.0",
         "unix_device_name": "/dev/input/mice",
         "unix_device_number": {
           "type": 99,
@@ -1851,30 +1747,7 @@
     ],
     "network_interface": [
       {
-        "index": 38,
-        "attached_to": 0,
-        "class_list": [
-          "network_interface"
-        ],
-        "base_class": {
-          "hex": "0107",
-          "name": "Network Interface",
-          "value": 263
-        },
-        "sub_class": {
-          "hex": "0000",
-          "name": "Loopback",
-          "value": 0
-        },
-        "model": "Loopback network interface",
-        "sysfs_id": "/class/net/lo",
-        "unix_device_name": "lo",
-        "unix_device_names": [
-          "lo"
-        ]
-      },
-      {
-        "index": 41,
+        "index": 37,
         "attached_to": 15,
         "class_list": [
           "network_interface"
@@ -1913,6 +1786,29 @@
         ],
         "driver_modules": [
           "r8169"
+        ]
+      },
+      {
+        "index": 38,
+        "attached_to": 0,
+        "class_list": [
+          "network_interface"
+        ],
+        "base_class": {
+          "hex": "0107",
+          "name": "Network Interface",
+          "value": 263
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Loopback",
+          "value": 0
+        },
+        "model": "Loopback network interface",
+        "sysfs_id": "/class/net/lo",
+        "unix_device_name": "lo",
+        "unix_device_names": [
+          "lo"
         ]
       }
     ],
@@ -2397,7 +2293,7 @@
           },
           {
             "type": "irq",
-            "base": 133,
+            "base": 140,
             "triggered": 0,
             "enabled": true
           },
@@ -2431,7 +2327,7 @@
           "command": 1031,
           "header_type": 0,
           "secondary_bus": 0,
-          "irq": 133,
+          "irq": 140,
           "prog_if": 1
         },
         "driver": "ahci",
@@ -2589,8 +2485,8 @@
     ],
     "usb": [
       {
-        "index": 35,
-        "attached_to": 36,
+        "index": 31,
+        "attached_to": 33,
         "class_list": [
           "usb",
           "unknown"
@@ -2630,8 +2526,8 @@
           "value": 0
         },
         "model": "Usb KeyBoard",
-        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-10/1-10:1.1",
-        "sysfs_bus_id": "1-10:1.1",
+        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.1",
+        "sysfs_bus_id": "1-8:1.1",
         "unix_device_name": "/dev/input/event3",
         "unix_device_number": {
           "type": 99,
@@ -2783,8 +2679,8 @@
     "bios": {
       "handle": 0,
       "vendor": "LENOVO",
-      "version": "M2YKT33A",
-      "date": "06/20/2022",
+      "version": "M2YKT36A",
+      "date": "04/27/2023",
       "features": [
         "PCI supported",
         "BIOS flashable",
@@ -3067,7 +2963,7 @@
         "handle": 57,
         "array_handle": 54,
         "start_address": 0,
-        "end_address": 12884901888,
+        "end_address": 17179869184,
         "part_width": 2
       }
     ],
@@ -3076,8 +2972,8 @@
         "handle": 55,
         "location": "ChannelA-DIMM1",
         "bank_location": "BANK 1",
-        "manufacturer": "0807",
-        "part_number": "BRBP1G88G8C2666",
+        "manufacturer": "0000",
+        "part_number": "DDR4 8G 2666",
         "array_handle": 54,
         "error_handle": 65534,
         "width": 64,
@@ -3104,12 +3000,12 @@
         "location": "ChannelB-DIMM1",
         "bank_location": "BANK 3",
         "manufacturer": "0807",
-        "part_number": "BRBP51284G8C2400",
+        "part_number": "BRBP1G88G8C2666",
         "array_handle": 54,
         "error_handle": 65534,
         "width": 64,
         "ecc_bits": 0,
-        "size": 4194304,
+        "size": 8388608,
         "form_factor": {
           "hex": "0009",
           "name": "DIMM",
@@ -3124,7 +3020,7 @@
         "memory_type_details": [
           "Synchronous"
         ],
-        "speed": 2400
+        "speed": 2667
       }
     ],
     "memory_device_mapped_address": [
@@ -3143,7 +3039,7 @@
         "memory_device_handle": 56,
         "array_map_handle": 57,
         "start_address": 8589934592,
-        "end_address": 12884901888,
+        "end_address": 17179869184,
         "row_position": 255,
         "interleave_position": 2,
         "interleave_depth": 1
