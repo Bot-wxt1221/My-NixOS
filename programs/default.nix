@@ -33,6 +33,6 @@
     ./waydroid.nix
     ./miner.nix
     ./root-utils.nix
-    ./nix-ld.nix
+    ./nix-ld
   ];
 }
