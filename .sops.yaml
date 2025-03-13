@@ -5,8 +5,8 @@ keys:
 
   - &home_wxt_bazhong age1kjc9nyxnnsgytwug46ue7wx2e6z5mxugaa9ntm5umsd0fmnpu3lqerpurc
   - &home_wxt_g3 age1kjc9nyxnnsgytwug46ue7wx2e6z5mxugaa9ntm5umsd0fmnpu3lqerpurc
-  - &home_wxt_school age1pjyvwzmacrkyhg0tphnkv7u0p4l2kahl66lcdq3sd0ymsc2vkpuqnnl4al
-  - &admin_all
+  - &home_wxt_school age1wtt3n5n3g80tr6xd3a7unckyl6zuu3535ywtm0r92f8ew6rdv4qs02avd0
+  - &admin_all age1wtt3n5n3g80tr6xd3a7unckyl6zuu3535ywtm0r92f8ew6rdv4qs02avd0
 creation_rules:
   - path_regex: home/wxt/secret/2FA
     key_groups:
@@ -30,17 +30,22 @@ creation_rules:
     - age:
       - *home_wxt_g3
       - *admin_all
-  - path_regex: security/sops/g3
+  - path_regex: machine/g3/sops
     key_groups:
     - age:
       - *root_wxt_g3
       - *admin_all
-  - path_regex: security/sops/bazhong
+  - path_regex: machine/bazhong/sops
     key_groups:
     - age:
       - *root_wxt_bazhong
       - *admin_all
-  - path_regex: security/sops/school-*
+  - path_regex: machine/school-real/sops
+    key_groups:
+    - age:
+      - *root_wxt_school
+      - *admin_all
+  - path_regex: machine/school-vmware/sops
     key_groups:
     - age:
       - *root_wxt_school
