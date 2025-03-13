@@ -1,6 +1,4 @@
-{
-  pkgs,
-}:
+{ pkgs, lib, ... }:
 [
   {
     id = "kpbnombpnpcffllnianjibmpadjolanh";
