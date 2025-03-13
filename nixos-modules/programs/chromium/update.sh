@@ -1,7 +1,7 @@
 #! /usr/bin/env nix-shell
 #! nix-shell -i bash -p jq curl wget unzip
 
-echo { pkgs, lib, ... }:
+echo { pkgs }:
 echo \[
 
 while read line2

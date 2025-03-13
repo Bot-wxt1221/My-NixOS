@@ -109,5 +109,6 @@
     pciutils # lspci
     usbutils # lsusb
     deadnix
+    statix
   ];
 }
