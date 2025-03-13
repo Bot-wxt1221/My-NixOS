@@ -38,6 +38,7 @@
     description = "Reset BTRFS root subvolume to empty snapshot";
     # initrd target: root filesystem device is available but not yet mounted. So ensure that this happens in that window.
     wantedBy = [ "initrd.target" ];
+    after = [ "initrd-root-device.target" ];
     # ensure this happens before mounting root
     before = [ "sysroot.mount" ];
     # Don't establish any dependencies not defined here
