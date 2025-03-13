@@ -2,26 +2,27 @@
   config,
   lib,
   pkgs,
-  nixos-facter-modules,
   ...
 }:
-
 {
   imports = [
-    ./school-vmware-hardware-configuration.nix
-    ../persist-config.nix
-    ./sops
-    nixos-facter-modules.nixosModules.facter
+    ./hardware.nix
+    ../../nixos-modules
   ];
-  facter.reportPath = ./facter-school-vmware.json;
-  environment.systemPackages = with pkgs; [
-    xorg.xf86videovmware
-  ];
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-ocl
+  time.timeZone = "Asia/Shanghai";
+  Ownhostname = "wxt-school-vmware";
+  Enablepulseaudio = true;
+  EnableIRC = true;
+  users.users.wxt = {
+    isNormalUser = true;
+    extraGroups = [
+      "wheel"
+      "docker"
+      "adbusers"
+      "video"
+      "networkmanager"
     ];
+    hashedPassword = "$y$j9T$XjbKBaxc32Pc.Mj4HQ.tu/$mxn7xvy5I/1/bv/eF64cwMSakLuFM1YgjU44r249I7/";
   };
-  virtualisation.vmware.guest.enable = true;
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 }

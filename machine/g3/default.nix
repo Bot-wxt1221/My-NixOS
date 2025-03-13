@@ -1,91 +1,75 @@
+# Edit this configuration file to define what should be installed on
+# your system. Help is available in the configuration.nix(5) man page, on
+# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
+
 {
   config,
   lib,
   pkgs,
-  modulesPath,
-  nixos-facter-modules,
+  nixpkgs,
   ...
 }:
 
 {
   imports = [
-    ./g3-hardware-configuration.nix
-    ../persist-config.nix
-    ./sops
-    nixos-facter-modules.nixosModules.facter
+    ./hardware.nix
+    ../../nixos-modules
   ];
-  facter.reportPath = ./facter-g3.json;
-  boot.initrd.kernelModules = [
-    "i915"
-    "vfio-iommu-type1"
-    "kvmgt"
-    "mdev"
-    "acpi_call"
-    "snd_aloop"
-  ];
-  nixpkgs.config.packageOverrides = pkgs: {
-    intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
-  };
-  nixpkgs.config.cudaSupport = true;
-  services.hardware.bolt.enable = true;
-  services.fstrim.enable = lib.mkDefault true;
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      vaapiIntel
-      libva
-      libvdpau-va-gl
-      vaapiVdpau
-      ocl-icd
-      intel-ocl
-      intel-compute-runtime
-      nvidia-vaapi-driver
-      intel-media-driver
+  time.timeZone = "Asia/Shanghai";
+  Ownhostname = "wxt-g3";
+  Enablesteam = true;
+  Enablepipewire = true;
+  EnableWaydroid = true;
+  EnableVirt = true;
+
+  EnableOllama = true;
+  EnableMineGPU = false;
+  EnableVirtualBox = false;
+  EnableBluetooth = true;
+  EnableMineCPU = false;
+  EnableCuda = true;
+  EnableKubo = false;
+  EnableDocker = true;
+  Laptop = true;
+  users.users.wxt = {
+    isNormalUser = true;
+    extraGroups = [
+      "wheel"
+      "docker"
+      "adbusers"
+      "libvirtd"
+      "video"
+      "networkmanager"
     ];
-    extraPackages32 = with pkgs.pkgsi686Linux; [
-      vaapiVdpau
-      libvdpau-va-gl
-      intel-media-driver
-    ];
+    hashedPasswordFile = config.sops.secrets.wxt-password.path;
   };
-  environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "iHD";
-    QT_QPA_PLATFORM = "wayland";
-  };
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    powerManagement.finegrained = true;
-    open = true;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
-    prime = {
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
-      nvidiaBusId = "PCI:1:0:0";
-      intelBusId = "PCI:0:2:0";
-    };
-  };
-  boot.kernelParams = [
-    "intel_iommu=on"
-    "i915.enable_guc=3"
-    "nvidia_drm.fbdev=1"
-    "nvidia_drm.modeset=1"
-    "i915.enable_fbc=1"
-    "i915.enable_execlists=0"
-    "acpi_osi=Linux-Dell-Video"
-  ];
-  services.xserver.videoDrivers = [
-    "modesettings"
-    "nvidia"
-  ];
-  boot.kernelModules = [
-    "kvm-intel"
-    "acpi_call"
-  ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    acpi_call
-  ];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  #  specialisation = {
+  #    test-kernel = {
+  #      configuration = {
+  #        system.nixos.tags = [ "test-kernel" ];
+  #        boot.kernelPackages = pkgs.linuxPackagesFor (
+  #          pkgs.buildLinux {
+  #            version = "6.12-rc1";
+  #            extraMeta.branch = "6.12";
+  #            kernelPatches = [
+  #              {
+  #                name = "bridge-stp-helper";
+  #                patch = "${nixpkgs}/pkgs/os-specific/linux/kernel/bridge-stp-helper.patch";
+  #              }
+  #              {
+  #                name = "request-key-helper";
+  #                patch = "${nixpkgs}/pkgs/os-specific/linux/kernel/request-key-helper.patch";
+  #              }
+  #            ];
+  #            src = pkgs.fetchzip {
+  #              url = "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-6.12-rc1.tar.gz";
+  #              hash = "sha256-olfaNFVQD9qyF/5I0ynv2xa0zxQag/4jyLvZt5nc/Js=";
+  #            };
+  #          }
+  #        );
+  #      };
+  #      inheritParentConfig = true;
+  #    };
+  #  };
 }

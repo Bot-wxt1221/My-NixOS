@@ -2,73 +2,70 @@
   config,
   lib,
   pkgs,
-  modulesPath,
-  nixos-facter-modules,
+  nixpkgs,
   ...
 }:
 
 {
   imports = [
-    ./bazhong-hardware-configuration.nix
-    ../persist-config.nix
-    ./sops
-    nixos-facter-modules.nixosModules.facter
+    ./hardware.nix
+    ../../nixos-modules
   ];
-  facter.reportPath = ./facter-bazhong.json;
-  boot.initrd.kernelModules = [
-    "i915"
-    "vfio-iommu-type1"
-    "kvmgt"
-    "mdev"
-    "acpi_call"
-    "snd_aloop"
-  ];
-  services.fstrim.enable = lib.mkDefault true;
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      vaapiIntel
-      libva
-      libvdpau-va-gl
-      vaapiVdpau
-      ocl-icd
-      intel-ocl
-      intel-compute-runtime
-      intel-media-driver
+  time.timeZone = "Asia/Shanghai";
+  Ownhostname = "wxt-bazhong";
+  Enablesteam = false;
+  Enablepipewire = true;
+  EnableWaydroid = true;
+  EnableVirt = false;
+
+  EnableOllama = true;
+  EnableMineGPU = false;
+  EnableVirtualBox = false;
+  EnableBluetooth = true;
+  EnableMineCPU = false;
+  EnableCuda = false;
+  EnableKubo = false;
+  EnableDocker = true;
+  Laptop = false;
+  users.users.wxt = {
+    isNormalUser = true;
+    extraGroups = [
+      "wheel"
+      "docker"
+      "adbusers"
+      "libvirtd"
+      "video"
+      "networkmanager"
     ];
-    extraPackages32 = with pkgs.pkgsi686Linux; [
-      vaapiVdpau
-      libvdpau-va-gl
-      intel-media-driver
-    ];
+    hashedPasswordFile = config.sops.secrets.wxt-password.path;
   };
-  nixpkgs.config.packageOverrides = pkgs: {
-    intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
-  };
-  environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "iHD";
-    QT_QPA_PLATFORM = "wayland";
-  };
-  boot.kernelParams = [
-    "intel_iommu=on"
-    "i915.enable_guc=3"
-    "i915.enable_fbc=1"
-    "i915.enable_execlists=0"
-    "modprobe.blacklist=rtw88_8821ce"
-  ];
-  services.xserver.videoDrivers = [
-    "modesettings"
-  ];
-  boot.kernelModules = [
-    "kvm-intel"
-    "acpi_call"
-  ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    (rtl8821ce.overrideAttrs (old: {
-      env.NIX_CFLAGS_COMPILE = toString [
-        "-Wno-error=incompatible-pointer-types"
-      ];
-    }))
-    acpi_call
-  ];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  #  specialisation = {
+  #    test-kernel = {
+  #      configuration = {
+  #        system.nixos.tags = [ "test-kernel" ];
+  #        boot.kernelPackages = pkgs.linuxPackagesFor (
+  #          pkgs.buildLinux {
+  #            version = "6.12-rc1";
+  #            extraMeta.branch = "6.12";
+  #            kernelPatches = [
+  #              {
+  #                name = "bridge-stp-helper";
+  #                patch = "${nixpkgs}/pkgs/os-specific/linux/kernel/bridge-stp-helper.patch";
+  #              }
+  #              {
+  #                name = "request-key-helper";
+  #                patch = "${nixpkgs}/pkgs/os-specific/linux/kernel/request-key-helper.patch";
+  #              }
+  #            ];
+  #            src = pkgs.fetchzip {
+  #              url = "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-6.12-rc1.tar.gz";
+  #              hash = "sha256-olfaNFVQD9qyF/5I0ynv2xa0zxQag/4jyLvZt5nc/Js=";
+  #            };
+  #          }
+  #        );
+  #      };
+  #      inheritParentConfig = true;
+  #    };
+  #  };
 }

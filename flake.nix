@@ -106,7 +106,7 @@
         system = "x86_64-linux";
         specialArgs = SystemSpecialArgs;
         modules = [
-          ./g3-configuration.nix
+          ./machine/g3
           impermanence.nixosModules.impermanence
           home-manager.nixosModules.home-manager
           {
@@ -121,7 +121,7 @@
         system = "x86_64-linux";
         specialArgs = SystemSpecialArgs;
         modules = [
-          ./bazhong-configuration.nix
+          ./machine/bazhong
           impermanence.nixosModules.impermanence
           home-manager.nixosModules.home-manager
           {
@@ -136,7 +136,7 @@
         system = "x86_64-linux";
         specialArgs = SystemSpecialArgs;
         modules = [
-          ./school-vmware-configuration.nix
+          ./machine/school-vmware
           impermanence.nixosModules.impermanence
           home-manager.nixosModules.home-manager
           {
@@ -151,7 +151,7 @@
         system = "x86_64-linux";
         specialArgs = SystemSpecialArgs;
         modules = [
-          ./school-real.nix
+          ./machine/school-real
           impermanence.nixosModules.impermanence
           home-manager.nixosModules.home-manager
           {
