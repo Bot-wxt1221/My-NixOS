@@ -42,7 +42,7 @@
             ];
             programs.chromium.package = pkgs.ungoogled-chromium;
             programs.chromium.extensions = import ./extensions.nix {
-              inherit pkgs lib;
+              inherit pkgs;
             };
           };
         }

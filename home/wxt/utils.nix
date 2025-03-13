@@ -1,7 +1,5 @@
 {
-  configs,
   pkgs,
-  lib,
   luogu-gcc,
   nur,
   ...
@@ -110,5 +108,6 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
+    deadnix
   ];
 }

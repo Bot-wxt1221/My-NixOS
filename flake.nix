@@ -29,11 +29,6 @@
       url = "github:Bot-wxt1221/clipboard-sync";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
-    };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -55,7 +50,6 @@
       nur,
       home-manager,
       neovim,
-      niri,
       luogu-gcc,
       nixinate,
       nix-colors,
@@ -66,7 +60,7 @@
       sops-nix,
       nixos-facter-modules,
       ...
-    }@inputs:
+    }:
     let
       HmSpecialArgs = {
         inherit
@@ -78,7 +72,6 @@
           impermanence
           neovim
           nix-index-database
-          niri
           sops-nix
           nixos-facter-modules
           ;
@@ -94,7 +87,6 @@
           impermanence
           neovim
           nix-index-database
-          niri
           sops-nix
           nixos-facter-modules
           ;

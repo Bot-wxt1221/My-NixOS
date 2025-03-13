@@ -3,7 +3,6 @@
   lib,
   pkgs,
   clipboard,
-  niri,
   ...
 }:
 let

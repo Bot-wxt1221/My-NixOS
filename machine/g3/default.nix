@@ -4,9 +4,6 @@
 
 {
   config,
-  lib,
-  pkgs,
-  nixpkgs,
   ...
 }:
 

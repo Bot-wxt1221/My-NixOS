@@ -1,8 +1,6 @@
 {
-  config,
   pkgs,
   neovim,
-  luogu-gcc,
   nixVim,
   ...
 }:
