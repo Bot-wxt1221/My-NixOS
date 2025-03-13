@@ -6,8 +6,7 @@
   ...
 }:
 let
-  wlr-xdg-desktop = (
-    pkgs.xdg-desktop-portal-wlr.overrideAttrs (old: {
+  wlr-xdg-desktop = pkgs.xdg-desktop-portal-wlr.overrideAttrs (old: {
       src = pkgs.fetchFromGitHub {
         owner = "emersion";
         repo = "xdg-desktop-portal-wlr";
@@ -18,8 +17,7 @@ let
       buildInputs = (old.buildInputs or [ ]) ++ [
         pkgs.libxkbcommon
       ];
-    })
-  );
+    });
 in
 {
   imports = [

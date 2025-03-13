@@ -26,9 +26,7 @@
     };
     home-manager.sharedModules = [
       (
-        {
-          ...
-        }:
+        _:
         {
           config = {
             home.file.".local/share/applications/Waydroid-Full-Ui.desktop".text = ''

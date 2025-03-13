@@ -1,6 +1,4 @@
-{
-  ...
-}:
+_:
 
 {
   sops.defaultSopsFile = ./secret.yaml.after;

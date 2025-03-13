@@ -14,7 +14,7 @@
     ];
   };
   fileSystems."/nix" = {
-    device = config.fileSystems."/".device;
+    inherit (config.fileSystems."/") device;
     fsType = "btrfs";
     options = [
       "subvol=nix"
@@ -22,7 +22,7 @@
     ];
   };
   fileSystems."/persist" = {
-    device = config.fileSystems."/".device;
+    inherit (config.fileSystems."/") device;
     fsType = "btrfs";
     options = [
       "subvol=persist"

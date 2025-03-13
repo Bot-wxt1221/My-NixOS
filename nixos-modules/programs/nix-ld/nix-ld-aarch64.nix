@@ -6,8 +6,7 @@
 }:
 let
   pkgsAarch64 = import nixpkgs { system = "aarch64-linux"; };
-in
-let
+
   nix-ld-libraries-aarch64 = pkgsAarch64.buildEnv {
     name = "ld-library-path";
     pathsToLink = [ "/lib" ];

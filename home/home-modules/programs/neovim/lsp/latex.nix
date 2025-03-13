@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  tex = (pkgs.texliveFull);
+  tex = pkgs.texliveFull;
 in
 {
   programs.nixvim.plugins.vimtex = {

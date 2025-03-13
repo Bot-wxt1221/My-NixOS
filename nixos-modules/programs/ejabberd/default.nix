@@ -20,8 +20,8 @@
       directories = [
         {
           directory = "/var/lib/private/ejabberd";
-          user = config.services.ejabberd.user;
-          group = config.services.ejabberd.group;
+          inherit (config.services.ejabberd) user;
+          inherit (config.services.ejabberd) group;
           mode = "0700";
         }
       ];

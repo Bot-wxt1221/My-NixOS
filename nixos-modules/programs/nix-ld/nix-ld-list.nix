@@ -32,7 +32,7 @@ with pkgs;
   zlib
   zstd
 ]
-++ lib.optionals (config.hardware.graphics.enable) [
+++ lib.optionals config.hardware.graphics.enable [
   pipewire
   cups
   libxkbcommon

@@ -195,9 +195,7 @@
         modules = [
           ./iso
           (
-            {
-              ...
-            }:
+            _:
             {
               environment.systemPackages = [
                 self.nixosConfigurations.wxt-g3.config.system.build.toplevel
