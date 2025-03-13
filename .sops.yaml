@@ -1,33 +1,47 @@
 keys:
-  - &admin_wxt_g3 age1kjc9nyxnnsgytwug46ue7wx2e6z5mxugaa9ntm5umsd0fmnpu3lqerpurc
-  - &admin_wxt_school age1us06lgsjn0z0xpzfmej3ryujau6jfdhgrmgsdqec4fkd54pwj4xsfm2jvt
+  - &root_wxt_bazhong age1kjc9nyxnnsgytwug46ue7wx2e6z5mxugaa9ntm5umsd0fmnpu3lqerpurc
+  - &root_wxt_g3 age1kjc9nyxnnsgytwug46ue7wx2e6z5mxugaa9ntm5umsd0fmnpu3lqerpurc
+  - &root_wxt_school age1us06lgsjn0z0xpzfmej3ryujau6jfdhgrmgsdqec4fkd54pwj4xsfm2jvt
+
+  - &home_wxt_bazhong age1kjc9nyxnnsgytwug46ue7wx2e6z5mxugaa9ntm5umsd0fmnpu3lqerpurc
+  - &home_wxt_g3 age1kjc9nyxnnsgytwug46ue7wx2e6z5mxugaa9ntm5umsd0fmnpu3lqerpurc
+  - &home_wxt_school age1pjyvwzmacrkyhg0tphnkv7u0p4l2kahl66lcdq3sd0ymsc2vkpuqnnl4al
+  - &admin_all
 creation_rules:
   - path_regex: home/wxt/secret/2FA
     key_groups:
     - age:
-      - *admin_wxt_g3
-      - *admin_wxt_school
+      - *home_wxt_g3
+      - *home_wxt_school
+      - *home_wxt_bazhong
+      - *admin_all
   - path_regex: home/wxt/secret/school-*
     key_groups:
     - age:
-      - *admin_wxt_school
+      - *home_wxt_school
+      - *admin_all
   - path_regex: home/wxt/secret/bazhong
     key_groups:
     - age:
-      - *admin_wxt_g3
+      - *home_wxt_bazhong
+      - *admin_all
   - path_regex: home/wxt/secret/g3
     key_groups:
     - age:
-      - *admin_wxt_g3
+      - *home_wxt_g3
+      - *admin_all
   - path_regex: security/sops/g3
     key_groups:
     - age:
-      - *admin_wxt_g3
+      - *root_wxt_g3
+      - *admin_all
   - path_regex: security/sops/bazhong
     key_groups:
     - age:
-      - *admin_wxt_g3
+      - *root_wxt_bazhong
+      - *admin_all
   - path_regex: security/sops/school-*
     key_groups:
     - age:
-      - *admin_wxt_school
+      - *root_wxt_school
+      - *admin_all

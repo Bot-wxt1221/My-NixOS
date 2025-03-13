@@ -8,10 +8,10 @@
     ./lualine.nix
   ];
 
-  programs.nixvim.extraPlugins = with pkgs.vimPlugins; [
-    plenary-nvim
-  ];
   programs.nixvim = {
+    extraPlugins = with pkgs.vimPlugins; [
+      plenary-nvim
+    ];
     extraConfigLua = ''
       local opt = vim.opt
       local o = vim.o
@@ -63,78 +63,81 @@
       g.loaded_perl_provider = 0
       g.loaded_ruby_provider = 0
     '';
-    colorschemes.gruvbox.enable = true;
-    colorschemes.gruvbox.settings = {
-      terminal_colors = true; # add neovim terminal colors
-      undercurl = true;
-      underline = true;
-      bold = true;
-      italic = {
-        strings = true;
-        emphasis = true;
-        comments = true;
-        operators = false;
-        folds = true;
+    colorschemes.gruvbox = {
+      enable = true;
+      settings = {
+        terminal_colors = true; # add neovim terminal colors
+        undercurl = true;
+        underline = true;
+        bold = true;
+        italic = {
+          strings = true;
+          emphasis = true;
+          comments = true;
+          operators = false;
+          folds = true;
+        };
+        strikethrough = true;
+        invert_selection = false;
+        invert_signs = false;
+        invert_tabline = false;
+        invert_intend_guides = false;
+        inverse = true; # invert background for search, diffs, statuslines and errors
+        contrast = ""; # can be "hard", "soft" or empty string
+        palette_overrides = { };
+        overrides = { };
+        dim_inactive = false;
+        transparent_mode = false;
       };
-      strikethrough = true;
-      invert_selection = false;
-      invert_signs = false;
-      invert_tabline = false;
-      invert_intend_guides = false;
-      inverse = true; # invert background for search, diffs, statuslines and errors
-      contrast = ""; # can be "hard", "soft" or empty string
-      palette_overrides = { };
-      overrides = { };
-      dim_inactive = false;
-      transparent_mode = false;
-    };
-  };
-  programs.nixvim.extraConfigVim = ''
-    nnoremap <S-Up> <PageUp>
-    nnoremap <S-Down> <PageDown>
-  '';
-  programs.nixvim.keymaps = [
-    {
-      mode = [ "n" ];
-      key = "<leader>n";
-      action = "<cmd>set nu!<CR>";
-      options = {
-        desc = "Toggle Line number";
-      };
-    }
-    {
-      mode = [ "n" ];
-      key = "<leader>x";
-      action = "<cmd>:bdelete<CR>";
-      options = {
-        desc = "Delete Buffer";
-      };
-    }
-    {
-      mode = [ "n" ];
-      key = "<Tab>";
-      action = "<cmd>:bnext<CR>";
-      options = {
-        desc = "Next Buffer";
-      };
-    }
-    {
-      mode = [ "n" ];
-      key = "<S-Tab>";
-      action = "<cmd>:bprevious<CR>";
-      options = {
-        desc = "Previous Buffer";
-      };
-    }
-    {
-      mode = [ "n" ];
-      key = "<leader>rn";
-      action = "<cmd>set rnu!<CR>";
-      options = {
-        desc = "Toggle Relative number";
-      };
-    }
-  ];
 
-  programs.nixvim.plugins.web-devicons.enable = true;
+    };
+    extraConfigVim = ''
+      nnoremap <S-Up> <PageUp>
+      nnoremap <S-Down> <PageDown>
+    '';
+    keymaps = [
+      {
+        mode = [ "n" ];
+        key = "<leader>n";
+        action = "<cmd>set nu!<CR>";
+        options = {
+          desc = "Toggle Line number";
+        };
+      }
+      {
+        mode = [ "n" ];
+        key = "<leader>x";
+        action = "<cmd>:bdelete<CR>";
+        options = {
+          desc = "Delete Buffer";
+        };
+      }
+      {
+        mode = [ "n" ];
+        key = "<Tab>";
+        action = "<cmd>:bnext<CR>";
+        options = {
+          desc = "Next Buffer";
+        };
+      }
+      {
+        mode = [ "n" ];
+        key = "<S-Tab>";
+        action = "<cmd>:bprevious<CR>";
+        options = {
+          desc = "Previous Buffer";
+        };
+      }
+      {
+        mode = [ "n" ];
+        key = "<leader>rn";
+        action = "<cmd>set rnu!<CR>";
+        options = {
+          desc = "Toggle Relative number";
+        };
+      }
+    ];
+    plugins.web-devicons.enable = true;
+
+  };
 }
