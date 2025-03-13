@@ -7,17 +7,17 @@
 }:
 let
   wlr-xdg-desktop = pkgs.xdg-desktop-portal-wlr.overrideAttrs (old: {
-      src = pkgs.fetchFromGitHub {
-        owner = "emersion";
-        repo = "xdg-desktop-portal-wlr";
-        rev = "d9ada849aeca6137915de2df69beaef4e272cc1d";
-        hash = "sha256-Vuf7bRAWozcA6mdR/h4YDCb9e14JMBL6uLXGkNWJ5KE=";
-      };
-      patches = (old.patches or [ ]) ++ [ ./325.patch ];
-      buildInputs = (old.buildInputs or [ ]) ++ [
-        pkgs.libxkbcommon
-      ];
-    });
+    src = pkgs.fetchFromGitHub {
+      owner = "emersion";
+      repo = "xdg-desktop-portal-wlr";
+      rev = "d9ada849aeca6137915de2df69beaef4e272cc1d";
+      hash = "sha256-Vuf7bRAWozcA6mdR/h4YDCb9e14JMBL6uLXGkNWJ5KE=";
+    };
+    patches = (old.patches or [ ]) ++ [ ./325.patch ];
+    buildInputs = (old.buildInputs or [ ]) ++ [
+      pkgs.libxkbcommon
+    ];
+  });
 in
 {
   imports = [
