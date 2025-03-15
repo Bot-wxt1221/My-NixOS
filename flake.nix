@@ -2,7 +2,7 @@
   description = "Main config";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     nix-colors.url = "github:misterio77/nix-colors";
     luogu-gcc.url = "github:luogu-dev/judge-env";
