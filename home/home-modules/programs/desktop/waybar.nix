@@ -152,15 +152,24 @@
         icon-size = 20;
         spacing = 8;
       };
-      pulseaudio = {
-        format = "{icon} {volume}%";
-        format-muted = "  {volume}%";
-        format-icons = {
-          default = [ " " ];
+      pulseaudio =
+        lib.mkIf osConfig.Enablepipewire
+        || osConfig.Enablepulseaudio {
+          format = "{icon} {volume}%";
+          format-muted = "  {volume}%";
+          format-icons = {
+            default = [ " " ];
+          };
+          scroll-step = 5;
+          on-click = (
+            if osConfig.Enablepipewire then
+              "${pkgs.pwvucontrol}/bin/pwvucontrol"
+            else if osConfig.Enablepulseaudio then
+              "${pkgs.pavucontrol}/bin/pavucontrol"
+            else
+              null
+          );
         };
-        scroll-step = 5;
-        on-click = "/etc/wxt/panel/bin";
-      };
       battery = lib.mkIf osConfig.Laptop {
         format = "{icon} {capacity}%";
         format-icons = [
