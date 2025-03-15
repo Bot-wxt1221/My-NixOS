@@ -8,7 +8,7 @@
   ];
   system.stateVersion = lib.trivial.release;
   nix.settings.substituters = lib.mkForce [
-    "https://mirrors.ustc.edu.cn/nix-channels/store"
+    "https://mirror.nju.edu.cn/nix-channels/store"
     "https://cache.nixos.org"
     "https://nix-community.cachix.org"
     "https://wxt1221.cachix.org"

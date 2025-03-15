@@ -104,6 +104,14 @@
     }
     {
       mode = [ "n" ];
+      key = "<leader>h";
+      action = "<cmd>split term://$SHELL<CR>";
+      options = {
+        desc = "Open Shell";
+      };
+    }
+    {
+      mode = [ "n" ];
       key = "<leader>x";
       action = "<cmd>:bdelete<CR>";
       options = {
