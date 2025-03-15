@@ -53,6 +53,8 @@
           "cpu"
           "memory"
           "disk"
+        ]
+        ++ lib.optionals (osConfig.Enablepipewire or osConfig.Enablepulseaudio) [
           "pulseaudio"
         ]
         ++ lib.optionals config.haveBacklight [
@@ -152,24 +154,22 @@
         icon-size = 20;
         spacing = 8;
       };
-      pulseaudio =
-        lib.mkIf osConfig.Enablepipewire
-        || osConfig.Enablepulseaudio {
-          format = "{icon} {volume}%";
-          format-muted = "  {volume}%";
-          format-icons = {
-            default = [ " " ];
-          };
-          scroll-step = 5;
-          on-click = (
-            if osConfig.Enablepipewire then
-              "${pkgs.pwvucontrol}/bin/pwvucontrol"
-            else if osConfig.Enablepulseaudio then
-              "${pkgs.pavucontrol}/bin/pavucontrol"
-            else
-              null
-          );
+      pulseaudio = lib.mkIf (osConfig.Enablepipewire or osConfig.Enablepulseaudio) {
+        format = "{icon} {volume}%";
+        format-muted = "  {volume}%";
+        format-icons = {
+          default = [ " " ];
         };
+        scroll-step = 5;
+        on-click = (
+          if osConfig.Enablepipewire then
+            "${pkgs.pwvucontrol}/bin/pwvucontrol"
+          else if osConfig.Enablepulseaudio then
+            "${pkgs.pavucontrol}/bin/pavucontrol"
+          else
+            null
+        );
+      };
       battery = lib.mkIf osConfig.Laptop {
         format = "{icon} {capacity}%";
         format-icons = [
