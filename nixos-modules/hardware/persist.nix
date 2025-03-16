@@ -7,11 +7,17 @@
 
   ];
   fileSystems."/persist".neededForBoot = true;
-  environment.persistence."/persist" = {
-    hideMounts = true;
+  preservation.enable = true;
+  preservation.preserveAt."/persist" = {
+    commonMountOptions = [
+      "x-gvfs-hide"
+    ];
     directories = [
       "/var/log"
-      "/var/lib/nixos"
+      {
+        directory = "/var/lib/nixos";
+        inInitrd = true;
+      }
       "/var/lib/NetworkManager"
       "/var/lib/libvirt"
       "/var/lib/systemd/coredump"
@@ -24,12 +30,9 @@
       }
     ];
     files = [
-      "/etc/machine-id"
       {
-        file = "/var/keys/secret_file";
-        parentDirectory = {
-          mode = "u=rwx,g=,o=";
-        };
+        file = "/etc/machine-id";
+        inInitrd = true;
       }
     ];
   };

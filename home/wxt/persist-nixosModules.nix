@@ -1,15 +1,16 @@
 {
+  config,
   ...
 }:
 {
-  imports = [
-  ];
-  home.persistence."/persist/home/wxt" = {
+  preservation.preserveAt."/persist".users.wxt = {
     directories = [
       ".wakatime"
 
       ".local/share/io.github.clash-verge-rev.clash-verge-rev"
       ".local/share/clash-verge"
+
+      ".local/share/zsh"
 
       ".local/share/fcitx5"
 
@@ -29,6 +30,8 @@
       ".config/dconf"
       ".local/share/flatpak"
       ".var"
+
+      ".config/gh"
     ];
     files = [
       ".wakatime.cfg"

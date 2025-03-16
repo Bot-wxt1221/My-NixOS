@@ -16,7 +16,7 @@
       configFile = ./ejabberd.yml;
       ctlConfig = builtins.readFile ./ejabberdctl.cfg;
     };
-    environment.persistence."/persist" = {
+    preservation.preserveAt."/persist" = {
       directories = [
         {
           directory = "/var/lib/private/ejabberd";

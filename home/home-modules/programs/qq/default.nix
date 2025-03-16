@@ -5,11 +5,6 @@
 {
   imports = [
   ];
-  home.persistence."/persist/home/wxt" = {
-    directories = [
-      ".config/QQ"
-    ];
-  };
   home.packages = with pkgs; [
     (qq.overrideAttrs (old: {
       preferLocalBuild = true;

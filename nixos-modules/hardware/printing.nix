@@ -10,7 +10,7 @@
     pkgs.hplipWithPlugin
     pkgs.cups-pdf-to-pdf
   ];
-  environment.persistence."/persist" = {
+  preservation.preserveAt."/persist" = {
     directories = [
       "/var/lib/cups"
     ];

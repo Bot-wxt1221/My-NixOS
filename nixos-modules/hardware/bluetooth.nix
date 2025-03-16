@@ -17,7 +17,8 @@
   config = lib.mkIf config.EnableBluetooth {
     hardware.bluetooth.enable = true;
     services.blueman.enable = true;
-    environment.persistence."/persist" = {
+    preservation.preserveAt."/persist" = {
+
       directories = [
         "/var/lib/bluetooth"
         "/etc/bluetooth"

@@ -17,8 +17,7 @@
   config = lib.mkIf config.EnableWaydroid {
     virtualisation.waydroid.enable = true;
     environment.systemPackages = with pkgs; [ waydroid ];
-    environment.persistence."/persist" = {
-      hideMounts = true;
+    preservation.preserveAt."/persist" = {
       directories = [
         "/var/lib/waydroid"
         "/home/wxt/.local/share/waydroid"

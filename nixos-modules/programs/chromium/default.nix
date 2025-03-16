@@ -13,10 +13,14 @@
   };
   config = lib.mkIf config.enableChromium {
     programs.chromium.enable = true;
+    preservation.preserveAt."/persist".users.wxt = {
+      directories = [
+        ".config/chromium"
+      ];
+    };
     home-manager.sharedModules = [
       (
         {
-          config,
           osConfig,
           lib,
           ...
@@ -24,11 +28,6 @@
         {
           config = lib.mkIf osConfig.enableChromium {
             programs.chromium.enable = true;
-            home.persistence."/persist${config.home.homeDirectory}" = {
-              directories = [
-                ".config/chromium"
-              ];
-            };
             programs.chromium.commandLineArgs = [
               "--process-per-site"
               "--ozone-platform-hint=wayland"

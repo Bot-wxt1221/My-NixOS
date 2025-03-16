@@ -12,8 +12,8 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    impermanence = {
-      url = "github:nix-community/impermanence";
+    preservation = {
+      url = "github:nix-community/preservation";
     };
     nixinate.url = "github:matthewcroughan/nixinate";
     nixinate.inputs.nixpkgs.follows = "nixpkgs";
@@ -53,7 +53,7 @@
       luogu-gcc,
       nixinate,
       nix-colors,
-      impermanence,
+      preservation,
       clipboard,
       nixVim,
       nix-index-database,
@@ -69,7 +69,7 @@
           luogu-gcc
           nix-colors
           nur
-          impermanence
+          preservation
           neovim
           nix-index-database
           sops-nix
@@ -84,7 +84,7 @@
           luogu-gcc
           nix-colors
           nur
-          impermanence
+          preservation
           neovim
           nix-index-database
           sops-nix
@@ -99,7 +99,7 @@
         specialArgs = SystemSpecialArgs;
         modules = [
           ./machine/g3
-          impermanence.nixosModules.impermanence
+          preservation.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -114,7 +114,7 @@
         specialArgs = SystemSpecialArgs;
         modules = [
           ./machine/bazhong
-          impermanence.nixosModules.impermanence
+          preservation.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -129,7 +129,7 @@
         specialArgs = SystemSpecialArgs;
         modules = [
           ./machine/school-vmware
-          impermanence.nixosModules.impermanence
+          preservation.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -144,7 +144,7 @@
         specialArgs = SystemSpecialArgs;
         modules = [
           ./machine/school-real
-          impermanence.nixosModules.impermanence
+          preservation.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

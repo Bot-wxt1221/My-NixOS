@@ -7,7 +7,7 @@
 
   ];
   services.flatpak.enable = true;
-  environment.persistence."/persist".directories = [ "/var/lib/flatpak" ];
+  preservation.preserveAt."/persist".directories = [ "/var/lib/flatpak" ];
   systemd.services.flatpak-repo = {
     wantedBy = [ "multi-user.target" ];
     after = [ "NetworkManager-wait-online.service" ];
