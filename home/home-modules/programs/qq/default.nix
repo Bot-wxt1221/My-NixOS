@@ -7,10 +7,6 @@
   ];
   home.packages = with pkgs; [
     (qq.overrideAttrs (old: {
-      src = src.overrideAttrs (old2: {
-        preferLocalBuild = true;
-
-      });
       preferLocalBuild = true;
       installPhase =
         old.installPhase
