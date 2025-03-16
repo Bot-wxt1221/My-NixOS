@@ -7,10 +7,26 @@
     ./programs/persist-default.nix
   ];
   systemd.tmpfiles.settings.preservation = {
-    "/home/${config.home.username}/.config".d = { user = "${config.home.username}"; group = "users"; mode = "0755"; };
-    "/home/${config.home.username}/.local".d = { user = "${config.home.username}"; group = "users"; mode = "0755"; };
-    "/home/${config.home.username}/.local/share".d = { user = "${config.home.username}"; group = "users"; mode = "0755"; };
-    "/home/${config.home.username}/.local/state".d = { user = "${config.home.username}"; group = "users"; mode = "0755"; };
+    "/home/wxt/.config".d = {
+      user = "wxt";
+      group = "users";
+      mode = "0755";
+    };
+    "/home/wxt/.local".d = {
+      user = "wxt";
+      group = "users";
+      mode = "0755";
+    };
+    "/home/wxt/.local/share".d = {
+      user = "wxt";
+      group = "users";
+      mode = "0755";
+    };
+    "/home/wxt/.local/state".d = {
+      user = "wxt";
+      group = "users";
+      mode = "0755";
+    };
   };
   preservation.preserveAt."/persist".users.wxt = {
     commonMountOptions = [
