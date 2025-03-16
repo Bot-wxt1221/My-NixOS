@@ -21,6 +21,7 @@ let
 in
 {
   imports = [
+    ./clipboard.nix
   ];
   options = {
     audioProcess = lib.mkOption {
