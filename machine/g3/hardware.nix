@@ -19,7 +19,6 @@
     "vfio-iommu-type1"
     "kvmgt"
     "mdev"
-    "acpi_call"
     "snd_aloop"
   ];
   nixpkgs.config.packageOverrides = pkgs: {

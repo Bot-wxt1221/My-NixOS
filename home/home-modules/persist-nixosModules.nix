@@ -17,6 +17,11 @@
       group = "users";
       mode = "0755";
     };
+    "/home/wxt/.cache".d = {
+      user = "wxt";
+      group = "users";
+      mode = "0755";
+    };
     "/home/wxt/.local/share".d = {
       user = "wxt";
       group = "users";
