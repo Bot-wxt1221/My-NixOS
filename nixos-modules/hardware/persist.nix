@@ -38,6 +38,17 @@
       }
     ];
   };
+  # let the service commit the transient ID to the persistent volume
+  systemd.services.systemd-machine-id-commit = {
+    unitConfig.ConditionPathIsMountPoint = [
+      ""
+      "/persist/etc/machine-id"
+    ];
+    serviceConfig.ExecStart = [
+      ""
+      "systemd-machine-id-setup --commit --root /persist"
+    ];
+  };
   boot.initrd.supportedFilesystems = [ "btrfs" ];
   boot.initrd.systemd.services.rollback = {
     description = "Reset BTRFS root subvolume to empty snapshot";
