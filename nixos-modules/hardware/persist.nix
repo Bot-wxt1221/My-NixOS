@@ -8,6 +8,8 @@
   ];
   fileSystems."/persist".neededForBoot = true;
   preservation.enable = true;
+  boot.initrd.systemd.suppressedUnits = [ "systemd-machine-id-commit.service" ];
+  systemd.suppressedSystemUnits = [ "systemd-machine-id-commit.service" ];
   preservation.preserveAt."/persist" = {
     commonMountOptions = [
       "x-gvfs-hide"
