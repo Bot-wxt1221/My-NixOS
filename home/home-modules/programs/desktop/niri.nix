@@ -172,25 +172,6 @@ in
         RestartSec = "10";
       };
     };
-    systemd.user.services.clash-verge = {
-      Install = {
-        WantedBy = [ config.wayland.systemd.target ];
-      };
-
-      Unit = {
-        ConditionEnvironment = "WAYLAND_DISPLAY";
-        Environment = [ "DISPLAY=:0" ];
-        Description = "clash-verge";
-        After = [ config.wayland.systemd.target ];
-        PartOf = [ config.wayland.systemd.target ];
-      };
-
-      Service = {
-        ExecStart = "${lib.getExe pkgs.clash-verge-rev}";
-        Restart = "on-failure";
-        RestartSec = "10";
-      };
-    };
     systemd.user.services.wayvnc = {
       Install = {
         WantedBy = [ config.wayland.systemd.target ];
