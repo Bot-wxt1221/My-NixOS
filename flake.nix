@@ -15,8 +15,6 @@
     preservation = {
       url = "github:nix-community/preservation";
     };
-    nixinate.url = "github:matthewcroughan/nixinate";
-    nixinate.inputs.nixpkgs.follows = "nixpkgs";
     neovim = {
       url = "github:nix-community/neovim-nightly-overlay/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,7 +49,6 @@
       home-manager,
       neovim,
       luogu-gcc,
-      nixinate,
       nix-colors,
       preservation,
       clipboard,
@@ -93,7 +90,6 @@
       };
     in
     {
-      apps = nixinate.nixinate.x86_64-linux self;
       nixosConfigurations.wxt-g3 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = SystemSpecialArgs;
@@ -151,15 +147,6 @@
             home-manager.useUserPackages = true;
             home-manager.users.wxt = import ./home/wxt/default-school-real.nix;
             home-manager.extraSpecialArgs = HmSpecialArgs;
-          }
-          {
-            _module.args.nixinate = {
-              host = "192.168.41.128";
-              sshUser = "root";
-              buildOn = "local"; # valid args are "local" or "remote"
-              substituteOnTarget = false; # if buildOn is "local" then it will substitute on the target, "-s"
-              hermetic = false;
-            };
           }
         ];
       };
