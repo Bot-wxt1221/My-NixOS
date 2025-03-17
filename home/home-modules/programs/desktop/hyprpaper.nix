@@ -22,7 +22,6 @@
         wallpaper = [ ",${config.home.homeDirectory}/.config/hypr/wallpaper.png" ];
       };
       package = pkgs.hyprpaper;
-
     };
   };
 }

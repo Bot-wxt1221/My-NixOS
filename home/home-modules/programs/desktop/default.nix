@@ -3,10 +3,11 @@
 }:
 {
   imports = [
+    ./fcitx5.nix
     ./hyprpaper.nix
-    ./waybar.nix
+    ./waybar
     ./niri.nix
-    ./swaync.nix
+    ./swaync
     #    ./clipboard.nix
   ];
 }

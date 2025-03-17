@@ -23,12 +23,6 @@ in
   imports = [
     ./clipboard.nix
   ];
-  options = {
-    audioProcess = lib.mkOption {
-      type = lib.types.str;
-      default = "";
-    };
-  };
   config = {
     home.packages = with pkgs; [
       fuzzel
@@ -124,23 +118,104 @@ in
           "video/webm" = mp;
         };
       };
+    systemd.user.services.agent-polkit = {
+      Install = {
+        WantedBy = [ config.wayland.systemd.target ];
+      };
+
+      Unit = {
+        ConditionEnvironment = "WAYLAND_DISPLAY";
+        Description = "agent-polkit";
+        After = [ config.wayland.systemd.target ];
+        PartOf = [ config.wayland.systemd.target ];
+      };
+
+      Service = {
+        ExecStart = "${pkgs.pantheon.pantheon-agent-polkit}/libexec/policykit-1-pantheon/io.elementary.desktop.agent-polkit";
+        Restart = "always";
+        RestartSec = "10";
+      };
+    };
+    systemd.user.services.waydroid = {
+      Install = {
+        WantedBy = [ config.wayland.systemd.target ];
+      };
+
+      Unit = {
+        ConditionEnvironment = "WAYLAND_DISPLAY";
+        Description = "waydroid";
+        After = [ config.wayland.systemd.target ];
+        PartOf = [ config.wayland.systemd.target ];
+      };
+
+      Service = {
+        ExecStart = "${lib.getExe pkgs.waydroid} session start";
+        Restart = "on-failure";
+        RestartSec = "10";
+      };
+    };
+    systemd.user.services.xwayland-satellite = {
+      Install = {
+        WantedBy = [ config.wayland.systemd.target ];
+      };
+
+      Unit = {
+        ConditionEnvironment = "WAYLAND_DISPLAY";
+        Description = "xwayland-satellite";
+        After = [ config.wayland.systemd.target ];
+        PartOf = [ config.wayland.systemd.target ];
+      };
+
+      Service = {
+        ExecStart = "${lib.getExe pkgs.xwayland-satellite} :0";
+        Restart = "always";
+        RestartSec = "10";
+      };
+    };
+    systemd.user.services.clash-verge = {
+      Install = {
+        WantedBy = [ config.wayland.systemd.target ];
+      };
+
+      Unit = {
+        ConditionEnvironment = "WAYLAND_DISPLAY";
+        Description = "clash-verge";
+        After = [ config.wayland.systemd.target ];
+        PartOf = [ config.wayland.systemd.target ];
+      };
+
+      Service = {
+        ExecStart = "${lib.getExe pkgs.clash-verge-rev}";
+        Restart = "on-failure";
+        RestartSec = "10";
+      };
+    };
+    systemd.user.services.wayvnc = {
+      Install = {
+        WantedBy = [ config.wayland.systemd.target ];
+      };
+
+      Unit = {
+        ConditionEnvironment = "WAYLAND_DISPLAY";
+        Description = "wayvnc";
+        After = [ config.wayland.systemd.target ];
+        PartOf = [ config.wayland.systemd.target ];
+      };
+
+      Service = {
+        ExecStart = "${lib.getExe pkgs.wayvnc} 0.0.0.0";
+        Restart = "on-failure";
+        RestartSec = "10";
+      };
+    };
+
     xdg.configFile."niri/config.kdl".text = builtins.readFile (
       pkgs.substituteAll {
         src = ./niri.kdl;
-        authAgent = "${pkgs.pantheon.pantheon-agent-polkit}/libexec/policykit-1-pantheon/io.elementary.desktop.agent-polkit";
-        startXwayland = pkgs.writeText "a.sh" ''
-          sleep 3
-          xwayland-satellite :0
-        '';
-        startClashVerge = pkgs.writeText "a.sh" ''
-          sleep 5
-          clash-verge
-        '';
         swaylockscript = pkgs.writeText "a.sh" ''
           niri msg action power-off-monitors
           ${lib.getExe pkgs.swaylock-effects} --screenshots --clock --font "WenQuanYi Micro Hei"
         '';
-        setupAudio = pkgs.writeText "a.sh" config.audioProcess;
       }
     );
   };

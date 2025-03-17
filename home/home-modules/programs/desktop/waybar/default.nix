@@ -20,6 +20,7 @@
   config = {
     programs.waybar = {
       enable = true;
+      systemd.enable = true;
     };
     home.packages = with pkgs; [
       pamixer
