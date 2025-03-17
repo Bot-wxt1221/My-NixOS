@@ -179,6 +179,7 @@ in
 
       Unit = {
         ConditionEnvironment = "WAYLAND_DISPLAY";
+        Environment = [ "DISPLAY=:0" ];
         Description = "clash-verge";
         After = [ config.wayland.systemd.target ];
         PartOf = [ config.wayland.systemd.target ];
