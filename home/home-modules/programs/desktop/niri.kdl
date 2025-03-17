@@ -7,7 +7,7 @@
 // Find the full list of options on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 
-spawn-at-startup "clash-verge"
+spawn-at-startup "bash" "@startClashVerge@"
 
 environment {
     DISPLAY ":0"

@@ -198,6 +198,10 @@ in
           niri msg action power-off-monitors
           ${lib.getExe pkgs.swaylock-effects} --screenshots --clock --font "WenQuanYi Micro Hei"
         '';
+        startClashVerge = pkgs.writeText "a.sh" ''
+          sleep 10
+          clash-verge
+        '';
       }
     );
   };
