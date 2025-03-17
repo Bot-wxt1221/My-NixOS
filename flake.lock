@@ -512,27 +512,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1742141861,
-        "narHash": "sha256-xEk7iGFgqUDwfDRuUXK5gMDqP2a7nDg9YeYeoEeutQs=",
+        "lastModified": 1742169275,
+        "narHash": "sha256-nkH2Edu9rClcsQp2PYBe8E6fp8LDPi2uDBQ6wyMdeXI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8f76cf16b17c51ae0cc8e55488069593f6dab645",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_4": {
-      "locked": {
-        "lastModified": 1741865919,
-        "narHash": "sha256-4thdbnP6dlbdq+qZWTsm4ffAwoS8Tiq1YResB+RP6WE=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "573c650e8a14b2faa0041645ab18aed7e60f0c9a",
+        "rev": "5d9b5431f967007b3952c057fc92af49a4c5f3b2",
         "type": "github"
       },
       "original": {
@@ -567,11 +551,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1742209748,
-        "narHash": "sha256-xqBqRBL3ofUG1oGgUhF/PTVfayxwr3+PgBxzrF2CuMc=",
+        "lastModified": 1742213553,
+        "narHash": "sha256-zMWAHCYsmnnR0SWwNLMEjdG5jRBZ2qmSkjKKiaTrE6U=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "4fc8378c5d5b08ae0166eaf5b97a1b3f381dfb3e",
+        "rev": "ca06b02c486c2d7030bb03d6d8387f9f76e875b6",
         "type": "github"
       },
       "original": {
@@ -632,8 +616,7 @@
         "nixpkgs": "nixpkgs_3",
         "nur": "nur",
         "preservation": "preservation",
-        "sops-nix": "sops-nix",
-        "sosp-nix": "sosp-nix"
+        "sops-nix": "sops-nix"
       }
     },
     "rust-overlay": {
@@ -656,23 +639,6 @@
       }
     },
     "sops-nix": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_4"
-      },
-      "locked": {
-        "lastModified": 1742209060,
-        "narHash": "sha256-47/1bOPBGhmAegF06nxLN15d/MClCAkk8s/+WOhJJAM=",
-        "owner": "Mic92",
-        "repo": "sops-nix",
-        "rev": "b33837ae3cfa012b65810891bebbee71fa4c0658",
-        "type": "github"
-      },
-      "original": {
-        "id": "sops-nix",
-        "type": "indirect"
-      }
-    },
-    "sosp-nix": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
