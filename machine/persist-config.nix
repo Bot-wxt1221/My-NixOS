@@ -11,6 +11,7 @@
     options = [
       "subvol=root"
       "compress=zstd"
+      "flushoncommit"
     ];
   };
   fileSystems."/nix" = {
@@ -19,6 +20,7 @@
     options = [
       "subvol=nix"
       "compress=zstd"
+      "flushoncommit"
     ];
   };
   fileSystems."/persist" = {
@@ -26,6 +28,7 @@
     fsType = "btrfs";
     options = [
       "subvol=persist"
+      "flushoncommit"
     ];
   };
 }

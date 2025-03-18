@@ -17,7 +17,7 @@
   Enablesteam = false;
   Enablepipewire = true;
   EnableWaydroid = true;
-  EnableVirt = false;
+  EnableVirt = true;
 
   EnableOllama = true;
   EnableMineGPU = false;
