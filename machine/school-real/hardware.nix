@@ -64,4 +64,13 @@
   boot.extraModulePackages = with config.boot.kernelPackages; [
     acpi_call
   ];
+  environment.systemPackages = with pkgs; [
+    bcache-tools
+  ];
+  systemd.tmpfiles.rules = [
+    "w /sys/fs/bcache/*/congested_read_threshold_us  - - - - 20000"
+    "w /sys/fs/bcache/*/congested_write_threshold_us - - - - 20000"
+    "w /sys/block/bcache*/bcache/sequential_cutoff - - - - 131071" # 128KiB - 1B, defaults to 4MiB
+    "w /sys/block/bcache*/bcache/cache_mode - - - - writeback"
+  ];
 }
