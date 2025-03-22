@@ -18,6 +18,7 @@
     "ahci"
     "nvme"
     "usb_storage"
+    "bcache"
     "usbhid"
     "sd_mod"
   ];

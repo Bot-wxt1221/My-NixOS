@@ -19,6 +19,7 @@
     "vfio-iommu-type1"
     "kvmgt"
     "mdev"
+    "bcache"
     "snd_aloop"
   ];
   services.fstrim.enable = lib.mkDefault true;
