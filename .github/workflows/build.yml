@@ -21,23 +21,21 @@ jobs:
         nix profile install nixpkgs#nixfmt-rfc-style
         ./update.sh | nixfmt > extensions.nix
         cd ../../../
+        nix flake update
+        git config --local user.email "3264117476@qq.com"
+        git config --local user.name "github-actions[bot]"
+        git add flake.lock
+        git add nixos-modules/programs/chromium/extensions.nix
+        git commit -m "Update flakes" || true
+    - run: |
         curl ${{secrets.VPN_URL}} > iso/config.yaml
         git add .
-        nix flake update
         nix build .#iso-image
     - name: Upload images artifact
       uses: actions/upload-artifact@v4
       with:
         name: Boot.iso
         path: result/iso/*
-    - run: |
-        git config --local user.email "3264117476@qq.com"
-        git config --local user.name "github-actions[bot]"
-        rm -rf iso/config.yaml
-        git restore --staged iso/config.yaml
-        git add flake.lock
-        git add nixos-modules/programs/chromium/extensions.nix
-        git commit -m "Update flakes" || true
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
