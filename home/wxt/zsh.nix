@@ -27,7 +27,7 @@
     source = "${pkgs.wakatime-cli}/bin/wakatime-cli";
     executable = true;
   };
-  home.file."wakatime-cli-linux-amd64" = {
+  home.file.".wakatime/wakatime-cli-linux-amd64" = {
     source = "${pkgs.wakatime-cli}/bin/wakatime-cli";
     executable = true;
   };
