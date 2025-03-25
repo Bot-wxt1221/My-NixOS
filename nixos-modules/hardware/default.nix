@@ -12,6 +12,7 @@
     ./cuda.nix
     ./etc.nix
     ./font.nix
+    ./fs.nix
     ./grub.nix
     ./kernel.nix
     ./laptop.nix
