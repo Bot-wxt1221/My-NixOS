@@ -51,8 +51,6 @@
     programs.chromium.defaultSearchProviderSearchURL = "https://www.bing.com/search?q={searchTerms}";
     programs.chromium.defaultSearchProviderEnabled = true;
     programs.chromium.extraOpts = {
-      "BrowserSignin" = 0;
-      "SyncDisabled" = true;
       "PasswordManagerEnabled" = false;
       "SpellcheckEnabled" = true;
       "HomePageLocation" = "https://www.bing.com";
