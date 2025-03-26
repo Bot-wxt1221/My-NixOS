@@ -39,7 +39,7 @@
               "--ignore-gpu-blocklist"
               "--enable-zero-copy"
             ];
-            programs.chromium.package = pkgs.ungoogled-chromium;
+            programs.chromium.package = pkgs.chromium;
             programs.chromium.extensions = import ./extensions.nix {
               inherit pkgs;
             };
