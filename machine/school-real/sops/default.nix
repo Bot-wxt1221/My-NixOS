@@ -9,14 +9,14 @@ _:
   };
   sops.secrets.GOOGLE_API_KEY = {
     neededForUsers = true;
-    mode = "0400";
+    mode = "0444";
   };
   sops.secrets.GOOGLE_DEFAULT_CLIENT_ID = {
     neededForUsers = true;
-    mode = "0400";
+    mode = "0444";
   };
   sops.secrets.GOOGLE_DEFAULT_CLIENT_SECRET = {
     neededForUsers = true;
-    mode = "0400";
+    mode = "0444";
   };
 }
