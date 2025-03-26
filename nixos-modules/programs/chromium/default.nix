@@ -18,6 +18,11 @@
         ".config/chromium"
       ];
     };
+    environment.sessionVariables = {
+      GOOGLE_API_KEY = "$(cat ${config.sops.secrets.GOOGLE_API_KEY.path})";
+      GOOGLE_DEFAULT_CLIENT_SECRET = "$(cat ${config.sops.secrets.GOOGLE_DEFAULT_CLIENT_SECRET.path})";
+      GOOGLE_DEFAULT_CLIENT_ID = "$(cat ${config.sops.secrets.GOOGLE_DEFAULT_CLIENT_ID.path})";
+    };
     home-manager.sharedModules = [
       (
         {
