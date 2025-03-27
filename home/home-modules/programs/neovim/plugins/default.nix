@@ -2,6 +2,7 @@
   imports = [
     ./auto-save.nix
     ./autopairs.nix
+    ./blink.nix
     ./comment.nix
     ./git.nix
     ./guess-indent.nix

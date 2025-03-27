@@ -57,10 +57,11 @@
       sops-nix,
       nixos-facter-modules,
       ...
-    }:
+    }@inputs:
     let
       HmSpecialArgs = {
         inherit
+          inputs
           clipboard
           nixVim
           luogu-gcc
@@ -75,6 +76,7 @@
       };
       SystemSpecialArgs = {
         inherit
+          inputs
           nixpkgs
           clipboard
           nixVim
