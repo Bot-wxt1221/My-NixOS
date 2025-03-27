@@ -26,11 +26,13 @@
     "cgroups"
     "dynamic-derivations"
   ];
-system.extraDependencies = let
-     collectFlakeInputs =
-       input: [ input ] ++ builtins.concatMap collectFlakeInputs (builtins.attrValues (input.inputs or {}));
-   in
-     builtins.concatMap collectFlakeInputs (builtins.attrValues inputs);
+  system.extraDependencies =
+    let
+      collectFlakeInputs =
+        input:
+        [ input ] ++ builtins.concatMap collectFlakeInputs (builtins.attrValues (input.inputs or { }));
+    in
+    builtins.concatMap collectFlakeInputs (builtins.attrValues inputs);
   nixpkgs.config.allowUnfree = true;
   system.rebuild.enableNg = true;
   nix.registry.nixpkgs.flake = nixpkgs;
