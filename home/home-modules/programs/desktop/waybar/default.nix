@@ -162,14 +162,13 @@
           default = [ " " ];
         };
         scroll-step = 5;
-        on-click = (
+        on-click =
           if osConfig.Enablepipewire then
             "${pkgs.pwvucontrol}/bin/pwvucontrol"
           else if osConfig.Enablepulseaudio then
             "${pkgs.pavucontrol}/bin/pavucontrol"
           else
-            null
-        );
+            null;
       };
       battery = lib.mkIf osConfig.Laptop {
         format = "{icon} {capacity}%";
