@@ -195,7 +195,6 @@ in
       pkgs.substituteAll {
         src = ./niri.kdl;
         swaylockscript = pkgs.writeText "a.sh" ''
-          niri msg action power-off-monitors
           ${lib.getExe pkgs.swaylock-effects} --screenshots --clock --font "WenQuanYi Micro Hei"
         '';
         startClashVerge = pkgs.writeText "a.sh" ''
