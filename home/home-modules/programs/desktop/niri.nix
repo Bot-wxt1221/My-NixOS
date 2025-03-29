@@ -167,7 +167,7 @@ in
       };
 
       Service = {
-        ExecStart = "${lib.getExe pkgs.xwayland-satellite} :0";
+        ExecStart = "sleep 5 && ${lib.getExe pkgs.xwayland-satellite} :0";
         Restart = "always";
         RestartSec = "10";
       };
