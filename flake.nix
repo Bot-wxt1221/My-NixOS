@@ -179,7 +179,7 @@
       nixosConfigurations.iso-image-with-mininal-config = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit nixpkgs;
+          inherit nixpkgs inputs;
         };
         modules = [
           ./iso
