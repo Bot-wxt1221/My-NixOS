@@ -160,6 +160,7 @@ in
       };
 
       Unit = {
+        RefuseManualStop = true;
         ConditionEnvironment = "WAYLAND_DISPLAY";
         Description = "xwayland-satellite";
         After = [ config.wayland.systemd.target ];
