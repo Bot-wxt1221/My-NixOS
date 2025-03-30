@@ -15,6 +15,7 @@
     ./nvim-tree.nix
     ./telescope.nix
     ./sops.nix
+    ./wakatime.nix
   ];
 
   # proper <C-S-...> selections from insert and normal modes
