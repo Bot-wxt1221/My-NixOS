@@ -156,7 +156,7 @@
       nixosConfigurations.iso-image = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit nixpkgs;
+          inherit nixpkgs inputs;
         };
         modules = [
           ./iso
@@ -167,7 +167,7 @@
       nixosConfigurations.iso-image-gpu = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit nixpkgs;
+          inherit nixpkgs inputs;
         };
         modules = [
           ./iso
