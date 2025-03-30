@@ -167,10 +167,16 @@ in
       };
 
       Service = {
-        ExecStart = ''
-          sleep 5
-          ${lib.getExe pkgs.xwayland-satellite} :0
-        '';
+        ExecStart =
+          let
+            script = pkgs.writeText "a.sh" ''
+              sleep 5
+              ${lib.getExe pkgs.xwayland-satellite} :0
+            '';
+          in
+          ''
+            ${lib.getExe pkgs.bash} ${script}
+          '';
         Restart = "always";
         RestartSec = "10";
       };
