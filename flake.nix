@@ -107,36 +107,6 @@
           }
         ];
       };
-      nixosConfigurations.wxt-bazhong = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = SystemSpecialArgs;
-        modules = [
-          ./machine/bazhong
-          preservation.nixosModules.default
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.wxt = import ./home/wxt/default-bazhong.nix;
-            home-manager.extraSpecialArgs = HmSpecialArgs;
-          }
-        ];
-      };
-      nixosConfigurations.wxt-school-vmware = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = SystemSpecialArgs;
-        modules = [
-          ./machine/school-vmware
-          preservation.nixosModules.default
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.wxt = import ./home/wxt/default-school-vmware.nix;
-            home-manager.extraSpecialArgs = HmSpecialArgs;
-          }
-        ];
-      };
       nixosConfigurations.wxt-school-real = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = SystemSpecialArgs;
@@ -193,8 +163,6 @@
           (_: {
             environment.systemPackages = [
               self.nixosConfigurations.wxt-g3.config.system.build.toplevel
-              self.nixosConfigurations.wxt-school-vmware.config.system.build.toplevel
-              self.nixosConfigurations.wxt-bazhong.config.system.build.toplevel
               self.nixosConfigurations.wxt-school-real.config.system.build.toplevel
             ];
           })

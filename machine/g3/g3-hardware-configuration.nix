@@ -37,6 +37,30 @@
       "dmask=0022"
     ];
   };
+  fileSystems."/" = {
+    options = [
+      "subvol=root"
+      "compress=zstd"
+      "flushoncommit"
+    ];
+  };
+  fileSystems."/nix" = {
+    inherit (config.fileSystems."/") device;
+    fsType = "btrfs";
+    options = [
+      "subvol=nix"
+      "compress=zstd"
+      "flushoncommit"
+    ];
+  };
+  fileSystems."/persist" = {
+    inherit (config.fileSystems."/") device;
+    fsType = "btrfs";
+    options = [
+      "subvol=persist"
+      "flushoncommit"
+    ];
+  };
 
   swapDevices = [
     { device = "/dev/disk/by-uuid/056efdb0-e963-44d7-82ae-3c8a58cab197"; }

@@ -6,7 +6,6 @@
   imports = [
 
   ];
-  fileSystems."/persist".neededForBoot = true;
   preservation.enable = true;
   boot.initrd.systemd.suppressedUnits = [ "systemd-machine-id-commit.service" ];
   systemd.suppressedSystemUnits = [ "systemd-machine-id-commit.service" ];
@@ -49,8 +48,12 @@
       "systemd-machine-id-setup --commit --root /persist"
     ];
   };
-  boot.initrd.supportedFilesystems = [ "btrfs" ];
+  boot.initrd.supportedFilesystems = [
+    "btrfs"
+    "bcachefs"
+  ];
   boot.initrd.systemd.services.rollback = {
+    enable = false;
     description = "Reset BTRFS root subvolume to empty snapshot";
     # initrd target: root filesystem device is available but not yet mounted. So ensure that this happens in that window.
     wantedBy = [ "initrd.target" ];

@@ -9,7 +9,6 @@
 {
   imports = [
     ./school-real-hardware-configuration.nix
-    ../persist-config.nix
     ./sops
     nixos-facter-modules.nixosModules.facter
   ];

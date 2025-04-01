@@ -10,5 +10,6 @@
     nano
     vim
     wget
+    bcachefs-tools
   ];
 }

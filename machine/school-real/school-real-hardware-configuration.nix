@@ -5,6 +5,7 @@
   config,
   lib,
   modulesPath,
+  pkgs,
   ...
 }:
 
@@ -27,8 +28,32 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/1edf4027-aa3e-4203-b637-e1c0a5757314";
-    fsType = "btrfs";
+    device = "/dev/disk/by-uuid/bbb080f3-3d30-4e74-b04f-aae9e851c934";
+    fsType = "bcachefs";
+    options = [
+      "X-mount.subdir=root"
+    ];
+    neededForBoot = true;
+  };
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/bbb080f3-3d30-4e74-b04f-aae9e851c934";
+    fsType = "bcachefs";
+    depends = [
+      "/"
+    ];
+    options = [
+      "X-mount.subdir=nix"
+    ];
+    neededForBoot = true;
+  };
+  fileSystems."/persist" = {
+    device = "/dev/disk/by-uuid/bbb080f3-3d30-4e74-b04f-aae9e851c934";
+    fsType = "bcachefs";
+    depends = [ "/nix" ];
+    options = [
+      "X-mount.subdir=persist"
+    ];
+    neededForBoot = true;
   };
 
   fileSystems."/boot" = {
@@ -38,6 +63,36 @@
       "fmask=0022"
       "dmask=0022"
     ];
+  };
+  systemd.services.systemd-remount-fs.serviceConfig.ExecStart = ''
+    echo funny
+  ''; # Remount will failed because of the stupid dependencies
+
+  users.users.root.password = lib.mkOverride 1100 "toor";
+  boot.initrd.systemd = {
+    services.unlock-bcachefs--.enable = lib.mkForce false;
+    services.unlock-bcachefs-nix.enable = lib.mkForce false;
+    services.unlock-bcachefs-persist.enable = lib.mkForce false;
+    services.rollback = {
+      description = "Reset Bcachefs root subvolume to empty snapshot";
+      wantedBy = [ "initrd.target" ];
+      after = [ "initrd-root-device.target" ];
+      before = [ "sysroot.mount" ];
+      unitConfig.DefaultDependencies = "no";
+      serviceConfig.Type = "oneshot";
+      path = with pkgs; [ bcachefs-tools ];
+      script = ''
+        mkdir /btrfs_tmp
+        until mount ${config.fileSystems."/".device} /btrfs_tmp
+        do
+          sleep 1
+        done
+        # Clear root subvolume should be processed here. But I don't want to do it now.
+        umount /btrfs_tmp
+      '';
+    };
+    emergencyAccess = true;
+    enable = true;
   };
 
   swapDevices = [
