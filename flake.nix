@@ -160,6 +160,13 @@
         };
         modules = [
           ./iso
+          ./nixos-modules/programs/nix
+          (
+            { ... }:
+            {
+              boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+            }
+          )
         ];
       };
       packages.x86_64-linux.iso-image-gpu =
