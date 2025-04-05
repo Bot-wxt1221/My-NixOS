@@ -28,7 +28,7 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/bbb080f3-3d30-4e74-b04f-aae9e851c934";
+    device = "/dev/disk/by-uuid/eaeabb43-ef0c-467a-81db-d6685669e181";
     fsType = "bcachefs";
     options = [
       "X-mount.subdir=root"
@@ -36,7 +36,7 @@
     neededForBoot = true;
   };
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/bbb080f3-3d30-4e74-b04f-aae9e851c934";
+    device = config.fileSystems."/".device;
     fsType = "bcachefs";
     depends = [
       "/"
@@ -47,7 +47,7 @@
     neededForBoot = true;
   };
   fileSystems."/persist" = {
-    device = "/dev/disk/by-uuid/bbb080f3-3d30-4e74-b04f-aae9e851c934";
+    device = config.fileSystems."/".device;
     fsType = "bcachefs";
     depends = [ "/nix" ];
     options = [
@@ -64,11 +64,8 @@
       "dmask=0022"
     ];
   };
-  systemd.services.systemd-remount-fs.serviceConfig.ExecStart = ''
-    echo funny
-  ''; # Remount will failed because of the stupid dependencies
-
-  users.users.root.password = lib.mkOverride 1100 "toor";
+  systemd.services.systemd-remount-fs.enable = false;
+  users.users.root.password = "nixos";
   boot.initrd.systemd = {
     services.unlock-bcachefs--.enable = lib.mkForce false;
     services.unlock-bcachefs-nix.enable = lib.mkForce false;
@@ -80,14 +77,28 @@
       before = [ "sysroot.mount" ];
       unitConfig.DefaultDependencies = "no";
       serviceConfig.Type = "oneshot";
-      path = with pkgs; [ bcachefs-tools ];
+      serviceConfig.KeyringMode = "inherit";
       script = ''
         mkdir /btrfs_tmp
-        until mount ${config.fileSystems."/".device} /btrfs_tmp
+        systemd-ask-password --timeout=0 > /tmpkey
+        until bcachefs mount --passphrase-file /tmpkey ${config.fileSystems."/".device} /btrfs_tmp
         do
+          echo "Device not online. Please wait" > /dev/kmsg
+          systemd-ask-password --timeout=0 > /tmpkey
           sleep 1
         done
-        # Clear root subvolume should be processed here. But I don't want to do it now.
+        cd /btrfs_tmp
+        if [[ -e /btrfs_tmp/root ]]; then
+          mkdir -p /btrfs_tmp/old_roots
+          timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
+          mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
+        fi
+        for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +1); do
+          rm -rf "$i"
+        done
+        ${pkgs.bcachefs-tools}/bin/bcachefs subvolume create root
+        chmod 7777 root
+        cd /
         umount /btrfs_tmp
       '';
     };
