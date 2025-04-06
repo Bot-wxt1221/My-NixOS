@@ -65,7 +65,6 @@
     ];
   };
   systemd.services.systemd-remount-fs.enable = false;
-  users.users.root.password = "nixos";
   boot.initrd.systemd = {
     services.unlock-bcachefs--.enable = lib.mkForce false;
     services.unlock-bcachefs-nix.enable = lib.mkForce false;
