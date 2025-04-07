@@ -12,7 +12,7 @@
     ./shared-modules.nix
   ];
   cpuTempDevice = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input";
-  haveBacklight = true;
+  haveBacklight = false;
   home.username = "wxt";
   home.homeDirectory = "/home/wxt";
   home.stateVersion = osConfig.system.stateVersion;
