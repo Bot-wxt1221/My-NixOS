@@ -35,7 +35,7 @@
       vaapiVdpau
       ocl-icd
       intel-ocl
-      intel-compute-runtime
+      intel-compute-runtime-legacy1
       nvidia-vaapi-driver
       intel-media-driver
     ];

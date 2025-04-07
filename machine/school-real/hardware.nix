@@ -31,7 +31,7 @@
       vaapiVdpau
       ocl-icd
       intel-ocl
-      intel-compute-runtime
+      intel-compute-runtime-legacy1
       intel-media-driver
     ];
     extraPackages32 = with pkgs.pkgsi686Linux; [
