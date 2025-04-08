@@ -93,7 +93,7 @@
           mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
         fi
         for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +1); do
-          rm -rf "$i"
+          bcachefs subvolume del "$i"
         done
         ${pkgs.bcachefs-tools}/bin/bcachefs subvolume create root
         chmod 7777 root
