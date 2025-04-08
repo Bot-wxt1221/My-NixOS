@@ -8,10 +8,12 @@
     enabled = "fcitx5";
     fcitx5.addons = osConfig.i18n.inputMethod.fcitx5.addons;
     fcitx5.waylandFrontend = true;
-    fcitx5.fcitx5-with-addons = pkgs.kdePackages.fcitx5-with-addons.overrideAttrs(old:{
-      postBuild = old.postBuild + ''
-        rm $out/$autostart
-      '';
+    fcitx5.fcitx5-with-addons = pkgs.kdePackages.fcitx5-with-addons.overrideAttrs (old: {
+      postBuild =
+        old.postInstall or ""
+        + ''
+          rm $out/$autostart
+        '';
     });
   };
 }
