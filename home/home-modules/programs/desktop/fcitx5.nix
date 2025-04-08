@@ -1,7 +1,6 @@
 {
   pkgs,
   osConfig,
-  lib,
   ...
 }:
 {
@@ -11,5 +10,4 @@
     fcitx5.waylandFrontend = true;
     fcitx5.fcitx5-with-addons = pkgs.kdePackages.fcitx5-with-addons;
   };
-  systemd.user.services.fcitx5-daemon.enable = lib.mkForce false;
 }
