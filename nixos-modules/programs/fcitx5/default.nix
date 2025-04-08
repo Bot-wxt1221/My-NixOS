@@ -12,7 +12,10 @@
     fcitx5.addons = with pkgs; [
       libsForQt5.fcitx5-qt
       kdePackages.fcitx5-qt
-      fcitx5-with-addons
+      (kdePackages.fcitx5-with-addons.overrideAttrs(old:{
+      postBuild = old.postBuild + ''
+        rm $out/$autostart
+      '';}))
       fcitx5-gtk
       fcitx5-rime
       fcitx5-chinese-addons

@@ -36,7 +36,7 @@
     neededForBoot = true;
   };
   fileSystems."/nix" = {
-    device = config.fileSystems."/".device;
+    inherit (config.fileSystems."/") device;
     fsType = "bcachefs";
     depends = [
       "/"
@@ -47,7 +47,7 @@
     neededForBoot = true;
   };
   fileSystems."/persist" = {
-    device = config.fileSystems."/".device;
+    inherit (config.fileSystems."/") device;
     fsType = "bcachefs";
     depends = [ "/nix" ];
     options = [

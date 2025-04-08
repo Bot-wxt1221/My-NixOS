@@ -3,23 +3,25 @@
   ...
 }:
 let
-  niri-use = pkgs.niri.overrideAttrs (new: old: {
-    src = pkgs.fetchFromGitHub {
-      owner = "YaLTeR";
-      repo = "niri";
-      rev = "430b155929a60644ea223012ee0c1389fc5e3755";
-      hash = "sha256-Hb3t6FoJycnqIZmu3c6K1bJGndBsrDw8IQtM2ieLbzU=";
-    };
+  niri-use = pkgs.niri.overrideAttrs (
+    new: old: {
+      src = pkgs.fetchFromGitHub {
+        owner = "YaLTeR";
+        repo = "niri";
+        rev = "430b155929a60644ea223012ee0c1389fc5e3755";
+        hash = "sha256-Hb3t6FoJycnqIZmu3c6K1bJGndBsrDw8IQtM2ieLbzU=";
+      };
       cargoDeps = old.cargoDeps.overrideAttrs (oldAttrs': {
-          vendorStaging = oldAttrs'.vendorStaging.overrideAttrs {
-            inherit (new) patches src;
-            outputHash = "sha256-5wK8cPEIw5VIsghikWlnuyaOp/qaG5ZCCwoiFEumyoE=";
-          };
-        });
-    patches = (old.patches or [ ]) ++ [
-      ./niri-make-chrome-happy.patch
-    ];
-  });
+        vendorStaging = oldAttrs'.vendorStaging.overrideAttrs {
+          inherit (new) patches src;
+          outputHash = "sha256-5wK8cPEIw5VIsghikWlnuyaOp/qaG5ZCCwoiFEumyoE=";
+        };
+      });
+      patches = (old.patches or [ ]) ++ [
+        ./niri-make-chrome-happy.patch
+      ];
+    }
+  );
 in
 {
   imports = [
