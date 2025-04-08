@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   ...
 }:
 {
@@ -21,7 +20,6 @@
     fcitx5.waylandFrontend = true;
     fcitx5.plasma6Support = true;
   };
-  systemd.user.services.fcitx5-daemon.enable = lib.mkForce false;
   home-manager.sharedModules = [
     (
       {
