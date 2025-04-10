@@ -1,14 +1,36 @@
 {
   pkgs,
+  lib,
   ...
 }:
 let
-  niri-use = pkgs.niri;
+  niri-use = pkgs.niri.overrideAttrs (
+    new: old: {
+      src = pkgs.fetchFromGitHub {
+        owner = "YaLTeR";
+        repo = "niri";
+        rev = "53d1efd3bc3d45f4a97ad2d0ad6f5768c7e557a3";
+        hash = "sha256-jR2GreUW+FkoUiBPZ/+PsApi+RseTWU+4F41MXv12X0=";
+      };
+      cargoDeps = old.cargoDeps.overrideAttrs (oldAttrs': {
+        vendorStaging = oldAttrs'.vendorStaging.overrideAttrs {
+          inherit (new) src;
+          outputHash = "sha256-5wK8cPEIw5VIsghikWlnuyaOp/qaG5ZCCwoiFEumyoE=";
+        };
+      });
+    }
+  );
 in
 {
   imports = [
 
   ];
+  options = {
+    niriInUse = lib.mkOption {
+      type = lib.types.package;
+      default = niri-use;
+    };
+  };
   config = {
     security.pam.services.swaylock = { };
     security.pam.services.wayvnc = {

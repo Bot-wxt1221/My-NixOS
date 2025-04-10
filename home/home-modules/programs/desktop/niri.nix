@@ -3,6 +3,7 @@
   lib,
   pkgs,
   clipboard,
+  osConfig,
   ...
 }:
 let
@@ -41,7 +42,7 @@ in
     xdg.portal = with pkgs; {
       enable = true;
       configPackages = [
-        pkgs.niri
+        osConfig.niriInUse
       ];
       extraPortals = [
         wlr-xdg-desktop
@@ -211,6 +212,9 @@ in
         startClashVerge = pkgs.writeText "a.sh" ''
           sleep 10
           clash-verge
+        '';
+        overviewScript = pkgs.writeText "a.sh" ''
+          echo '{"Action":{"ToggleOverview":{}}}' | comma socat STDIO "$NIRI_SOCKET"
         '';
       }
     );
