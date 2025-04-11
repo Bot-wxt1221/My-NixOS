@@ -214,7 +214,7 @@ in
           clash-verge
         '';
         overviewScript = pkgs.writeText "a.sh" ''
-          echo '{"Action":{"ToggleOverview":{}}}' | comma socat STDIO "$NIRI_SOCKET"
+          echo '{"Action":{"ToggleOverview":{}}}' | ${lib.getExe pkgs.socat} STDIO "$NIRI_SOCKET"
         '';
       }
     );
