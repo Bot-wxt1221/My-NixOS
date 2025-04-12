@@ -45,7 +45,7 @@ in
         osConfig.niriInUse
       ];
       extraPortals = [
-        wlr-xdg-desktop
+        # wlr-xdg-desktop
         xdg-desktop-portal-gnome
         xdg-desktop-portal-gtk
         xdg-desktop-portal
@@ -56,8 +56,9 @@ in
             "gnome"
             "gtk"
           ];
-          "org.freedesktop.impl.portal.RemoteDesktop" = [ "wlr" ];
-          "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
+          "org.freedesktop.impl.portal.RemoteDesktop" = [ "gnome" ];
+          "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+          "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
           "org.freedesktop.impl.portal.FileChooser" = [ "gnome" ];
         };
       };
