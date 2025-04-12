@@ -82,9 +82,9 @@
         systemd-ask-password --timeout=0 > /tmpkey
         until bcachefs mount --passphrase-file /tmpkey ${config.fileSystems."/".device} /btrfs_tmp
         do
-          echo "<2> Device not online. Please wait" > /dev/kmsg
-          systemd-ask-password --timeout=0 > /tmpkey
+          echo "<2> Password Error or Device Not Onlined. Try Again." > /dev/kmsg
           sleep 1
+          systemd-ask-password --timeout=0 > /tmpkey
         done
         cd /btrfs_tmp
         if [[ -e /btrfs_tmp/root ]]; then
