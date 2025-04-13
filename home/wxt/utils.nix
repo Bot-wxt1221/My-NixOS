@@ -79,6 +79,6 @@
     deadnix
     statix
 
-    ventoy-full-qt
+    ventoy-full-gtk
   ];
 }
