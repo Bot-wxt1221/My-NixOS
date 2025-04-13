@@ -78,5 +78,7 @@
     usbutils # lsusb
     deadnix
     statix
+
+    ventoy-full-qt
   ];
 }
