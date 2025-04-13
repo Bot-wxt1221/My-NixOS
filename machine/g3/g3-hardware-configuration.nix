@@ -27,9 +27,11 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/48057729-20c7-4f4d-88d5-180aec0bb34d";
     fsType = "btrfs";
+    neededForBoot = true;
   };
 
   fileSystems."/boot" = {
+    neededForBoot = true;
     device = "/dev/disk/by-uuid/C519-C5AE";
     fsType = "vfat";
     options = [
@@ -45,6 +47,7 @@
     ];
   };
   fileSystems."/nix" = {
+    neededForBoot = true;
     inherit (config.fileSystems."/") device;
     fsType = "btrfs";
     options = [
@@ -54,6 +57,7 @@
     ];
   };
   fileSystems."/persist" = {
+    neededForBoot = true;
     inherit (config.fileSystems."/") device;
     fsType = "btrfs";
     options = [
@@ -78,7 +82,6 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   boot.initrd.systemd.services.rollback = {
-    enable = false;
     description = "Reset BTRFS root subvolume to empty snapshot";
     # initrd target: root filesystem device is available but not yet mounted. So ensure that this happens in that window.
     wantedBy = [ "initrd.target" ];

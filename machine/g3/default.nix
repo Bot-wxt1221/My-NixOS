@@ -28,6 +28,7 @@
   EnableKubo = false;
   EnableDocker = true;
   Laptop = true;
+  users.users.root.password = "root";
   users.users.wxt = {
     isNormalUser = true;
     extraGroups = [
