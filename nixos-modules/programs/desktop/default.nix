@@ -9,8 +9,8 @@ let
       src = pkgs.fetchFromGitHub {
         owner = "YaLTeR";
         repo = "niri";
-        rev = "35623ea34582d6dfb0946a56981053f6fe8ed8b1";
-        hash = "sha256-cZTekG7OJUvNmdG/nT7z4ock/hbqcjf+E21DlEpzaqY=";
+        rev = "7345961a46c90fd82b51effa4e122c5ea3d3ba00";
+        hash = "sha256-zp/R45oGSbvzV53nPE3EM8aGtn1DvvWHRDD4WxhzuMU=";
       };
       cargoDeps = old.cargoDeps.overrideAttrs (oldAttrs': {
         vendorStaging = oldAttrs'.vendorStaging.overrideAttrs {
