@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}:
+_:
 {
   preservation.preserveAt."/persist".users.wxt = {
     directories = [
