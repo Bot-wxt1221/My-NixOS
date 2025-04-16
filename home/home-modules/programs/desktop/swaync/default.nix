@@ -1,6 +1,5 @@
 {
   lib,
-  config,
   osConfig,
   ...
 }:
@@ -11,7 +10,7 @@
   services.swaync = {
     enable = true;
     settings = import ./swaync-json.nix {
-      inherit config lib osConfig;
+      inherit lib osConfig;
     };
     style = ./swaync.css;
   };
