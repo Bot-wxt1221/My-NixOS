@@ -60,6 +60,7 @@
   boot.kernelModules = [
     "kvm-intel"
     "acpi_call"
+    "v4l2loopback"
   ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
     acpi_call
