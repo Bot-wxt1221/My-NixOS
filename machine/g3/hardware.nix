@@ -84,5 +84,6 @@
   ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
     acpi_call
+    v4l2loopback
   ];
 }
