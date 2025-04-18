@@ -46,7 +46,7 @@ in
         color: #b4befe;
     }
 
-    #tray, #pulseaudio, #network, #cpu, #memory, #disk, #clock, #battery, #custom-notification, #backlight, #bluetooth, #temperature {
+    #tray, #pulseaudio, #network, #cpu, #memory, #disk, #clock, #battery, #custom-notification, #backlight, #bluetooth, #temperature, #niri/window {
         font-size: ${custom.font_size};
         color: ${custom.text_color};
     }

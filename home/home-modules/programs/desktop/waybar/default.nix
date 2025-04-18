@@ -41,6 +41,7 @@
       modules-left = [
         "custom/launcher"
         "niri/workspaces"
+        "niri/window"
       ];
       modules-center = [ "clock" ];
       modules-right =
@@ -81,6 +82,7 @@
           ""
         ];
       };
+      "niri/window" = { };
       clock = {
         format = " {:%H:%M}";
         format-alt = " {:%Y/%m/%d (%R)}";
