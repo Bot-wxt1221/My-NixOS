@@ -27,12 +27,15 @@ in
 
     window#waybar {
         background: ${custom.background};
+        color: ${custom.text_color};
+        padding-left: 9px;
+        padding-right: 15px;
     }
 
     #workspaces {
         font-size: 18px;
         padding-left: 15px;
-        
+        padding-left: 15px;
     }
     #workspaces button {
         color: ${custom.text_color};
