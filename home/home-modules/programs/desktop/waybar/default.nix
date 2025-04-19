@@ -83,8 +83,9 @@
         ];
       };
       "niri/window" = {
-      icon = true;
-      icon-size = 21;};
+        icon = true;
+        icon-size = 21;
+      };
       clock = {
         format = " {:%H:%M}";
         format-alt = " {:%Y/%m/%d (%R)}";

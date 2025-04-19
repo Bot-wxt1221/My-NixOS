@@ -200,9 +200,6 @@
           sleep 10
           clash-verge
         '';
-        overviewScript = pkgs.writeText "a.sh" ''
-          echo '{"Action":{"ToggleOverview":{}}}' | ${lib.getExe pkgs.socat} STDIO "$NIRI_SOCKET"
-        '';
       }
     );
   };
