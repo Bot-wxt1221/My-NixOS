@@ -82,7 +82,9 @@
           ""
         ];
       };
-      "niri/window" = { };
+      "niri/window" = {
+      icon = true;
+      icon-size = 21;};
       clock = {
         format = " {:%H:%M}";
         format-alt = " {:%Y/%m/%d (%R)}";
@@ -154,7 +156,7 @@
         on-click = "io.elementary.settings";
       };
       tray = {
-        icon-size = 20;
+        icon-size = 21;
         spacing = 8;
       };
       pulseaudio = lib.mkIf (osConfig.Enablepipewire or osConfig.Enablepulseaudio) {
