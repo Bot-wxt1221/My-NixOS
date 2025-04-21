@@ -15,15 +15,10 @@
     preservation.preserveAt."/persist".users.wxt = {
       directories = [
         ".cache/mozilla"
-        ".mozilla/firefox"
+        ".mozilla/firefox/*/storage"
       ];
     };
     programs.firefox = {
-      enable = true;
-      package = pkgs.firefox-beta;
-      nativeMessagingHosts.packages = [
-        pkgs.keepassxc
-      ];
       languagePacks = [
         "zh-CN"
       ];
@@ -32,6 +27,14 @@
       (_: {
         config = {
           programs.firefox = {
+            enable = true;
+            languagePacks = [
+              "zh-CN"
+            ];
+            nativeMessagingHosts = [
+              pkgs.keepassxc
+            ];
+            package = pkgs.firefox-beta;
             profiles.botwxt = {
               isDefault = true;
               name = "BotIsNotBot";
