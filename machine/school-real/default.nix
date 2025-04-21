@@ -18,6 +18,8 @@
   Enablepipewire = true;
   EnableWaydroid = true;
   EnableVirt = true;
+  enableChromium = false;
+  enableFirefox = true;
 
   EnableOllama = true;
   EnableMineGPU = false;

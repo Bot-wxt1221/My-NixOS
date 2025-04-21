@@ -61,10 +61,10 @@
     ] ''rm -f ${config.home.homeDirectory}/.config/mimeapps.list'';
     xdg.mimeApps =
       let
-        br = "chromium-browser.desktop";
+        br = "firefox.desktop";
         fm = "org.gnome.Nautilus.desktop";
-        iv = "chromium-browser.desktop";
-        mp = "chromium-browser.desktop";
+        iv = "firefox.desktop";
+        mp = "firefox.desktop";
         te = "nvim.desktop";
       in
       rec {
