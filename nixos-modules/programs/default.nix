@@ -13,6 +13,7 @@
     ./docker
     ./ejabberd
     ./fcitx5
+    ./firefox
     ./flatpak
     ./fuse
     ./irc-server
