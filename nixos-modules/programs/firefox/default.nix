@@ -38,6 +38,13 @@
             profiles.botwxt = {
               isDefault = true;
               name = "BotIsNotBot";
+              extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+                keepassxc-browser
+                wayback-machine
+                tampermonkey
+                competitive-companion
+                wakatimes
+              ];
               search = {
                 force = true;
                 default = "bing";
