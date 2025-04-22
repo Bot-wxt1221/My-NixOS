@@ -15,7 +15,7 @@
     preservation.preserveAt."/persist".users.wxt = {
       directories = [
         ".cache/mozilla"
-        ".mozilla/firefox/*/storage"
+        ".mozilla/firefox/botwxt/storage"
       ];
     };
     programs.firefox = {
