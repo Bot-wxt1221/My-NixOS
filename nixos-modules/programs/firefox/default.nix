@@ -18,6 +18,23 @@
         ".mozilla/firefox/botwxt/storage"
       ];
     };
+    systemd.tmpfiles.settings.preservation = {
+      "/home/wxt/.mozilla".d = {
+        user = "wxt";
+        group = "users";
+        mode = "0755";
+      };
+      "/home/wxt/.mozilla/firefox".d = {
+        user = "wxt";
+        group = "users";
+        mode = "0755";
+      };
+      "/home/wxt/.mozilla/firefox/botwxt".d = {
+        user = "wxt";
+        group = "users";
+        mode = "0755";
+      };
+    };
     programs.firefox = {
       languagePacks = [
         "zh-CN"
