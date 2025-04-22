@@ -15,7 +15,7 @@
     preservation.preserveAt."/persist".users.wxt = {
       directories = [
         ".cache/mozilla"
-        ".mozilla/firefox/botwxt/storage"
+        ".mozilla/firefox/botwxt"
       ];
     };
     systemd.tmpfiles.settings.preservation = {
@@ -25,11 +25,6 @@
         mode = "0755";
       };
       "/home/wxt/.mozilla/firefox".d = {
-        user = "wxt";
-        group = "users";
-        mode = "0755";
-      };
-      "/home/wxt/.mozilla/firefox/botwxt".d = {
         user = "wxt";
         group = "users";
         mode = "0755";
