@@ -34,7 +34,7 @@
             nativeMessagingHosts = [
               pkgs.keepassxc
             ];
-            package = pkgs.firefox-beta;
+            package = (pkgs.wrapFirefox (pkgs.firefox-beta-unwrapped.override { pipewireSupport = true; }) { });
             profiles.botwxt = {
               isDefault = true;
               name = "BotIsNotBot";
@@ -76,6 +76,7 @@
                 "browser.fullscreen.autohide" = true;
                 "browser.newtabpage.activity-stream.feeds.topsites" = false;
                 "browser.urlbar.keepPanelOpenDuringImeComposition" = true;
+                "widget.use-xdg-desktop-portal.file-picker" = 1;
                 "browser.uiCustomization.horizontalTabstrip" =
                   ''["firefox-view-button","tabbrowser-tabs","new-tab-button","alltabs-button"]'';
                 "sidebar.verticalTabs" = true;
