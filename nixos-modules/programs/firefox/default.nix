@@ -40,7 +40,7 @@
               name = "BotIsNotBot";
               search = {
                 force = true;
-                default = "Bing";
+                default = "bing";
                 engines = {
                   nix-packages = {
                     name = "Nix Packages";
