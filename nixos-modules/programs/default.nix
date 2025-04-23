@@ -26,7 +26,7 @@
     ./ollama
     ./openssh
     ./qt
-    # ./rustdesk
+    ./rustdesk
     ./steam
     ./virutalbox
     ./waydroid
