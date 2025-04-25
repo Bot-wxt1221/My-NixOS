@@ -46,7 +46,7 @@
             nativeMessagingHosts = [
               pkgs.keepassxc
             ];
-            package = (pkgs.wrapFirefox (pkgs.firefox-beta-unwrapped.override { pipewireSupport = true; }) { });
+            package = pkgs.wrapFirefox (pkgs.firefox-beta-unwrapped.override { pipewireSupport = true; }) { };
             profiles.botwxt = {
               isDefault = true;
               name = "BotIsNotBot";

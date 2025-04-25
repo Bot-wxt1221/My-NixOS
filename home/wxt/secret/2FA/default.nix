@@ -1,5 +1,7 @@
 {
   config,
+  pkgs,
+  lib,
   ...
 }:
 
@@ -29,15 +31,22 @@
     };
 
     Install.WantedBy = [ "xdg-desktop-autostart.target" ];
-
     Service = {
       Type = "exec";
       Restart = "on-abnormal";
-      ExecStart = ''
+      Environment = "PATH=${
+        lib.makeBinPath (
+          with pkgs;
+          [
+            coreutils-full
+          ]
+        )
+      }";
+      ExecStart = pkgs.writeShellScript "a.sh" ''
         cp ${config.home.homeDirectory}/2FA/kee.before ${config.home.homeDirectory}/2FA/kee
         cp ${config.home.homeDirectory}/2FA/pas2s.kdbx.before ${config.home.homeDirectory}/2FA/pas2s.kdbx
-        chown 0700 ${config.home.homeDirectory}/2FA/pas2s.kdbx
-        chown 0700 ${config.home.homeDirectory}/2FA/kee
+        chmod 0700 ${config.home.homeDirectory}/2FA/pas2s.kdbx
+        chmod 0700 ${config.home.homeDirectory}/2FA/kee
       '';
     };
   };
