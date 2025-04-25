@@ -34,8 +34,10 @@
       Type = "exec";
       Restart = "on-abnormal";
       ExecStart = ''
-        install -Dm600 ${config.home.homeDirectory}/2FA/kee.before ${config.home.homeDirectory}/2FA/kee
-        install -Dm600 ${config.home.homeDirectory}/2FA/pas2s.kdbx.before ${config.home.homeDirectory}/2FA/pas2s.kdbx
+        cp ${config.home.homeDirectory}/2FA/kee.before ${config.home.homeDirectory}/2FA/kee
+        cp ${config.home.homeDirectory}/2FA/pas2s.kdbx.before ${config.home.homeDirectory}/2FA/pas2s.kdbx
+        chown 0700 ${config.home.homeDirectory}/2FA/pas2s.kdbx
+        chown 0700 ${config.home.homeDirectory}/2FA/kee
       '';
     };
   };
