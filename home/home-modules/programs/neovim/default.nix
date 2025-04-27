@@ -37,7 +37,7 @@
     Name=Neovim wrapper
     GenericName=Text Editor
     TryExec=nvim
-    Exec=konsole nvim %F
+    Exec=konsole -e nvim %F
     Terminal=false
     Type=Application
     Keywords=Text;editor;
