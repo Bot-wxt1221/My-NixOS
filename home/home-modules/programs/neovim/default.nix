@@ -2,6 +2,7 @@
   pkgs,
   neovim,
   nixVim,
+  lib,
   ...
 }:
 {
@@ -31,6 +32,21 @@
     ./ui
     nixVim.homeManagerModules.nixvim
   ];
+  home.file.".local/share/applications/nvim.desktop" = lib.mkForce {text = ''
+    [Desktop Entry]
+    Name=Neovim wrapper
+    GenericName=Text Editor
+    TryExec=nvim
+    Exec=konsole nvim %F
+    Terminal=false
+    Type=Application
+    Keywords=Text;editor;
+    Icon=nvim
+    Categories=Utility;TextEditor;
+    StartupNotify=false
+    MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
+  '';
+  };
   programs.nixvim = {
     enable = true;
     package = neovim.packages.${pkgs.system}.default;
