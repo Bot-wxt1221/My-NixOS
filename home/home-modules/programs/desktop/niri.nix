@@ -191,8 +191,7 @@
     };
 
     xdg.configFile."niri/config.kdl".text = builtins.readFile (
-      pkgs.substituteAll {
-        src = ./niri.kdl;
+      (pkgs.replaceVars ./niri.kdl {
         swaylockscript = pkgs.writeText "a.sh" ''
           ${lib.getExe pkgs.swaylock-effects} --screenshots --clock --font "WenQuanYi Micro Hei" --effect-pixelate 20 --effect-greyscale --effect-vignette 0.7:0.7
         '';
@@ -200,7 +199,10 @@
           sleep 10
           clash-verge
         '';
-      }
+      }).overrideAttrs
+        {
+          doCheck = false;
+        }
     );
   };
 }
