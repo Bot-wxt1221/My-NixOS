@@ -9,5 +9,6 @@
     ./neovim
     ./nix-index
     ./qq
+    ./thunderbird
   ];
 }
