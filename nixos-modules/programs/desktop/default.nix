@@ -9,13 +9,13 @@ let
       src = pkgs.fetchFromGitHub {
         owner = "YaLTeR";
         repo = "niri";
-        rev = "d15a45f3a5450a60fb1296b98a23f631a0dbcdfa";
-        hash = "sha256-I0C245EfIBGsupFMf/zdVmNJDVngc/4vvwCaSlS7UBA=";
+        rev = "501ea471283a3ac7b94593e271c9d4ae6af8859f";
+        hash = "sha256-XhfYYefs/97yWcyNKEarStaSL4t4M+yR6ZD4PQbO5Lo=";
       };
       cargoDeps = old.cargoDeps.overrideAttrs (oldAttrs': {
         vendorStaging = oldAttrs'.vendorStaging.overrideAttrs {
           inherit (new) src;
-          outputHash = "sha256-5wK8cPEIw5VIsghikWlnuyaOp/qaG5ZCCwoiFEumyoE=";
+          outputHash = "sha256-5w18cPEIw5VIsghikWlnuyaOp/qaG5ZCCwoiFEumyoE=";
         };
       });
     }
