@@ -15,7 +15,7 @@ let
       cargoDeps = old.cargoDeps.overrideAttrs (oldAttrs': {
         vendorStaging = oldAttrs'.vendorStaging.overrideAttrs {
           inherit (new) src;
-          outputHash = "sha256-5w18cPEIw5VIsghikWlnuyaOp/qaG5ZCCwoiFEumyoE=";
+          outputHash = "sha256-5wK8cPEIw5VIsghikWlnuyaOp/qaG5ZCCwoiFEumyoE=";
         };
       });
     }
