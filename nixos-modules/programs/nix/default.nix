@@ -26,6 +26,9 @@
     "cgroups"
     "dynamic-derivations"
   ];
+  nixpkgs.config.permittedInsecurePackages = [
+    "clash-verge-rev-2.2.3"
+  ];
   system.extraDependencies =
     let
       collectFlakeInputs =
