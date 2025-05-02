@@ -28,8 +28,12 @@ in
     window#waybar {
         background: ${custom.background};
         color: ${custom.text_color};
-        padding-left: 9px;
+        padding-left: 15px;
         padding-right: 15px;
+    }
+
+    .niri-taskbar button {
+        padding: 2px 2px;
     }
 
     #workspaces {
