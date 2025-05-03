@@ -239,6 +239,7 @@
           hwmon-path = config.cpuTempDevice;
           critical-threshold = 80;
           format-critical = " {temperatureC}°C";
+          on-click = "niri msg action toggle-overview";
           format = " {temperatureC}°C";
         };
       };
