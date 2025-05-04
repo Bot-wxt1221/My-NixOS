@@ -80,5 +80,8 @@
     statix
 
     ventoy-full-gtk
+
+    testlib
+    ac-library
   ];
 }
