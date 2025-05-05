@@ -45,6 +45,7 @@
       iv = "microsoft-edge.desktop";
       mp = "microsoft-edge.desktop";
       te = "nvim.desktop";
+      em = "thunderbird.desktop";
     in
     rec {
       enable = true;
@@ -60,6 +61,9 @@
         "text/html" = br;
         "x-scheme-handler/http" = br;
         "x-scheme-handler/https" = br;
+        "x-scheme-handler/mailto" = em;
+        "x-scheme-handler/mid" = em;
+        "message/rfc822" = em;
 
         # Images.
         "image/avif" = iv;

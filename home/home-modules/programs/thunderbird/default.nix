@@ -1,26 +1,10 @@
 {
   pkgs,
   lib,
-  config,
   ...
 }:
 
 {
-  home.packages = with pkgs; [
-    birdtray
-  ];
-  systemd.user.services.thunderbird-tray = {
-    Unit = {
-      Description = "Mozilla Thunderbird System Tray (birdtray) service";
-      After = [ "waybar.service" ];
-    };
-    Service = {
-      ExecStart = "${pkgs.birdtray}/bin/birdtray -l ${config.home.homeDirectory}/.config/thunderbird/birdtray.log";
-      Restart = "on-failure";
-      RestartSec = 5;
-    };
-    Install.WantedBy = [ "default.target" ];
-  };
   programs.thunderbird = {
     package = pkgs.thunderbird-latest;
     enable = true;
