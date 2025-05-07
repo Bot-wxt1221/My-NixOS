@@ -48,6 +48,8 @@
     QT_QPA_PLATFORM = "wayland";
   };
   boot.kernelParams = [
+     "default_hugepagesz=1G"
+    "hugepages=3"   
     "intel_iommu=on"
     "i915.enable_guc=3"
     "i915.enable_fbc=1"
