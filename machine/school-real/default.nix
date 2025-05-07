@@ -25,7 +25,7 @@
   EnableMineGPU = false;
   EnableVirtualBox = false;
   EnableBluetooth = false;
-  EnableMineCPU = false;
+  EnableMineCPU = true;
   EnableCuda = false;
   EnableKubo = false;
   EnableDocker = true;
