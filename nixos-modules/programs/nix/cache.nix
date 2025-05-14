@@ -8,7 +8,7 @@
   ];
   system.stateVersion = lib.trivial.release;
   nix.settings.substituters = lib.mkForce [
-    "https://mirror.nju.edu.cn/nix-channels/store"
+    "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
     "https://cache.nixos.org"
     "https://nix-community.cachix.org"
     "https://wxt1221.cachix.org"
@@ -16,6 +16,7 @@
     "https://niri.cachix.org"
     "https://cache.garnix.io"
   ];
+  nix.settings.narinfo-cache-positive-ttl = 3600;
   nix.settings.trusted-users = [
     "root"
     "wxt"
