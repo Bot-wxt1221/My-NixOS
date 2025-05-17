@@ -81,5 +81,7 @@
 
     testlib
     ac-library
+
+    feishu
   ];
 }
