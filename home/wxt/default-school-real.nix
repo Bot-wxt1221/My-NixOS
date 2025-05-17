@@ -15,7 +15,7 @@
   haveBacklight = false;
   home.username = "wxt";
   home.homeDirectory = "/home/wxt";
-  home.stateVersion = osConfig.system.stateVersion;
+  home.stateVersion = "25.05";
   programs.home-manager.enable = true;
   programs.git.extraConfig = {
     commit = {
