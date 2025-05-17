@@ -83,5 +83,10 @@
     ac-library
 
     feishu
+
+    numix-icon-theme-circle
+    colloid-icon-theme
+    catppuccin-gtk
+    catppuccin-kvantum
   ];
 }
