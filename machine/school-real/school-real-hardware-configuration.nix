@@ -96,7 +96,7 @@
           bcachefs subvolume del "$i"
         done
         ${pkgs.bcachefs-tools}/bin/bcachefs subvolume create root
-        chmod 7777 root
+        chmod 7755 root
         cd /
         umount /btrfs_tmp
       '';
