@@ -1,0 +1,13 @@
+2025-05-18 00:24:43.829	    7f6e8cc7aec0	INFO	logging	contrib/epee/src/mlog.cpp:274	New log categories: *:WARNING,net:FATAL,net.http:FATAL,net.ssl:FATAL,net.p2p:FATAL,net.cn:FATAL,daemon.rpc:FATAL,global:INFO,verify:FATAL,serialization:FATAL,daemon.rpc.payment:ERROR,stacktrace:INFO,logging:INFO,msgwriter:INFO
+2025-05-18 00:24:43.829	    7f6e8cc7aec0	INFO	logging	contrib/epee/src/mlog.cpp:274	New log categories: *:WARNING,net:FATAL,net.http:FATAL,net.ssl:FATAL,net.p2p:FATAL,net.cn:FATAL,daemon.rpc:FATAL,global:INFO,verify:FATAL,serialization:FATAL,daemon.rpc.payment:ERROR,stacktrace:INFO,logging:INFO,msgwriter:INFO,bcutil:INFO
+2025-05-18 00:24:43.829	    7f6e8cc7aec0	INFO	bcutil	src/blockchain_utilities/blockchain_import.cpp:686	Starting...
+2025-05-18 00:24:43.829	    7f6e8cc7aec0	INFO	bcutil	src/blockchain_utilities/blockchain_import.cpp:704	database: LMDB
+2025-05-18 00:24:43.829	    7f6e8cc7aec0	INFO	bcutil	src/blockchain_utilities/blockchain_import.cpp:705	verify:  true
+2025-05-18 00:24:43.829	    7f6e8cc7aec0	INFO	bcutil	src/blockchain_utilities/blockchain_import.cpp:708	batch:   true  batch size: 5000
+2025-05-18 00:24:43.829	    7f6e8cc7aec0	INFO	bcutil	src/blockchain_utilities/blockchain_import.cpp:715	resume:  true
+2025-05-18 00:24:43.829	    7f6e8cc7aec0	INFO	bcutil	src/blockchain_utilities/blockchain_import.cpp:716	nettype: mainnet
+2025-05-18 00:24:43.829	    7f6e8cc7aec0	INFO	bcutil	src/blockchain_utilities/blockchain_import.cpp:718	bootstrap file path: /home/wxt/.bitmonero/export/blockchain.raw
+2025-05-18 00:24:43.829	    7f6e8cc7aec0	INFO	bcutil	src/blockchain_utilities/blockchain_import.cpp:719	database path:       /home/wxt/.bitmonero
+2025-05-18 00:24:43.830	    7f6e8cc7aec0	INFO	global	src/cryptonote_core/cryptonote_core.cpp:508	Loading blockchain from folder /home/wxt/.bitmonero/lmdb ...
+2025-05-18 00:24:43.922	    7f6e8cc7aec0	INFO	global	src/cryptonote_core/cryptonote_core.cpp:683	Loading checkpoints
+2025-05-18 00:24:43.923	    7f6e8cc7aec0	FATAL	bcutil	src/blockchain_utilities/blockchain_import.cpp:235	bootstrap file not found: "/home/wxt/.bitmonero/export/blockchain.raw"
