@@ -196,7 +196,9 @@
           ${lib.getExe pkgs.swaylock-effects} --screenshots --clock --font "WenQuanYi Micro Hei" --effect-pixelate 20 --effect-greyscale --effect-vignette 0.7:0.7
         '';
         startClashVerge = pkgs.writeText "a.sh" ''
-          sleep 10
+          sleep 5
+          systemctl restart --user waybar
+          sleep 5
           clash-verge
         '';
       }).overrideAttrs
