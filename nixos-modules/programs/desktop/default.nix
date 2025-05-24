@@ -4,22 +4,7 @@
   ...
 }:
 let
-  niri-use = pkgs.niri.overrideAttrs (
-    new: old: {
-      src = pkgs.fetchFromGitHub {
-        owner = "YaLTeR";
-        repo = "niri";
-        rev = "501ea471283a3ac7b94593e271c9d4ae6af8859f";
-        hash = "sha256-XhfYYefs/97yWcyNKEarStaSL4t4M+yR6ZD4PQbO5Lo=";
-      };
-      cargoDeps = old.cargoDeps.overrideAttrs (oldAttrs': {
-        vendorStaging = oldAttrs'.vendorStaging.overrideAttrs {
-          inherit (new) src;
-          outputHash = "sha256-5wK8cPEIw5VIsghikWlnuyaOp/qaG5ZCCwoiFEumyoE=";
-        };
-      });
-    }
-  );
+  niri-use = pkgs.niri;
 in
 {
   imports = [
