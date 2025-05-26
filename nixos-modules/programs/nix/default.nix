@@ -26,12 +26,6 @@
     "cgroups"
     "dynamic-derivations"
   ];
-  nixpkgs.config.permittedInsecurePackages = [
-    "clash-verge-rev-2.2.3"
-    "clash-verge-rev-unwrapped-2.2.3"
-    "clash-verge-rev-service-2.2.3"
-    "clash-verge-rev-webui-2.2.3"
-  ];
   system.extraDependencies =
     let
       collectFlakeInputs =
