@@ -6,7 +6,7 @@
   imports = [
 
   ];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_14;
   hardware.firmware = [ pkgs.linux-firmware ];
   boot.kernel.sysctl = {
     "kernel.sysrq" = 255;
