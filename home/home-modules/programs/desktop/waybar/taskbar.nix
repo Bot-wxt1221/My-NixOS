@@ -4,6 +4,7 @@
   fetchFromGitHub,
   pkg-config,
   gtk3,
+  fetchpatch,
 }:
 
 rustPlatform.buildRustPackage rec {
@@ -17,8 +18,15 @@ rustPlatform.buildRustPackage rec {
     hash = "sha256-mzO2j3CnYJsF8UCoKquG2AT1Lb0PDsSEs2mdmTcTGPA=";
   };
 
+  cargoPatches = [
+    (fetchpatch {
+      url = "https://github.com/LawnGnome/niri-taskbar/pull/11/commits/472017164c0ce3ae8ab787317116bdc7afef23ec.patch";
+      hash = "sha256-BicNVi2JHq9c7sEC3NSIuxIfTg5TMjOzQw/PyLUqhLQ=";
+    })
+  ];
+
   useFetchCargoVendor = true;
-  cargoHash = "sha256-zOAdnkWSSJd2tfT1bV9WkFY74DKSGD6HkSl8a+Fyd9o=";
+  cargoHash = "sha256-NTiXr9FrcKWwfY7uV8yTSSNKbrCmKT7dVQp9m2U98UQ=";
 
   nativeBuildInputs = [
     pkg-config
