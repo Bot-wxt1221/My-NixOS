@@ -52,6 +52,29 @@
     };
     programs.niriswitcher = {
       enable = true;
+      settings = {
+        keys = {
+          modifier = "Super";
+          switch = {
+            next = "Tab";
+            prev = "Shift+Tab";
+          };
+        };
+        center_on_focus = true;
+        appearance = {
+          system_theme = "dark";
+          icon_size = 64;
+        };
+      };
+      style = ''
+        .application-name {
+          opacity: 1;
+          color: rgba(255, 255, 255, 0.6);
+        }
+        .application.selected .application-name {
+          color: rgba(255, 255, 255, 1);
+        }
+      '';
     };
     systemd.user.services.niriswitcher = {
       Install = {
