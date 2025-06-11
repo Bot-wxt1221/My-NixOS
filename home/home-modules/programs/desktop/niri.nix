@@ -50,6 +50,27 @@
       };
       xdgOpenUsePortal = true;
     };
+    programs.niriswitcher = {
+      enable = true;
+    };
+    systemd.user.services.niriswitcher = {
+      Install = {
+        WantedBy = [ config.wayland.systemd.target ];
+      };
+
+      Unit = {
+        ConditionEnvironment = "WAYLAND_DISPLAY";
+        Description = "niriswitcher";
+        After = [ config.wayland.systemd.target ];
+        PartOf = [ config.wayland.systemd.target ];
+      };
+
+      Service = {
+        ExecStart = "${lib.getExe pkgs.niriswitcher}";
+        Restart = "on-failure";
+        RestartSec = "10";
+      };
+    };
     home.file = {
       ".config/wayvnc/config".text = ''
         enable_auth=true
