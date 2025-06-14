@@ -1,12 +1,22 @@
 {
   pkgs,
+  lib,
   ...
 }:
 {
   imports = [
 
   ];
-  boot.kernelPackages = pkgs.linuxPackages_6_14;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  specialisation = {
+    stable-kernel = {
+      configuration = {
+        system.nixos.tags = [ "stable-kernel" ];
+        boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
+      };
+      inheritParentConfig = true;
+    };
+  };
   hardware.firmware = [ pkgs.linux-firmware ];
   boot.kernel.sysctl = {
     "kernel.sysrq" = 255;

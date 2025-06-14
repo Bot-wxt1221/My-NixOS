@@ -8,12 +8,12 @@
     ./network
 
     ./bluetooth.nix
+    ./boot.nix
     ./console.nix
     ./cuda.nix
     ./etc.nix
     ./font.nix
     ./fs.nix
-    ./grub.nix
     ./kernel.nix
     ./laptop.nix
     ./libinput.nix
