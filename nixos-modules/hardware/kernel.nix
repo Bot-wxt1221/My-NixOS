@@ -9,10 +9,10 @@
   ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   specialisation = {
-    stable-kernel = {
+    _6_14-kernel = {
       configuration = {
         system.nixos.tags = [ "stable-kernel" ];
-        boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
+        boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_14;
       };
       inheritParentConfig = true;
     };
