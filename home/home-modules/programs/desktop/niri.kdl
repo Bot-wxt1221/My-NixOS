@@ -364,8 +364,8 @@ binds {
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
 
-    Mod+Tab repeat=false { spawn "niriswitcherctl" "show" "--window"; }
-    Mod+Shift+Tab repeat=false { spawn "niriswitcherctl" "show" "--window"; }
-    Mod+Grave repeat=false { spawn "niriswitcherctl" "show" "--workspace"; }
-    Mod+Shift+Grave repeat=false { spawn "niriswitcherctl" "show" "--workspace"; }
+    Mod+Tab repeat=false { spawn "gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application" ; }
+    Mod+Shift+Tab repeat=false { spawn "gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application" ; }
+    Mod+Grave repeat=false { spawn "gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.workspace" ; }
+    Mod+Shift+Grave repeat=false { spawn "gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.workspace" ; }
 }

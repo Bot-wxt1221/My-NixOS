@@ -16,6 +16,7 @@
       xsel
       pkgs.swaylock-effects
       clipboard.packages.${pkgs.system}.default
+      glib.bin
     ];
     home.pointerCursor = {
       gtk.enable = true;
