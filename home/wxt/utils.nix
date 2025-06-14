@@ -18,7 +18,7 @@
     gcc
     gdb
     pkgs.nur.repos.bot-wxt1221.ddz_py
-    moraxyc-nur.wechat
+    moraxyc-nur.packages.${pkgs.system}.wechat
     cmake
     gnumake
     fd

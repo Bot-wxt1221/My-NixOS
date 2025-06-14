@@ -8,6 +8,7 @@
 
   ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.binfmt.preferStaticEmulators = true;
   specialisation = {
     _6_14-kernel = {
       configuration = {
@@ -30,4 +31,4 @@
     "/sys/module/zswap/parameters/enabled"."w-".argument = "1";
     "/sys/module/zswap/parameters/zpool"."w-".argument = "zsmalloc";
   };
-}
+} 
