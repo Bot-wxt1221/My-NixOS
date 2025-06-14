@@ -401,11 +401,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1749873036,
-        "narHash": "sha256-OAvJF0mnMzY/Auvmx3hBQZDOBv7ss/M7wqIAbT4Ht60=",
+        "lastModified": 1749892646,
+        "narHash": "sha256-0zBsm5+z1Y5URRaEMvtSRM2K38LVrUyLxPvWBTxNHiw=",
         "owner": "Moraxyc",
         "repo": "nur-packages",
-        "rev": "eb300e64f713af11351a42a90ed0060065da36c7",
+        "rev": "f407c2b4377b1bc1698a3fc80bd5b790df7bfcc5",
         "type": "github"
       },
       "original": {
@@ -653,11 +653,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1749888054,
-        "narHash": "sha256-xvs9ECVwXwqPZcgRq8+LbvWSMEiS2VZ6vLb/RhO9vsE=",
+        "lastModified": 1749891265,
+        "narHash": "sha256-lxE5fUK9zTRPTR4S/8x9rtYNFokPStT3+Hwou95CbI0=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "5f4fb9f4e4bcd39e1073e4b776d668a0f6b971d4",
+        "rev": "54e53c358ee16b153d91ac7bfe7dfa34aedad411",
         "type": "github"
       },
       "original": {
