@@ -79,7 +79,7 @@
   # networking.interfaces.Mihomo.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  nixpkgs.hostPlatform = "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   boot.initrd.systemd.services.rollback = {
     description = "Reset BTRFS root subvolume to empty snapshot";
