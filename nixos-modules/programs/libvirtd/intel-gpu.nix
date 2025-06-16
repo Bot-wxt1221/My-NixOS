@@ -4,7 +4,8 @@
   ...
 }:
 
-lib.mkIf ((lib.lists.count (x: x.driver == "i915") config.facter.report.hardware.graphics_card) > 0)
+lib.mkIf
+  ((lib.lists.count (x: x.driver == "i915") (config.facter.report.hardware.graphics_card or [ ])) > 0)
   {
     virtualisation.kvmgt.enable = true;
     virtualisation.kvmgt.vgpus = {
