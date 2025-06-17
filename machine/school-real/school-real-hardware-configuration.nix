@@ -101,7 +101,6 @@
         umount /btrfs_tmp
       '';
     };
-    emergencyAccess = true;
     enable = true;
   };
 
