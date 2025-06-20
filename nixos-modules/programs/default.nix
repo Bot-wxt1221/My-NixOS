@@ -16,6 +16,7 @@
     ./firefox
     ./flatpak
     ./fuse
+    ./genshin
     ./irc-server
     ./kubo
     ./libvirtd
