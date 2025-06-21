@@ -43,10 +43,6 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    moraxyc-nur = {
-      url = "github:Moraxyc/nur-packages";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -64,7 +60,6 @@
       nix-index-database,
       sops-nix,
       nixos-facter-modules,
-      moraxyc-nur,
       an-anime-game-launcher,
       ...
     }@inputs:
@@ -82,7 +77,6 @@
           nix-index-database
           sops-nix
           nixos-facter-modules
-          moraxyc-nur
           an-anime-game-launcher
           ;
       };

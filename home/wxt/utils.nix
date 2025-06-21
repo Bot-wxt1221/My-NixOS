@@ -1,7 +1,6 @@
 {
   pkgs,
   luogu-gcc,
-  moraxyc-nur,
   ...
 }:
 {
@@ -18,7 +17,7 @@
     gcc
     gdb
     pkgs.nur.repos.bot-wxt1221.ddz_py
-    moraxyc-nur.packages.${pkgs.system}.wechat
+    wechat
     cmake
     gnumake
     fd
