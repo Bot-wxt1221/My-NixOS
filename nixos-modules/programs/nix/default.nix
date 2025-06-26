@@ -22,9 +22,7 @@
     "nix-command"
     "flakes"
     "auto-allocate-uids"
-    "ca-derivations"
     "cgroups"
-    "dynamic-derivations"
   ];
   system.extraDependencies =
     let
