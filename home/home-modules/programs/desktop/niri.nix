@@ -6,9 +6,9 @@
   osConfig,
   ...
 }:
-let 
-  wlr-xdg-desktop = pkgs.xdg-desktop-portal-wlr.overrideAttrs (old:{
-    patches = old.patches or [] ++ [
+let
+  wlr-xdg-desktop = pkgs.xdg-desktop-portal-wlr.overrideAttrs (old: {
+    patches = old.patches or [ ] ++ [
       ./wlr.patch
     ];
     buildInputs = old.buildInputs ++ [
@@ -21,11 +21,13 @@ let
       hash = "sha256-xvkTd1kzlI1HtALOMS2nXzSymrr4wWjYxm5+I4AcwHo=";
     };
   });
-  xdg-desktop-portal-for-rustdesk = pkgs.xdg-desktop-portal.overrideAttrs (old:{
-    postPatch = old.postPatch + ''
-      substituteInPlace src/xdg-desktop-portal.c \
-        --replace-fail "org.freedesktop.portal.Desktop" "org.freedesktop.portal.Desktop-for-rustdesk"
-    '';
+  xdg-desktop-portal-for-rustdesk = pkgs.xdg-desktop-portal.overrideAttrs (old: {
+    postPatch =
+      old.postPatch
+      + ''
+        substituteInPlace src/xdg-desktop-portal.c \
+          --replace-fail "org.freedesktop.portal.Desktop" "org.freedesktop.portal.Desktop-for-rustdesk"
+      '';
     doCheck = false;
   });
 in
@@ -88,7 +90,8 @@ in
 
       Service = {
         Environment = [
-        "XDG_DESKTOP_PORTAL_DIR=${./xdg-rustdesk-dir/xdg-desktop-portal/portals}"];
+          "XDG_DESKTOP_PORTAL_DIR=${./xdg-rustdesk-dir/xdg-desktop-portal/portals}"
+        ];
         ExecStart = "${xdg-desktop-portal-for-rustdesk}/libexec/xdg-desktop-portal";
         Restart = "on-failure";
         RestartSec = "10";
