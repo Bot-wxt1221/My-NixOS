@@ -13,7 +13,7 @@
     _6_14-kernel = {
       configuration = {
         system.nixos.tags = [ "stable-kernel" ];
-        boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_14;
+        boot.kernelPackages = lib.mkForce pkgs.linuxPackages_testing;
       };
       inheritParentConfig = true;
     };
