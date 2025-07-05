@@ -257,6 +257,8 @@ binds {
     Mod+Shift+Right { move-column-right; }
 
     Mod+Home { focus-column-first; }
+    Mod+Alt+F1 { set-dynamic-cast-window; }
+    Mod+Alt+F2 { set-dynamic-cast-monitor; }
     Mod+End  { focus-column-last; }
     Mod+Shift+Home { move-column-to-first; }
     Mod+Shift+End  { move-column-to-last; }
