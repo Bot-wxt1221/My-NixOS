@@ -1,0 +1,4348 @@
+diff --git a/.builds/alpine.yml b/.builds/alpine.yml
+index 9092c81..dab079a 100644
+--- a/.builds/alpine.yml
++++ b/.builds/alpine.yml
+@@ -10,6 +10,7 @@ packages:
+   - scdoc
+   - libdrm
+   - mesa-dev
++  - libxkbcommon-dev
+ sources:
+   - https://github.com/emersion/xdg-desktop-portal-wlr
+ tasks:
+diff --git a/.builds/archlinux.yml b/.builds/archlinux.yml
+index e9b6d8f..c40bd91 100644
+--- a/.builds/archlinux.yml
++++ b/.builds/archlinux.yml
+@@ -9,6 +9,7 @@ packages:
+   - libinih
+   - scdoc
+   - mesa
++  - libxkbcommon
+ sources:
+   - https://github.com/emersion/xdg-desktop-portal-wlr
+ tasks:
+diff --git a/.builds/freebsd.yml b/.builds/freebsd.yml
+index fd012d8..a54eb45 100644
+--- a/.builds/freebsd.yml
++++ b/.builds/freebsd.yml
+@@ -11,6 +11,7 @@ packages:
+   - scdoc
+   - graphics/libdrm
+   - graphics/mesa-libs
++  - libxkbcommon
+ sources:
+   - https://github.com/emersion/xdg-desktop-portal-wlr
+ tasks:
+diff --git a/include/config.h b/include/config.h
+index f856dc1..098cbe9 100644
+--- a/include/config.h
++++ b/include/config.h
+@@ -14,8 +14,15 @@ struct config_screencast {
+ 	bool force_mod_linear;
+ };
+ 
++struct config_remotedesktop {
++	bool allow_keyboard;
++	bool allow_pointer;
++	bool allow_touchscreen;
++};
++
+ struct xdpw_config {
+ 	struct config_screencast screencast_conf;
++	struct config_remotedesktop remotedesktop_conf;
+ };
+ 
+ void print_config(enum LOGLEVEL loglevel, struct xdpw_config *config);
+diff --git a/include/ext_image_copy.h b/include/ext_image_copy.h
+deleted file mode 100644
+index f90cfcd..0000000
+--- a/include/ext_image_copy.h
++++ /dev/null
+@@ -1,10 +0,0 @@
+-#ifndef EXT_IMAGE_COPY_H
+-#define EXT_IMAGE_COPY_H
+-
+-#include "screencast_common.h"
+-
+-void xdpw_ext_ic_frame_capture(struct xdpw_screencast_instance *cast);
+-int xdpw_ext_ic_session_init(struct xdpw_screencast_instance *cast);
+-void xdpw_ext_ic_session_close(struct xdpw_screencast_instance *cast);
+-
+-#endif
+diff --git a/include/intset.h b/include/intset.h
+new file mode 100644
+index 0000000..338a2bd
+--- /dev/null
++++ b/include/intset.h
+@@ -0,0 +1,37 @@
++/*
++ * Copied from wayvnc: https://github.com/any1/wayvnc/
++ *
++ * Copyright (c) 2020 Andri Yngvason
++ *
++ * Permission to use, copy, modify, and/or distribute this software for any
++ * purpose with or without fee is hereby granted, provided that the above
++ * copyright notice and this permission notice appear in all copies.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
++ * REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
++ * AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
++ * INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
++ * LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE
++ * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
++ * PERFORMANCE OF THIS SOFTWARE.
++ */
++
++#pragma once
++
++#include <unistd.h>
++#include <stdint.h>
++#include <stdbool.h>
++
++struct intset {
++	size_t cap;
++	size_t len;
++	int32_t* storage;
++};
++
++int intset_init(struct intset* self, size_t cap);
++void intset_destroy(struct intset* self);
++
++int intset_set(struct intset* self, int32_t value);
++void intset_clear(struct intset* self, int32_t value);
++
++bool intset_is_set(const struct intset* self, int32_t value);
+diff --git a/include/keyboard.h b/include/keyboard.h
+new file mode 100644
+index 0000000..3042f17
+--- /dev/null
++++ b/include/keyboard.h
+@@ -0,0 +1,50 @@
++/*
++ * Copied from wayvnc: https://github.com/any1/wayvnc/
++ *
++ * Copyright (c) 2019 Andri Yngvason
++ *
++ * Permission to use, copy, modify, and/or distribute this software for any
++ * purpose with or without fee is hereby granted, provided that the above
++ * copyright notice and this permission notice appear in all copies.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
++ * REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
++ * AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
++ * INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
++ * LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE
++ * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
++ * PERFORMANCE OF THIS SOFTWARE.
++ */
++
++#pragma once
++
++#include <stdlib.h>
++#include <xkbcommon/xkbcommon.h>
++#include <stdbool.h>
++
++#include "intset.h"
++
++struct zwp_virtual_keyboard_v1;
++struct table_entry;
++struct nvnc;
++
++struct keyboard {
++	struct zwp_virtual_keyboard_v1* virtual_keyboard;
++
++	struct xkb_context* context;
++	struct xkb_keymap* keymap;
++	struct xkb_state* state;
++
++	size_t lookup_table_size;
++	size_t lookup_table_length;
++	struct table_entry* lookup_table;
++
++	struct intset key_state;
++};
++
++int keyboard_init(struct keyboard* self, const struct xkb_rule_names* rule_names);
++void keyboard_destroy(struct keyboard* self);
++void keyboard_feed(struct keyboard* self, xkb_keysym_t symbol, bool is_pressed);
++void keyboard_feed_code(struct keyboard* self, xkb_keycode_t code,
++		bool is_pressed);
++//enum nvnc_keyboard_led_state keyboard_get_led_state(const struct keyboard*);
+diff --git a/include/remotedesktop.h b/include/remotedesktop.h
+new file mode 100644
+index 0000000..538e365
+--- /dev/null
++++ b/include/remotedesktop.h
+@@ -0,0 +1,8 @@
++#ifndef REMOTE_DESKTOP_H
++#define REMOTE_DESKTOP_H
++
++#include "remotedesktop_common.h"
++
++void xdpw_remotedesktop_destroy(struct xdpw_remotedesktop_session_data *data);
++
++#endif
+diff --git a/include/remotedesktop_common.h b/include/remotedesktop_common.h
+new file mode 100644
+index 0000000..dfdb3a5
+--- /dev/null
++++ b/include/remotedesktop_common.h
+@@ -0,0 +1,44 @@
++#ifndef REMOTEDESKTOP_COMMON_H
++#define REMOTEDESKTOP_COMMON_H
++
++#include <stdbool.h>
++#include <time.h>
++
++#include "wlr-virtual-pointer-unstable-v1-client-protocol.h"
++#include "virtual-keyboard-unstable-v1-client-protocol.h"
++#include <wayland-client-protocol.h>
++#include <wayland-util.h>
++
++#include "keyboard.h"
++
++#define XDP_REMOTE_PROTO_VER 1
++
++struct xdpw_remotedesktop_context {
++	// xdpw
++	struct xdpw_state *state;
++
++	// wlroots
++	struct wl_registry *registry;
++	struct zwlr_virtual_pointer_manager_v1 *virtual_pointer_manager;
++	struct zwp_virtual_keyboard_manager_v1 *virtual_keyboard_manager;
++	struct wl_seat *seat;
++
++	// sessions
++	struct wl_list remotedesktop_instances;
++};
++
++struct xdpw_remotedesktop_session_data {
++	struct zwlr_virtual_pointer_v1 *virtual_pointer;
++	struct keyboard keyboard;
++	struct timespec t_start;
++	uint32_t devices;
++	uint32_t pressed_buttons;
++};
++
++enum device_types {
++	KEYBOARD = 1,
++	POINTER = 2,
++	TOUCHSCREEN = 4,
++};
++
++#endif
+diff --git a/include/screencast.h b/include/screencast.h
+index 99b7411..d2c29b2 100644
+--- a/include/screencast.h
++++ b/include/screencast.h
+@@ -6,4 +6,6 @@
+ void xdpw_screencast_instance_destroy(struct xdpw_screencast_instance *cast);
+ void xdpw_screencast_instance_teardown(struct xdpw_screencast_instance *cast);
+ 
++int xdpw_screencast_start(struct xdpw_screencast_instance *cast);
++
+ #endif
+diff --git a/include/screencast_common.h b/include/screencast_common.h
+index 61b0fec..d31f0a0 100644
+--- a/include/screencast_common.h
++++ b/include/screencast_common.h
+@@ -43,6 +43,14 @@ enum xdpw_chooser_types {
+   XDPW_CHOOSER_DMENU,
+ };
+ 
++enum xdpw_frame_state {
++  XDPW_FRAME_STATE_NONE,
++  XDPW_FRAME_STATE_STARTED,
++  XDPW_FRAME_STATE_RENEG,
++  XDPW_FRAME_STATE_FAILED,
++  XDPW_FRAME_STATE_SUCCESS,
++};
++
+ struct xdpw_output_chooser {
+ 	enum xdpw_chooser_types type;
+ 	char *cmd;
+@@ -56,15 +64,24 @@ struct xdpw_frame_damage {
+ };
+ 
+ struct xdpw_frame {
+-	bool completed;
+ 	bool y_invert;
+ 	uint64_t tv_sec;
+ 	uint32_t tv_nsec;
+ 	uint32_t transformation;
++	struct xdpw_frame_damage damage[4];
++	uint32_t damage_count;
+ 	struct xdpw_buffer *xdpw_buffer;
+ 	struct pw_buffer *pw_buffer;
+ };
+ 
++struct xdpw_screencopy_frame_info {
++	uint32_t width;
++	uint32_t height;
++	uint32_t size;
++	uint32_t stride;
++	uint32_t format;
++};
++
+ struct xdpw_buffer {
+ 	struct wl_list link;
+ 	enum buffer_type buffer_type;
+@@ -73,20 +90,21 @@ struct xdpw_buffer {
+ 	uint32_t height;
+ 	uint32_t format;
+ 	int plane_count;
+-	uint64_t modifier;
+ 
+-	int fd[GBM_MAX_PLANES];
+-	uint32_t size[GBM_MAX_PLANES];
+-	uint32_t stride[GBM_MAX_PLANES];
+-	uint32_t offset[GBM_MAX_PLANES];
+-
+-	struct wl_array damage;
++	int fd[4];
++	uint32_t size[4];
++	uint32_t stride[4];
++	uint32_t offset[4];
+ 
+ 	struct gbm_bo *bo;
+ 
+ 	struct wl_buffer *buffer;
+ };
+ 
++struct xdpw_format_modifier_pair {
++	uint32_t fourcc;
++	uint64_t modifier;
++};
+ 
+ struct xdpw_dmabuf_feedback_data {
+ 	void *format_table_data;
+@@ -107,8 +125,6 @@ struct xdpw_screencast_context {
+ 	struct wl_list output_list;
+ 	struct wl_registry *registry;
+ 	struct zwlr_screencopy_manager_v1 *screencopy_manager;
+-	struct ext_output_image_capture_source_manager_v1 *ext_output_image_capture_source_manager;
+-	struct ext_image_copy_capture_manager_v1 *ext_image_copy_capture_manager;
+ 	struct wl_shm *shm;
+ 	struct zwp_linux_dmabuf_v1 *linux_dmabuf;
+ 	struct zwp_linux_dmabuf_feedback_v1 *linux_dmabuf_feedback;
+@@ -137,29 +153,6 @@ struct xdpw_screencast_restore_data {
+ 	const char *output_name;
+ };
+ 
+-struct xdpw_format_modifier_pair {
+-	uint32_t fourcc;
+-	uint64_t modifier;
+-};
+-
+-struct xdpw_shm_format {
+-	uint32_t fourcc;
+-	uint32_t stride;
+-};
+-
+-struct xdpw_buffer_constraints {
+-	struct wl_array dmabuf_format_modifier_pairs;
+-	struct wl_array shm_formats;
+-	uint32_t width, height;
+-	bool dirty;
+-	struct gbm_device *gbm;
+-};
+-
+-struct xdpw_screencast_ext_session {
+-	struct ext_image_copy_capture_session_v1 *capture_session;
+-	struct ext_image_copy_capture_frame_v1 *frame;
+-};
+-
+ struct xdpw_screencast_wlr_session {
+ 	struct zwlr_screencopy_frame_v1 *frame_callback;
+ 	struct zwlr_screencopy_frame_v1 *wlr_frame;
+@@ -174,6 +167,7 @@ struct xdpw_screencast_instance {
+ 	struct xdpw_screencast_context *ctx;
+ 	bool initialized;
+ 	struct xdpw_frame current_frame;
++	enum xdpw_frame_state frame_state;
+ 	struct wl_list buffer_list;
+ 	bool avoid_dmabufs;
+ 
+@@ -189,14 +183,13 @@ struct xdpw_screencast_instance {
+ 	// wlroots
+ 	union {
+ 		struct xdpw_screencast_wlr_session wlr_session;
+-		struct xdpw_screencast_ext_session ext_session;
+ 	};
+-
+-	struct xdpw_buffer_constraints current_constraints;
+-	struct xdpw_buffer_constraints pending_constraints;
+-
+ 	struct xdpw_screencast_target *target;
+ 	uint32_t max_framerate;
++	struct xdpw_screencopy_frame_info screencopy_frame_info[2];
++	int err;
++	bool quit;
++	bool teardown;
+ 	enum buffer_type buffer_type;
+ 
+ 	// fps limit
+@@ -228,24 +221,15 @@ struct xdpw_wlr_output {
+ void randname(char *buf);
+ struct gbm_device *xdpw_gbm_device_create(drmDevice *device);
+ struct xdpw_buffer *xdpw_buffer_create(struct xdpw_screencast_instance *cast,
+-	enum buffer_type buffer_type);
++	enum buffer_type buffer_type, struct xdpw_screencopy_frame_info *frame_info);
+ void xdpw_buffer_destroy(struct xdpw_buffer *buffer);
+-
+-void xdpw_buffer_constraints_init(struct xdpw_buffer_constraints *constraints);
+-void xdpw_buffer_constraints_finish(struct xdpw_buffer_constraints *constraints);
+-bool xdpw_buffer_constraints_move(struct xdpw_buffer_constraints *dst, struct xdpw_buffer_constraints *src);
+-uint32_t xdpw_count_dmabuf_modifiers(struct xdpw_screencast_instance *cast, uint32_t drm_format);
+-void xdpw_query_dmabuf_modifiers(struct xdpw_screencast_instance *cast, uint32_t drm_format,
+-		uint64_t *modifiers, uint32_t num_modifiers);
+-
++bool wlr_query_dmabuf_modifiers(struct xdpw_screencast_context *ctx, uint32_t drm_format,
++		uint32_t num_modifiers, uint64_t *modifiers, uint32_t *max_modifiers);
+ enum wl_shm_format xdpw_format_wl_shm_from_drm_fourcc(uint32_t format);
+ uint32_t xdpw_format_drm_fourcc_from_wl_shm(enum wl_shm_format format);
+-uint32_t xdpw_format_drm_fourcc_from_pw_format(enum spa_video_format format);
+ enum spa_video_format xdpw_format_pw_from_drm_fourcc(uint32_t format);
+ enum spa_video_format xdpw_format_pw_strip_alpha(enum spa_video_format format);
+ 
+-int xdpw_bpp_from_drm_fourcc(uint32_t format);
+-
+ enum xdpw_chooser_types get_chooser_type(const char *chooser_type);
+ const char *chooser_type_str(enum xdpw_chooser_types chooser_type);
+ 
+diff --git a/include/shm.h b/include/shm.h
+new file mode 100644
+index 0000000..9798eef
+--- /dev/null
++++ b/include/shm.h
+@@ -0,0 +1,23 @@
++/*
++ * Copied from wayvnc: https://github.com/any1/wayvnc/
++ *
++ * Copyright (c) 2019 - 2020 Andri Yngvason
++ *
++ * Permission to use, copy, modify, and/or distribute this software for any
++ * purpose with or without fee is hereby granted, provided that the above
++ * copyright notice and this permission notice appear in all copies.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
++ * REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
++ * AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
++ * INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
++ * LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE
++ * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
++ * PERFORMANCE OF THIS SOFTWARE.
++ */
++
++#pragma once
++
++#include <unistd.h>
++
++int shm_alloc_fd(size_t size);
+diff --git a/include/virtual_input.h b/include/virtual_input.h
+new file mode 100644
+index 0000000..1412389
+--- /dev/null
++++ b/include/virtual_input.h
+@@ -0,0 +1,18 @@
++#ifndef VIRTUAL_INPUT_H
++#define VIRTUAL_INPUT_H
++
++#define VIRTUAL_POINTER_VERSION 2
++#define VIRTUAL_POINTER_VERSION_MIN 1
++
++#define VIRTUAL_KEYBOARD_VERSION 1
++#define VIRTUAL_KEYBOARD_VERSION_MIN 1
++
++#include "remotedesktop_common.h"
++
++struct xdpw_state;
++
++int xdpw_virtual_input_init(struct xdpw_state *state);
++
++void xdpw_virtual_input_finish(struct xdpw_remotedesktop_context *ctx);
++
++#endif
+diff --git a/include/xdpw.h b/include/xdpw.h
+index 3b95691..098a683 100644
+--- a/include/xdpw.h
++++ b/include/xdpw.h
+@@ -12,6 +12,7 @@
+ 
+ #include "screencast_common.h"
+ #include "screenshot_common.h"
++#include "remotedesktop_common.h"
+ #include "config.h"
+ 
+ struct xdpw_state {
+@@ -24,6 +25,9 @@ struct xdpw_state {
+ 	uint32_t screencast_cursor_modes; // bitfield of enum cursor_modes
+ 	uint32_t screencast_version;
+ 	uint32_t screenshot_version;
++	struct xdpw_remotedesktop_context remotedesktop;
++	uint32_t remotedesktop_version;
++	uint32_t remotedesktop_available_device_types;
+ 	struct xdpw_config *config;
+ 	int timer_poll_fd;
+ 	struct wl_list timers;
+@@ -39,6 +43,7 @@ struct xdpw_session {
+ 	sd_bus_slot *slot;
+ 	char *session_handle;
+ 	struct xdpw_screencast_session_data screencast_data;
++	struct xdpw_remotedesktop_session_data remotedesktop_data;
+ };
+ 
+ typedef void (*xdpw_event_loop_timer_func_t)(void *data);
+@@ -59,6 +64,7 @@ enum {
+ 
+ int xdpw_screenshot_init(struct xdpw_state *state);
+ int xdpw_screencast_init(struct xdpw_state *state);
++int xdpw_remotedesktop_init(struct xdpw_state *state);
+ 
+ struct xdpw_request *xdpw_request_create(sd_bus *bus, const char *object_path);
+ void xdpw_request_destroy(struct xdpw_request *req);
+diff --git a/meson.build b/meson.build
+index 47129fa..3f61fdd 100644
+--- a/meson.build
++++ b/meson.build
+@@ -31,6 +31,7 @@ wayland_protos = dependency('wayland-protocols', version: '>=1.24')
+ iniparser = dependency('inih')
+ gbm = dependency('gbm')
+ drm = dependency('libdrm')
++xkbcommon = dependency('xkbcommon')
+ 
+ epoll = dependency('', required: false)
+ if not cc.has_function('timerfd_create', prefix: '#include <sys/timerfd.h>')
+@@ -58,11 +59,15 @@ xdpw_files = files(
+ 	'src/screenshot/screenshot.c',
+ 	'src/screencast/screencast.c',
+ 	'src/screencast/screencast_common.c',
+-	'src/screencast/ext_image_copy.c',
+ 	'src/screencast/wlr_screencast.c',
+ 	'src/screencast/wlr_screencopy.c',
+ 	'src/screencast/pipewire_screencast.c',
+ 	'src/screencast/fps_limit.c',
++	'src/remotedesktop/intset.c',
++	'src/remotedesktop/remotedesktop.c',
++	'src/remotedesktop/keyboard.c',
++	'src/remotedesktop/shm.c',
++	'src/remotedesktop/virtual_input.c',
+ )
+ 
+ executable(
+@@ -77,6 +82,7 @@ executable(
+ 		gbm,
+ 		drm,
+ 		epoll,
++		xkbcommon,
+ 	],
+ 	include_directories: [inc],
+ 	install: true,
+diff --git a/protocols/meson.build b/protocols/meson.build
+index def3809..41df44e 100644
+--- a/protocols/meson.build
++++ b/protocols/meson.build
+@@ -9,10 +9,9 @@ wayland_scanner = find_program(
+ client_protocols = [
+ 	wl_protocol_dir / 'unstable/linux-dmabuf/linux-dmabuf-unstable-v1.xml',
+ 	wl_protocol_dir / 'unstable/xdg-output/xdg-output-unstable-v1.xml',
+-	wl_protocol_dir / 'staging/ext-image-capture-source/ext-image-capture-source-v1.xml',
+-	wl_protocol_dir / 'staging/ext-image-copy-capture/ext-image-copy-capture-v1.xml',
+-	wl_protocol_dir / 'staging/ext-foreign-toplevel-list/ext-foreign-toplevel-list-v1.xml',
++	'virtual-keyboard-unstable-v1.xml',
+ 	'wlr-screencopy-unstable-v1.xml',
++	'wlr-virtual-pointer-unstable-v1.xml',
+ ]
+ 
+ wl_proto_files = []
+diff --git a/protocols/virtual-keyboard-unstable-v1.xml b/protocols/virtual-keyboard-unstable-v1.xml
+new file mode 100644
+index 0000000..5095c91
+--- /dev/null
++++ b/protocols/virtual-keyboard-unstable-v1.xml
+@@ -0,0 +1,113 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<protocol name="virtual_keyboard_unstable_v1">
++  <copyright>
++    Copyright © 2008-2011  Kristian Høgsberg
++    Copyright © 2010-2013  Intel Corporation
++    Copyright © 2012-2013  Collabora, Ltd.
++    Copyright © 2018       Purism SPC
++
++    Permission is hereby granted, free of charge, to any person obtaining a
++    copy of this software and associated documentation files (the "Software"),
++    to deal in the Software without restriction, including without limitation
++    the rights to use, copy, modify, merge, publish, distribute, sublicense,
++    and/or sell copies of the Software, and to permit persons to whom the
++    Software is furnished to do so, subject to the following conditions:
++
++    The above copyright notice and this permission notice (including the next
++    paragraph) shall be included in all copies or substantial portions of the
++    Software.
++
++    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++    DEALINGS IN THE SOFTWARE.
++  </copyright>
++
++  <interface name="zwp_virtual_keyboard_v1" version="1">
++    <description summary="virtual keyboard">
++      The virtual keyboard provides an application with requests which emulate
++      the behaviour of a physical keyboard.
++
++      This interface can be used by clients on its own to provide raw input
++      events, or it can accompany the input method protocol.
++    </description>
++
++    <request name="keymap">
++      <description summary="keyboard mapping">
++        Provide a file descriptor to the compositor which can be
++        memory-mapped to provide a keyboard mapping description.
++
++        Format carries a value from the keymap_format enumeration.
++      </description>
++      <arg name="format" type="uint" summary="keymap format"/>
++      <arg name="fd" type="fd" summary="keymap file descriptor"/>
++      <arg name="size" type="uint" summary="keymap size, in bytes"/>
++    </request>
++
++    <enum name="error">
++      <entry name="no_keymap" value="0" summary="No keymap was set"/>
++    </enum>
++
++    <request name="key">
++      <description summary="key event">
++        A key was pressed or released.
++        The time argument is a timestamp with millisecond granularity, with an
++        undefined base. All requests regarding a single object must share the
++        same clock.
++
++        Keymap must be set before issuing this request.
++
++        State carries a value from the key_state enumeration.
++      </description>
++      <arg name="time" type="uint" summary="timestamp with millisecond granularity"/>
++      <arg name="key" type="uint" summary="key that produced the event"/>
++      <arg name="state" type="uint" summary="physical state of the key"/>
++    </request>
++
++    <request name="modifiers">
++      <description summary="modifier and group state">
++        Notifies the compositor that the modifier and/or group state has
++        changed, and it should update state.
++
++        The client should use wl_keyboard.modifiers event to synchronize its
++        internal state with seat state.
++
++        Keymap must be set before issuing this request.
++      </description>
++      <arg name="mods_depressed" type="uint" summary="depressed modifiers"/>
++      <arg name="mods_latched" type="uint" summary="latched modifiers"/>
++      <arg name="mods_locked" type="uint" summary="locked modifiers"/>
++      <arg name="group" type="uint" summary="keyboard layout"/>
++    </request>
++
++    <request name="destroy" type="destructor" since="1">
++      <description summary="destroy the virtual keyboard keyboard object"/>
++    </request>
++  </interface>
++
++  <interface name="zwp_virtual_keyboard_manager_v1" version="1">
++    <description summary="virtual keyboard manager">
++      A virtual keyboard manager allows an application to provide keyboard
++      input events as if they came from a physical keyboard.
++    </description>
++
++    <enum name="error">
++      <entry name="unauthorized" value="0" summary="client not authorized to use the interface"/>
++    </enum>
++
++    <request name="create_virtual_keyboard">
++      <description summary="Create a new virtual keyboard">
++        Creates a new virtual keyboard associated to a seat.
++
++        If the compositor enables a keyboard to perform arbitrary actions, it
++        should present an error when an untrusted client requests a new
++        keyboard.
++      </description>
++      <arg name="seat" type="object" interface="wl_seat"/>
++      <arg name="id" type="new_id" interface="zwp_virtual_keyboard_v1"/>
++    </request>
++  </interface>
++</protocol>
+diff --git a/protocols/wlr-virtual-pointer-unstable-v1.xml b/protocols/wlr-virtual-pointer-unstable-v1.xml
+new file mode 100644
+index 0000000..ea243e7
+--- /dev/null
++++ b/protocols/wlr-virtual-pointer-unstable-v1.xml
+@@ -0,0 +1,152 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<protocol name="wlr_virtual_pointer_unstable_v1">
++  <copyright>
++    Copyright © 2019 Josef Gajdusek
++
++    Permission is hereby granted, free of charge, to any person obtaining a
++    copy of this software and associated documentation files (the "Software"),
++    to deal in the Software without restriction, including without limitation
++    the rights to use, copy, modify, merge, publish, distribute, sublicense,
++    and/or sell copies of the Software, and to permit persons to whom the
++    Software is furnished to do so, subject to the following conditions:
++
++    The above copyright notice and this permission notice (including the next
++    paragraph) shall be included in all copies or substantial portions of the
++    Software.
++
++    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++    DEALINGS IN THE SOFTWARE.
++  </copyright>
++
++  <interface name="zwlr_virtual_pointer_v1" version="2">
++    <description summary="virtual pointer">
++      This protocol allows clients to emulate a physical pointer device. The
++      requests are mostly mirror opposites of those specified in wl_pointer.
++    </description>
++
++    <enum name="error">
++      <entry name="invalid_axis" value="0"
++        summary="client sent invalid axis enumeration value" />
++      <entry name="invalid_axis_source" value="1"
++        summary="client sent invalid axis source enumeration value" />
++    </enum>
++
++    <request name="motion">
++      <description summary="pointer relative motion event">
++        The pointer has moved by a relative amount to the previous request.
++
++        Values are in the global compositor space.
++      </description>
++      <arg name="time" type="uint" summary="timestamp with millisecond granularity"/>
++      <arg name="dx" type="fixed" summary="displacement on the x-axis"/>
++      <arg name="dy" type="fixed" summary="displacement on the y-axis"/>
++    </request>
++
++    <request name="motion_absolute">
++      <description summary="pointer absolute motion event">
++        The pointer has moved in an absolute coordinate frame.
++
++        Value of x can range from 0 to x_extent, value of y can range from 0
++        to y_extent.
++      </description>
++      <arg name="time" type="uint" summary="timestamp with millisecond granularity"/>
++      <arg name="x" type="uint" summary="position on the x-axis"/>
++      <arg name="y" type="uint" summary="position on the y-axis"/>
++      <arg name="x_extent" type="uint" summary="extent of the x-axis"/>
++      <arg name="y_extent" type="uint" summary="extent of the y-axis"/>
++    </request>
++
++    <request name="button">
++      <description summary="button event">
++        A button was pressed or released.
++      </description>
++      <arg name="time" type="uint" summary="timestamp with millisecond granularity"/>
++      <arg name="button" type="uint" summary="button that produced the event"/>
++      <arg name="state" type="uint" enum="wl_pointer.button_state" summary="physical state of the button"/>
++    </request>
++
++    <request name="axis">
++      <description summary="axis event">
++        Scroll and other axis requests.
++      </description>
++      <arg name="time" type="uint" summary="timestamp with millisecond granularity"/>
++      <arg name="axis" type="uint" enum="wl_pointer.axis" summary="axis type"/>
++      <arg name="value" type="fixed" summary="length of vector in touchpad coordinates"/>
++    </request>
++
++    <request name="frame">
++      <description summary="end of a pointer event sequence">
++        Indicates the set of events that logically belong together.
++      </description>
++    </request>
++
++    <request name="axis_source">
++      <description summary="axis source event">
++        Source information for scroll and other axis.
++      </description>
++      <arg name="axis_source" type="uint" enum="wl_pointer.axis_source" summary="source of the axis event"/>
++    </request>
++
++    <request name="axis_stop">
++      <description summary="axis stop event">
++        Stop notification for scroll and other axes.
++      </description>
++      <arg name="time" type="uint" summary="timestamp with millisecond granularity"/>
++      <arg name="axis" type="uint" enum="wl_pointer.axis" summary="the axis stopped with this event"/>
++    </request>
++
++    <request name="axis_discrete">
++      <description summary="axis click event">
++        Discrete step information for scroll and other axes.
++
++        This event allows the client to extend data normally sent using the axis
++        event with discrete value.
++      </description>
++      <arg name="time" type="uint" summary="timestamp with millisecond granularity"/>
++      <arg name="axis" type="uint" enum="wl_pointer.axis" summary="axis type"/>
++      <arg name="value" type="fixed" summary="length of vector in touchpad coordinates"/>
++      <arg name="discrete" type="int" summary="number of steps"/>
++    </request>
++
++    <request name="destroy" type="destructor" since="1">
++      <description summary="destroy the virtual pointer object"/>
++    </request>
++  </interface>
++
++  <interface name="zwlr_virtual_pointer_manager_v1" version="2">
++    <description summary="virtual pointer manager">
++      This object allows clients to create individual virtual pointer objects.
++    </description>
++
++    <request name="create_virtual_pointer">
++      <description summary="Create a new virtual pointer">
++        Creates a new virtual pointer. The optional seat is a suggestion to the
++        compositor.
++      </description>
++      <arg name="seat" type="object" interface="wl_seat" allow-null="true"/>
++      <arg name="id" type="new_id" interface="zwlr_virtual_pointer_v1"/>
++    </request>
++
++    <request name="destroy" type="destructor" since="1">
++      <description summary="destroy the virtual pointer manager"/>
++    </request>
++
++    <!-- Version 2 additions -->
++    <request name="create_virtual_pointer_with_output" since="2">
++      <description summary="Create a new virtual pointer">
++        Creates a new virtual pointer. The seat and the output arguments are
++        optional. If the seat argument is set, the compositor should assign the
++        input device to the requested seat. If the output argument is set, the
++        compositor should map the input device to the requested output.
++      </description>
++      <arg name="seat" type="object" interface="wl_seat" allow-null="true"/>
++      <arg name="output" type="object" interface="wl_output" allow-null="true"/>
++      <arg name="id" type="new_id" interface="zwlr_virtual_pointer_v1"/>
++    </request>
++  </interface>
++</protocol>
+diff --git a/src/core/config.c b/src/core/config.c
+index 693cc89..dfdae23 100644
+--- a/src/core/config.c
++++ b/src/core/config.c
+@@ -85,6 +85,20 @@ static int handle_ini_screencast(struct config_screencast *screencast_conf, cons
+ 	return 1;
+ }
+ 
++static int handle_ini_remotedesktop(struct config_remotedesktop *conf, const char *key, const char *value) {
++	if (strcmp(key, "allow_keyboard") == 0) {
++		parse_bool(&conf->allow_keyboard, value);
++	} else if (strcmp(key, "allow_pointer") == 0) {
++		parse_bool(&conf->allow_pointer, value);
++	} else if (strcmp(key, "allow_touchscreen") == 0) {
++		parse_bool(&conf->allow_touchscreen, value);
++	} else {
++		logprint(TRACE, "config: skipping invalid key in config file");
++		return 0;
++	}
++	return 1;
++}
++
+ static int handle_ini_config(void *data, const char* section, const char *key, const char *value) {
+ 	struct xdpw_config *config = (struct xdpw_config*)data;
+ 	logprint(TRACE, "config: parsing setction %s, key %s, value %s", section, key, value);
+@@ -92,6 +106,9 @@ static int handle_ini_config(void *data, const char* section, const char *key, c
+ 	if (strcmp(section, "screencast") == 0) {
+ 		return handle_ini_screencast(&config->screencast_conf, key, value);
+ 	}
++	if (strcmp(section, "remotedesktop") == 0) {
++		return handle_ini_remotedesktop(&config->remotedesktop_conf, key, value);
++	}
+ 
+ 	logprint(TRACE, "config: skipping invalid key in config file");
+ 	return 0;
+@@ -100,6 +117,9 @@ static int handle_ini_config(void *data, const char* section, const char *key, c
+ static void default_config(struct xdpw_config *config) {
+ 	config->screencast_conf.max_fps = 0;
+ 	config->screencast_conf.chooser_type = XDPW_CHOOSER_DEFAULT;
++	config->remotedesktop_conf.allow_keyboard = true;
++	config->remotedesktop_conf.allow_pointer= true;
++	config->remotedesktop_conf.allow_touchscreen= true;
+ }
+ 
+ static bool file_exists(const char *path) {
+diff --git a/src/core/main.c b/src/core/main.c
+index e27d261..6e30887 100644
+--- a/src/core/main.c
++++ b/src/core/main.c
+@@ -120,6 +120,8 @@ int main(int argc, char *argv[]) {
+ 		.screencast_cursor_modes = HIDDEN | EMBEDDED,
+ 		.screencast_version = XDP_CAST_PROTO_VER,
+ 		.screenshot_version = XDP_SHOT_PROTO_VER,
++		.remotedesktop_available_device_types = POINTER,
++		.remotedesktop_version = XDP_REMOTE_PROTO_VER,
+ 		.config = &config,
+ 	};
+ 
+@@ -137,6 +139,12 @@ int main(int argc, char *argv[]) {
+ 		goto error;
+ 	}
+ 
++	ret = xdpw_remotedesktop_init(&state);
++	if (ret < 0) {
++		logprint(ERROR, "xdpw: failed to initialize remotedesktop");
++		goto error;
++	}
++
+ 	uint64_t flags = SD_BUS_NAME_ALLOW_REPLACEMENT;
+ 	if (replace) {
+ 		flags |= SD_BUS_NAME_REPLACE_EXISTING;
+diff --git a/src/core/session.c b/src/core/session.c
+index 6be42db..f09a83a 100644
+--- a/src/core/session.c
++++ b/src/core/session.c
+@@ -5,6 +5,7 @@
+ #include <assert.h>
+ #include "xdpw.h"
+ #include "screencast.h"
++#include "remotedesktop.h"
+ #include "logger.h"
+ 
+ static const char interface_name[] = "org.freedesktop.impl.portal.Session";
+@@ -61,23 +62,30 @@ void xdpw_session_destroy(struct xdpw_session *sess) {
+ 	if (!sess) {
+ 		return;
+ 	}
+-
+-	sd_bus_slot_unref(sess->slot);
+-	wl_list_remove(&sess->link);
+-
+ 	struct xdpw_screencast_instance *cast = sess->screencast_data.screencast_instance;
+-	sess->screencast_data.screencast_instance = NULL;
+-
+ 	if (cast) {
+ 		assert(cast->refcount > 0);
+ 		--cast->refcount;
+ 		logprint(DEBUG, "xdpw: screencast instance %p now has %d references",
+ 			cast, cast->refcount);
+ 		if (cast->refcount < 1) {
+-			logprint(TRACE, "xdpw: destroying screencast instance");
+-			xdpw_screencast_instance_destroy(cast);
++			if (cast->frame_state == XDPW_FRAME_STATE_NONE) {
++				logprint(TRACE, "xdpw: screencast instance not streaming, destroy it");
++				xdpw_screencast_instance_destroy(cast);
++			} else if (cast->teardown) {
++				logprint(TRACE, "xdpw: screencast instance marked for teardown, destroy it");
++				xdpw_screencast_instance_destroy(cast);
++			} else {
++				logprint(TRACE, "xdpw: screencast instance still streaming, set quit flag");
++				cast->quit = true;
++			}
+ 		}
+ 	}
++
++	xdpw_remotedesktop_destroy(&sess->remotedesktop_data);
++
++	sd_bus_slot_unref(sess->slot);
++	wl_list_remove(&sess->link);
+ 	free(sess->session_handle);
+ 	free(sess);
+ }
+diff --git a/src/remotedesktop/intset.c b/src/remotedesktop/intset.c
+new file mode 100644
+index 0000000..afca50f
+--- /dev/null
++++ b/src/remotedesktop/intset.c
+@@ -0,0 +1,97 @@
++/*
++ * Copied from wayvnc: https://github.com/any1/wayvnc/
++ *
++ * Copyright (c) 2020 Andri Yngvason
++ *
++ * Permission to use, copy, modify, and/or distribute this software for any
++ * purpose with or without fee is hereby granted, provided that the above
++ * copyright notice and this permission notice appear in all copies.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
++ * REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
++ * AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
++ * INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
++ * LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE
++ * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
++ * PERFORMANCE OF THIS SOFTWARE.
++ */
++
++#include "intset.h"
++
++#include <stdlib.h>
++#include <string.h>
++#include <assert.h>
++
++#define DEFAULT_CAPACITY 256
++
++int intset_init(struct intset* self, size_t cap)
++{
++	if (cap == 0)
++		cap = DEFAULT_CAPACITY;
++
++	memset(self, 0, sizeof(*self));
++
++	self->storage = malloc(cap * sizeof(*self->storage));
++	if (!self->storage)
++		return -1;
++
++	self->cap = cap;
++
++	return 0;
++}
++
++void intset_destroy(struct intset* self)
++{
++	free(self->storage);
++	memset(self, 0, sizeof(*self));
++}
++
++static int intset__grow(struct intset*  self)
++{
++	size_t new_cap = self->cap * 2;
++
++	int32_t* new_storage = realloc(self->storage, new_cap);
++	if (!new_storage)
++		return -1;
++
++	self->storage = new_storage;
++	self->cap = new_cap;
++
++	return 0;
++}
++
++int intset_set(struct intset* self, int32_t value)
++{
++	if (intset_is_set(self, value))
++		return 0;
++
++	if (self->len >= self->cap && intset__grow(self) < 0)
++		return -1;
++
++	self->storage[self->len++] = value;
++
++	return 0;
++}
++
++static ssize_t intset__find_index(const struct intset* self, int32_t value)
++{
++	for (size_t i = 0; i < self->len; ++i)
++		if (self->storage[i] == value)
++			return i;
++
++	return -1;
++}
++
++void intset_clear(struct intset* self, int32_t value)
++{
++	ssize_t index = intset__find_index(self, value);
++	if (index < 0)
++		return;
++
++	self->storage[index] = self->storage[--self->len];
++}
++
++bool intset_is_set(const struct intset* self, int32_t value)
++{
++	return intset__find_index(self, value) >= 0;
++}
+diff --git a/src/remotedesktop/keyboard.c b/src/remotedesktop/keyboard.c
+new file mode 100644
+index 0000000..cd6f87d
+--- /dev/null
++++ b/src/remotedesktop/keyboard.c
+@@ -0,0 +1,451 @@
++/*
++ * Copied from wayvnc: https://github.com/any1/wayvnc/
++ * Modified to add time info to send keycodes and remove neatvnc dependency.
++ *
++ * Copyright (c) 2019 - 2020 Andri Yngvason
++ *
++ * Permission to use, copy, modify, and/or distribute this software for any
++ * purpose with or without fee is hereby granted, provided that the above
++ * copyright notice and this permission notice appear in all copies.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
++ * REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
++ * AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
++ * INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
++ * LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE
++ * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
++ * PERFORMANCE OF THIS SOFTWARE.
++ *
++ * Acknowledgements: Reading Josef Gajdusek's wvnc code helped me understand
++ * how to use the xkbcommon API to interface with the wayland virtual keyboard
++ * interface.
++ */
++
++#include <errno.h>
++#include <stdlib.h>
++#include <unistd.h>
++#include <stdbool.h>
++#include <string.h>
++#include <wayland-client-protocol.h>
++#include <xkbcommon/xkbcommon-keysyms.h>
++#include <xkbcommon/xkbcommon.h>
++#include <wayland-client.h>
++#include <time.h>
++
++#include "intset.h"
++#include "keyboard.h"
++#include "logger.h"
++#include "shm.h"
++#include "virtual-keyboard-unstable-v1-client-protocol.h"
++
++#define MAYBE_UNUSED __attribute__((unused))
++
++struct table_entry {
++	xkb_keysym_t symbol;
++	xkb_keycode_t code;
++	int level;
++};
++
++struct kb_mods {
++	xkb_mod_mask_t depressed, latched, locked;
++};
++
++static void append_entry(struct keyboard* self, xkb_keysym_t symbol,
++                         xkb_keycode_t code, int level)
++{
++	if (self->lookup_table_size <= self->lookup_table_length) {
++		size_t new_size = self->lookup_table_size * 2;
++		struct table_entry* table =
++			realloc(self->lookup_table, new_size * sizeof(*table));
++		if (!table)
++			return; // TODO: Report this
++
++		self->lookup_table_size = new_size;
++		self->lookup_table = table;
++	}
++
++	struct table_entry* entry =
++		&self->lookup_table[self->lookup_table_length++];
++
++	entry->symbol = symbol;
++	entry->code = code;
++	entry->level = level;
++}
++
++static void key_iter(struct xkb_keymap* map, xkb_keycode_t code, void* userdata)
++{
++	struct keyboard* self = userdata;
++
++	size_t n_levels = xkb_keymap_num_levels_for_key(map, code, 0);
++
++	for (size_t level = 0; level < n_levels; level++) {
++		const xkb_keysym_t* symbols;
++		size_t n_syms = xkb_keymap_key_get_syms_by_level(map, code, 0,
++				                                 level,
++				                                 &symbols);
++
++		for (size_t sym_idx = 0; sym_idx < n_syms; sym_idx++)
++			append_entry(self, symbols[sym_idx], code, level);
++	}
++}
++
++static int compare_symbols(const void* a, const void* b)
++{
++	const struct table_entry* x = a;
++	const struct table_entry* y = b;
++
++	if (x->symbol == y->symbol)
++		return x->code < y->code ? -1 : x->code > y->code;
++
++	return x->symbol < y->symbol ? -1 : x->symbol > y->symbol;
++}
++
++static int compare_symbols2(const void* a, const void* b)
++{
++	const struct table_entry* x = a;
++	const struct table_entry* y = b;
++
++	return x->symbol < y->symbol ? -1 : x->symbol > y->symbol;
++}
++
++static int create_lookup_table(struct keyboard* self)
++{
++	self->lookup_table_length = 0;
++	self->lookup_table_size = 128;
++
++	self->lookup_table =
++		malloc(self->lookup_table_size * sizeof(*self->lookup_table));
++	if (!self->lookup_table)
++		return -1;
++
++	xkb_keymap_key_for_each(self->keymap, key_iter, self);
++
++	qsort(self->lookup_table, self->lookup_table_length,
++	      sizeof(*self->lookup_table), compare_symbols);
++
++	return 0;
++}
++
++static char* get_symbol_name(xkb_keysym_t sym, char* dst, size_t size)
++{
++	if (xkb_keysym_get_name(sym, dst, size) >= 0)
++		return dst;
++
++	snprintf(dst, size, "UNKNOWN (%x)", sym);
++	return dst;
++}
++
++static void keyboard__dump_entry(const struct keyboard* self,
++                                 const struct table_entry* entry)
++{
++	char sym_name[256];
++	get_symbol_name(entry->symbol, sym_name, sizeof(sym_name));
++
++	const char* code_name MAYBE_UNUSED =
++		xkb_keymap_key_get_name(self->keymap, entry->code);
++
++	bool is_pressed MAYBE_UNUSED =
++		intset_is_set(&self->key_state, entry->code);
++
++	logprint(DEBUG, "symbol=%s level=%d code=%s %s", sym_name, entry->level,
++	          code_name, is_pressed ? "pressed" : "released");
++}
++
++void keyboard_dump_lookup_table(const struct keyboard* self)
++{
++	for (size_t i = 0; i < self->lookup_table_length; i++)
++		keyboard__dump_entry(self, &self->lookup_table[i]);
++}
++
++static uint32_t get_time_ms() {
++	struct timespec t;
++	clock_gettime(CLOCK_MONOTONIC, &t);
++	return t.tv_sec * 1e3 + t.tv_nsec * 1e-6;
++}
++
++int keyboard_init(struct keyboard* self, const struct xkb_rule_names* rule_names)
++{
++	self->context = xkb_context_new(XKB_CONTEXT_NO_FLAGS);
++	if (!self->context)
++		return -1;
++
++	if (intset_init(&self->key_state, 0) < 0)
++		goto key_state_failure;
++
++	self->keymap = xkb_keymap_new_from_names(self->context, rule_names,
++			XKB_KEYMAP_COMPILE_NO_FLAGS);
++	if (!self->keymap)
++		goto keymap_failure;
++
++	if (xkb_keymap_num_layouts(self->keymap) > 1)
++		logprint(WARN, "Multiple keyboard layouts have been specified, but only one is supported.");
++
++	self->state = xkb_state_new(self->keymap);
++	if (!self->state)
++		goto state_failure;
++
++	if (create_lookup_table(self) < 0)
++		goto table_failure;
++
++//	keyboard_dump_lookup_table(self);
++
++	char* keymap_string =
++		xkb_keymap_get_as_string(self->keymap,
++		                         XKB_KEYMAP_FORMAT_TEXT_V1);
++	if (!keymap_string)
++		goto keymap_string_failure;
++
++	size_t keymap_size = strlen(keymap_string) + 1;
++
++	int keymap_fd = shm_alloc_fd(keymap_size);
++	if (keymap_fd < 0)
++		goto fd_failure;
++
++	size_t written = 0;
++	while (written < keymap_size) {
++		ssize_t ret = write(keymap_fd, keymap_string + written, keymap_size - written);
++		if (ret == -1 && errno == EINTR)
++			continue;
++		if (ret == -1)
++			goto write_failure;
++		written += ret;
++	}
++
++	free(keymap_string);
++
++	zwp_virtual_keyboard_v1_keymap(self->virtual_keyboard,
++	                               WL_KEYBOARD_KEYMAP_FORMAT_XKB_V1,
++	                               keymap_fd, keymap_size);
++
++	close(keymap_fd);
++
++	return 0;
++
++write_failure:
++	close(keymap_fd);
++fd_failure:
++	free(keymap_string);
++keymap_string_failure:
++	free(self->lookup_table);
++table_failure:
++	xkb_state_unref(self->state);
++state_failure:
++	xkb_keymap_unref(self->keymap);
++keymap_failure:
++	intset_destroy(&self->key_state);
++key_state_failure:
++	xkb_context_unref(self->context);
++	return -1;
++}
++
++void keyboard_destroy(struct keyboard* self)
++{
++	free(self->lookup_table);
++	xkb_state_unref(self->state);
++	xkb_keymap_unref(self->keymap);
++	intset_destroy(&self->key_state);
++	xkb_context_unref(self->context);
++}
++
++struct table_entry* keyboard_find_symbol(const struct keyboard* self,
++                                         xkb_keysym_t symbol)
++{
++	struct table_entry cmp = { .symbol = symbol };
++
++	struct table_entry* entry =
++		bsearch(&cmp, self->lookup_table, self->lookup_table_length,
++		        sizeof(*self->lookup_table), compare_symbols2);
++
++	if (!entry)
++		return NULL;
++
++	while (entry != self->lookup_table && (entry - 1)->symbol == symbol)
++		--entry;
++
++	return entry;
++}
++
++static void keyboard_send_mods(struct keyboard* self)
++{
++	xkb_mod_mask_t depressed, latched, locked, group;
++
++	depressed = xkb_state_serialize_mods(self->state, XKB_STATE_MODS_DEPRESSED);
++	latched = xkb_state_serialize_mods(self->state, XKB_STATE_MODS_LATCHED);
++	locked = xkb_state_serialize_mods(self->state, XKB_STATE_MODS_LOCKED);
++	group = xkb_state_serialize_mods(self->state, XKB_STATE_MODS_EFFECTIVE);
++
++	zwp_virtual_keyboard_v1_modifiers(self->virtual_keyboard, depressed,
++	                                  latched, locked, group);
++}
++
++static void keyboard_apply_mods(struct keyboard* self, xkb_keycode_t code,
++                                bool is_pressed)
++{
++	enum xkb_state_component comp, compmask;
++
++	comp = xkb_state_update_key(self->state, code,
++	                            is_pressed ? XKB_KEY_DOWN : XKB_KEY_UP);
++
++	compmask = XKB_STATE_MODS_DEPRESSED |
++	           XKB_STATE_MODS_LATCHED |
++	           XKB_STATE_MODS_LOCKED |
++	           XKB_STATE_MODS_EFFECTIVE;
++
++	if (!(comp & compmask))
++		return;
++
++	keyboard_send_mods(self);
++}
++
++static struct table_entry* match_level(struct keyboard* self,
++                                       struct table_entry* entry)
++{
++	xkb_keysym_t symbol = entry->symbol;
++
++	while (true) {
++		int level;
++
++		level = xkb_state_key_get_level(self->state, entry->code, 0);
++
++		if (entry->level == level)
++			return entry;
++
++		if (++entry >= &self->lookup_table[self->lookup_table_length] ||
++		    entry->symbol != symbol)
++			break;
++	}
++
++	return NULL;
++}
++
++static bool keyboard_symbol_is_mod(xkb_keysym_t symbol)
++{
++	switch (symbol) {
++	case XKB_KEY_Shift_L:
++	case XKB_KEY_Shift_R:
++	case XKB_KEY_Control_L:
++	case XKB_KEY_Caps_Lock:
++	case XKB_KEY_Shift_Lock:
++	case XKB_KEY_Meta_L:
++	case XKB_KEY_Meta_R:
++	case XKB_KEY_Alt_L:
++	case XKB_KEY_Alt_R:
++	case XKB_KEY_Super_L:
++	case XKB_KEY_Super_R:
++	case XKB_KEY_Hyper_L:
++	case XKB_KEY_Hyper_R:
++	case XKB_KEY_ISO_Level5_Shift:
++	case XKB_KEY_ISO_Level5_Lock:
++		return true;
++	}
++
++	return false;
++}
++
++static void send_key(struct keyboard* self, xkb_keycode_t code, bool is_pressed)
++{
++	uint32_t t = get_time_ms();
++	logprint(DEBUG, "Sending 0x%x with timestamp %d.", code, t);
++	zwp_virtual_keyboard_v1_key(self->virtual_keyboard, t, code - 8,
++	                            is_pressed ? WL_KEYBOARD_KEY_STATE_PRESSED
++	                                       : WL_KEYBOARD_KEY_STATE_RELEASED);
++}
++
++static void save_mods(struct keyboard* self, struct kb_mods* mods)
++{
++	mods->depressed = xkb_state_serialize_mods(self->state,
++			XKB_STATE_MODS_DEPRESSED);
++	mods->latched = xkb_state_serialize_mods(self->state,
++			XKB_STATE_MODS_LATCHED);
++	mods->locked = xkb_state_serialize_mods(self->state,
++			XKB_STATE_MODS_LOCKED);
++}
++
++static void restore_mods(struct keyboard* self, struct kb_mods* mods)
++{
++	xkb_state_update_mask(self->state, mods->depressed, mods->latched,
++			mods->locked, XKB_STATE_MODS_DEPRESSED,
++			XKB_STATE_MODS_LATCHED, XKB_STATE_MODS_LOCKED);
++}
++
++static void send_key_with_level(struct keyboard* self, xkb_keycode_t code,
++		bool is_pressed, int level)
++{
++	struct kb_mods save;
++	save_mods(self, &save);
++
++	xkb_mod_mask_t mods = 0;
++	xkb_keymap_key_get_mods_for_level(self->keymap, code, 0, level,
++			&mods, 1);
++	xkb_state_update_mask(self->state, mods, 0, 0, XKB_STATE_MODS_DEPRESSED,
++			XKB_STATE_MODS_LATCHED, XKB_STATE_MODS_LOCKED);
++	keyboard_send_mods(self);
++
++	logprint(DEBUG, "send key with level: old mods: %x, new mods: %x",
++			save.latched | save.locked | save.depressed, mods);
++
++	send_key(self, code, is_pressed);
++
++	restore_mods(self, &save);
++	keyboard_send_mods(self);
++}
++
++static bool update_key_state(struct keyboard* self, xkb_keycode_t code,
++		bool is_pressed)
++{
++	bool was_pressed = intset_is_set(&self->key_state, code);
++	if (was_pressed == is_pressed)
++		return false;
++
++	if (is_pressed)
++		intset_set(&self->key_state, code);
++	else
++		intset_clear(&self->key_state, code);
++
++	return true;
++}
++
++void keyboard_feed(struct keyboard* self, xkb_keysym_t symbol, bool is_pressed)
++{
++	struct table_entry* entry = keyboard_find_symbol(self, symbol);
++	if (!entry) {
++		char name[256];
++		logprint(ERROR, "Failed to look up keyboard symbol: %s",
++		          get_symbol_name(symbol, name, sizeof(name)));
++		return;
++	}
++
++	bool level_is_match = true;
++
++	if (!keyboard_symbol_is_mod(symbol)) {
++		struct table_entry* level_entry = match_level(self, entry);
++		if (level_entry)
++			entry = level_entry;
++		else
++			level_is_match = false;
++	}
++
++#ifndef NDEBUG
++	keyboard__dump_entry(self, entry);
++#endif
++
++	if (!update_key_state(self, entry->code, is_pressed))
++		return;
++
++	keyboard_apply_mods(self, entry->code, is_pressed);
++
++	if (level_is_match)
++		send_key(self, entry->code, is_pressed);
++	else
++		send_key_with_level(self, entry->code, is_pressed,
++				entry->level);
++}
++
++void keyboard_feed_code(struct keyboard* self, xkb_keycode_t code,
++		bool is_pressed)
++{
++	if (update_key_state(self, code, is_pressed)) {
++		keyboard_apply_mods(self, code, is_pressed);
++		send_key(self, code, is_pressed);
++	}
++}
+diff --git a/src/remotedesktop/remotedesktop.c b/src/remotedesktop/remotedesktop.c
+new file mode 100644
+index 0000000..3744ee6
+--- /dev/null
++++ b/src/remotedesktop/remotedesktop.c
+@@ -0,0 +1,895 @@
++#include "remotedesktop.h"
++
++#include <spa/utils/result.h>
++#include <time.h>
++
++#include "config.h"
++#include "remotedesktop_common.h"
++#include "screencast.h"
++#include "virtual_input.h"
++#include "wlr-virtual-pointer-unstable-v1-client-protocol.h"
++#include "xdpw.h"
++
++static const char object_path[] = "/org/freedesktop/portal/desktop";
++static const char interface_name[] = "org.freedesktop.impl.portal.RemoteDesktop";
++
++static uint32_t get_timestamp_ms(struct xdpw_remotedesktop_session_data *remote) {
++	struct timespec *t_start, t_stop;
++
++	t_start = &remote->t_start;
++	clock_gettime(CLOCK_REALTIME, &t_stop);
++
++	return 1000 * (t_stop.tv_sec - t_start->tv_sec) +
++		(t_stop.tv_nsec - t_start->tv_nsec) / 1000000;
++}
++
++static struct xdpw_session *get_session_from_handle(struct xdpw_state *state, char *session_handle) {
++	struct xdpw_session *sess;
++	wl_list_for_each_reverse(sess, &state->xdpw_sessions, link) {
++		if (strcmp(sess->session_handle, session_handle) == 0) {
++			return sess;
++		}
++	}
++	return NULL;
++}
++
++static int method_remotedesktop_create_session(sd_bus_message *msg, void *data,
++		sd_bus_error *ret_error) {
++	struct xdpw_state *state = data;
++
++	int ret = 0;
++	char *request_handle, *session_handle, *app_id, *key;
++	struct xdpw_request *req;
++	struct xdpw_session *sess;
++
++	logprint(DEBUG, "remotedesktop: create session: method invoked");
++
++	ret = sd_bus_message_read(msg, "oos", &request_handle, &session_handle, &app_id);
++	if (ret < 0) {
++		return ret;
++	}
++
++	logprint(DEBUG, "remotedesktop: create session: request_handle: %s", request_handle);
++	logprint(DEBUG, "remotedesktop: create session: session_handle: %s", session_handle);
++	logprint(DEBUG, "remotedesktop: create session: app_id: %s", app_id);
++
++	ret = sd_bus_message_enter_container(msg, 'a', "{sv}");
++	if (ret < 0) {
++		return ret;
++	}
++	while ((ret = sd_bus_message_enter_container(msg, 'e', "sv")) > 0) {
++		ret = sd_bus_message_read(msg, "s", &key);
++		if (ret < 0) {
++			return ret;
++		}
++
++		if (strcmp(key, "session_handle_token") == 0) {
++			char *token;
++			sd_bus_message_read(msg, "v", "s", &token);
++			logprint(DEBUG, "remotedesktop: create session: session handle token: %s", token);
++		} else {
++			logprint(WARN, "remotedesktop: create session: unknown option: %s", key);
++			sd_bus_message_skip(msg, "v");
++		}
++
++		ret = sd_bus_message_exit_container(msg);
++		if (ret < 0) {
++			return ret;
++		}
++	}
++	if (ret < 0) {
++		return ret;
++	}
++
++	ret = sd_bus_message_exit_container(msg);
++	if (ret < 0) {
++		return ret;
++	}
++
++	req = xdpw_request_create(sd_bus_message_get_bus(msg), request_handle);
++	if (req == NULL) {
++		return -ENOMEM;
++	}
++
++	sess = xdpw_session_create(state, sd_bus_message_get_bus(msg), strdup(session_handle));
++	if (sess == NULL) {
++		return -ENOMEM;
++	}
++
++	ret = sd_bus_reply_method_return(msg, "ua{sv}", PORTAL_RESPONSE_SUCCESS, 0);
++	if (ret < 0) {
++		return ret;
++	}
++	return 0;
++}
++
++static int method_remotedesktop_select_devices(sd_bus_message *msg, void *data,
++		sd_bus_error *ret_error) {
++	struct xdpw_state *state = data;
++
++	int ret = 0;
++	char *request_handle, *session_handle, *app_id, *key;
++	struct xdpw_session *sess;
++
++	logprint(DEBUG, "remotedesktop: select devices: method invoked");
++
++	ret = sd_bus_message_read(msg, "oos", &request_handle, &session_handle, &app_id);
++	if (ret < 0) {
++		return ret;
++	}
++
++	logprint(DEBUG, "remotedesktop: select devices: request_handle: %s", request_handle);
++	logprint(DEBUG, "remotedesktop: select devices: session_handle: %s", session_handle);
++	logprint(DEBUG, "remotedesktop: select devices: app_id: %s", app_id);
++
++	sess = get_session_from_handle(state, session_handle);
++	if (!sess) {
++		logprint(WARN, "remotedesktop: select devices: session not found");
++		return -1;
++	}
++	logprint(DEBUG, "remotedesktop: select devices: session found");
++
++	ret = sd_bus_message_enter_container(msg, 'a', "{sv}");
++	if (ret < 0) {
++		return ret;
++	}
++	while ((ret = sd_bus_message_enter_container(msg, 'e', "sv")) > 0) {
++		ret = sd_bus_message_read(msg, "s", &key);
++		if (ret < 0) {
++			return ret;
++		}
++
++		if (strcmp(key, "types") == 0) {
++			uint32_t types;
++			ret = sd_bus_message_read(msg, "v", "u", &types);
++			if (ret < 0) {
++				return ret;
++			}
++			logprint(DEBUG, "remotedesktop: select devices: option types: %x", types);
++			uint32_t allowed_types =
++				(state->config->remotedesktop_conf.allow_keyboard ? KEYBOARD : 0) |
++				(state->config->remotedesktop_conf.allow_pointer ? POINTER : 0);
++			if ((types & ~allowed_types) != 0) {
++				logprint(DEBUG, "remotedesktop: tried to select not allowed device, "
++						"selected types: 0x%x, allowed types: 0x%x.", types, allowed_types);
++				types &= allowed_types;
++			}
++			sess->remotedesktop_data.devices = types;
++		} else {
++			logprint(WARN, "remotedesktop: select devices: unknown option: %s", key);
++			sd_bus_message_skip(msg, "v");
++		}
++
++		ret = sd_bus_message_exit_container(msg);
++		if (ret < 0) {
++			return ret;
++		}
++	}
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_exit_container(msg);
++	if (ret < 0) {
++		return ret;
++	}
++
++	ret = sd_bus_reply_method_return(msg, "ua{sv}", PORTAL_RESPONSE_SUCCESS, 0);
++	if (ret < 0) {
++		return ret;
++	}
++	return 0;
++}
++
++static int method_remotedesktop_start(sd_bus_message *msg, void *data, sd_bus_error *ret_error) {
++	struct xdpw_state *state = data;
++
++	int ret = 0;
++	char *request_handle, *session_handle, *app_id, *parent_window, *key;
++	struct xdpw_session *sess;
++	struct xdpw_remotedesktop_session_data *remote;
++
++	logprint(DEBUG, "remotedesktop: start: method invoked");
++
++	ret = sd_bus_message_read(msg, "oos", &request_handle, &session_handle, &app_id);
++	if (ret < 0) {
++		return ret;
++	}
++
++	logprint(DEBUG, "remotedesktop: start: request_handle: %s", request_handle);
++	logprint(DEBUG, "remotedesktop: start: session_handle: %s", session_handle);
++	logprint(DEBUG, "remotedesktop: start: app_id: %s", app_id);
++
++	sess = get_session_from_handle(state, session_handle);
++	if (!sess) {
++		logprint(WARN, "remotedesktop: start: session not found");
++		return -1;
++	}
++	logprint(DEBUG, "remotedesktop: start: session found");
++	struct xdpw_screencast_instance *cast = sess->screencast_data.screencast_instance;
++	logprint(DEBUG, "remotedesktop: screencast instance %x", cast);
++
++	if (cast) {
++		logprint(DEBUG, "remotedesktop: starting screencast");
++		if (!cast->initialized) {
++			ret = xdpw_screencast_start(cast);
++			if (ret < 0) {
++				return ret;
++			}
++		}
++		while (cast->node_id == SPA_ID_INVALID) {
++			int ret = pw_loop_iterate(state->pw_loop, 0);
++			if (ret < 0) {
++				logprint(ERROR, "pipewire_loop_iterate failed: %s", spa_strerror(ret));
++				return ret;
++			}
++		}
++	}
++
++	remote = &sess->remotedesktop_data;
++	remote->virtual_pointer = zwlr_virtual_pointer_manager_v1_create_virtual_pointer(
++		state->remotedesktop.virtual_pointer_manager, NULL);
++
++	// TODO: make this user configureable
++	struct xkb_rule_names rule_names = {
++		.rules = "evdev",
++		.layout = "us",
++		.model = "pc105",
++		.variant = "",
++		.options = "",
++	};
++	logprint(DEBUG, "Creating virtual keyboard with manager 0x%x",
++			state->remotedesktop.virtual_keyboard_manager);
++	remote->keyboard.virtual_keyboard = zwp_virtual_keyboard_manager_v1_create_virtual_keyboard(
++			state->remotedesktop.virtual_keyboard_manager, state->remotedesktop.seat);
++	ret = keyboard_init(&remote->keyboard, &rule_names);
++	if (ret < 0) {
++		return ret;
++	}
++
++	clock_gettime(CLOCK_REALTIME, &remote->t_start);
++
++	ret = sd_bus_message_read(msg, "s", &parent_window);
++	if (ret < 0) {
++		return ret;
++	}
++	logprint(DEBUG, "remotedesktop: start: parent window: %s", parent_window);
++
++	ret = sd_bus_message_enter_container(msg, 'a', "{sv}");
++	if (ret < 0) {
++		return ret;
++	}
++	while ((ret = sd_bus_message_enter_container(msg, 'e', "sv")) > 0) {
++		ret = sd_bus_message_read(msg, "s", &key);
++		if (ret < 0) {
++			return ret;
++		}
++
++		logprint(WARN, "remotedesktop: start: unknown option: %s", key);
++		sd_bus_message_skip(msg, "v");
++
++		ret = sd_bus_message_exit_container(msg);
++		if (ret < 0) {
++			return ret;
++		}
++	}
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_exit_container(msg);
++	if (ret < 0) {
++		return ret;
++	}
++
++	sd_bus_message *reply = NULL;
++	ret = sd_bus_message_new_method_return(msg, &reply);
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_append(reply, "u", PORTAL_RESPONSE_SUCCESS);
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_open_container(reply, 'a', "{sv}");
++	if (ret < 0) {
++		return ret;
++	}
++
++	ret = sd_bus_message_append(reply, "{sv}",
++		"devices", "u", POINTER | KEYBOARD);
++	if (ret < 0) {
++		return ret;
++	}
++
++	ret = sd_bus_message_open_container(reply, 'e', "sv");
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_append(reply, "s", "streams");
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_open_container(reply, 'v', "a(ua{sv})");
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_open_container(reply, 'a', "(ua{sv})");
++	if (ret < 0) {
++		return ret;
++	}
++	if (cast) {
++		ret = sd_bus_message_open_container(reply, 'r', "ua{sv}");
++		if (ret < 0) {
++			return ret;
++		}
++		ret = sd_bus_message_append(reply, "u", cast->node_id);
++		if (ret < 0) {
++			return ret;
++		}
++		ret = sd_bus_message_open_container(reply, 'a', "{sv}");
++		if (ret < 0) {
++			return ret;
++		}
++		if (cast->target->output->xdg_output) {
++			ret = sd_bus_message_append(reply, "{sv}",
++				"position", "(ii)", cast->target->output->x, cast->target->output->y);
++			if (ret < 0) {
++				return ret;
++			}
++			ret = sd_bus_message_append(reply, "{sv}",
++				"size", "(ii)", cast->target->output->width, cast->target->output->height);
++			if (ret < 0) {
++				return ret;
++			}
++		}
++		ret = sd_bus_message_append(reply, "{sv}", "source_type", "u", MONITOR);
++		if (ret < 0) {
++			return ret;
++		}
++		ret = sd_bus_message_close_container(reply);
++		if (ret < 0) {
++			return ret;
++		}
++		ret = sd_bus_message_close_container(reply);
++		if (ret < 0) {
++			return ret;
++		}
++	}
++	ret = sd_bus_message_close_container(reply);
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_close_container(reply);
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_close_container(reply);
++	if (ret < 0) {
++		return ret;
++	}
++
++	ret = sd_bus_message_append(reply, "{sv}",
++		"devices", "u", KEYBOARD | POINTER);
++	if (ret < 0) {
++		return ret;
++	}
++
++	ret = sd_bus_message_close_container(reply);
++	if (ret < 0) {
++		return ret;
++	}
++
++	ret = sd_bus_send(NULL, reply, NULL);
++	if (ret < 0) {
++		return ret;
++	}
++	sd_bus_message_unref(reply);
++
++	return 0;
++}
++
++static int method_remotedesktop_notify_pointer_motion(sd_bus_message *msg,
++		void *data, sd_bus_error *ret_error) {
++	struct xdpw_state *state = data;
++
++	int ret = 0;
++	char *session_handle;
++	struct xdpw_session *sess;
++	double dx = 0, dy = 0;
++
++	logprint(TRACE, "remotedesktop: npm: method invoked");
++
++	ret = sd_bus_message_read(msg, "o", &session_handle);
++	if (ret < 0) {
++		return ret;
++	}
++	logprint(TRACE, "remotedesktop: npm: session_handle: %s", session_handle);
++
++	wl_list_for_each_reverse(sess, &state->xdpw_sessions, link) {
++		if (strcmp(sess->session_handle, session_handle) == 0) {
++			break;
++		}
++	}
++	if (!sess) {
++		logprint(WARN, "remotedesktop: npm: session not found");
++		return -1;
++	}
++	logprint(TRACE, "remotedesktop: npm: session found");
++
++	if (!(sess->remotedesktop_data.devices & POINTER)) {
++		logprint(ERROR, "remotedesktop: npm: called, but pointer not selected!");
++		return -1;
++	}
++
++	ret = sd_bus_message_skip(msg, "a{sv}");
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_read(msg, "d", &dx);
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_read(msg, "d", &dy);
++	if (ret < 0) {
++		return ret;
++	}
++
++	zwlr_virtual_pointer_v1_motion(sess->remotedesktop_data.virtual_pointer,
++		get_timestamp_ms(&sess->remotedesktop_data),
++		wl_fixed_from_double(dx), wl_fixed_from_double(dy));
++	zwlr_virtual_pointer_v1_frame(sess->remotedesktop_data.virtual_pointer);
++
++	return 0;
++}
++
++static int method_remotedesktop_notify_pointer_motion_absolute(
++		sd_bus_message *msg, void *data, sd_bus_error *ret_error) {
++	struct xdpw_state *state = data;
++
++	int ret = 0;
++	char *session_handle;
++	struct xdpw_session *sess;
++	double x = 0, y = 0;
++
++	logprint(TRACE, "remotedesktop: npma: method invoked");
++
++	ret = sd_bus_message_read(msg, "o", &session_handle);
++	if (ret < 0) {
++		return ret;
++	}
++	logprint(TRACE, "remotedesktop: npma: session_handle: %s", session_handle);
++
++	wl_list_for_each_reverse(sess, &state->xdpw_sessions, link) {
++		if (strcmp(sess->session_handle, session_handle) == 0) {
++			break;
++		}
++	}
++	if (!sess) {
++		logprint(WARN, "remotedesktop: npma: session not found");
++		return -1;
++	}
++	logprint(TRACE, "remotedesktop: npma: session found");
++
++	if (!(sess->remotedesktop_data.devices & POINTER)) {
++		logprint(ERROR, "remotedesktop: npma: called, but pointer not selected!");
++		return -1;
++	}
++
++	ret = sd_bus_message_skip(msg, "a{sv}");
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_skip(msg, "u");
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_read(msg, "d", &x);
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_read(msg, "d", &y);
++	if (ret < 0) {
++		return ret;
++	}
++	struct xdpw_wlr_output *output = sess->screencast_data.screencast_instance->target->output;
++	zwlr_virtual_pointer_v1_motion_absolute(sess->remotedesktop_data.virtual_pointer,
++		get_timestamp_ms(&sess->remotedesktop_data),
++		wl_fixed_from_double(x), wl_fixed_from_double(y),
++		wl_fixed_from_int(output->width), wl_fixed_from_int(output->height));
++	zwlr_virtual_pointer_v1_frame(sess->remotedesktop_data.virtual_pointer);
++
++	return 0;
++}
++
++static int method_remotedesktop_notify_pointer_button(sd_bus_message *msg,
++		void *data, sd_bus_error *ret_error) {
++	struct xdpw_state *state = data;
++
++	int ret = 0;
++	char *session_handle;
++	struct xdpw_session *sess;
++	int32_t button;
++	uint32_t btn_state;
++
++	logprint(DEBUG, "remotedesktop: npb: method invoked");
++
++	ret = sd_bus_message_read(msg, "o", &session_handle);
++	if (ret < 0) {
++		return ret;
++	}
++	logprint(DEBUG, "remotedesktop: npb: session_handle: %s", session_handle);
++
++	wl_list_for_each_reverse(sess, &state->xdpw_sessions, link) {
++		if (strcmp(sess->session_handle, session_handle) == 0) {
++			break;
++		}
++	}
++	if (!sess) {
++		logprint(WARN, "remotedesktop: npb: session not found");
++		return -1;
++	}
++	logprint(DEBUG, "remotedesktop: npb: session found");
++
++	if (!(sess->remotedesktop_data.devices & POINTER)) {
++		logprint(ERROR, "remotedesktop: npb: called, but pointer not selected!");
++		return -1;
++	}
++
++	ret = sd_bus_message_skip(msg, "a{sv}");
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_read(msg, "i", &button);
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_read(msg, "u", &btn_state);
++	if (ret < 0) {
++		return ret;
++	}
++
++	if (btn_state == WL_POINTER_BUTTON_STATE_PRESSED) {
++		if (sess->remotedesktop_data.pressed_buttons & 1<<button) {
++			logprint(WARN, "remotedesktop: npb: pointer already pressed, releasing first");
++			zwlr_virtual_pointer_v1_button(sess->remotedesktop_data.virtual_pointer,
++					get_timestamp_ms(&sess->remotedesktop_data),
++					button, WL_POINTER_BUTTON_STATE_RELEASED);
++		}
++		sess->remotedesktop_data.pressed_buttons |= 1<<button;
++	} else {
++		sess->remotedesktop_data.pressed_buttons &= ~(1<<button);
++	}
++	zwlr_virtual_pointer_v1_button(sess->remotedesktop_data.virtual_pointer,
++		get_timestamp_ms(&sess->remotedesktop_data),
++		button, btn_state);
++	zwlr_virtual_pointer_v1_frame(sess->remotedesktop_data.virtual_pointer);
++	return 0;
++}
++
++static int method_remotedesktop_notify_pointer_axis(sd_bus_message *msg,
++		void *data, sd_bus_error *ret_error) {
++	struct xdpw_state *state = data;
++
++	int ret = 0, finish = 0;
++	char *session_handle, *key;
++	struct xdpw_session *sess;
++	double dx = 0, dy = 0;
++
++	logprint(TRACE, "remotedesktop: npa: method invoked");
++
++	ret = sd_bus_message_read(msg, "o", &session_handle);
++	if (ret < 0) {
++		return ret;
++	}
++	logprint(TRACE, "remotedesktop: npa: session_handle: %s", session_handle);
++
++	wl_list_for_each_reverse(sess, &state->xdpw_sessions, link) {
++		if (strcmp(sess->session_handle, session_handle) == 0) {
++			break;
++		}
++	}
++	if (!sess) {
++		logprint(WARN, "remotedesktop: npa: session not found");
++		return -1;
++	}
++	logprint(TRACE, "remotedesktop: npa: session found");
++
++	if (!(sess->remotedesktop_data.devices & POINTER)) {
++		logprint(DEBUG, "remotedesktop: npa: called, but pointer not selected!");
++		return -1;
++	}
++
++	ret = sd_bus_message_enter_container(msg, 'a', "{sv}");
++	if (ret < 0) {
++		return ret;
++	}
++	while ((ret = sd_bus_message_enter_container(msg, 'e', "sv")) > 0) {
++		ret = sd_bus_message_read(msg, "s", &key);
++		if (ret < 0) {
++			return ret;
++		}
++
++		if (strcmp(key, "finish") == 0) {
++			sd_bus_message_read(msg, "v", "b", &finish);
++			logprint(DEBUG, "remotedesktop: npa: finish: %d", finish);
++		} else {
++			logprint(WARN, "remotedesktop: npa: unknown option: %s", key);
++			sd_bus_message_skip(msg, "v");
++		}
++
++		ret = sd_bus_message_exit_container(msg);
++		if (ret < 0) {
++			return ret;
++		}
++	}
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_exit_container(msg);
++	if (ret < 0) {
++		return ret;
++	}
++
++	ret = sd_bus_message_read(msg, "d", &dx);
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_read(msg, "d", &dy);
++	if (ret < 0) {
++		return ret;
++	}
++
++	struct zwlr_virtual_pointer_v1 *pointer = sess->remotedesktop_data.virtual_pointer;
++	uint32_t t = get_timestamp_ms(&sess->remotedesktop_data);
++
++	zwlr_virtual_pointer_v1_axis_source(pointer, WL_POINTER_AXIS_SOURCE_CONTINUOUS);
++	zwlr_virtual_pointer_v1_axis(pointer, t, WL_POINTER_AXIS_VERTICAL_SCROLL,
++			wl_fixed_from_double(dy));
++	zwlr_virtual_pointer_v1_axis(pointer, t, WL_POINTER_AXIS_HORIZONTAL_SCROLL,
++			wl_fixed_from_double(dx));
++
++	if (finish) {
++		zwlr_virtual_pointer_v1_axis_stop(pointer, t, WL_POINTER_AXIS_VERTICAL_SCROLL);
++		zwlr_virtual_pointer_v1_axis_stop(pointer, t, WL_POINTER_AXIS_HORIZONTAL_SCROLL);
++	}
++
++	zwlr_virtual_pointer_v1_frame(pointer);
++	return 0;
++}
++
++static int method_remotedesktop_notify_pointer_axis_discrete(
++		sd_bus_message *msg, void *data, sd_bus_error *ret_error) {
++	struct xdpw_state *state = data;
++
++	int ret = 0;
++	char *session_handle;
++	struct xdpw_session *sess;
++	uint32_t axis;
++	int32_t steps;
++
++	logprint(DEBUG, "remotedesktop: npad: method invoked");
++
++	ret = sd_bus_message_read(msg, "o", &session_handle);
++	if (ret < 0) {
++		return ret;
++	}
++	logprint(DEBUG, "remotedesktop: npad: session_handle: %s", session_handle);
++
++	wl_list_for_each_reverse(sess, &state->xdpw_sessions, link) {
++		if (strcmp(sess->session_handle, session_handle) == 0) {
++			break;
++		}
++	}
++	if (!sess) {
++		logprint(WARN, "remotedesktop: npad: session not found");
++		return -1;
++	}
++	logprint(DEBUG, "remotedesktop: npad: session found");
++
++	if (!(sess->remotedesktop_data.devices & POINTER)) {
++		logprint(DEBUG, "remotedesktop: npad: called, but pointer not selected!");
++		return -1;
++	}
++
++	ret = sd_bus_message_skip(msg, "a{sv}");
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_read(msg, "u", &axis);
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_read(msg, "i", &steps);
++	if (ret < 0) {
++		return ret;
++	}
++
++	zwlr_virtual_pointer_v1_axis_discrete(sess->remotedesktop_data.virtual_pointer,
++			get_timestamp_ms(&sess->remotedesktop_data),
++			axis, wl_fixed_from_double(0.1), steps);
++	zwlr_virtual_pointer_v1_frame(sess->remotedesktop_data.virtual_pointer);
++	return 0;
++}
++
++static int method_remotedesktop_notify_keyboard_keycode(
++		sd_bus_message *msg, void *data, sd_bus_error *ret_error) {
++	struct xdpw_state *state = data;
++
++	int ret = 0;
++	char *session_handle;
++	struct xdpw_session *sess;
++	int32_t keycode;
++	uint32_t keystate;
++
++	logprint(DEBUG, "remotedesktop: npb: method invoked");
++
++	ret = sd_bus_message_read(msg, "o", &session_handle);
++	if (ret < 0) {
++		return ret;
++	}
++	logprint(DEBUG, "remotedesktop: npb: session_handle: %s", session_handle);
++
++	sess = get_session_from_handle(state, session_handle);
++	if (!sess) {
++		logprint(WARN, "remotedesktop: npb: session not found");
++		return -1;
++	}
++
++	if (!(sess->remotedesktop_data.devices & KEYBOARD)) {
++		logprint(DEBUG, "remotedesktop: npb: called, but keyboard not selected!");
++		return -1;
++	}
++
++	ret = sd_bus_message_skip(msg, "a{sv}");
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_read(msg, "i", &keycode);
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_read(msg, "u", &keystate);
++	if (ret < 0) {
++		return ret;
++	}
++	logprint(DEBUG, "remotedesktop: received code %x, state %u", keycode, keystate);
++	// The remotedesktop keycodes are evdev keycodes. They are converted to xkb keycodes by a
++	// fixed offset of 8.
++	keyboard_feed_code(&sess->remotedesktop_data.keyboard, keycode + 8, keystate == 1);
++	return 0;
++}
++
++static int method_remotedesktop_notify_keyboard_keysym(
++		sd_bus_message *msg, void *data, sd_bus_error *ret_error) {
++	struct xdpw_state *state = data;
++
++	int ret = 0;
++	char *session_handle;
++	struct xdpw_session *sess;
++	int32_t keysym;
++	uint32_t keystate;
++
++	logprint(DEBUG, "remotedesktop: npb: method invoked");
++
++	ret = sd_bus_message_read(msg, "o", &session_handle);
++	if (ret < 0) {
++		return ret;
++	}
++	logprint(DEBUG, "remotedesktop: npb: session_handle: %s", session_handle);
++
++	sess = get_session_from_handle(state, session_handle);
++	if (!sess) {
++		logprint(WARN, "remotedesktop: npb: session not found");
++		return -1;
++	}
++
++	if (!(sess->remotedesktop_data.devices & KEYBOARD)) {
++		logprint(DEBUG, "remotedesktop: npb: called, but keyboard not selected!");
++		return -1;
++	}
++
++	ret = sd_bus_message_skip(msg, "a{sv}");
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_read(msg, "i", &keysym);
++	if (ret < 0) {
++		return ret;
++	}
++	ret = sd_bus_message_read(msg, "u", &keystate);
++	if (ret < 0) {
++		return ret;
++	}
++	logprint(DEBUG, "remotedesktop: received symbol %x, state %u", keysym, keystate);
++	keyboard_feed(&sess->remotedesktop_data.keyboard, (xkb_keysym_t)keysym, keystate == 1);
++	return 0;
++}
++
++static int method_remotedesktop_notify_touch_down(
++		sd_bus_message *msg, void *data, sd_bus_error *ret_error) {
++
++	logprint(DEBUG, "remotedesktop: npt: called, but not supported!");
++	return -1;
++}
++
++static int method_remotedesktop_notify_touch_motion(
++		sd_bus_message *msg, void *data, sd_bus_error *ret_error) {
++	logprint(DEBUG, "remotedesktop: npt: called, but not supported!");
++	return -1;
++}
++
++static int method_remotedesktop_notify_touch_up(
++		sd_bus_message *msg, void *data, sd_bus_error *ret_error) {
++	logprint(DEBUG, "remotedesktop: npt: called, but not supported!");
++	return -1;
++}
++
++static const sd_bus_vtable remotedesktop_vtable[] = {
++	SD_BUS_VTABLE_START(0),
++	SD_BUS_METHOD("CreateSession", "oosa{sv}", "ua{sv}",
++		method_remotedesktop_create_session, SD_BUS_VTABLE_UNPRIVILEGED),
++	SD_BUS_METHOD("SelectDevices", "oosa{sv}", "ua{sv}",
++		method_remotedesktop_select_devices, SD_BUS_VTABLE_UNPRIVILEGED),
++	SD_BUS_METHOD("Start", "oossa{sv}", "ua{sv}",
++		method_remotedesktop_start, SD_BUS_VTABLE_UNPRIVILEGED),
++	SD_BUS_METHOD("NotifyPointerMotion", "oa{sv}dd", NULL,
++		method_remotedesktop_notify_pointer_motion, SD_BUS_VTABLE_UNPRIVILEGED),
++	SD_BUS_METHOD("NotifyPointerMotionAbsolute", "oa{sv}udd", NULL,
++		method_remotedesktop_notify_pointer_motion_absolute, SD_BUS_VTABLE_UNPRIVILEGED),
++	SD_BUS_METHOD("NotifyPointerButton", "oa{sv}iu", NULL,
++		method_remotedesktop_notify_pointer_button, SD_BUS_VTABLE_UNPRIVILEGED),
++	SD_BUS_METHOD("NotifyPointerAxis", "oa{sv}dd", NULL,
++		method_remotedesktop_notify_pointer_axis, SD_BUS_VTABLE_UNPRIVILEGED),
++	SD_BUS_METHOD("NotifyPointerAxisDiscrete", "oa{sv}ui", NULL,
++		method_remotedesktop_notify_pointer_axis_discrete, SD_BUS_VTABLE_UNPRIVILEGED),
++	SD_BUS_METHOD("NotifyKeyboardKeycode", "oa{sv}iu", NULL,
++		method_remotedesktop_notify_keyboard_keycode, SD_BUS_VTABLE_UNPRIVILEGED),
++	SD_BUS_METHOD("NotifyKeyboardKeysym", "oa{sv}iu", NULL,
++		method_remotedesktop_notify_keyboard_keysym, SD_BUS_VTABLE_UNPRIVILEGED),
++	SD_BUS_METHOD("NotifyTouchDown", "oa{sv}uudd", NULL,
++		method_remotedesktop_notify_touch_down, SD_BUS_VTABLE_UNPRIVILEGED),
++	SD_BUS_METHOD("NotifyTouchMotion", "oa{sv}uudd", NULL,
++		method_remotedesktop_notify_touch_motion, SD_BUS_VTABLE_UNPRIVILEGED),
++	SD_BUS_METHOD("NotifyTouchUp", "oa{sv}u", NULL,
++		method_remotedesktop_notify_touch_up, SD_BUS_VTABLE_UNPRIVILEGED),
++	SD_BUS_PROPERTY("AvailableDeviceTypes", "u", NULL,
++		offsetof(struct xdpw_state, remotedesktop_available_device_types),
++		SD_BUS_VTABLE_PROPERTY_CONST),
++	SD_BUS_PROPERTY("version", "u", NULL,
++		offsetof(struct xdpw_state, remotedesktop_version),
++		SD_BUS_VTABLE_PROPERTY_CONST),
++	SD_BUS_VTABLE_END
++};
++
++int xdpw_remotedesktop_init(struct xdpw_state *state) {
++	sd_bus_slot *slot = NULL;
++
++	state->remotedesktop = (struct xdpw_remotedesktop_context) { 0 };
++	state->remotedesktop.state = state;
++
++	int err;
++	err = xdpw_virtual_input_init(state);
++	if (err) {
++		goto fail_virtual_pointer;
++	}
++
++	return sd_bus_add_object_vtable(state->bus, &slot, object_path,
++		interface_name, remotedesktop_vtable, state);
++
++fail_virtual_pointer:
++	xdpw_virtual_input_finish(&state->remotedesktop);
++
++	return err;
++}
++
++void xdpw_remotedesktop_destroy(struct xdpw_remotedesktop_session_data *data) {
++	logprint(DEBUG, "remotedesktop: destroy called.");
++	if (data->virtual_pointer) {
++		zwlr_virtual_pointer_v1_destroy(data->virtual_pointer);
++		data->virtual_pointer = NULL;
++	}
++	if (data->keyboard.virtual_keyboard) {
++		zwp_virtual_keyboard_v1_destroy(data->keyboard.virtual_keyboard);
++		data->keyboard.virtual_keyboard = NULL;
++		keyboard_destroy(&data->keyboard);
++	}
++}
+diff --git a/src/remotedesktop/shm.c b/src/remotedesktop/shm.c
+new file mode 100644
+index 0000000..f1940e6
+--- /dev/null
++++ b/src/remotedesktop/shm.c
+@@ -0,0 +1,91 @@
++/*
++ * Copied from wayvnc: https://github.com/any1/wayvnc/
++ *
++ * Copyright (c) 2019 - 2020 Andri Yngvason
++ *
++ * Permission to use, copy, modify, and/or distribute this software for any
++ * purpose with or without fee is hereby granted, provided that the above
++ * copyright notice and this permission notice appear in all copies.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
++ * REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
++ * AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
++ * INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
++ * LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE
++ * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
++ * PERFORMANCE OF THIS SOFTWARE.
++ */
++
++#include <errno.h>
++#include <fcntl.h>
++#include <sys/mman.h>
++#include <time.h>
++#include <unistd.h>
++
++// Linux with glibc < 2.27 has no wrapper
++#if defined(HAVE_MEMFD) && !defined(HAVE_MEMFD_CREATE)
++#include <sys/syscall.h>
++
++static inline int memfd_create(const char *name, unsigned int flags) {
++	return syscall(SYS_memfd_create, name, flags);
++}
++#endif
++
++#if !defined(HAVE_MEMFD) && !defined(__FreeBSD__)
++static void randname(char *buf)
++{
++	struct timespec ts;
++	clock_gettime(CLOCK_REALTIME, &ts);
++	long r = ts.tv_nsec;
++
++	for (int i = 0; i < 6; ++i) {
++		buf[i] = 'A'+(r&15)+(r&16)*2;
++		r >>= 5;
++	}
++}
++#endif
++
++static int create_shm_file(void)
++{
++#ifdef HAVE_MEMFD
++	return memfd_create("wayvnc-shm", 0);
++#elif defined(__FreeBSD__)
++	// memfd_create added in FreeBSD 13, but SHM_ANON has been supported for ages
++	return shm_open(SHM_ANON, O_RDWR | O_CREAT | O_EXCL, 0600);
++#else
++	int retries = 100;
++
++	do {
++		char name[] = "/wl_shm-XXXXXX";
++		randname(name + sizeof(name) - 7);
++		--retries;
++
++		int fd = shm_open(name, O_RDWR | O_CREAT | O_EXCL, 0600);
++		if (fd >= 0) {
++			shm_unlink(name);
++			return fd;
++		}
++	} while (retries > 0 && errno == EEXIST);
++
++	return -1;
++#endif
++}
++
++int shm_alloc_fd(size_t size)
++{
++	int fd = create_shm_file();
++	if (fd < 0)
++		return -1;
++
++	int ret;
++	do {
++		ret = ftruncate(fd, size);
++	} while (ret < 0 && errno == EINTR);
++
++	if (ret < 0) {
++		close(fd);
++		return -1;
++	}
++
++	return fd;
++}
+diff --git a/src/remotedesktop/virtual_input.c b/src/remotedesktop/virtual_input.c
+new file mode 100644
+index 0000000..20c9cbc
+--- /dev/null
++++ b/src/remotedesktop/virtual_input.c
+@@ -0,0 +1,89 @@
++#include "virtual_input.h"
++
++#include "virtual-keyboard-unstable-v1-client-protocol.h"
++#include "wlr-virtual-pointer-unstable-v1-client-protocol.h"
++
++#include "xdpw.h"
++#include "logger.h"
++
++static void wlr_registry_handle_add(void *data, struct wl_registry *reg,
++		uint32_t id, const char *interface, uint32_t ver) {
++	struct xdpw_remotedesktop_context *ctx = data;
++
++	logprint(DEBUG, "wlroots: interface to register %s  (Version: %u)",
++		interface, ver);
++
++	if (!strcmp(interface, zwlr_virtual_pointer_manager_v1_interface.name)) {
++		uint32_t version = ver;
++		if (VIRTUAL_POINTER_VERSION < ver) {
++			version = VIRTUAL_POINTER_VERSION;
++		} else if (ver < VIRTUAL_POINTER_VERSION_MIN) {
++			version = VIRTUAL_POINTER_VERSION_MIN;
++		}
++		logprint(DEBUG,
++			"wlroots: |-- registered to interface %s (Version %u)",
++			interface, version);
++		ctx->virtual_pointer_manager = wl_registry_bind(reg, id,
++			&zwlr_virtual_pointer_manager_v1_interface, version);
++	} else if (!strcmp(interface, zwp_virtual_keyboard_manager_v1_interface.name)) {
++		uint32_t version = ver;
++		if (VIRTUAL_KEYBOARD_VERSION < ver) {
++			version = VIRTUAL_KEYBOARD_VERSION;
++		} else if (ver < VIRTUAL_KEYBOARD_VERSION_MIN) {
++			version = VIRTUAL_KEYBOARD_VERSION_MIN;
++		}
++		logprint(DEBUG,
++			"wlroots: |-- registered to interface %s (Version %u)",
++			interface, version);
++		ctx->virtual_keyboard_manager = wl_registry_bind(reg, id,
++			&zwp_virtual_keyboard_manager_v1_interface, version);
++	} else if (strcmp(interface, wl_seat_interface.name) == 0) {
++		ctx->seat = wl_registry_bind(reg, id, &wl_seat_interface, 7);
++	}
++}
++
++
++static void wlr_registry_handle_remove(void *data, struct wl_registry *reg,
++		uint32_t id) {
++	// TODO: handle seat removal?
++}
++
++static const struct wl_registry_listener wlr_registry_listener = {
++	.global = wlr_registry_handle_add,
++	.global_remove = wlr_registry_handle_remove,
++};
++
++int xdpw_virtual_input_init(struct xdpw_state *state) {
++	struct xdpw_remotedesktop_context *ctx = &state->remotedesktop;
++
++	// retrieve registry
++	ctx->registry = wl_display_get_registry(state->wl_display);
++	wl_registry_add_listener(ctx->registry, &wlr_registry_listener, ctx);
++
++	wl_display_roundtrip(state->wl_display);
++
++	logprint(DEBUG, "wayland: registry listeners run");
++	wl_display_roundtrip(state->wl_display);
++
++	// make sure our wlroots supports virtual-pointer protocol
++	if (!ctx->virtual_pointer_manager) {
++		logprint(ERROR, "Compositor doesn't support %s!",
++			zwlr_virtual_pointer_manager_v1_interface.name);
++		return -1;
++	}
++
++	// make sure our wlroots supports virtual-keyboard protocol
++	if (!ctx->virtual_keyboard_manager) {
++		logprint(ERROR, "Compositor doesn't support %s!",
++			zwp_virtual_keyboard_manager_v1_interface.name);
++		return -1;
++	}
++
++	return 0;
++}
++
++void xdpw_virtual_input_finish(struct xdpw_remotedesktop_context *ctx) {
++	if (ctx->virtual_pointer_manager) {
++		zwlr_virtual_pointer_manager_v1_destroy(ctx->virtual_pointer_manager);
++	}
++}
+diff --git a/src/screencast/ext_image_copy.c b/src/screencast/ext_image_copy.c
+deleted file mode 100644
+index aacb9bb..0000000
+--- a/src/screencast/ext_image_copy.c
++++ /dev/null
+@@ -1,330 +0,0 @@
+-#include "wlr_screencast.h"
+-
+-#include "linux-dmabuf-unstable-v1-client-protocol.h"
+-#include "ext-image-capture-source-v1-client-protocol.h"
+-#include "ext-image-copy-capture-v1-client-protocol.h"
+-#include <drm_fourcc.h>
+-#include <fcntl.h>
+-#include <limits.h>
+-#include <stdbool.h>
+-#include <stdlib.h>
+-#include <string.h>
+-#include <sys/mman.h>
+-#include <sys/param.h>
+-#include <sys/stat.h>
+-#include <sys/wait.h>
+-#include <unistd.h>
+-#include <assert.h>
+-#include <wayland-client-protocol.h>
+-#include <xf86drm.h>
+-#include <sys/types.h>
+-
+-#include "ext_image_copy.h"
+-#include "screencast.h"
+-#include "pipewire_screencast.h"
+-#include "xdpw.h"
+-#include "logger.h"
+-#include "fps_limit.h"
+-
+-static void ext_session_buffer_size(void *data,
+-		struct ext_image_copy_capture_session_v1 *ext_image_copy_capture_session_v1,
+-		uint32_t width, uint32_t height) {
+-	struct xdpw_screencast_instance *cast = data;
+-
+-	cast->pending_constraints.width = width;
+-	cast->pending_constraints.height = height;
+-	cast->pending_constraints.dirty = true;
+-}
+-
+-static void ext_session_shm_format(void *data,
+-		struct ext_image_copy_capture_session_v1 *ext_image_copy_capture_session_v1,
+-		uint32_t format) {
+-	struct xdpw_screencast_instance *cast = data;
+-
+-	uint32_t fourcc = xdpw_format_drm_fourcc_from_wl_shm(format);
+-
+-	char *fmt_name = drmGetFormatName(fourcc);
+-	struct xdpw_shm_format *fmt;
+-	wl_array_for_each(fmt, &cast->pending_constraints.shm_formats) {
+-		if (fmt->fourcc == fourcc) {
+-			logprint(TRACE, "ext: skipping duplicated format: %s (%X)", fmt_name, fourcc);
+-			goto done;
+-		}
+-	}
+-	if (xdpw_bpp_from_drm_fourcc(fourcc) <= 0) {
+-		logprint(WARN, "ext: unsupported shm format: %s (%X)", fmt_name, fourcc);
+-		goto done;
+-	}
+-
+-	fmt = wl_array_add(&cast->pending_constraints.shm_formats, sizeof(*fmt));
+-	if (fmt == NULL) {
+-		logprint(WARN, "ext: allocation for shm format %s (%X) failed", fmt_name, fourcc);
+-		goto done;
+-	}
+-	fmt->fourcc = fourcc;
+-	// Stride will be calculated when session_done is received
+-	fmt->stride = 0;
+-	cast->pending_constraints.dirty = true;
+-	logprint(TRACE, "ext: shm_format: %s (%X)", fmt_name, fourcc);
+-
+-done:
+-	free(fmt_name);
+-}
+-
+-static void ext_session_dmabuf_device(void *data,
+-		struct ext_image_copy_capture_session_v1 *ext_image_copy_capture_session_v1,
+-		struct wl_array *device_arr) {
+-	struct xdpw_screencast_instance *cast = data;
+-
+-	dev_t device;
+-	assert(device_arr->size == sizeof(device));
+-	memcpy(&device, device_arr->data, sizeof(device));
+-
+-	drmDevice *drmDev;
+-	if (drmGetDeviceFromDevId(device, /* flags */ 0, &drmDev) != 0) {
+-		return;
+-	}
+-
+-	cast->pending_constraints.gbm = xdpw_gbm_device_create(drmDev);
+-	cast->pending_constraints.dirty = true;
+-	logprint(TRACE, "ext: dmabuf_device handler");
+-}
+-
+-static void ext_session_dmabuf_format(void *data,
+-		struct ext_image_copy_capture_session_v1 *ext_image_copy_capture_session_v1,
+-		uint32_t format, struct wl_array *modifiers) {
+-	struct xdpw_screencast_instance *cast = data;
+-
+-	char *fmt_name = drmGetFormatName(format);
+-	uint64_t *modifier;
+-	wl_array_for_each(modifier, modifiers) {
+-		struct xdpw_format_modifier_pair *fm_pair;
+-		bool new = true;
+-		wl_array_for_each(fm_pair, &cast->pending_constraints.dmabuf_format_modifier_pairs) {
+-			if (fm_pair->fourcc == format && fm_pair->modifier == *modifier) {
+-				new = false;
+-				break;
+-			}
+-		}
+-		if (!new) {
+-			logprint(TRACE, "ext: skipping duplicated format %s (%X, %lu)", fmt_name, format, *modifier);
+-			continue;
+-		}
+-
+-		fm_pair = wl_array_add(&cast->pending_constraints.dmabuf_format_modifier_pairs, sizeof(*fm_pair));
+-		fm_pair->fourcc = format;
+-		fm_pair->modifier = *modifier;
+-
+-		char *modifier_name = drmGetFormatModifierName(*modifier);
+-		logprint(TRACE, "ext: dmabuf_format handler: %s (%X), modifier: %s (%X)", fmt_name, format, modifier_name, *modifier);
+-		free(modifier_name);
+-	}
+-
+-	cast->pending_constraints.dirty = true;
+-	free(fmt_name);
+-}
+-
+-static void ext_session_done(void *data,
+-		struct ext_image_copy_capture_session_v1 *ext_image_copy_capture_session_v1) {
+-	struct xdpw_screencast_instance *cast = data;
+-
+-	logprint(TRACE, "ext: done handler");
+-
+-	// We can only calculate the stride now we have both formats and width
+-	struct xdpw_shm_format *fmt;
+-	wl_array_for_each(fmt, &cast->pending_constraints.shm_formats) {
+-		int bpp = xdpw_bpp_from_drm_fourcc(fmt->fourcc);
+-		assert(bpp > 0);
+-		fmt->stride = bpp * cast->pending_constraints.width;
+-	}
+-
+-	if (xdpw_buffer_constraints_move(&cast->current_constraints, &cast->pending_constraints)) {
+-		logprint(DEBUG, "ext: buffer constraints changed");
+-		pwr_update_stream_param(cast);
+-		return;
+-	}
+-
+-	if (!cast->initialized) {
+-		return;
+-	}
+-}
+-
+-static void ext_session_stopped(void *data,
+-		struct ext_image_copy_capture_session_v1 *ext_image_copy_capture_session_v1) {
+-	struct xdpw_screencast_instance *cast = data;
+-
+-	xdpw_screencast_instance_destroy(cast);
+-	logprint(TRACE, "ext: session_stopped handler");
+-}
+-
+-static const struct ext_image_copy_capture_session_v1_listener ext_session_listener = {
+-	.buffer_size = ext_session_buffer_size,
+-	.shm_format = ext_session_shm_format,
+-	.dmabuf_device = ext_session_dmabuf_device,
+-	.dmabuf_format = ext_session_dmabuf_format,
+-	.done = ext_session_done,
+-	.stopped = ext_session_stopped,
+-};
+-
+-static void ext_frame_transform(void *data,
+-		struct ext_image_copy_capture_frame_v1 *ext_image_copy_capture_frame_v1,
+-		uint32_t transform) {
+-	struct xdpw_screencast_instance *cast = data;
+-	logprint(TRACE, "ext: transform handler %u", transform);
+-	cast->current_frame.transformation = transform;
+-}
+-
+-static void ext_frame_damage(void *data,
+-		struct ext_image_copy_capture_frame_v1 *ext_image_copy_capture_frame_v1,
+-		int32_t x, int32_t y, int32_t width, int32_t height) {
+-	struct xdpw_screencast_instance *cast = data;
+-
+-	logprint(TRACE, "ext: damage: %"PRId32",%"PRId32"x%"PRId32",%"PRId32, x, y, width, height);
+-
+-	// Our damage tracking
+-	struct xdpw_buffer *buffer;
+-	wl_list_for_each(buffer, &cast->buffer_list, link) {
+-		struct xdpw_frame_damage *damage = wl_array_add(&buffer->damage, sizeof(*damage));
+-		*damage = (struct xdpw_frame_damage){ .x = x, .y = y, .width = width, .height = height };
+-	}
+-}
+-
+-static void ext_frame_presentation_time(void *data,
+-		struct ext_image_copy_capture_frame_v1 *ext_image_copy_capture_frame_v1,
+-		uint32_t tv_sec_hi, uint32_t tv_sec_lo, uint32_t tv_nsec) {
+-	struct xdpw_screencast_instance *cast = data;
+-
+-	cast->current_frame.tv_sec = ((((uint64_t)tv_sec_hi) << 32) | tv_sec_lo);
+-	cast->current_frame.tv_nsec = tv_nsec;
+-	logprint(TRACE, "ext: timestamp %"PRIu64":%"PRIu32, cast->current_frame.tv_sec, cast->current_frame.tv_nsec);
+-}
+-
+-static void ext_frame_ready(void *data,
+-		struct ext_image_copy_capture_frame_v1 *ext_image_copy_capture_frame_v1) {
+-	struct xdpw_screencast_instance *cast = data;
+-	fps_limit_measure_start(&cast->fps_limit, cast->framerate);
+-
+-	logprint(TRACE, "ext: ready event handler");
+-
+-	if (cast->ext_session.frame) {
+-		ext_image_copy_capture_frame_v1_destroy(cast->ext_session.frame);
+-		cast->ext_session.frame = NULL;
+-	}
+-
+-	struct xdpw_buffer *buffer = cast->current_frame.xdpw_buffer;
+-	cast->current_frame.completed = true;
+-	xdpw_pwr_enqueue_buffer(cast);
+-	if (buffer) {
+-		// Clear damage for the buffer that was just submitted
+-		buffer->damage.size = 0;
+-	}
+-}
+-
+-static void ext_frame_failed(void *data,
+-		struct ext_image_copy_capture_frame_v1 *ext_image_copy_capture_frame_v1,
+-		uint32_t reason) {
+-	struct xdpw_screencast_instance *cast = data;
+-
+-	if (cast->ext_session.frame) {
+-		ext_image_copy_capture_frame_v1_destroy(cast->ext_session.frame);
+-		cast->ext_session.frame = NULL;
+-	}
+-
+-	switch (reason) {
+-	case EXT_IMAGE_COPY_CAPTURE_FRAME_V1_FAILURE_REASON_UNKNOWN:
+-		logprint(ERROR, "ext: frame capture failed: unknown reason");
+-		xdpw_screencast_instance_destroy(cast);
+-		return;
+-	case EXT_IMAGE_COPY_CAPTURE_FRAME_V1_FAILURE_REASON_BUFFER_CONSTRAINTS:
+-		logprint(ERROR, "ext: frame capture failed: buffer constraint mismatch");
+-		xdpw_pwr_enqueue_buffer(cast);
+-		return;
+-	case EXT_IMAGE_COPY_CAPTURE_FRAME_V1_FAILURE_REASON_STOPPED:
+-		logprint(INFO, "ext: frame capture failed: capture session stopped");
+-		xdpw_screencast_instance_destroy(cast);
+-		return;
+-	default:
+-		abort();
+-	}
+-}
+-
+-static const struct ext_image_copy_capture_frame_v1_listener ext_frame_listener = {
+-	.transform = ext_frame_transform,
+-	.damage = ext_frame_damage,
+-	.presentation_time = ext_frame_presentation_time,
+-	.ready = ext_frame_ready,
+-	.failed = ext_frame_failed,
+-};
+-
+-static void ext_register_session_cb(struct xdpw_screencast_instance *cast) {
+-	struct ext_image_capture_source_v1 *source =
+-		ext_output_image_capture_source_manager_v1_create_source(
+-				cast->ctx->ext_output_image_capture_source_manager,
+-				cast->target->output->output);
+-
+-	cast->ext_session.capture_session = ext_image_copy_capture_manager_v1_create_session(
+-			cast->ctx->ext_image_copy_capture_manager, source,
+-			cast->target->with_cursor ? EXT_IMAGE_COPY_CAPTURE_MANAGER_V1_OPTIONS_PAINT_CURSORS : 0);
+-	ext_image_copy_capture_session_v1_add_listener(cast->ext_session.capture_session,
+-			&ext_session_listener, cast);
+-	logprint(TRACE, "ext: session callbacks registered");
+-}
+-
+-static void ext_register_frame_cb(struct xdpw_screencast_instance *cast) {
+-	if (!cast->ext_session.capture_session) {
+-		ext_register_session_cb(cast);
+-	}
+-	cast->ext_session.frame = ext_image_copy_capture_session_v1_create_frame(
+-			cast->ext_session.capture_session);
+-	ext_image_copy_capture_frame_v1_add_listener(cast->ext_session.frame,
+-			&ext_frame_listener, cast);
+-
+-	ext_image_copy_capture_frame_v1_attach_buffer(cast->ext_session.frame,
+-			cast->current_frame.xdpw_buffer->buffer);
+-	struct xdpw_buffer *buffer;
+-	wl_list_for_each(buffer, &cast->buffer_list, link) {
+-		struct xdpw_frame_damage *damage;
+-		wl_array_for_each(damage, &buffer->damage) {
+-			ext_image_copy_capture_frame_v1_damage_buffer(
+-					cast->ext_session.frame, damage->x, damage->y, damage->width, damage->height);
+-		}
+-	}
+-	ext_image_copy_capture_frame_v1_capture(cast->ext_session.frame);
+-
+-	logprint(TRACE, "ext: frame callbacks registered");
+-}
+-
+-void xdpw_ext_ic_frame_capture(struct xdpw_screencast_instance *cast) {
+-	logprint(TRACE, "ext: start screencopy");
+-	if (cast->current_frame.xdpw_buffer == NULL) {
+-		logprint(ERROR, "ext: started frame without buffer");
+-		return;
+-	}
+-
+-	ext_register_frame_cb(cast);
+-}
+-
+-void xdpw_ext_ic_session_close(struct xdpw_screencast_instance *cast) {
+-	if (cast->ext_session.frame) {
+-		ext_image_copy_capture_frame_v1_destroy(cast->ext_session.frame);
+-		cast->ext_session.frame = NULL;
+-	}
+-	if (cast->ext_session.capture_session) {
+-		ext_image_copy_capture_session_v1_destroy(cast->ext_session.capture_session);
+-		cast->ext_session.capture_session = NULL;
+-	}
+-}
+-
+-int xdpw_ext_ic_session_init(struct xdpw_screencast_instance *cast) {
+-	if (cast->ctx->ext_image_copy_capture_manager == NULL ||
+-			cast->ctx->ext_output_image_capture_source_manager == NULL) {
+-		logprint(INFO, "ext: unsupported");
+-		return -1;
+-	}
+-	ext_register_session_cb(cast);
+-
+-	// process at least one frame so that we know
+-	// some of the metadata required for the pipewire
+-	// remote state connected event
+-	return wl_display_roundtrip(cast->ctx->state->wl_display);
+-}
+diff --git a/src/screencast/pipewire_screencast.c b/src/screencast/pipewire_screencast.c
+index 50f21ce..ecbe2fd 100644
+--- a/src/screencast/pipewire_screencast.c
++++ b/src/screencast/pipewire_screencast.c
+@@ -12,13 +12,10 @@
+ #include <assert.h>
+ #include <libdrm/drm_fourcc.h>
+ 
+-#include "screencast.h"
+ #include "wlr_screencast.h"
+ #include "xdpw.h"
+ #include "logger.h"
+ 
+-#define DAMAGE_REGION_COUNT 16
+-
+ static struct spa_pod *build_buffer(struct spa_pod_builder *b, uint32_t blocks, uint32_t size,
+ 		uint32_t stride, uint32_t datatype) {
+ 	assert(blocks > 0);
+@@ -126,82 +123,53 @@ static struct spa_pod *build_format(struct spa_pod_builder *b, enum spa_video_fo
+ 	return spa_pod_builder_pop(b, &f[0]);
+ }
+ 
+-static void build_modifierlist(struct xdpw_screencast_instance *cast,
++static bool build_modifierlist(struct xdpw_screencast_instance *cast,
+ 		uint32_t drm_format, uint64_t **modifiers, uint32_t *modifier_count) {
+-	*modifier_count = xdpw_count_dmabuf_modifiers(cast, drm_format);
++	if (!wlr_query_dmabuf_modifiers(cast->ctx, drm_format, 0, NULL, modifier_count)) {
++		*modifiers = NULL;
++		*modifier_count = 0;
++		return false;
++	}
+ 	if (*modifier_count == 0) {
+ 		logprint(INFO, "wlroots: no modifiers available for format %u", drm_format);
+ 		*modifiers = NULL;
+-		return;
++		return true;
+ 	}
+ 	*modifiers = calloc(*modifier_count, sizeof(uint64_t));
+-	xdpw_query_dmabuf_modifiers(cast, drm_format, *modifiers, *modifier_count);
++	bool ret = wlr_query_dmabuf_modifiers(cast->ctx, drm_format, *modifier_count, *modifiers, modifier_count);
+ 	logprint(INFO, "wlroots: num_modififiers %d", *modifier_count);
++	return ret;
+ }
+ 
+-static void add_pod(struct wl_array *params, const struct spa_pod *pod) {
+-	if (pod != NULL) {
+-		const struct spa_pod **entry = wl_array_add(params, sizeof(**entry));
+-		if (entry != NULL) {
+-			*entry = pod;
+-		}
+-	}
+-}
+-
+-static void build_formats(struct spa_pod_builder *builder, struct xdpw_screencast_instance *cast,
+-		struct wl_array *params) {
+-	if (!cast->avoid_dmabufs) {
+-		uint32_t last_format = DRM_FORMAT_INVALID;
+-		struct xdpw_format_modifier_pair *fm_pair;
+-		wl_array_for_each(fm_pair, &cast->current_constraints.dmabuf_format_modifier_pairs) {
+-			if (last_format == fm_pair->fourcc) {
+-				continue;
+-			}
+-			enum spa_video_format pw_format = xdpw_format_pw_from_drm_fourcc(fm_pair->fourcc);
+-			if (pw_format == SPA_VIDEO_FORMAT_UNKNOWN) {
+-				continue;
+-			}
+-			last_format = fm_pair->fourcc;
+-
+-			uint32_t modifier_count;
+-			uint64_t *modifiers = NULL;
+-			build_modifierlist(cast, fm_pair->fourcc, &modifiers, &modifier_count);
+-			if (modifier_count > 0) {
+-				add_pod(params, build_format(builder, pw_format,
+-						cast->current_constraints.width, cast->current_constraints.height,
+-						cast->framerate, modifiers, modifier_count));
+-			}
+-			free(modifiers);
+-		}
+-	}
+-
+-	uint32_t *format;
+-	wl_array_for_each(format, &cast->current_constraints.shm_formats) {
+-		enum spa_video_format pw_format = xdpw_format_pw_from_drm_fourcc(*format);
+-		if (pw_format != SPA_VIDEO_FORMAT_UNKNOWN) {
+-			add_pod(params, build_format(builder, pw_format,
+-						cast->current_constraints.width, cast->current_constraints.height,
+-						cast->framerate, NULL, 0));
+-		}
+-	}
+-}
+-
+-static bool has_drm_fourcc(struct xdpw_screencast_instance *cast, uint32_t format) {
+-	if (format == DRM_FORMAT_INVALID) {
+-		return false;
+-	}
+-	if (!cast->avoid_dmabufs) {
+-		struct xdpw_format_modifier_pair *fm_pair;
+-		wl_array_for_each(fm_pair, &cast->current_constraints.dmabuf_format_modifier_pairs) {
+-			if (fm_pair->fourcc == format) {
+-				return true;
+-			}
+-		}
+-	}
+-	return false;
++static uint32_t build_formats(struct spa_pod_builder *b[static 2], struct xdpw_screencast_instance *cast,
++		const struct spa_pod *params[static 2]) {
++	uint32_t param_count;
++	uint32_t modifier_count;
++	uint64_t *modifiers = NULL;
++
++	if (!cast->avoid_dmabufs &&
++			build_modifierlist(cast, cast->screencopy_frame_info[DMABUF].format, &modifiers, &modifier_count) && modifier_count > 0) {
++		param_count = 2;
++		params[0] = build_format(b[0], xdpw_format_pw_from_drm_fourcc(cast->screencopy_frame_info[DMABUF].format),
++				cast->screencopy_frame_info[DMABUF].width, cast->screencopy_frame_info[DMABUF].height, cast->framerate,
++				modifiers, modifier_count);
++		assert(params[0] != NULL);
++		params[1] = build_format(b[1], xdpw_format_pw_from_drm_fourcc(cast->screencopy_frame_info[WL_SHM].format),
++				cast->screencopy_frame_info[WL_SHM].width, cast->screencopy_frame_info[WL_SHM].height, cast->framerate,
++				NULL, 0);
++		assert(params[1] != NULL);
++	} else {
++		param_count = 1;
++		params[0] = build_format(b[0], xdpw_format_pw_from_drm_fourcc(cast->screencopy_frame_info[WL_SHM].format),
++				cast->screencopy_frame_info[WL_SHM].width, cast->screencopy_frame_info[WL_SHM].height, cast->framerate,
++				NULL, 0);
++		assert(params[0] != NULL);
++	}
++	free(modifiers);
++	return param_count;
+ }
+ 
+-static void xdpw_pwr_dequeue_buffer(struct xdpw_screencast_instance *cast) {
++void xdpw_pwr_dequeue_buffer(struct xdpw_screencast_instance *cast) {
+ 	logprint(TRACE, "pipewire: dequeueing buffer");
+ 
+ 	assert(!cast->current_frame.pw_buffer);
+@@ -211,7 +179,6 @@ static void xdpw_pwr_dequeue_buffer(struct xdpw_screencast_instance *cast) {
+ 	}
+ 
+ 	cast->current_frame.xdpw_buffer = cast->current_frame.pw_buffer->user_data;
+-	cast->current_frame.completed = false;
+ }
+ 
+ void xdpw_pwr_enqueue_buffer(struct xdpw_screencast_instance *cast) {
+@@ -221,17 +188,16 @@ void xdpw_pwr_enqueue_buffer(struct xdpw_screencast_instance *cast) {
+ 		logprint(WARN, "pipewire: no buffer to queue");
+ 		goto done;
+ 	}
+-	struct xdpw_buffer *xdpw_buf = cast->current_frame.xdpw_buffer;
+ 	struct pw_buffer *pw_buf = cast->current_frame.pw_buffer;
+ 	struct spa_buffer *spa_buf = pw_buf->buffer;
+ 	struct spa_data *d = spa_buf->datas;
+ 
+-	bool buffer_corrupt = !cast->current_frame.completed;
++	bool buffer_corrupt = cast->frame_state != XDPW_FRAME_STATE_SUCCESS;
+ 
+ 	if (cast->current_frame.y_invert) {
+ 		//TODO: Flip buffer or set stride negative
+-		xdpw_screencast_instance_destroy(cast);
+-		return;
++		buffer_corrupt = true;
++		cast->err = 1;
+ 	}
+ 
+ 	logprint(TRACE, "********************");
+@@ -254,32 +220,25 @@ void xdpw_pwr_enqueue_buffer(struct xdpw_screencast_instance *cast) {
+ 	if ((damage = spa_buffer_find_meta(spa_buf, SPA_META_VideoDamage))) {
+ 		struct spa_region *d_region = spa_meta_first(damage);
+ 		uint32_t damage_counter = 0;
+-		struct xdpw_frame_damage *fdamage;
+-		bool stopped_for_spa = false;
+-		wl_array_for_each(fdamage, &xdpw_buf->damage) {
+-			if (!spa_meta_check(d_region + 1, damage)) {
+-				stopped_for_spa = true;
+-				break;
++		do {
++			if (damage_counter >= cast->current_frame.damage_count) {
++				*d_region = SPA_REGION(0, 0, 0, 0);
++				logprint(TRACE, "pipewire: end damage %u %u,%u (%ux%u)", damage_counter,
++						d_region->position.x, d_region->position.y, d_region->size.width, d_region->size.height);
+ 			}
+-			d_region++;
+-
++			struct xdpw_frame_damage *fdamage = &cast->current_frame.damage[damage_counter];
+ 			*d_region = SPA_REGION(fdamage->x, fdamage->y, fdamage->width, fdamage->height);
+ 			logprint(TRACE, "pipewire: damage %u %u,%u (%ux%u)", damage_counter,
+ 					d_region->position.x, d_region->position.y, d_region->size.width, d_region->size.height);
+-			damage_counter++;
+-		}
++		} while (spa_meta_check(d_region + 1, damage) && d_region++);
+ 
+-		if (stopped_for_spa) {
+-			struct xdpw_frame_damage new_fdamage =
++		if (damage_counter < cast->current_frame.damage_count) {
++			struct xdpw_frame_damage fdamage =
+ 				{d_region->position.x, d_region->position.y, d_region->size.width, d_region->size.height};
+-
+-			wl_array_for_each(fdamage, &xdpw_buf->damage) {
+-				if (damage_counter-- > 0) {
+-					continue;
+-				}
+-				new_fdamage = merge_damage(&new_fdamage, fdamage);
++			for (; damage_counter < cast->current_frame.damage_count; damage_counter++) {
++				fdamage = merge_damage(&fdamage, &cast->current_frame.damage[damage_counter]);
+ 			}
+-			*d_region = SPA_REGION(new_fdamage.x, new_fdamage.y, new_fdamage.width, new_fdamage.height);
++			*d_region = SPA_REGION(fdamage.x, fdamage.y, fdamage.width, fdamage.height);
+ 			logprint(TRACE, "pipewire: collected damage %u %u,%u (%ux%u)", damage_counter,
+ 					d_region->position.x, d_region->position.y, d_region->size.width, d_region->size.height);
+ 		}
+@@ -319,20 +278,18 @@ done:
+ void pwr_update_stream_param(struct xdpw_screencast_instance *cast) {
+ 	logprint(TRACE, "pipewire: stream update parameters");
+ 	struct pw_stream *stream = cast->stream;
+-	if (stream == NULL) {
+-		return;
+-	}
+-	uint8_t params_buffer[2048];
+-	struct spa_pod_dynamic_builder builder;
+-	spa_pod_dynamic_builder_init(&builder, params_buffer, sizeof(params_buffer[0]), 2048);
+-
+-	struct wl_array params;
+-	wl_array_init(&params);
+-	build_formats(&builder.b, cast, &params);
+-
+-	pw_stream_update_params(stream, params.data, params.size / sizeof(struct spa_pod *));
+-	spa_pod_dynamic_builder_clean(&builder);
+-	wl_array_release(&params);
++	uint8_t params_buffer[2][1024];
++	struct spa_pod_dynamic_builder b[2];
++	spa_pod_dynamic_builder_init(&b[0], params_buffer[0], sizeof(params_buffer[0]), 2048);
++	spa_pod_dynamic_builder_init(&b[1], params_buffer[1], sizeof(params_buffer[1]), 2048);
++	const struct spa_pod *params[2];
++
++	struct spa_pod_builder *builder[2] = {&b[0].b, &b[1].b};
++	uint32_t n_params = build_formats(builder, cast, params);
++
++	pw_stream_update_params(stream, params, n_params);
++	spa_pod_dynamic_builder_clean(&b[0]);
++	spa_pod_dynamic_builder_clean(&b[1]);
+ }
+ 
+ static void pwr_handle_stream_state_changed(void *data,
+@@ -364,9 +321,9 @@ static void pwr_handle_stream_param_changed(void *data, uint32_t id,
+ 	logprint(TRACE, "pipewire: stream parameters changed");
+ 	struct xdpw_screencast_instance *cast = data;
+ 	struct pw_stream *stream = cast->stream;
+-	uint8_t params_buffer[3 * 1024];
+-	struct spa_pod_dynamic_builder builder;
+-	struct wl_array params;
++	uint8_t params_buffer[3][1024];
++	struct spa_pod_dynamic_builder b[3];
++	const struct spa_pod *params[4];
+ 	uint32_t blocks;
+ 	uint32_t data_type;
+ 
+@@ -374,21 +331,18 @@ static void pwr_handle_stream_param_changed(void *data, uint32_t id,
+ 		return;
+ 	}
+ 
+-	wl_array_init(&params);
+-
+-	spa_pod_dynamic_builder_init(&builder, params_buffer, sizeof(params_buffer), 2048);
++	spa_pod_dynamic_builder_init(&b[0], params_buffer[0], sizeof(params_buffer[0]), 2048);
++	spa_pod_dynamic_builder_init(&b[1], params_buffer[1], sizeof(params_buffer[1]), 2048);
++	spa_pod_dynamic_builder_init(&b[2], params_buffer[2], sizeof(params_buffer[2]), 2048);
+ 
+ 	spa_format_video_raw_parse(param, &cast->pwr_format);
+ 	cast->framerate = (uint32_t)(cast->pwr_format.max_framerate.num / cast->pwr_format.max_framerate.denom);
+ 
+-	struct gbm_device *gbm = cast->current_constraints.gbm ? cast->current_constraints.gbm : cast->ctx->gbm;
+-
+ 	const struct spa_pod_prop *prop_modifier;
+ 	if ((prop_modifier = spa_pod_find_prop(param, NULL, SPA_FORMAT_VIDEO_modifier)) != NULL) {
+ 		cast->buffer_type = DMABUF;
+ 		data_type = 1<<SPA_DATA_DmaBuf;
+-		uint32_t fourcc = xdpw_format_drm_fourcc_from_pw_format(cast->pwr_format.format);
+-		assert(has_drm_fourcc(cast, fourcc));
++		assert(cast->pwr_format.format == xdpw_format_pw_from_drm_fourcc(cast->screencopy_frame_info[DMABUF].format));
+ 		if ((prop_modifier->flags & SPA_POD_PROP_FLAG_DONT_FIXATE) > 0) {
+ 			const struct spa_pod *pod_modifier = &prop_modifier->value;
+ 
+@@ -397,10 +351,12 @@ static void pwr_handle_stream_param_changed(void *data, uint32_t id,
+ 			modifiers++;
+ 			uint32_t flags = GBM_BO_USE_RENDERING;
+ 			uint64_t modifier;
++			uint32_t n_params;
++			struct spa_pod_builder *builder[2] = {&b[0].b, &b[1].b};
+ 
+-			struct gbm_bo *bo = gbm_bo_create_with_modifiers2(gbm,
+-				cast->current_constraints.width, cast->current_constraints.height,
+-				fourcc, modifiers, n_modifiers, flags);
++			struct gbm_bo *bo = gbm_bo_create_with_modifiers2(cast->ctx->gbm,
++				cast->screencopy_frame_info[cast->buffer_type].width, cast->screencopy_frame_info[cast->buffer_type].height,
++				cast->screencopy_frame_info[cast->buffer_type].format, modifiers, n_modifiers, flags);
+ 			if (bo) {
+ 				modifier = gbm_bo_get_modifier(bo);
+ 				gbm_bo_destroy(bo);
+@@ -420,8 +376,9 @@ static void pwr_handle_stream_param_changed(void *data, uint32_t id,
+ 				default:
+ 					continue;
+ 				}
+-				bo = gbm_bo_create(gbm, cast->current_constraints.width,
+-						cast->current_constraints.height, fourcc, flags);
++				bo = gbm_bo_create(cast->ctx->gbm,
++					cast->screencopy_frame_info[cast->buffer_type].width, cast->screencopy_frame_info[cast->buffer_type].height,
++					cast->screencopy_frame_info[cast->buffer_type].format, flags);
+ 				if (bo) {
+ 					modifier = gbm_bo_get_modifier(bo);
+ 					gbm_bo_destroy(bo);
+@@ -432,31 +389,32 @@ static void pwr_handle_stream_param_changed(void *data, uint32_t id,
+ 			logprint(WARN, "pipewire: unable to allocate a dmabuf. Falling back to shm");
+ 			cast->avoid_dmabufs = true;
+ 
+-			build_formats(&builder.b, cast, &params);
+-
+-			pw_stream_update_params(stream, params.data, params.size / sizeof(struct spa_pod *));
+-			spa_pod_dynamic_builder_clean(&builder);
+-			wl_array_release(&params);
++			n_params = build_formats(builder, cast, &params[0]);
++			pw_stream_update_params(stream, params, n_params);
++			spa_pod_dynamic_builder_clean(&b[0]);
++			spa_pod_dynamic_builder_clean(&b[1]);
++			spa_pod_dynamic_builder_clean(&b[2]);
+ 			return;
+ 
+ fixate_format:
++			params[0] = fixate_format(&b[2].b, xdpw_format_pw_from_drm_fourcc(cast->screencopy_frame_info[cast->buffer_type].format),
++					cast->screencopy_frame_info[cast->buffer_type].width, cast->screencopy_frame_info[cast->buffer_type].height, cast->framerate, &modifier);
+ 
+-			add_pod(&params, fixate_format(&builder.b, cast->pwr_format.format,
+-						cast->current_constraints.width, cast->current_constraints.height, cast->framerate, &modifier));
++			n_params = build_formats(builder, cast, &params[1]);
++			n_params++;
+ 
+-			build_formats(&builder.b, cast, &params);
+-
+-			pw_stream_update_params(stream, params.data, params.size / sizeof(struct spa_pod *));
+-			spa_pod_dynamic_builder_clean(&builder);
+-			wl_array_release(&params);
++			pw_stream_update_params(stream, params, n_params);
++			spa_pod_dynamic_builder_clean(&b[0]);
++			spa_pod_dynamic_builder_clean(&b[1]);
++			spa_pod_dynamic_builder_clean(&b[2]);
+ 			return;
+ 		}
+ 
+ 		if (cast->pwr_format.modifier == DRM_FORMAT_MOD_INVALID) {
+ 			blocks = 1;
+ 		} else {
+-			blocks = gbm_device_get_format_modifier_plane_count(gbm,
+-				fourcc, cast->pwr_format.modifier);
++			blocks = gbm_device_get_format_modifier_plane_count(cast->ctx->gbm,
++				cast->screencopy_frame_info[DMABUF].format, cast->pwr_format.modifier);
+ 		}
+ 	} else {
+ 		cast->buffer_type = WL_SHM;
+@@ -471,29 +429,31 @@ fixate_format:
+ 	logprint(DEBUG, "pipewire: size: (%u, %u)", cast->pwr_format.size.width, cast->pwr_format.size.height);
+ 	logprint(DEBUG, "pipewire: max_framerate: (%u / %u)", cast->pwr_format.max_framerate.num, cast->pwr_format.max_framerate.denom);
+ 
+-	add_pod(&params, build_buffer(&builder.b, blocks, 0, 0, data_type));
++	params[0] = build_buffer(&b[0].b, blocks, cast->screencopy_frame_info[cast->buffer_type].size,
++			cast->screencopy_frame_info[cast->buffer_type].stride, data_type);
+ 
+-	add_pod(&params, spa_pod_builder_add_object(&builder.b,
++	params[1] = spa_pod_builder_add_object(&b[1].b,
+ 		SPA_TYPE_OBJECT_ParamMeta, SPA_PARAM_Meta,
+ 		SPA_PARAM_META_type, SPA_POD_Id(SPA_META_Header),
+-		SPA_PARAM_META_size, SPA_POD_Int(sizeof(struct spa_meta_header))));
++		SPA_PARAM_META_size, SPA_POD_Int(sizeof(struct spa_meta_header)));
+ 
+-	add_pod(&params, spa_pod_builder_add_object(&builder.b,
++	params[2] = spa_pod_builder_add_object(&b[1].b,
+ 		SPA_TYPE_OBJECT_ParamMeta, SPA_PARAM_Meta,
+ 		SPA_PARAM_META_type, SPA_POD_Id(SPA_META_VideoTransform),
+-		SPA_PARAM_META_size, SPA_POD_Int(sizeof(struct spa_meta_videotransform))));
++		SPA_PARAM_META_size, SPA_POD_Int(sizeof(struct spa_meta_videotransform)));
+ 
+-	add_pod(&params, spa_pod_builder_add_object(&builder.b,
++	params[3] = spa_pod_builder_add_object(&b[2].b,
+ 		SPA_TYPE_OBJECT_ParamMeta, SPA_PARAM_Meta,
+ 		SPA_PARAM_META_type, SPA_POD_Id(SPA_META_VideoDamage),
+ 		SPA_PARAM_META_size, SPA_POD_CHOICE_RANGE_Int(
+-			sizeof(struct spa_meta_region) * DAMAGE_REGION_COUNT,
++			sizeof(struct spa_meta_region) * 4,
+ 			sizeof(struct spa_meta_region) * 1,
+-			sizeof(struct spa_meta_region) * DAMAGE_REGION_COUNT)));
++			sizeof(struct spa_meta_region) * 4));
+ 
+-	pw_stream_update_params(stream, params.data, params.size / sizeof(struct spa_pod *));
+-	spa_pod_dynamic_builder_clean(&builder);
+-	wl_array_release(&params);
++	pw_stream_update_params(stream, params, 4);
++	spa_pod_dynamic_builder_clean(&b[0]);
++	spa_pod_dynamic_builder_clean(&b[1]);
++	spa_pod_dynamic_builder_clean(&b[2]);
+ }
+ 
+ static void pwr_handle_stream_add_buffer(void *data, struct pw_buffer *buffer) {
+@@ -514,16 +474,16 @@ static void pwr_handle_stream_add_buffer(void *data, struct pw_buffer *buffer) {
+ 		t = SPA_DATA_DmaBuf;
+ 	} else {
+ 		logprint(ERROR, "pipewire: unsupported buffer type");
+-		xdpw_screencast_instance_destroy(cast);
++		cast->err = 1;
+ 		return;
+ 	}
+ 
+ 	logprint(TRACE, "pipewire: selected buffertype %u", t);
+ 
+-	struct xdpw_buffer *xdpw_buffer = xdpw_buffer_create(cast, cast->buffer_type);
++	struct xdpw_buffer *xdpw_buffer = xdpw_buffer_create(cast, cast->buffer_type, &cast->screencopy_frame_info[cast->buffer_type]);
+ 	if (xdpw_buffer == NULL) {
+ 		logprint(ERROR, "pipewire: failed to create xdpw buffer");
+-		xdpw_screencast_instance_destroy(cast);
++		cast->err = 1;
+ 		return;
+ 	}
+ 	wl_list_insert(&cast->buffer_list, &xdpw_buffer->link);
+@@ -555,7 +515,6 @@ static void pwr_handle_stream_remove_buffer(void *data, struct pw_buffer *buffer
+ 
+ 	struct xdpw_buffer *xdpw_buffer = buffer->user_data;
+ 	if (xdpw_buffer) {
+-		wl_list_remove(&xdpw_buffer->link);
+ 		xdpw_buffer_destroy(xdpw_buffer);
+ 	}
+ 	if (cast->current_frame.pw_buffer == buffer) {
+@@ -567,10 +526,6 @@ static void pwr_handle_stream_remove_buffer(void *data, struct pw_buffer *buffer
+ 	buffer->user_data = NULL;
+ }
+ 
+-static void xdpw_wlr_frame_capture_cb(void *data) {
+-	xdpw_wlr_frame_capture(data);
+-}
+-
+ static void pwr_handle_stream_on_process(void *data) {
+ 	struct xdpw_screencast_instance *cast = data;
+ 
+@@ -594,7 +549,8 @@ static void pwr_handle_stream_on_process(void *data) {
+ 	if (cast->seq > 0) {
+ 		uint64_t delay_ns = fps_limit_measure_end(&cast->fps_limit, cast->framerate);
+ 		if (delay_ns > 0) {
+-			xdpw_add_timer(cast->ctx->state, delay_ns, xdpw_wlr_frame_capture_cb, cast);
++			xdpw_add_timer(cast->ctx->state, delay_ns,
++				(xdpw_event_loop_timer_func_t) xdpw_wlr_frame_capture, cast);
+ 			return;
+ 		}
+ 	}
+@@ -616,12 +572,11 @@ void xdpw_pwr_stream_create(struct xdpw_screencast_instance *cast) {
+ 
+ 	pw_loop_enter(state->pw_loop);
+ 
+-	uint8_t buffer[2 * 1024];
+-	struct spa_pod_dynamic_builder builder;;
+-	spa_pod_dynamic_builder_init(&builder, buffer, sizeof(buffer), 2048);
+-
+-	struct wl_array params;
+-	wl_array_init(&params);
++	uint8_t buffer[2][1024];
++	struct spa_pod_dynamic_builder b[2];
++	spa_pod_dynamic_builder_init(&b[0], buffer[0], sizeof(buffer[0]), 2048);
++	spa_pod_dynamic_builder_init(&b[1], buffer[1], sizeof(buffer[1]), 2048);
++	const struct spa_pod *params[2];
+ 
+ 	char name[] = "xdpw-stream-XXXXXX";
+ 	randname(name + strlen(name) - 6);
+@@ -636,7 +591,10 @@ void xdpw_pwr_stream_create(struct xdpw_screencast_instance *cast) {
+ 	}
+ 	cast->pwr_stream_state = false;
+ 
+-	build_formats(&builder.b, cast, &params);
++	struct spa_pod_builder *builder[2] = {&b[0].b, &b[1].b};
++	uint32_t param_count = build_formats(builder, cast, params);
++	spa_pod_dynamic_builder_clean(&b[0]);
++	spa_pod_dynamic_builder_clean(&b[1]);
+ 
+ 	pw_stream_add_listener(cast->stream, &cast->stream_listener,
+ 		&pwr_stream_events, cast);
+@@ -645,10 +603,7 @@ void xdpw_pwr_stream_create(struct xdpw_screencast_instance *cast) {
+ 		PW_DIRECTION_OUTPUT,
+ 		PW_ID_ANY,
+ 		PW_STREAM_FLAG_ALLOC_BUFFERS,
+-		params.data, params.size / sizeof(struct spa_pod *));
+-
+-	spa_pod_dynamic_builder_clean(&builder);
+-	wl_array_release(&params);
++		params, param_count);
+ }
+ 
+ void xdpw_pwr_stream_destroy(struct xdpw_screencast_instance *cast) {
+diff --git a/src/screencast/screencast.c b/src/screencast/screencast.c
+index 022b1b0..8449c2b 100644
+--- a/src/screencast/screencast.c
++++ b/src/screencast/screencast.c
+@@ -58,9 +58,6 @@ void xdpw_screencast_instance_init(struct xdpw_screencast_context *ctx,
+ 		}
+ 	}
+ 
+-	xdpw_buffer_constraints_init(&cast->current_constraints);
+-	xdpw_buffer_constraints_init(&cast->pending_constraints);
+-
+ 	cast->ctx = ctx;
+ 	cast->target = target;
+ 	if (ctx->state->config->screencast_conf.max_fps > 0) {
+@@ -73,6 +70,7 @@ void xdpw_screencast_instance_init(struct xdpw_screencast_context *ctx,
+ 	cast->refcount = 1;
+ 	cast->node_id = SPA_ID_INVALID;
+ 	cast->avoid_dmabufs = false;
++	cast->teardown = false;
+ 	wl_list_init(&cast->buffer_list);
+ 	logprint(INFO, "xdpw: screencast instance %p has %d references", cast, cast->refcount);
+ 	wl_list_insert(&ctx->screencast_instances, &cast->link);
+@@ -81,25 +79,6 @@ void xdpw_screencast_instance_init(struct xdpw_screencast_context *ctx,
+ }
+ 
+ void xdpw_screencast_instance_destroy(struct xdpw_screencast_instance *cast) {
+-	struct xdpw_timer *timer, *ttmp;
+-	wl_list_for_each_safe(timer, ttmp, &cast->ctx->state->timers, link) {
+-		if (timer->user_data == cast) {
+-			xdpw_destroy_timer(timer);
+-		}
+-	}
+-	struct xdpw_session *sess, *stmp;
+-	wl_list_for_each_safe(sess, stmp, &cast->ctx->state->xdpw_sessions, link) {
+-		if (sess->screencast_data.screencast_instance == cast) {
+-			wl_list_remove(&sess->link);
+-			wl_list_init(&sess->link);
+-			sess->screencast_data.screencast_instance = NULL;
+-			cast->refcount--;
+-			xdpw_session_destroy(sess);
+-		}
+-	}
+-
+-	xdpw_wlr_session_close(cast);
+-
+ 	assert(cast->refcount == 0); // Fails assert if called by screencast_finish
+ 	logprint(DEBUG, "xdpw: destroying cast instance");
+ 
+@@ -116,12 +95,18 @@ void xdpw_screencast_instance_destroy(struct xdpw_screencast_instance *cast) {
+ 	wl_list_remove(&cast->link);
+ 	xdpw_pwr_stream_destroy(cast);
+ 	assert(wl_list_length(&cast->buffer_list) == 0);
+-
+-	xdpw_buffer_constraints_finish(&cast->current_constraints);
+-	xdpw_buffer_constraints_finish(&cast->pending_constraints);
+ 	free(cast);
+ }
+ 
++void xdpw_screencast_instance_teardown(struct xdpw_screencast_instance *cast) {
++	struct xdpw_session *sess, *tmp;
++	wl_list_for_each_safe(sess, tmp, &cast->ctx->state->xdpw_sessions, link) {
++		if (sess->screencast_data.screencast_instance == cast) {
++			xdpw_session_destroy(sess);
++		}
++	}
++}
++
+ bool setup_target(struct xdpw_screencast_context *ctx, struct xdpw_session *sess, struct xdpw_screencast_restore_data *data) {
+ 	bool target_initialized = false;
+ 
+@@ -201,7 +186,7 @@ bool setup_target(struct xdpw_screencast_context *ctx, struct xdpw_session *sess
+ 
+ }
+ 
+-static int start_screencast(struct xdpw_screencast_instance *cast) {
++int xdpw_screencast_start(struct xdpw_screencast_instance *cast) {
+ 	int ret;
+ 	ret = xdpw_wlr_session_init(cast);
+ 	if (ret < 0) {
+@@ -561,7 +546,7 @@ static int method_screencast_start(sd_bus_message *msg, void *data,
+ 	}
+ 
+ 	if (!cast->initialized) {
+-		ret = start_screencast(cast);
++		ret = xdpw_screencast_start(cast);
+ 	}
+ 	if (ret < 0) {
+ 		return ret;
+diff --git a/src/screencast/screencast_common.c b/src/screencast/screencast_common.c
+index 1cd6186..4d1cd4f 100644
+--- a/src/screencast/screencast_common.c
++++ b/src/screencast/screencast_common.c
+@@ -77,56 +77,35 @@ static struct wl_buffer *import_wl_shm_buffer(struct xdpw_screencast_instance *c
+ }
+ 
+ struct xdpw_buffer *xdpw_buffer_create(struct xdpw_screencast_instance *cast,
+-		enum buffer_type buffer_type) {
++		enum buffer_type buffer_type, struct xdpw_screencopy_frame_info *frame_info) {
+ 	struct xdpw_buffer *buffer = calloc(1, sizeof(struct xdpw_buffer));
+-
+-	uint32_t format = xdpw_format_drm_fourcc_from_pw_format(cast->pwr_format.format);
+-	assert(format != DRM_FORMAT_INVALID);
+-
+-	buffer->width = cast->current_constraints.width;
+-	buffer->height = cast->current_constraints.height;
++	buffer->width = frame_info->width;
++	buffer->height = frame_info->height;
++	buffer->format = frame_info->format;
+ 	buffer->buffer_type = buffer_type;
+-	buffer->format = format;
+-	wl_array_init(&buffer->damage);
+-
+-	struct gbm_device *gbm = cast->current_constraints.gbm ? cast->current_constraints.gbm : cast->ctx->gbm;
+ 
+ 	switch (buffer_type) {
+-	case WL_SHM:;
+-		struct xdpw_shm_format *fmt;
+-		bool found = false;
+-		wl_array_for_each(fmt, &cast->current_constraints.shm_formats) {
+-			if (fmt->fourcc == format) {
+-				found = true;
+-				break;
+-			}
+-		}
+-		if (!found) {
+-			logprint(ERROR, "xdpw: unable to find format: %d", format);
+-			xdpw_buffer_destroy(buffer);
+-			return NULL;
+-
+-		}
+-
++	case WL_SHM:
+ 		buffer->plane_count = 1;
+-		buffer->size[0] = fmt->stride * buffer->height;
+-		buffer->stride[0] = fmt->stride;
++		buffer->size[0] = frame_info->size;
++		buffer->stride[0] = frame_info->stride;
+ 		buffer->offset[0] = 0;
+ 		buffer->fd[0] = anonymous_shm_open();
+ 		if (buffer->fd[0] == -1) {
+ 			logprint(ERROR, "xdpw: unable to create anonymous filedescriptor");
+-			xdpw_buffer_destroy(buffer);
++			free(buffer);
+ 			return NULL;
+ 		}
+ 
+ 		if (ftruncate(buffer->fd[0], buffer->size[0]) < 0) {
+ 			logprint(ERROR, "xdpw: unable to truncate filedescriptor");
+-			xdpw_buffer_destroy(buffer);
++			close(buffer->fd[0]);
++			free(buffer);
+ 			return NULL;
+ 		}
+ 
+-		buffer->buffer = import_wl_shm_buffer(cast, buffer->fd[0], xdpw_format_wl_shm_from_drm_fourcc(format),
+-			buffer->width, buffer->height, fmt->stride);
++		buffer->buffer = import_wl_shm_buffer(cast, buffer->fd[0], xdpw_format_wl_shm_from_drm_fourcc(frame_info->format),
++			frame_info->width, frame_info->height, frame_info->stride);
+ 		if (buffer->buffer == NULL) {
+ 			logprint(ERROR, "xdpw: unable to create wl_buffer");
+ 			close(buffer->fd[0]);
+@@ -138,24 +117,25 @@ struct xdpw_buffer *xdpw_buffer_create(struct xdpw_screencast_instance *cast,
+ 		uint32_t flags = GBM_BO_USE_RENDERING;
+ 		if (cast->pwr_format.modifier != DRM_FORMAT_MOD_INVALID) {
+ 			uint64_t *modifiers = (uint64_t*)&cast->pwr_format.modifier;
+-			buffer->bo = gbm_bo_create_with_modifiers2(gbm, buffer->width, buffer->height,
+-				format, modifiers, 1, flags);
++			buffer->bo = gbm_bo_create_with_modifiers2(cast->ctx->gbm, frame_info->width, frame_info->height,
++				frame_info->format, modifiers, 1, flags);
+ 		} else {
+ 			if (cast->ctx->state->config->screencast_conf.force_mod_linear) {
+ 				flags |= GBM_BO_USE_LINEAR;
+ 			}
+-			buffer->bo = gbm_bo_create(gbm, buffer->width, buffer->height, format, flags);
++			buffer->bo = gbm_bo_create(cast->ctx->gbm, frame_info->width, frame_info->height,
++				frame_info->format, flags);
+ 		}
+ 
+ 		// Fallback for linear buffers via the implicit api
+ 		if (buffer->bo == NULL && cast->pwr_format.modifier == DRM_FORMAT_MOD_LINEAR) {
+-			buffer->bo = gbm_bo_create(gbm, buffer->width, buffer->height,
+-				format, flags | GBM_BO_USE_LINEAR);
++			buffer->bo = gbm_bo_create(cast->ctx->gbm, frame_info->width, frame_info->height,
++					frame_info->format, flags | GBM_BO_USE_LINEAR);
+ 		}
+ 
+ 		if (buffer->bo == NULL) {
+ 			logprint(ERROR, "xdpw: failed to create gbm_bo");
+-			xdpw_buffer_destroy(buffer);
++			free(buffer);
+ 			return NULL;
+ 		}
+ 		buffer->plane_count = gbm_bo_get_plane_count(buffer->bo);
+@@ -164,27 +144,31 @@ struct xdpw_buffer *xdpw_buffer_create(struct xdpw_screencast_instance *cast,
+ 		params = zwp_linux_dmabuf_v1_create_params(cast->ctx->linux_dmabuf);
+ 		if (!params) {
+ 			logprint(ERROR, "xdpw: failed to create linux_buffer_params");
+-			xdpw_buffer_destroy(buffer);
++			gbm_bo_destroy(buffer->bo);
++			free(buffer);
+ 			return NULL;
+ 		}
+ 
+-		buffer->modifier = gbm_bo_get_modifier(buffer->bo);
+ 		for (int plane = 0; plane < buffer->plane_count; plane++) {
+ 			buffer->size[plane] = 0;
+ 			buffer->stride[plane] = gbm_bo_get_stride_for_plane(buffer->bo, plane);
+ 			buffer->offset[plane] = gbm_bo_get_offset(buffer->bo, plane);
++			uint64_t mod = gbm_bo_get_modifier(buffer->bo);
+ 			buffer->fd[plane] = gbm_bo_get_fd_for_plane(buffer->bo, plane);
+ 
+ 			if (buffer->fd[plane] < 0) {
+ 				logprint(ERROR, "xdpw: failed to get file descriptor");
+ 				zwp_linux_buffer_params_v1_destroy(params);
+-				xdpw_buffer_destroy(buffer);
++				gbm_bo_destroy(buffer->bo);
++				for (int plane_tmp = 0; plane_tmp < plane; plane_tmp++) {
++					close(buffer->fd[plane_tmp]);
++				}
++				free(buffer);
+ 				return NULL;
+ 			}
+ 
+ 			zwp_linux_buffer_params_v1_add(params, buffer->fd[plane], plane,
+-				buffer->offset[plane], buffer->stride[plane], buffer->modifier >> 32,
+-				buffer->modifier & 0xffffffff);
++				buffer->offset[plane], buffer->stride[plane], mod >> 32, mod & 0xffffffff);
+ 		}
+ 		buffer->buffer = zwp_linux_buffer_params_v1_create_immed(params,
+ 			buffer->width, buffer->height,
+@@ -193,7 +177,11 @@ struct xdpw_buffer *xdpw_buffer_create(struct xdpw_screencast_instance *cast,
+ 
+ 		if (!buffer->buffer) {
+ 			logprint(ERROR, "xdpw: failed to create buffer");
+-			xdpw_buffer_destroy(buffer);
++			gbm_bo_destroy(buffer->bo);
++			for (int plane = 0; plane < buffer->plane_count; plane++) {
++				close(buffer->fd[plane]);
++			}
++			free(buffer);
+ 			return NULL;
+ 		}
+ 	}
+@@ -202,19 +190,48 @@ struct xdpw_buffer *xdpw_buffer_create(struct xdpw_screencast_instance *cast,
+ }
+ 
+ void xdpw_buffer_destroy(struct xdpw_buffer *buffer) {
+-	if (buffer->buffer) {
+-		wl_buffer_destroy(buffer->buffer);
+-	}
+-	if (buffer->bo) {
++	wl_buffer_destroy(buffer->buffer);
++	if (buffer->buffer_type == DMABUF) {
+ 		gbm_bo_destroy(buffer->bo);
+ 	}
+ 	for (int plane = 0; plane < buffer->plane_count; plane++) {
+ 		close(buffer->fd[plane]);
+ 	}
+-	wl_array_release(&buffer->damage);
++	wl_list_remove(&buffer->link);
+ 	free(buffer);
+ }
+ 
++bool wlr_query_dmabuf_modifiers(struct xdpw_screencast_context *ctx, uint32_t drm_format,
++		uint32_t num_modifiers, uint64_t *modifiers, uint32_t *max_modifiers) {
++	if (ctx->format_modifier_pairs.size == 0)
++		return false;
++	struct xdpw_format_modifier_pair *fm_pair;
++	if (num_modifiers == 0) {
++		*max_modifiers = 0;
++		wl_array_for_each(fm_pair, &ctx->format_modifier_pairs) {
++			if (fm_pair->fourcc == drm_format &&
++					(fm_pair->modifier == DRM_FORMAT_MOD_INVALID ||
++					gbm_device_get_format_modifier_plane_count(ctx->gbm, fm_pair->fourcc, fm_pair->modifier) > 0))
++				*max_modifiers += 1;
++		}
++		return true;
++	}
++
++	uint32_t i = 0;
++	wl_array_for_each(fm_pair, &ctx->format_modifier_pairs) {
++		if (i == num_modifiers)
++			break;
++		if (fm_pair->fourcc == drm_format &&
++				(fm_pair->modifier == DRM_FORMAT_MOD_INVALID ||
++				gbm_device_get_format_modifier_plane_count(ctx->gbm, fm_pair->fourcc, fm_pair->modifier) > 0)) {
++			modifiers[i] = fm_pair->modifier;
++			i++;
++		}
++	}
++	*max_modifiers = num_modifiers;
++	return true;
++}
++
+ enum wl_shm_format xdpw_format_wl_shm_from_drm_fourcc(uint32_t format) {
+ 	switch (format) {
+ 	case DRM_FORMAT_ARGB8888:
+@@ -278,79 +295,9 @@ enum spa_video_format xdpw_format_pw_from_drm_fourcc(uint32_t format) {
+ 	case DRM_FORMAT_RGB888:
+ 		return SPA_VIDEO_FORMAT_BGR;
+ 	default:
+-		return SPA_VIDEO_FORMAT_UNKNOWN;
+-	}
+-}
+-
+-int xdpw_bpp_from_drm_fourcc(uint32_t format) {
+-	switch (format) {
+-	case DRM_FORMAT_ARGB8888:
+-	case DRM_FORMAT_XRGB8888:
+-	case DRM_FORMAT_RGBA8888:
+-	case DRM_FORMAT_RGBX8888:
+-	case DRM_FORMAT_ABGR8888:
+-	case DRM_FORMAT_XBGR8888:
+-	case DRM_FORMAT_BGRA8888:
+-	case DRM_FORMAT_BGRX8888:
+-	case DRM_FORMAT_XRGB2101010:
+-	case DRM_FORMAT_XBGR2101010:
+-	case DRM_FORMAT_RGBX1010102:
+-	case DRM_FORMAT_BGRX1010102:
+-	case DRM_FORMAT_ARGB2101010:
+-	case DRM_FORMAT_ABGR2101010:
+-	case DRM_FORMAT_RGBA1010102:
+-	case DRM_FORMAT_BGRA1010102:
+-		return 4;
+-	case DRM_FORMAT_BGR888:
+-	case DRM_FORMAT_RGB888:
+-		return 3;
+-	default:
+-		return -1;
+-	}
+-}
+-
+-uint32_t xdpw_format_drm_fourcc_from_pw_format(enum spa_video_format format) {
+-	switch (format) {
+-	case SPA_VIDEO_FORMAT_BGRA:
+-		return DRM_FORMAT_ARGB8888;
+-	case SPA_VIDEO_FORMAT_BGRx:
+-		return DRM_FORMAT_XRGB8888;
+-	case SPA_VIDEO_FORMAT_ABGR:
+-		return DRM_FORMAT_RGBA8888;
+-	case SPA_VIDEO_FORMAT_xBGR:
+-		return DRM_FORMAT_RGBX8888;
+-	case SPA_VIDEO_FORMAT_RGBA:
+-		return DRM_FORMAT_ABGR8888;
+-	case SPA_VIDEO_FORMAT_RGBx:
+-		return DRM_FORMAT_XBGR8888;
+-	case SPA_VIDEO_FORMAT_ARGB:
+-		return DRM_FORMAT_BGRA8888;
+-	case SPA_VIDEO_FORMAT_xRGB:
+-		return DRM_FORMAT_BGRX8888;
+-	case SPA_VIDEO_FORMAT_NV12:
+-		return DRM_FORMAT_NV12;
+-	case SPA_VIDEO_FORMAT_xRGB_210LE:
+-		return DRM_FORMAT_XRGB2101010;
+-	case SPA_VIDEO_FORMAT_xBGR_210LE:
+-		return DRM_FORMAT_XBGR2101010;
+-	case SPA_VIDEO_FORMAT_RGBx_102LE:
+-		return DRM_FORMAT_RGBX1010102;
+-	case SPA_VIDEO_FORMAT_BGRx_102LE:
+-		return DRM_FORMAT_BGRX1010102;
+-	case SPA_VIDEO_FORMAT_ARGB_210LE:
+-		return DRM_FORMAT_ARGB2101010;
+-	case SPA_VIDEO_FORMAT_ABGR_210LE:
+-		return DRM_FORMAT_ABGR2101010;
+-	case SPA_VIDEO_FORMAT_RGBA_102LE:
+-		return DRM_FORMAT_RGBA1010102;
+-	case SPA_VIDEO_FORMAT_BGRA_102LE:
+-		return DRM_FORMAT_BGRA1010102;
+-	case SPA_VIDEO_FORMAT_RGB:
+-		return DRM_FORMAT_BGR888;
+-	case SPA_VIDEO_FORMAT_BGR:
+-		return DRM_FORMAT_RGB888;
+-	default:
+-		return DRM_FORMAT_INVALID;
++		logprint(ERROR, "xdg-desktop-portal-wlr: failed to convert drm "
++			"format 0x%08x to spa_video_format", format);
++		abort();
+ 	}
+ }
+ 
+@@ -419,67 +366,3 @@ struct xdpw_frame_damage merge_damage(struct xdpw_frame_damage *damage1, struct
+ 
+ 	return damage;
+ }
+-
+-void xdpw_buffer_constraints_init(struct xdpw_buffer_constraints *constraints) {
+-	*constraints = (struct xdpw_buffer_constraints){ 0 };
+-	wl_array_init(&constraints->dmabuf_format_modifier_pairs);
+-	wl_array_init(&constraints->shm_formats);
+-}
+-
+-void xdpw_buffer_constraints_finish(struct xdpw_buffer_constraints *constraints) {
+-	wl_array_release(&constraints->dmabuf_format_modifier_pairs);
+-	wl_array_release(&constraints->shm_formats);
+-	if (constraints->gbm) {
+-		// TODO: reference count gbm to keep it alive while we have BO's?
+-		gbm_device_destroy(constraints->gbm);
+-	}
+-	*constraints = (struct xdpw_buffer_constraints){ 0 };
+-}
+-
+-bool xdpw_buffer_constraints_move(struct xdpw_buffer_constraints *dst, struct xdpw_buffer_constraints *src) {
+-	if (!src->dirty) {
+-		return false;
+-	}
+-	int dirty = src->dirty;
+-
+-	xdpw_buffer_constraints_finish(dst);
+-	*dst = *src;
+-
+-	xdpw_buffer_constraints_init(src);
+-	return dirty;
+-}
+-
+-uint32_t xdpw_count_dmabuf_modifiers(struct xdpw_screencast_instance *cast, uint32_t drm_format) {
+-	struct xdpw_buffer_constraints *constraints = &cast->current_constraints;
+-	struct gbm_device *gbm = cast->current_constraints.gbm ? cast->current_constraints.gbm : cast->ctx->gbm;
+-
+-	uint32_t modifiers = 0;
+-	struct xdpw_format_modifier_pair *fm_pair;
+-	wl_array_for_each(fm_pair, &constraints->dmabuf_format_modifier_pairs) {
+-		if (fm_pair->fourcc == drm_format &&
+-				(fm_pair->modifier == DRM_FORMAT_MOD_INVALID ||
+-				gbm_device_get_format_modifier_plane_count(gbm, fm_pair->fourcc, fm_pair->modifier) > 0))
+-			modifiers += 1;
+-	}
+-
+-	return modifiers;
+-}
+-
+-void xdpw_query_dmabuf_modifiers(struct xdpw_screencast_instance *cast, uint32_t drm_format,
+-		uint64_t *modifiers, uint32_t num_modifiers) {
+-	struct xdpw_buffer_constraints *constraints = &cast->current_constraints;
+-	struct gbm_device *gbm = cast->current_constraints.gbm ? cast->current_constraints.gbm : cast->ctx->gbm;
+-
+-	uint32_t idx = 0;
+-	struct xdpw_format_modifier_pair *fm_pair;
+-	wl_array_for_each(fm_pair, &constraints->dmabuf_format_modifier_pairs) {
+-		if (fm_pair->fourcc == drm_format &&
+-				(fm_pair->modifier == DRM_FORMAT_MOD_INVALID ||
+-				gbm_device_get_format_modifier_plane_count(gbm, fm_pair->fourcc, fm_pair->modifier) > 0)) {
+-			assert(idx < num_modifiers);
+-			modifiers[idx] = fm_pair->modifier;
+-			idx++;
+-		}
+-	}
+-}
+-
+diff --git a/src/screencast/wlr_screencast.c b/src/screencast/wlr_screencast.c
+index 2a442f6..b56cb76 100644
+--- a/src/screencast/wlr_screencast.c
++++ b/src/screencast/wlr_screencast.c
+@@ -3,8 +3,6 @@
+ #include "linux-dmabuf-unstable-v1-client-protocol.h"
+ #include "wlr-screencopy-unstable-v1-client-protocol.h"
+ #include "xdg-output-unstable-v1-client-protocol.h"
+-#include "ext-image-capture-source-v1-client-protocol.h"
+-#include "ext-image-copy-capture-v1-client-protocol.h"
+ #include <drm_fourcc.h>
+ #include <fcntl.h>
+ #include <limits.h>
+@@ -22,33 +20,23 @@
+ 
+ #include "screencast.h"
+ #include "wlr_screencopy.h"
+-#include "ext_image_copy.h"
+ #include "xdpw.h"
+ #include "logger.h"
+ 
+ void xdpw_wlr_frame_capture(struct xdpw_screencast_instance *cast) {
+-	if (cast->ctx->ext_image_copy_capture_manager
+-			&& cast->ctx->ext_output_image_capture_source_manager) {
+-		xdpw_ext_ic_frame_capture(cast);
+-	} else if (cast->ctx->screencopy_manager) {
++	if (cast->ctx->screencopy_manager) {
+ 		xdpw_wlr_sc_frame_capture(cast);
+ 	}
+ }
+ 
+ void xdpw_wlr_session_close(struct xdpw_screencast_instance *cast) {
+-	if (cast->ctx->ext_image_copy_capture_manager
+-			&& cast->ctx->ext_output_image_capture_source_manager) {
+-		xdpw_ext_ic_session_close(cast);
+-	} else if (cast->ctx->screencopy_manager) {
++	if (cast->ctx->screencopy_manager) {
+ 		xdpw_wlr_sc_session_close(cast);
+ 	}
+ }
+ 
+ int xdpw_wlr_session_init(struct xdpw_screencast_instance *cast) {
+-	if (cast->ctx->ext_image_copy_capture_manager
+-			&& cast->ctx->ext_output_image_capture_source_manager) {
+-		return xdpw_ext_ic_session_init(cast);
+-	} else if (cast->ctx->screencopy_manager) {
++	if (cast->ctx->screencopy_manager) {
+ 		return xdpw_wlr_sc_session_init(cast);
+ 	}
+ 	return -1;
+@@ -301,9 +289,6 @@ error_chooser_in:
+ static struct xdpw_wlr_output *wlr_output_chooser_default(struct wl_list *output_list) {
+ 	logprint(DEBUG, "wlroots: output chooser called");
+ 	struct xdpw_output_chooser default_chooser[] = {
+-		{XDPW_CHOOSER_SIMPLE, "slurp -f %o -or"},
+-		{XDPW_CHOOSER_DMENU, "wofi -d -n --prompt='Select the monitor to share:'"},
+-		{XDPW_CHOOSER_DMENU, "bemenu --prompt='Select the monitor to share:'"},
+ 	};
+ 
+ 	size_t N = sizeof(default_chooser)/sizeof(default_chooser[0]);
+@@ -592,18 +577,6 @@ static void wlr_registry_handle_add(void *data, struct wl_registry *reg,
+ 			reg, id, &zwlr_screencopy_manager_v1_interface, version);
+ 	}
+ 
+-	if (!strcmp(interface, ext_output_image_capture_source_manager_v1_interface.name)) {
+-		logprint(DEBUG, "wlroots: |-- registered to interface %s (Version %u)", interface, ver);
+-		ctx->ext_output_image_capture_source_manager = wl_registry_bind(
+-				reg, id, &ext_output_image_capture_source_manager_v1_interface, 1);
+-	}
+-
+-	if (!strcmp(interface, ext_image_copy_capture_manager_v1_interface.name)) {
+-		logprint(DEBUG, "wlroots: |-- registered to interface %s (Version %u)", interface, ver);
+-		ctx->ext_image_copy_capture_manager = wl_registry_bind(
+-				reg, id, &ext_image_copy_capture_manager_v1_interface, 1);
+-	}
+-
+ 	if (strcmp(interface, wl_shm_interface.name) == 0) {
+ 		logprint(DEBUG, "wlroots: |-- registered to interface %s (Version %u)", interface, WL_SHM_VERSION);
+ 		ctx->shm = wl_registry_bind(reg, id, &wl_shm_interface, WL_SHM_VERSION);
+@@ -619,6 +592,13 @@ static void wlr_registry_handle_add(void *data, struct wl_registry *reg,
+ 		}
+ 		logprint(DEBUG, "wlroots: |-- registered to interface %s (Version %u)", interface, version);
+ 		ctx->linux_dmabuf = wl_registry_bind(reg, id, &zwp_linux_dmabuf_v1_interface, version);
++
++		if (version >= 4) {
++			ctx->linux_dmabuf_feedback = zwp_linux_dmabuf_v1_get_default_feedback(ctx->linux_dmabuf);
++			zwp_linux_dmabuf_feedback_v1_add_listener(ctx->linux_dmabuf_feedback, &linux_dmabuf_listener_feedback, ctx);
++		} else {
++			zwp_linux_dmabuf_v1_add_listener(ctx->linux_dmabuf, &linux_dmabuf_listener, ctx);
++		}
+ 	}
+ 
+ 	if (strcmp(interface, zxdg_output_manager_v1_interface.name) == 0
+@@ -643,7 +623,16 @@ static void wlr_registry_handle_remove(void *data, struct wl_registry *reg,
+ 		wl_list_for_each_safe(cast, tmp, &ctx->screencast_instances, link) {
+ 			if (cast->target->output == output) {
+ 				// screencopy might be in process for this instance
+-				xdpw_screencast_instance_destroy(cast);
++				xdpw_wlr_session_close(cast);
++				// instance might be waiting for wakeup by the frame limiter
++				struct xdpw_timer *timer, *ttmp;
++				wl_list_for_each_safe(timer, ttmp, &cast->ctx->state->timers, link) {
++					if (timer->user_data == cast) {
++						xdpw_destroy_timer(timer);
++					}
++				}
++				cast->teardown = true;
++				xdpw_screencast_instance_teardown(cast);
+ 			}
+ 		}
+ 		wlr_remove_output(output);
+@@ -675,30 +664,10 @@ int xdpw_wlr_screencopy_init(struct xdpw_state *state) {
+ 
+ 	logprint(DEBUG, "wayland: registry listeners run");
+ 
+-	if (ctx->ext_image_copy_capture_manager && ctx->ext_output_image_capture_source_manager) {
+-		logprint(DEBUG, "wayland: using ext_image_copy_capture");
+-	} else if (ctx->screencopy_manager && ctx->linux_dmabuf) {
+-		if (zwp_linux_dmabuf_v1_get_version(ctx->linux_dmabuf) >= ZWP_LINUX_DMABUF_V1_GET_DEFAULT_FEEDBACK_SINCE_VERSION) {
+-			ctx->linux_dmabuf_feedback = zwp_linux_dmabuf_v1_get_default_feedback(ctx->linux_dmabuf);
+-			zwp_linux_dmabuf_feedback_v1_add_listener(ctx->linux_dmabuf_feedback, &linux_dmabuf_listener_feedback, ctx);
+-		} else {
+-			zwp_linux_dmabuf_v1_add_listener(ctx->linux_dmabuf, &linux_dmabuf_listener, ctx);
+-		}
+-
++	if (ctx->linux_dmabuf_feedback) {
+ 		wl_display_roundtrip(state->wl_display);
+ 
+ 		logprint(DEBUG, "wayland: dmabuf_feedback listeners run");
+-
+-		// make sure we have a gbm device
+-		if (!ctx->gbm) {
+-			ctx->gbm = xdpw_gbm_device_create(NULL);
+-			if (!ctx->gbm) {
+-				logprint(ERROR, "System doesn't support gbm!");
+-			}
+-		}
+-	} else {
+-		logprint(ERROR, "Compositor supports neither ext_image_copy_capture or wlr_screencopy!");
+-		return -1;
+ 	}
+ 
+ 	// make sure our wlroots supports shm protocol
+@@ -707,6 +676,21 @@ int xdpw_wlr_screencopy_init(struct xdpw_state *state) {
+ 		return -1;
+ 	}
+ 
++	// make sure our wlroots supports screencopy protocol
++	if (!ctx->screencopy_manager) {
++		logprint(ERROR, "Compositor doesn't support %s!",
++			zwlr_screencopy_manager_v1_interface.name);
++		return -1;
++	}
++
++	// make sure we have a gbm device
++	if (ctx->linux_dmabuf && !ctx->gbm) {
++		ctx->gbm = xdpw_gbm_device_create(NULL);
++		if (!ctx->gbm) {
++			logprint(ERROR, "System doesn't support gbm!");
++		}
++	}
++
+ 	if (ctx->xdg_output_manager) {
+ 		struct xdpw_wlr_output *output;
+ 		wl_list_for_each(output, &ctx->output_list, link) {
+@@ -737,18 +721,12 @@ void xdpw_wlr_screencopy_finish(struct xdpw_screencast_context *ctx) {
+ 
+ 	struct xdpw_screencast_instance *cast, *tmp_c;
+ 	wl_list_for_each_safe(cast, tmp_c, &ctx->screencast_instances, link) {
+-		xdpw_screencast_instance_destroy(cast);
++		cast->quit = true;
+ 	}
+ 
+ 	if (ctx->screencopy_manager) {
+ 		zwlr_screencopy_manager_v1_destroy(ctx->screencopy_manager);
+ 	}
+-	if (ctx->ext_image_copy_capture_manager) {
+-		ext_image_copy_capture_manager_v1_destroy(ctx->ext_image_copy_capture_manager);
+-	}
+-	if (ctx->ext_output_image_capture_source_manager) {
+-		ext_output_image_capture_source_manager_v1_destroy(ctx->ext_output_image_capture_source_manager);
+-	}
+ 	if (ctx->shm) {
+ 		wl_shm_destroy(ctx->shm);
+ 	}
+diff --git a/src/screencast/wlr_screencopy.c b/src/screencast/wlr_screencopy.c
+index ee48db6..9aca935 100644
+--- a/src/screencast/wlr_screencopy.c
++++ b/src/screencast/wlr_screencopy.c
+@@ -24,7 +24,7 @@
+ #include "logger.h"
+ #include "fps_limit.h"
+ 
+-static void wlr_frame_finish(struct xdpw_screencast_instance *cast) {
++static void wlr_frame_free(struct xdpw_screencast_instance *cast) {
+ 	if (!cast->wlr_session.wlr_frame) {
+ 		return;
+ 	}
+@@ -33,6 +33,37 @@ static void wlr_frame_finish(struct xdpw_screencast_instance *cast) {
+ 	logprint(TRACE, "wlroots: frame destroyed");
+ }
+ 
++static void wlr_frame_finish(struct xdpw_screencast_instance *cast) {
++	logprint(TRACE, "wlroots: finish screencopy");
++
++	wlr_frame_free(cast);
++
++	if (cast->quit || cast->err) {
++		// TODO: revisit the exit condition (remove quit?)
++		// and clean up sessions that still exist if err
++		// is the cause of the instance_destroy call
++		xdpw_screencast_instance_destroy(cast);
++		return;
++	}
++
++	if (!cast->pwr_stream_state) {
++		cast->frame_state = XDPW_FRAME_STATE_NONE;
++		return;
++	}
++
++	if (cast->frame_state == XDPW_FRAME_STATE_RENEG) {
++		pwr_update_stream_param(cast);
++	}
++
++	if (cast->frame_state == XDPW_FRAME_STATE_FAILED) {
++		xdpw_pwr_enqueue_buffer(cast);
++	}
++
++	if (cast->frame_state == XDPW_FRAME_STATE_SUCCESS) {
++		xdpw_pwr_enqueue_buffer(cast);
++	}
++}
++
+ static void wlr_frame_buffer_done(void *data,
+ 		struct zwlr_screencopy_frame_v1 *frame);
+ 
+@@ -46,17 +77,11 @@ static void wlr_frame_buffer(void *data, struct zwlr_screencopy_frame_v1 *frame,
+ 	logprint(TRACE, "wlroots: buffer event handler");
+ 	cast->wlr_session.wlr_frame = frame;
+ 
+-	struct xdpw_shm_format *fmt = wl_array_add(&cast->pending_constraints.shm_formats, sizeof(*fmt));
+-	if (fmt == NULL) {
+-		logprint(WARN, "ext: allocation for shm format failed");
+-		return;
+-	}
+-	fmt->fourcc = xdpw_format_drm_fourcc_from_wl_shm(format);
+-	fmt->stride = stride;
+-
+-	cast->pending_constraints.width = width;
+-	cast->pending_constraints.height = height;
+-	cast->pending_constraints.dirty = true;
++	cast->screencopy_frame_info[WL_SHM].width = width;
++	cast->screencopy_frame_info[WL_SHM].height = height;
++	cast->screencopy_frame_info[WL_SHM].stride = stride;
++	cast->screencopy_frame_info[WL_SHM].size = stride * height;
++	cast->screencopy_frame_info[WL_SHM].format = xdpw_format_drm_fourcc_from_wl_shm(format);
+ 
+ 	if (zwlr_screencopy_manager_v1_get_version(cast->ctx->screencopy_manager) < 3) {
+ 		wlr_frame_buffer_done(cast, frame);
+@@ -73,51 +98,9 @@ static void wlr_frame_linux_dmabuf(void *data,
+ 
+ 	logprint(TRACE, "wlroots: linux_dmabuf event handler");
+ 
+-
+-	struct xdpw_format_modifier_pair *fm_pair;
+-	wl_array_for_each(fm_pair, &cast->ctx->format_modifier_pairs) {
+-		if (fm_pair->fourcc != format) {
+-			continue;
+-		}
+-
+-		struct xdpw_format_modifier_pair *new =
+-			wl_array_add(&cast->pending_constraints.dmabuf_format_modifier_pairs, sizeof(*new));
+-		assert(new != NULL);
+-		new->fourcc = fm_pair->fourcc;
+-		new->modifier = fm_pair->modifier;
+-	}
+-
+-	cast->pending_constraints.width = width;
+-	cast->pending_constraints.height = height;
+-	cast->pending_constraints.dirty = true;
+-
+-}
+-
+-static bool check_constraints(struct xdpw_buffer_constraints *constraints, struct xdpw_buffer *buffer) {
+-	if (constraints->width != buffer->width || constraints->height != buffer->height) {
+-		return false;
+-	}
+-
+-	switch (buffer->buffer_type) {
+-	case DMABUF:;
+-		struct xdpw_format_modifier_pair *fm_pair;
+-		wl_array_for_each(fm_pair, &constraints->dmabuf_format_modifier_pairs) {
+-			if (buffer->format == fm_pair->fourcc && buffer->modifier == fm_pair->modifier) {
+-				return true;
+-			}
+-		}
+-		return false;
+-	case WL_SHM:;
+-		struct xdpw_shm_format *format;
+-		wl_array_for_each(format, &constraints->shm_formats) {
+-			if (buffer->format == format->fourcc && buffer->stride[0] == format->stride) {
+-				return true;
+-			}
+-		}
+-		return false;
+-	default:
+-		abort();
+-	}
++	cast->screencopy_frame_info[DMABUF].width = width;
++	cast->screencopy_frame_info[DMABUF].height = height;
++	cast->screencopy_frame_info[DMABUF].format = format;
+ }
+ 
+ static void wlr_frame_buffer_done(void *data,
+@@ -127,8 +110,6 @@ static void wlr_frame_buffer_done(void *data,
+ 		return;
+ 	}
+ 
+-	xdpw_buffer_constraints_move(&cast->current_constraints, &cast->pending_constraints);
+-
+ 	logprint(TRACE, "wlroots: buffer_done event handler");
+ 
+ 	if (!cast->initialized) {
+@@ -136,17 +117,33 @@ static void wlr_frame_buffer_done(void *data,
+ 		return;
+ 	}
+ 
++	// Check if announced screencopy information is compatible with pipewire meta
++	if ((cast->pwr_format.format != xdpw_format_pw_from_drm_fourcc(cast->screencopy_frame_info[cast->buffer_type].format) &&
++			cast->pwr_format.format != xdpw_format_pw_strip_alpha(xdpw_format_pw_from_drm_fourcc(cast->screencopy_frame_info[cast->buffer_type].format))) ||
++			cast->pwr_format.size.width != cast->screencopy_frame_info[cast->buffer_type].width ||
++			cast->pwr_format.size.height != cast->screencopy_frame_info[cast->buffer_type].height) {
++		logprint(DEBUG, "wlroots: pipewire and wlroots metadata are incompatible. Renegotiate stream");
++		cast->frame_state = XDPW_FRAME_STATE_RENEG;
++		wlr_frame_finish(cast);
++		return;
++	}
++
+ 	if (!cast->current_frame.xdpw_buffer) {
+ 		logprint(WARN, "wlroots: no current buffer");
+-		xdpw_pwr_enqueue_buffer(cast);
+ 		wlr_frame_finish(cast);
+ 		return;
+ 	}
+ 
+-	if (!check_constraints(&cast->current_constraints, cast->current_frame.xdpw_buffer)) {
+-		logprint(DEBUG, "wlroots: buffer constraints changed");
+-		pwr_update_stream_param(cast);
+-		xdpw_pwr_enqueue_buffer(cast);
++	assert(cast->current_frame.xdpw_buffer);
++
++	// Check if dequeued buffer is compatible with announced buffer
++	if (( cast->buffer_type == WL_SHM &&
++				(cast->current_frame.xdpw_buffer->size[0] != cast->screencopy_frame_info[cast->buffer_type].size ||
++				cast->current_frame.xdpw_buffer->stride[0] != cast->screencopy_frame_info[cast->buffer_type].stride)) ||
++			cast->current_frame.xdpw_buffer->width != cast->screencopy_frame_info[cast->buffer_type].width ||
++			cast->current_frame.xdpw_buffer->height != cast->screencopy_frame_info[cast->buffer_type].height) {
++		logprint(DEBUG, "wlroots: pipewire buffer has wrong dimensions");
++		cast->frame_state = XDPW_FRAME_STATE_FAILED;
+ 		wlr_frame_finish(cast);
+ 		return;
+ 	}
+@@ -154,9 +151,7 @@ static void wlr_frame_buffer_done(void *data,
+ 	cast->current_frame.transformation = cast->target->output->transformation;
+ 	logprint(TRACE, "wlroots: transformation %u", cast->current_frame.transformation);
+ 
+-	struct xdpw_buffer *buffer = cast->current_frame.xdpw_buffer;
+-	buffer->damage.size = 0;
+-
++	cast->current_frame.damage_count = 0;
+ 	zwlr_screencopy_frame_v1_copy_with_damage(frame, cast->current_frame.xdpw_buffer->buffer);
+ 	logprint(TRACE, "wlroots: frame copied");
+ 
+@@ -183,10 +178,13 @@ static void wlr_frame_damage(void *data, struct zwlr_screencopy_frame_v1 *frame,
+ 
+ 	logprint(TRACE, "wlroots: damage event handler");
+ 
+-	struct xdpw_buffer *buffer = cast->current_frame.xdpw_buffer;
+-	logprint(TRACE, "wlroots: damage %"PRIu32": %"PRIu32",%"PRIu32"x%"PRIu32",%"PRIu32, buffer->damage.size, x, y, width, height);
+-	struct xdpw_frame_damage *damage = wl_array_add(&buffer->damage, sizeof(*damage));
+-	*damage = (struct xdpw_frame_damage){ .x = x, .y = y, .width = width, .height = height };
++	logprint(TRACE, "wlroots: damage %"PRIu32": %"PRIu32",%"PRIu32"x%"PRIu32",%"PRIu32, cast->current_frame.damage_count, x, y, width, height);
++	struct xdpw_frame_damage damage = {x, y, width, height};
++	if (cast->current_frame.damage_count < 4) {
++		cast->current_frame.damage[cast->current_frame.damage_count++] = damage;
++	} else {
++		cast->current_frame.damage[3] = merge_damage(&cast->current_frame.damage[3], &damage);
++	}
+ }
+ 
+ static void wlr_frame_ready(void *data, struct zwlr_screencopy_frame_v1 *frame,
+@@ -200,10 +198,10 @@ static void wlr_frame_ready(void *data, struct zwlr_screencopy_frame_v1 *frame,
+ 
+ 	cast->current_frame.tv_sec = ((((uint64_t)tv_sec_hi) << 32) | tv_sec_lo);
+ 	cast->current_frame.tv_nsec = tv_nsec;
+-	cast->current_frame.completed = true;
+ 	logprint(TRACE, "wlroots: timestamp %"PRIu64":%"PRIu32, cast->current_frame.tv_sec, cast->current_frame.tv_nsec);
+ 
+-	xdpw_pwr_enqueue_buffer(cast);
++	cast->frame_state = XDPW_FRAME_STATE_SUCCESS;
++
+ 	wlr_frame_finish(cast);
+ }
+ 
+@@ -216,7 +214,8 @@ static void wlr_frame_failed(void *data,
+ 
+ 	logprint(TRACE, "wlroots: failed event handler");
+ 
+-	xdpw_pwr_enqueue_buffer(cast);
++	cast->frame_state = XDPW_FRAME_STATE_FAILED;
++
+ 	wlr_frame_finish(cast);
+ }
+ 
+@@ -241,15 +240,22 @@ static void wlr_register_cb(struct xdpw_screencast_instance *cast) {
+ 
+ void xdpw_wlr_sc_frame_capture(struct xdpw_screencast_instance *cast) {
+ 	logprint(TRACE, "wlroots: start screencopy");
++	if (cast->quit || cast->err) {
++		xdpw_screencast_instance_destroy(cast);
++		return;
++	}
++
+ 	if (cast->initialized && !cast->pwr_stream_state) {
++		cast->frame_state = XDPW_FRAME_STATE_NONE;
+ 		return;
+ 	}
+ 
++	cast->frame_state = XDPW_FRAME_STATE_STARTED;
+ 	wlr_register_cb(cast);
+ }
+ 
+ void xdpw_wlr_sc_session_close(struct xdpw_screencast_instance *cast) {
+-	wlr_frame_finish(cast);
++	wlr_frame_free(cast);
+ }
+ 
+ int xdpw_wlr_sc_session_init(struct xdpw_screencast_instance *cast) {
+@@ -261,5 +267,12 @@ int xdpw_wlr_sc_session_init(struct xdpw_screencast_instance *cast) {
+ 	wl_display_dispatch(cast->ctx->state->wl_display);
+ 	wl_display_roundtrip(cast->ctx->state->wl_display);
+ 
++	if (cast->screencopy_frame_info[WL_SHM].format == DRM_FORMAT_INVALID ||
++			(cast->ctx->state->screencast_version >= 3 &&
++			 cast->screencopy_frame_info[DMABUF].format == DRM_FORMAT_INVALID)) {
++		logprint(INFO, "wlroots: unable to receive a valid format from wlr_screencopy");
++		return -1;
++	}
++
+ 	return 0;
+ }
+diff --git a/wlr.portal b/wlr.portal
+index aa63335..087c008 100644
+--- a/wlr.portal
++++ b/wlr.portal
+@@ -1,4 +1,4 @@
+ [portal]
+ DBusName=org.freedesktop.impl.portal.desktop.wlr
+-Interfaces=org.freedesktop.impl.portal.Screenshot;org.freedesktop.impl.portal.ScreenCast;
++Interfaces=org.freedesktop.impl.portal.Screenshot;org.freedesktop.impl.portal.ScreenCast;org.freedesktop.impl.portal.RemoteDesktop;
+ UseIn=wlroots;sway;Wayfire;river;phosh;Hyprland;

@@ -6,6 +6,29 @@
   osConfig,
   ...
 }:
+let 
+  wlr-xdg-desktop = pkgs.xdg-desktop-portal-wlr.overrideAttrs (old:{
+    patches = old.patches or [] ++ [
+      ./wlr.patch
+    ];
+    buildInputs = old.buildInputs ++ [
+      pkgs.libxkbcommon
+    ];
+    src = pkgs.fetchFromGitHub {
+      owner = "emersion";
+      repo = "xdg-desktop-portal-wlr";
+      rev = "5598c4360b6e1bab52516c96653fd29db110e8fe";
+      hash = "sha256-xvkTd1kzlI1HtALOMS2nXzSymrr4wWjYxm5+I4AcwHo=";
+    };
+  });
+  xdg-desktop-portal-for-rustdesk = pkgs.xdg-desktop-portal.overrideAttrs (old:{
+    postPatch = old.postPatch + ''
+      substituteInPlace src/xdg-desktop-portal.c \
+        --replace-fail "org.freedesktop.portal.Desktop" "org.freedesktop.portal.Desktop-for-rustdesk"
+    '';
+    doCheck = false;
+  });
+in
 {
   imports = [
     ./clipboard.nix
@@ -32,7 +55,7 @@
         osConfig.niriInUse
       ];
       extraPortals = [
-        # wlr-xdg-desktop
+        wlr-xdg-desktop
         xdg-desktop-portal-gnome
         xdg-desktop-portal-gtk
         xdg-desktop-portal
@@ -51,6 +74,27 @@
       };
       xdgOpenUsePortal = true;
     };
+    systemd.user.services.xdg-desktop-portal-for-rustdesk = {
+      Install = {
+        WantedBy = [ config.wayland.systemd.target ];
+      };
+
+      Unit = {
+        ConditionEnvironment = "WAYLAND_DISPLAY";
+        Description = "xdg-desktop-portal-for-rustdesk";
+        After = [ config.wayland.systemd.target ];
+        PartOf = [ config.wayland.systemd.target ];
+      };
+
+      Service = {
+        Environment = [
+        "XDG_DESKTOP_PORTAL_DIR=${./xdg-rustdesk-dir/xdg-desktop-portal/portals}"];
+        ExecStart = "${xdg-desktop-portal-for-rustdesk}/libexec/xdg-desktop-portal";
+        Restart = "on-failure";
+        RestartSec = "10";
+      };
+    };
+
     programs.niriswitcher = {
       enable = true;
       settings = {
