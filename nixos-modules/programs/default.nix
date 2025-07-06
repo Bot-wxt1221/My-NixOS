@@ -29,6 +29,7 @@
     ./qt
     ./rustdesk
     ./steam
+    ./tailscale
     ./virutalbox
     ./waydroid
 
