@@ -6,7 +6,7 @@
 
   ];
   programs.clash-verge = {
-    enable = true;
-    serviceMode = true;
+    enable = false;
+    serviceMode = false;
   };
 }

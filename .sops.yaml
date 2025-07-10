@@ -32,3 +32,9 @@ creation_rules:
     - age:
       - *root_wxt_school
       - *admin_all
+  - path_regex: nixos-modules/programs/sing-box/.key
+    key_groups:
+    - age:
+      - *root_wxt_school
+      - *admin_all
+      - *root_wxt_g3
