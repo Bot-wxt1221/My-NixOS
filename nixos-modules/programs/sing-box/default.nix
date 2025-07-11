@@ -28,8 +28,11 @@
         script = pkgs.writeScript "a.sh" ''
           #!${pkgs.runtimeShell} -eu
           cat /etc/sing-box/config-pre.json > /var/lib/sing-box/config.json
-          mkdir /var/lib/sing-box/ui
-          cp -r ${pkgs.metacubexd}/*  /var/lib/sing-box/ui/
+          if [ -d /var/lib/sing-box/dashboard ]; then
+            rm -rf /var/lib/sing-box/dashboard
+          fi
+          mkdir -p /var/lib/sing-box/dashboard
+          cp -r ${pkgs.metacubexd}/*  /var/lib/sing-box/dashboard/
         '';
       in
       {
