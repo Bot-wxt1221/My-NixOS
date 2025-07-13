@@ -21,8 +21,6 @@ jobs:
         nix profile install nixpkgs#nixfmt-rfc-style nixpkgs#sops
         ./update.sh | nixfmt > extensions.nix
         cd ../../../
-        curl ${{secrets.VPN_URL}} > nixos-modules/programs/sing-box/.key
-        sops encrypt --input-type binary --output-type json nixos-modules/programs/sing-box/.key > nixos-modules/programs/sing-box/key-after
         nix flake update
         git config --local user.email "3264117476@qq.com"
         git config --local user.name "github-actions[bot]"
