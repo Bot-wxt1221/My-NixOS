@@ -17,6 +17,7 @@
     ./kernel.nix
     ./laptop.nix
     ./libinput.nix
+    ./ntsync.nix
     ./persist.nix
     ./printing.nix
   ];
