@@ -16,6 +16,7 @@
   ];
   config = lib.mkIf config.EnableVirt {
     virtualisation.libvirtd.enable = true;
+    virtualisation.libvirtd.qemu.swtpm.enable = true;
     virtualisation.vswitch.enable = true;
     environment.systemPackages = with pkgs; [ virt-manager ];
     virtualisation.spiceUSBRedirection.enable = true;
