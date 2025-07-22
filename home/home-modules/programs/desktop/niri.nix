@@ -64,6 +64,7 @@ in
       extraPortals = [
         wlr-xdg-desktop
         xdg-desktop-portal-gnome
+        gnome-keyring
         xdg-desktop-portal-gtk
         xdg-desktop-portal
       ];
