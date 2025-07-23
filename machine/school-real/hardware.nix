@@ -42,6 +42,25 @@
   };
   nixpkgs.config.packageOverrides = pkgs: {
     intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
+    bcachefs-tools = pkgs.bcachefs-tools.overrideAttrs (old: {
+      src = pkgs.fetchFromGitHub {
+        owner = "koverstreet";
+        repo = "bcachefs-tools";
+        rev = "5023292623e8f1dedc138a20daabbcc4772a0d86";
+        hash = "sha256-TuYMttih+FtQ+nuENaigVKFE6cKB9VU2725ILN3vRIE=";
+
+      };
+      cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+        src = pkgs.fetchFromGitHub {
+          owner = "koverstreet";
+          repo = "bcachefs-tools";
+          rev = "5023292623e8f1dedc138a20daabbcc4772a0d86";
+          hash = "sha256-TuYMttih+FtQ+nuENaigVKFE6cKB9VU2725ILN3vRIE=";
+
+        };
+        hash = "sha256-dayYLzoCcNbL5TcfxwlKx+7zK3LHLF3j1w1C9ZzsMuE=";
+      };
+    });
   };
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "iHD";
