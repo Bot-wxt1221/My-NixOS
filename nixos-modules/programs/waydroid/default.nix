@@ -16,11 +16,6 @@
   };
   config = lib.mkIf config.EnableWaydroid {
     virtualisation.waydroid.enable = true;
-    nixpkgs.config.packageOverrides = pkgs: {
-      waydroid = pkgs.waydroid.override {
-        python3Packages = pkgs.python312Packages;
-      };
-    };
     preservation.preserveAt."/persist" = {
       directories = [
         "/var/lib/waydroid"
