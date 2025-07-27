@@ -8,7 +8,6 @@
 
   ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.binfmt.preferStaticEmulators = true;
   specialisation = {
     _6_14-kernel = {
       configuration = {
