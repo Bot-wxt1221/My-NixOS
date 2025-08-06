@@ -5,6 +5,7 @@
     pcscd.enable = true;
   };
 
+  services.yubikey-agent.enable = true;
   hardware.gpgSmartcards.enable = true;
 
   # sops-nix will launch an scdaemon instance on boot, which will stay
@@ -17,4 +18,16 @@
     '';
     wantedBy = [ "multi-user.target" ];
   };
+  home-manager.sharedModules = [
+    (_: {
+      config = {
+        home.file.".gnupg/scdaemon.conf" = {
+          text = ''
+            disable-ccid
+            pcsc-shared
+          '';
+        };
+      };
+    })
+  ];
 }
