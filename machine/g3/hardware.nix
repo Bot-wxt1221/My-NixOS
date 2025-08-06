@@ -87,13 +87,6 @@
   ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
     acpi_call
-    (v4l2loopback.overrideAttrs (old: {
-      patches = old.patches or [ ] ++ [
-        (pkgs.fetchpatch {
-          url = "https://github.com/v4l2loopback/v4l2loopback/commit/196ae48c0f08dfcdcad0aded4917cf8a303bf237.patch";
-          hash = "sha256-gVeObdLdj6/YKD+TxjDC93G2cl2sz6z8qgGrQEOlkI8=";
-        })
-      ];
-    }))
+    v4l2loopback
   ];
 }

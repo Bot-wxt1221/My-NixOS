@@ -49,35 +49,36 @@
           "niri/window"
         ];
         modules-center = [ "clock" ];
-        modules-right = [
-          "tray"
-        ]
-        ++ lib.optionals (!builtins.isNull config.cpuTempDevice) [
-          "temperature"
-        ]
-        ++ [
-          "cpu"
-          "memory"
-          "disk"
-        ]
-        ++ lib.optionals (osConfig.Enablepipewire or osConfig.Enablepulseaudio) [
-          "pulseaudio"
-        ]
-        ++ lib.optionals config.haveBacklight [
-          "backlight"
-        ]
-        ++ [
-          "network"
-        ]
-        ++ lib.optionals osConfig.EnableBluetooth [
-          "bluetooth"
-        ]
-        ++ lib.optionals osConfig.Laptop [
-          "battery"
-        ]
-        ++ [
-          "custom/notification"
-        ];
+        modules-right =
+          [
+            "tray"
+          ]
+          ++ lib.optionals (!builtins.isNull config.cpuTempDevice) [
+            "temperature"
+          ]
+          ++ [
+            "cpu"
+            "memory"
+            "disk"
+          ]
+          ++ lib.optionals (osConfig.Enablepipewire or osConfig.Enablepulseaudio) [
+            "pulseaudio"
+          ]
+          ++ lib.optionals config.haveBacklight [
+            "backlight"
+          ]
+          ++ [
+            "network"
+          ]
+          ++ lib.optionals osConfig.EnableBluetooth [
+            "bluetooth"
+          ]
+          ++ lib.optionals osConfig.Laptop [
+            "battery"
+          ]
+          ++ [
+            "custom/notification"
+          ];
         backlight = lib.optionals config.haveBacklight {
           device = "intel_backlight";
           format = "{icon} {percent}%";

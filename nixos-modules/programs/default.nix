@@ -33,6 +33,7 @@
     ./tailscale
     ./virutalbox
     ./waydroid
+    ./yubikey
 
     ./root-utils.nix
   ];

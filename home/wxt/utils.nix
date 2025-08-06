@@ -80,6 +80,8 @@
     deadnix
     statix
 
+    yubioath-flutter
+
     testlib
     ac-library
 
