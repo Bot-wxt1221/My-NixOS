@@ -22,7 +22,7 @@
       gpgsign = true;
     };
     user = {
-      signingKey = "E834B5093C621EFE92D7CC1AF41E2366C0EDC8BC";
+      signingKey = "D2F78642E924DCACF864327B67E8436D09A65130";
     };
   };
   programs.git.signing.format = lib.mkForce "openpgp";
