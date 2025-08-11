@@ -5,44 +5,44 @@ _: {
       filters = {
         dotfiles = false;
       };
-      disableNetrw = true;
-      hijackNetrw = true;
-      hijackCursor = true;
-      hijackUnnamedBufferWhenOpening = false;
-      syncRootWithCwd = true;
-      updateFocusedFile = {
+      disable_netrw = true;
+      hijack_netrw = true;
+      hijack_cursor = true;
+      hijack_unnamed_buffer_when_opening = false;
+      sync_root_with_cwd = true;
+      update_focused_file = {
         enable = true;
-        updateRoot = false;
+        update_root = false;
       };
       view = {
         side = "left";
         width = 35;
-        preserveWindowProportions = true;
+        preserve_window_proportions = true;
       };
       git = {
         enable = true;
         ignore = true;
       };
-      filesystemWatchers = {
+      filesystem_watchers = {
         enable = true;
       };
       actions = {
-        openFile = {
-          resizeWindow = false;
+        open_file = {
+          resize_window = false;
         };
       };
       renderer = {
-        rootFolderLabel = false;
-        highlightGit = true;
-        highlightOpenedFiles = "none";
-        indentMarkers = {
+        root_folder_label = false;
+        highlight_git = true;
+        highlight_opened_files = "none";
+        indent_markers = {
           enable = true;
         };
         icons = {
           show = {
             file = true;
             folder = true;
-            folderArrow = true;
+            folder_arrow = true;
             git = true;
           };
           glyphs = {
@@ -51,12 +51,12 @@ _: {
             folder = {
               default = "";
               empty = "";
-              emptyOpen = "";
+              empty_open = "";
               open = "";
               symlink = "";
-              symlinkOpen = "";
-              arrowOpen = "";
-              arrowClosed = "";
+              symlink_open = "";
+              arrow_open = "";
+              arrow_closed = "";
             };
             git = {
               unstaged = "✗";
