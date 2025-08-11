@@ -51,12 +51,12 @@ _: {
             folder = {
               default = "";
               empty = "";
-              empty_open = "";
+              emptyOpen = "";
               open = "";
               symlink = "";
-              symlink_open = "";
-              arrow_open = "";
-              arrow_closed = "";
+              symlinkOpen = "";
+              arrowOpen = "";
+              arrowClosed = "";
             };
             git = {
               unstaged = "✗";
