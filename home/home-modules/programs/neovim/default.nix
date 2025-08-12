@@ -30,7 +30,7 @@
     ./plugins
     ./treesitter.nix
     ./ui
-    nixVim.homeManagerModules.nixvim
+    nixVim.homeModules.nixvim
   ];
   home.file.".local/share/applications/nvim.desktop" = lib.mkForce {
     text = ''

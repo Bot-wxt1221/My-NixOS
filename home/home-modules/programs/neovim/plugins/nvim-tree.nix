@@ -2,70 +2,72 @@ _: {
   programs.nixvim = {
     plugins.nvim-tree = {
       enable = true;
-      filters = {
-        dotfiles = false;
-      };
-      disable_netrw = true;
-      hijack_netrw = true;
-      hijack_cursor = true;
-      hijack_unnamed_buffer_when_opening = false;
-      sync_root_with_cwd = true;
-      update_focused_file = {
-        enable = true;
-        update_root = false;
-      };
-      view = {
-        side = "left";
-        width = 35;
-        preserve_window_proportions = true;
-      };
-      git = {
-        enable = true;
-        ignore = true;
-      };
-      filesystem_watchers = {
-        enable = true;
-      };
-      actions = {
-        open_file = {
-          resize_window = false;
+      settings = {
+        filters = {
+          dotfiles = false;
         };
-      };
-      renderer = {
-        root_folder_label = false;
-        highlight_git = true;
-        highlight_opened_files = "none";
-        indent_markers = {
+        disable_netrw = true;
+        hijack_netrw = true;
+        hijack_cursor = true;
+        hijack_unnamed_buffer_when_opening = false;
+        sync_root_with_cwd = true;
+        update_focused_file = {
+          enable = true;
+          update_root = false;
+        };
+        view = {
+          side = "left";
+          width = 35;
+          preserve_window_proportions = true;
+        };
+        git = {
+          enable = true;
+          ignore = true;
+        };
+        filesystem_watchers = {
           enable = true;
         };
-        icons = {
-          show = {
-            file = true;
-            folder = true;
-            folder_arrow = true;
-            git = true;
+        actions = {
+          open_file = {
+            resize_window = false;
           };
-          glyphs = {
-            default = "󰈚";
-            symlink = "";
-            folder = {
-              default = "";
-              empty = "";
-              emptyOpen = "";
-              open = "";
-              symlink = "";
-              symlinkOpen = "";
-              arrowOpen = "";
-              arrowClosed = "";
+        };
+        renderer = {
+          root_folder_label = false;
+          highlight_git = true;
+          highlight_opened_files = "none";
+          indent_markers = {
+            enable = true;
+          };
+          icons = {
+            show = {
+              file = true;
+              folder = true;
+              folder_arrow = true;
+              git = true;
             };
-            git = {
-              unstaged = "✗";
-              staged = "✓";
-              unmerged = "";
-              renamed = "➜";
-              untracked = "★";
-              deleted = "";
-              ignored = "◌";
+            glyphs = {
+              default = "󰈚";
+              symlink = "";
+              folder = {
+                default = "";
+                empty = "";
+                emptyOpen = "";
+                open = "";
+                symlink = "";
+                symlinkOpen = "";
+                arrowOpen = "";
+                arrowClosed = "";
+              };
+              git = {
+                unstaged = "✗";
+                staged = "✓";
+                unmerged = "";
+                renamed = "➜";
+                untracked = "★";
+                deleted = "";
+                ignored = "◌";
+              };
             };
           };
         };
