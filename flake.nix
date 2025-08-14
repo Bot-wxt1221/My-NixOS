@@ -43,6 +43,10 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    niri-flake = {
+      url = "github:sodiboo/niri-flake/9dabff6fe20b1a58a4bb739917b09e046af70cea";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -61,6 +65,7 @@
       sops-nix,
       nixos-facter-modules,
       an-anime-game-launcher,
+      niri-flake,
       ...
     }@inputs:
     let
@@ -95,6 +100,7 @@
           sops-nix
           nixos-facter-modules
           an-anime-game-launcher
+          niri-flake
           ;
       };
     in

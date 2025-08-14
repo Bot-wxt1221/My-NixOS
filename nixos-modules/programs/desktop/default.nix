@@ -1,10 +1,11 @@
 {
   pkgs,
   lib,
+  niri-flake,
   ...
 }:
 let
-  niri-use = pkgs.niri;
+  niri-use = niri-flake.packages.${pkgs.system}.niri-unstable;
 in
 {
   imports = [
