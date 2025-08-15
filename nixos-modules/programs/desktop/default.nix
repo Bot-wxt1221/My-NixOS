@@ -5,7 +5,13 @@
   ...
 }:
 let
-  niri-use = niri-flake.packages.${pkgs.system}.niri-unstable;
+  niri-use = niri-flake.packages.${pkgs.system}.niri-unstable.overrideAttrs (old: {
+    postPatch = (old.postPatch or "") + ''
+      pushd $cargoDepsCopy/smithay-0.7.0
+        patch -p1 < ${./0550cb9c2c18c18f91bda00ac8fb23300e799805.patch}
+      popd
+    '';
+  });
 in
 {
   imports = [

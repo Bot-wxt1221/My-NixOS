@@ -1,0 +1,30 @@
+From 0550cb9c2c18c18f91bda00ac8fb23300e799805 Mon Sep 17 00:00:00 2001
+From: Bot_wxt1221 <3264117476@qq.com>
+Date: Thu, 14 Aug 2025 18:09:09 +0800
+Subject: [PATCH] fix: generate handler for each virtual keyboard.
+
+This fix the problem that all virtual keyboard share the same keymap.
+---
+ src/wayland/virtual_keyboard/mod.rs | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/src/wayland/virtual_keyboard/mod.rs b/src/wayland/virtual_keyboard/mod.rs
+index 335221e337fe..67fee285bda5 100644
+--- a/src/wayland/virtual_keyboard/mod.rs
++++ b/src/wayland/virtual_keyboard/mod.rs
+@@ -157,13 +157,11 @@ where
+         match request {
+             zwp_virtual_keyboard_manager_v1::Request::CreateVirtualKeyboard { seat, id } => {
+                 let seat = Seat::<D>::from_resource(&seat).unwrap();
+-                let user_data = seat.user_data();
+-                user_data.insert_if_missing(VirtualKeyboardHandle::default);
+-                let virtual_keyboard_handle = user_data.get::<VirtualKeyboardHandle>().unwrap();
++                let virtual_keyboard_handle = VirtualKeyboardHandle::default();
+                 data_init.init(
+                     id,
+                     VirtualKeyboardUserData {
+-                        handle: virtual_keyboard_handle.clone(),
++                        handle: virtual_keyboard_handle,
+                         seat: seat.clone(),
+                     },
+                 );
