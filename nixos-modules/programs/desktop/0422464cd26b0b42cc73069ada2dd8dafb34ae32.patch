@@ -1,0 +1,456 @@
+From 0422464cd26b0b42cc73069ada2dd8dafb34ae32 Mon Sep 17 00:00:00 2001
+From: wxt <3264117476@qq.com>
+Date: Sat, 16 Aug 2025 13:36:04 +0800
+Subject: [PATCH] feat: handle virtual keyboard by ourself
+
+---
+ Cargo.toml                         |  1 +
+ src/input/mod.rs                   | 33 +++++++-------
+ src/input/move_grab.rs             |  2 +-
+ src/input/pick_color_grab.rs       |  4 +-
+ src/input/pick_window_grab.rs      |  2 +-
+ src/input/resize_grab.rs           |  2 +-
+ src/input/spatial_movement_grab.rs |  2 +-
+ src/input/touch_move_grab.rs       |  2 +-
+ src/input/touch_overview_grab.rs   |  2 +-
+ src/input/touch_resize_grab.rs     |  2 +-
+ src/niri.rs                        | 71 ++++++++++++++++--------------
+ 11 files changed, 64 insertions(+), 59 deletions(-)
+
+diff --git a/Cargo.toml b/Cargo.toml
+index 3977fa98a..ee9cade9a 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -110,6 +110,7 @@ features = [
+     "renderer_multi",
+     "use_system_lib",
+     "wayland_frontend",
++    "virtual_keyboard_not_use_default_handler",
+ ]
+ 
+ [dev-dependencies]
+diff --git a/src/input/mod.rs b/src/input/mod.rs
+index c2667dfcd..4e3c581cd 100644
+--- a/src/input/mod.rs
++++ b/src/input/mod.rs
+@@ -1,7 +1,7 @@
+ use std::any::Any;
+ use std::cmp::min;
+-use std::collections::hash_map::Entry;
+ use std::collections::HashSet;
++use std::collections::hash_map::Entry;
+ use std::time::Duration;
+ 
+ use calloop::timer::{TimeoutAction, Timer};
+@@ -17,7 +17,8 @@ use smithay::backend::input::{
+     TabletToolTipState, TouchEvent,
+ };
+ use smithay::backend::libinput::LibinputInputBackend;
+-use smithay::input::keyboard::{keysyms, FilterResult, Keysym, Layout, ModifiersState};
++use smithay::input::SeatHandler;
++use smithay::input::keyboard::{FilterResult, Keysym, Layout, ModifiersState, keysyms};
+ use smithay::input::pointer::{
+     AxisFrame, ButtonEvent, CursorIcon, CursorImageStatus, Focus, GestureHoldBeginEvent,
+     GestureHoldEndEvent, GesturePinchBeginEvent, GesturePinchEndEvent, GesturePinchUpdateEvent,
+@@ -27,11 +28,10 @@ use smithay::input::pointer::{
+ use smithay::input::touch::{
+     DownEvent, GrabStartData as TouchGrabStartData, MotionEvent as TouchMotionEvent, UpEvent,
+ };
+-use smithay::input::SeatHandler;
+ use smithay::output::Output;
+-use smithay::utils::{Logical, Point, Rectangle, Size, Transform, SERIAL_COUNTER};
++use smithay::utils::{Logical, Point, Rectangle, SERIAL_COUNTER, Size, Transform};
+ use smithay::wayland::keyboard_shortcuts_inhibit::KeyboardShortcutsInhibitor;
+-use smithay::wayland::pointer_constraints::{with_pointer_constraint, PointerConstraint};
++use smithay::wayland::pointer_constraints::{PointerConstraint, with_pointer_constraint};
+ use smithay::wayland::selection::data_device::DnDGrab;
+ use smithay::wayland::tablet_manager::{TabletDescriptor, TabletSeatTrait};
+ use touch_move_grab::TouchMoveGrab;
+@@ -45,7 +45,7 @@ use crate::layout::{ActivateWindow, LayoutElement as _};
+ use crate::niri::{CastTarget, PointerVisibility, State};
+ use crate::ui::screenshot_ui::ScreenshotUi;
+ use crate::utils::spawning::spawn;
+-use crate::utils::{center, get_monotonic_time, ResizeEdge};
++use crate::utils::{ResizeEdge, center, get_monotonic_time};
+ 
+ pub mod backend_ext;
+ pub mod move_grab;
+@@ -333,12 +333,11 @@ impl State {
+             .is_some_and(KeyboardShortcutsInhibitor::is_active)
+     }
+ 
+-    fn on_keyboard<I: InputBackend>(&mut self, event: I::KeyboardKeyEvent) {
++    pub fn on_keyboard_real(&mut self, key: Keycode, state: KeyState, time: u32) {
+         let mod_key = self.backend.mod_key(&self.niri.config.borrow());
+ 
+         let serial = SERIAL_COUNTER.next_serial();
+-        let time = Event::time_msec(&event);
+-        let pressed = event.state() == KeyState::Pressed;
++        let pressed = state == KeyState::Pressed;
+ 
+         // Stop bind key repeat on any release. This won't work 100% correctly in cases like:
+         // 1. Press Mod
+@@ -362,22 +361,18 @@ impl State {
+         // Accessibility modifier grabs should override XKB state changes (e.g. Caps Lock), so we
+         // need to process them before keyboard.input() below.
+         #[cfg(feature = "dbus")]
+-        if self.a11y_process_key(
+-            Duration::from_millis(u64::from(time)),
+-            event.key_code(),
+-            event.state(),
+-        ) {
++        if self.a11y_process_key(Duration::from_millis(u64::from(time)), key, state) {
+             return;
+         }
+ 
+         let Some(Some(bind)) = self.niri.seat.get_keyboard().unwrap().input(
+             self,
+-            event.key_code(),
+-            event.state(),
++            key,
++            state,
+             serial,
+             time,
+             |this, mods, keysym| {
+-                let key_code = event.key_code();
++                let key_code = key;
+                 let modified = keysym.modified_sym();
+                 let raw = keysym.raw_latin_sym_or_raw_current_sym();
+ 
+@@ -452,6 +447,10 @@ impl State {
+         self.start_key_repeat(bind);
+     }
+ 
++    fn on_keyboard<I: InputBackend>(&mut self, event: I::KeyboardKeyEvent) {
++        self.on_keyboard_real(event.key_code(), event.state(), Event::time_msec(&event));
++    }
++
+     fn start_key_repeat(&mut self, bind: Bind) {
+         if !bind.repeat {
+             return;
+diff --git a/src/input/move_grab.rs b/src/input/move_grab.rs
+index e939696ba..10a6c7547 100644
+--- a/src/input/move_grab.rs
++++ b/src/input/move_grab.rs
+@@ -1,5 +1,6 @@
+ use smithay::backend::input::ButtonState;
+ use smithay::desktop::Window;
++use smithay::input::SeatHandler;
+ use smithay::input::pointer::{
+     AxisFrame, ButtonEvent, CursorIcon, CursorImageStatus, GestureHoldBeginEvent,
+     GestureHoldEndEvent, GesturePinchBeginEvent, GesturePinchEndEvent, GesturePinchUpdateEvent,
+@@ -7,7 +8,6 @@ use smithay::input::pointer::{
+     GrabStartData as PointerGrabStartData, MotionEvent, PointerGrab, PointerInnerHandle,
+     RelativeMotionEvent,
+ };
+-use smithay::input::SeatHandler;
+ use smithay::utils::{IsAlive, Logical, Point};
+ 
+ use crate::niri::State;
+diff --git a/src/input/pick_color_grab.rs b/src/input/pick_color_grab.rs
+index 295d7c801..001e1ab49 100644
+--- a/src/input/pick_color_grab.rs
++++ b/src/input/pick_color_grab.rs
+@@ -2,17 +2,17 @@ use niri_ipc::PickedColor;
+ use smithay::backend::allocator::Fourcc;
+ use smithay::backend::input::ButtonState;
+ use smithay::backend::renderer::element::utils::{Relocate, RelocateRenderElement};
++use smithay::input::SeatHandler;
+ use smithay::input::pointer::{
+     AxisFrame, ButtonEvent, CursorImageStatus, GestureHoldBeginEvent, GestureHoldEndEvent,
+     GesturePinchBeginEvent, GesturePinchEndEvent, GesturePinchUpdateEvent, GestureSwipeBeginEvent,
+     GestureSwipeEndEvent, GestureSwipeUpdateEvent, GrabStartData as PointerGrabStartData,
+     MotionEvent, PointerGrab, PointerInnerHandle, RelativeMotionEvent,
+ };
+-use smithay::input::SeatHandler;
+ use smithay::utils::{Logical, Physical, Point, Scale, Size, Transform};
+ 
+ use crate::niri::State;
+-use crate::render_helpers::{render_to_vec, RenderTarget};
++use crate::render_helpers::{RenderTarget, render_to_vec};
+ 
+ pub struct PickColorGrab {
+     start_data: PointerGrabStartData<State>,
+diff --git a/src/input/pick_window_grab.rs b/src/input/pick_window_grab.rs
+index 9c2615b47..0ea97823c 100644
+--- a/src/input/pick_window_grab.rs
++++ b/src/input/pick_window_grab.rs
+@@ -1,11 +1,11 @@
+ use smithay::backend::input::ButtonState;
++use smithay::input::SeatHandler;
+ use smithay::input::pointer::{
+     AxisFrame, ButtonEvent, CursorImageStatus, GestureHoldBeginEvent, GestureHoldEndEvent,
+     GesturePinchBeginEvent, GesturePinchEndEvent, GesturePinchUpdateEvent, GestureSwipeBeginEvent,
+     GestureSwipeEndEvent, GestureSwipeUpdateEvent, GrabStartData as PointerGrabStartData,
+     MotionEvent, PointerGrab, PointerInnerHandle, RelativeMotionEvent,
+ };
+-use smithay::input::SeatHandler;
+ use smithay::utils::{Logical, Point};
+ 
+ use crate::niri::State;
+diff --git a/src/input/resize_grab.rs b/src/input/resize_grab.rs
+index 5b58c7b01..9c3aae742 100644
+--- a/src/input/resize_grab.rs
++++ b/src/input/resize_grab.rs
+@@ -1,11 +1,11 @@
+ use smithay::desktop::Window;
++use smithay::input::SeatHandler;
+ use smithay::input::pointer::{
+     AxisFrame, ButtonEvent, CursorImageStatus, GestureHoldBeginEvent, GestureHoldEndEvent,
+     GesturePinchBeginEvent, GesturePinchEndEvent, GesturePinchUpdateEvent, GestureSwipeBeginEvent,
+     GestureSwipeEndEvent, GestureSwipeUpdateEvent, GrabStartData as PointerGrabStartData,
+     MotionEvent, PointerGrab, PointerInnerHandle, RelativeMotionEvent,
+ };
+-use smithay::input::SeatHandler;
+ use smithay::utils::{IsAlive, Logical, Point};
+ 
+ use crate::niri::State;
+diff --git a/src/input/spatial_movement_grab.rs b/src/input/spatial_movement_grab.rs
+index e536866cb..1a181094c 100644
+--- a/src/input/spatial_movement_grab.rs
++++ b/src/input/spatial_movement_grab.rs
+@@ -1,12 +1,12 @@
+ use std::time::Duration;
+ 
++use smithay::input::SeatHandler;
+ use smithay::input::pointer::{
+     AxisFrame, ButtonEvent, CursorImageStatus, GestureHoldBeginEvent, GestureHoldEndEvent,
+     GesturePinchBeginEvent, GesturePinchEndEvent, GesturePinchUpdateEvent, GestureSwipeBeginEvent,
+     GestureSwipeEndEvent, GestureSwipeUpdateEvent, GrabStartData as PointerGrabStartData,
+     MotionEvent, PointerGrab, PointerInnerHandle, RelativeMotionEvent,
+ };
+-use smithay::input::SeatHandler;
+ use smithay::output::Output;
+ use smithay::utils::{Logical, Point};
+ 
+diff --git a/src/input/touch_move_grab.rs b/src/input/touch_move_grab.rs
+index e69f4c6e1..5a5f36392 100644
+--- a/src/input/touch_move_grab.rs
++++ b/src/input/touch_move_grab.rs
+@@ -1,9 +1,9 @@
+ use smithay::desktop::Window;
++use smithay::input::SeatHandler;
+ use smithay::input::touch::{
+     DownEvent, GrabStartData as TouchGrabStartData, MotionEvent, OrientationEvent, ShapeEvent,
+     TouchGrab, TouchInnerHandle, UpEvent,
+ };
+-use smithay::input::SeatHandler;
+ use smithay::utils::{IsAlive, Logical, Point, Serial};
+ 
+ use crate::niri::State;
+diff --git a/src/input/touch_overview_grab.rs b/src/input/touch_overview_grab.rs
+index c5213ccca..919cafb8a 100644
+--- a/src/input/touch_overview_grab.rs
++++ b/src/input/touch_overview_grab.rs
+@@ -1,11 +1,11 @@
+ use std::time::Duration;
+ 
+ use smithay::desktop::Window;
++use smithay::input::SeatHandler;
+ use smithay::input::touch::{
+     DownEvent, GrabStartData as TouchGrabStartData, MotionEvent, OrientationEvent, ShapeEvent,
+     TouchGrab, TouchInnerHandle, UpEvent,
+ };
+-use smithay::input::SeatHandler;
+ use smithay::output::Output;
+ use smithay::utils::{IsAlive, Logical, Point, Serial};
+ 
+diff --git a/src/input/touch_resize_grab.rs b/src/input/touch_resize_grab.rs
+index 91156411d..e65318b11 100644
+--- a/src/input/touch_resize_grab.rs
++++ b/src/input/touch_resize_grab.rs
+@@ -1,9 +1,9 @@
+ use smithay::desktop::Window;
++use smithay::input::SeatHandler;
+ use smithay::input::touch::{
+     DownEvent, GrabStartData as TouchGrabStartData, MotionEvent, OrientationEvent, ShapeEvent,
+     TouchGrab, TouchInnerHandle, UpEvent,
+ };
+-use smithay::input::SeatHandler;
+ use smithay::utils::{IsAlive, Logical, Point, Serial};
+ 
+ use crate::niri::State;
+diff --git a/src/niri.rs b/src/niri.rs
+index 9d847c74e..57e45dd7e 100644
+--- a/src/niri.rs
++++ b/src/niri.rs
+@@ -11,39 +11,40 @@ use std::time::{Duration, Instant};
+ use std::{env, mem, thread};
+ 
+ use _server_decoration::server::org_kde_kwin_server_decoration_manager::Mode as KdeDecorationsMode;
+-use anyhow::{bail, ensure, Context};
++use anyhow::{Context, bail, ensure};
+ use calloop::futures::Scheduler;
+ use niri_config::{
+     Config, FloatOrInt, Key, Modifiers, OutputName, PreviewRender, TrackLayout,
+     WarpMouseToFocusMode, WorkspaceReference, Xkb,
+ };
+ use smithay::backend::allocator::Fourcc;
+-use smithay::backend::input::Keycode;
++use smithay::backend::input::{KeyState, Keycode};
++use smithay::backend::renderer::Color32F;
+ use smithay::backend::renderer::damage::OutputDamageTracker;
+ use smithay::backend::renderer::element::memory::MemoryRenderBufferRenderElement;
+ use smithay::backend::renderer::element::surface::{
+-    render_elements_from_surface_tree, WaylandSurfaceRenderElement,
++    WaylandSurfaceRenderElement, render_elements_from_surface_tree,
+ };
+ use smithay::backend::renderer::element::utils::{
+-    select_dmabuf_feedback, CropRenderElement, Relocate, RelocateRenderElement,
+-    RescaleRenderElement,
++    CropRenderElement, Relocate, RelocateRenderElement, RescaleRenderElement,
++    select_dmabuf_feedback,
+ };
+ use smithay::backend::renderer::element::{
+-    default_primary_scanout_output_compare, Element, Id, Kind, PrimaryScanoutOutput,
+-    RenderElementStates,
++    Element, Id, Kind, PrimaryScanoutOutput, RenderElementStates,
++    default_primary_scanout_output_compare,
+ };
+ use smithay::backend::renderer::gles::GlesRenderer;
+ use smithay::backend::renderer::sync::SyncPoint;
+-use smithay::backend::renderer::Color32F;
+ use smithay::desktop::utils::{
+-    bbox_from_surface_tree, output_update, send_dmabuf_feedback_surface_tree,
+-    send_frames_surface_tree, surface_presentation_feedback_flags_from_states,
+-    surface_primary_scanout_output, take_presentation_feedback_surface_tree,
+-    under_from_surface_tree, update_surface_primary_scanout_output, OutputPresentationFeedback,
++    OutputPresentationFeedback, bbox_from_surface_tree, output_update,
++    send_dmabuf_feedback_surface_tree, send_frames_surface_tree,
++    surface_presentation_feedback_flags_from_states, surface_primary_scanout_output,
++    take_presentation_feedback_surface_tree, under_from_surface_tree,
++    update_surface_primary_scanout_output,
+ };
+ use smithay::desktop::{
+-    find_popup_root_surface, layer_map_for_output, LayerMap, LayerSurface, PopupGrab, PopupManager,
+-    PopupUngrabStrategy, Space, Window, WindowSurfaceType,
++    LayerMap, LayerSurface, PopupGrab, PopupManager, PopupUngrabStrategy, Space, Window,
++    WindowSurfaceType, find_popup_root_surface, layer_map_for_output,
+ };
+ use smithay::input::keyboard::Layout as KeyboardLayout;
+ use smithay::input::pointer::{
+@@ -68,12 +69,12 @@ use smithay::reexports::wayland_server::protocol::wl_shm;
+ use smithay::reexports::wayland_server::protocol::wl_surface::WlSurface;
+ use smithay::reexports::wayland_server::{Client, Display, DisplayHandle, Resource};
+ use smithay::utils::{
+-    ClockSource, IsAlive as _, Logical, Monotonic, Physical, Point, Rectangle, Scale, Size,
+-    Transform, SERIAL_COUNTER,
++    ClockSource, IsAlive as _, Logical, Monotonic, Physical, Point, Rectangle, SERIAL_COUNTER,
++    Scale, Size, Transform,
+ };
+ use smithay::wayland::compositor::{
+-    with_states, with_surface_tree_downward, CompositorClientState, CompositorHandler,
+-    CompositorState, HookId, SurfaceData, TraversalAction,
++    CompositorClientState, CompositorHandler, CompositorState, HookId, SurfaceData,
++    TraversalAction, with_states, with_surface_tree_downward,
+ };
+ use smithay::wayland::cursor_shape::CursorShapeManagerState;
+ use smithay::wayland::dmabuf::DmabufState;
+@@ -85,20 +86,20 @@ use smithay::wayland::keyboard_shortcuts_inhibit::{
+     KeyboardShortcutsInhibitState, KeyboardShortcutsInhibitor,
+ };
+ use smithay::wayland::output::OutputManagerState;
+-use smithay::wayland::pointer_constraints::{with_pointer_constraint, PointerConstraintsState};
++use smithay::wayland::pointer_constraints::{PointerConstraintsState, with_pointer_constraint};
+ use smithay::wayland::pointer_gestures::PointerGesturesState;
+ use smithay::wayland::presentation::PresentationState;
+ use smithay::wayland::relative_pointer::RelativePointerManagerState;
+ use smithay::wayland::security_context::SecurityContextState;
+-use smithay::wayland::selection::data_device::{set_data_device_selection, DataDeviceState};
++use smithay::wayland::selection::data_device::{DataDeviceState, set_data_device_selection};
+ use smithay::wayland::selection::ext_data_control::DataControlState as ExtDataControlState;
+ use smithay::wayland::selection::primary_selection::PrimarySelectionState;
+ use smithay::wayland::selection::wlr_data_control::DataControlState as WlrDataControlState;
+ use smithay::wayland::session_lock::{LockSurface, SessionLockManagerState, SessionLocker};
+ use smithay::wayland::shell::kde::decoration::KdeDecorationState;
+ use smithay::wayland::shell::wlr_layer::{self, Layer, WlrLayerShellState};
+-use smithay::wayland::shell::xdg::decoration::XdgDecorationState;
+ use smithay::wayland::shell::xdg::XdgShellState;
++use smithay::wayland::shell::xdg::decoration::XdgDecorationState;
+ use smithay::wayland::shm::ShmState;
+ #[cfg(test)]
+ use smithay::wayland::single_pixel_buffer::SinglePixelBufferState;
+@@ -106,7 +107,7 @@ use smithay::wayland::socket::ListeningSocketSource;
+ use smithay::wayland::tablet_manager::TabletManagerState;
+ use smithay::wayland::text_input::TextInputManagerState;
+ use smithay::wayland::viewporter::ViewporterState;
+-use smithay::wayland::virtual_keyboard::VirtualKeyboardManagerState;
++use smithay::wayland::virtual_keyboard::{VirtualKeyboardHandler, VirtualKeyboardManagerState};
+ use smithay::wayland::xdg_activation::XdgActivationState;
+ use smithay::wayland::xdg_foreign::XdgForeignState;
+ 
+@@ -123,17 +124,17 @@ use crate::dbus::gnome_shell_screenshot::{NiriToScreenshot, ScreenshotToNiri};
+ #[cfg(feature = "xdp-gnome-screencast")]
+ use crate::dbus::mutter_screen_cast::{self, ScreenCastToNiri};
+ use crate::frame_clock::FrameClock;
+-use crate::handlers::{configure_lock_surface, XDG_ACTIVATION_TOKEN_TIMEOUT};
++use crate::handlers::{XDG_ACTIVATION_TOKEN_TIMEOUT, configure_lock_surface};
+ use crate::input::pick_color_grab::PickColorGrab;
+ use crate::input::scroll_swipe_gesture::ScrollSwipeGesture;
+ use crate::input::scroll_tracker::ScrollTracker;
+ use crate::input::{
+-    apply_libinput_settings, mods_with_finger_scroll_binds, mods_with_mouse_binds,
+-    mods_with_wheel_binds, TabletData,
++    TabletData, apply_libinput_settings, mods_with_finger_scroll_binds, mods_with_mouse_binds,
++    mods_with_wheel_binds,
+ };
+ use crate::ipc::server::IpcServer;
+-use crate::layer::mapped::LayerSurfaceRenderElement;
+ use crate::layer::MappedLayer;
++use crate::layer::mapped::LayerSurfaceRenderElement;
+ use crate::layout::tile::TileRenderElement;
+ use crate::layout::workspace::{Workspace, WorkspaceId};
+ use crate::layout::{HitType, Layout, LayoutElement as _, MonitorRenderElement};
+@@ -154,8 +155,8 @@ use crate::render_helpers::renderer::NiriRenderer;
+ use crate::render_helpers::solid_color::{SolidColorBuffer, SolidColorRenderElement};
+ use crate::render_helpers::texture::TextureBuffer;
+ use crate::render_helpers::{
+-    encompassing_geo, render_to_dmabuf, render_to_encompassing_texture, render_to_shm,
+-    render_to_texture, render_to_vec, shaders, RenderTarget, SplitElements,
++    RenderTarget, SplitElements, encompassing_geo, render_to_dmabuf,
++    render_to_encompassing_texture, render_to_shm, render_to_texture, render_to_vec, shaders,
+ };
+ use crate::ui::config_error_notification::ConfigErrorNotification;
+ use crate::ui::exit_confirm_dialog::ExitConfirmDialog;
+@@ -1172,8 +1173,7 @@ impl State {
+         if self.niri.keyboard_focus != focus {
+             trace!(
+                 "keyboard focus changed from {:?} to {:?}",
+-                self.niri.keyboard_focus,
+-                focus
++                self.niri.keyboard_focus, focus
+             );
+ 
+             // Tell the windows their new focus state for window rule purposes.
+@@ -1225,8 +1225,7 @@ impl State {
+                 if grab.has_keyboard_grab && Some(&grab.root) != focus.surface() {
+                     trace!(
+                         "grab root {:?} is not the new focus {:?}, ungrabbing",
+-                        grab.root,
+-                        focus
++                        grab.root, focus
+                     );
+ 
+                     grab.grab.ungrab(PopupUngrabStrategy::All);
+@@ -2706,7 +2705,7 @@ impl Niri {
+     pub fn inhibit_power_key(&mut self) -> anyhow::Result<()> {
+         use std::os::fd::{AsRawFd, BorrowedFd};
+ 
+-        use smithay::reexports::rustix::io::{fcntl_setfd, FdFlags};
++        use smithay::reexports::rustix::io::{FdFlags, fcntl_setfd};
+ 
+         let conn = zbus::blocking::Connection::system()?;
+ 
+@@ -6267,6 +6266,12 @@ fn scale_relocate_crop<E: Element>(
+     CropRenderElement::from_element(elem, output_scale, ws_geo)
+ }
+ 
++impl VirtualKeyboardHandler for State {
++    fn on_keyboard_event(&mut self, keycode: Keycode, state: KeyState, time: u32) {
++        self.on_keyboard_real(keycode, state, time);
++    }
++}
++
+ niri_render_elements! {
+     OutputRenderElements<R> => {
+         Monitor = MonitorRenderElement<R>,
