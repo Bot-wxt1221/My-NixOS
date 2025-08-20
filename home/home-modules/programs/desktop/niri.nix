@@ -17,8 +17,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "emersion";
       repo = "xdg-desktop-portal-wlr";
-      rev = "5598c4360b6e1bab52516c96653fd29db110e8fe";
-      hash = "sha256-xvkTd1kzlI1HtALOMS2nXzSymrr4wWjYxm5+I4AcwHo=";
+      rev = "e471c3dfe5fe03921fd7109e6affe7740f9503c3";
+      hash = "sha256-9T73obDmx4gsGo6KdaQHoBqOCig4/6TVJWhx7tOpym4=";
     };
   });
   xdg-desktop-portal-for-rustdesk = pkgs.xdg-desktop-portal.overrideAttrs (old: {
