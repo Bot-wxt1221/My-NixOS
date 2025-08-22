@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   ...
 }:
 {
@@ -8,15 +7,6 @@
 
   ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  specialisation = {
-    _6_14-kernel = {
-      configuration = {
-        system.nixos.tags = [ "stable-kernel" ];
-        boot.kernelPackages = lib.mkForce pkgs.linuxPackages_testing;
-      };
-      inheritParentConfig = true;
-    };
-  };
   hardware.firmware = [ pkgs.linux-firmware ];
   boot.kernel.sysctl = {
     "kernel.sysrq" = 255;
