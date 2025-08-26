@@ -44,7 +44,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     niri-flake = {
-      url = "github:sodiboo/niri-flake/22a24ab05a9f4b3a94fba0aa0d8d850e6269241a";
+      url = "github:sodiboo/niri-flake/d63f7848d0e0b9d2860be5ba9c4f6ed09e91049e";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

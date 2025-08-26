@@ -79,11 +79,11 @@
   boot.kernelModules = [
     "kvm-intel"
     "acpi_call"
-    "v4l2loopback"
+    #"v4l2loopback"
   ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
     acpi_call
-    v4l2loopback
+    #v4l2loopback
   ];
   environment.systemPackages = with pkgs; [
     bcache-tools
