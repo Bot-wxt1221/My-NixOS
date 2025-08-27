@@ -54,7 +54,7 @@
     powerManagement.enable = true;
     powerManagement.finegrained = true;
     open = true;
-    nvidiaPersistenced = true;
+    nvidiaPersistenced = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
     videoAcceleration = true;
