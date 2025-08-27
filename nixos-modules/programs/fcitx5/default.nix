@@ -15,7 +15,7 @@
       kdePackages.fcitx5-with-addons
       fcitx5-gtk
       fcitx5-rime
-      fcitx5-chinese-addons
+      kdePackages.fcitx5-chinese-addons
     ];
     fcitx5.waylandFrontend = true;
     fcitx5.plasma6Support = true;
