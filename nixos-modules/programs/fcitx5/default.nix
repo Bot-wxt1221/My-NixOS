@@ -18,7 +18,6 @@
       kdePackages.fcitx5-chinese-addons
     ];
     fcitx5.waylandFrontend = true;
-    fcitx5.plasma6Support = true;
   };
   home-manager.sharedModules = [
     (
