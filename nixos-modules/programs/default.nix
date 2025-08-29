@@ -20,6 +20,7 @@
     ./irc-server
     ./kubo
     ./libvirtd
+    ./mihomo
     ./miner-cpu
     ./miner-gpu
     ./nix
@@ -28,7 +29,7 @@
     ./openssh
     ./qt
     ./rustdesk
-    ./sing-box
+    # ./sing-box
     ./steam
     ./tailscale
     ./virutalbox

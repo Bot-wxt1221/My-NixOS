@@ -22,6 +22,10 @@
   ];
   nixpkgs.config.packageOverrides = pkgs: {
     intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
+    onnxruntime = pkgs.onnxruntime.override {
+      cudaSupport = false;
+      ncclSupport = false;
+    };
   };
   nixpkgs.config.cudaSupport = true;
   services.hardware.bolt.enable = true;
