@@ -1,15 +1,15 @@
-From e8042b3c4ea4aa04b67c321ab49178a17d276b3e Mon Sep 17 00:00:00 2001
+From c096c993630b95642aceb7f4e7df65b99d7d4036 Mon Sep 17 00:00:00 2001
 From: wxt <3264117476@qq.com>
 Date: Sun, 14 Sep 2025 18:18:06 +0800
 Subject: [PATCH] feat: handle virtual keyboard by ourself
 
 ---
- src/input/mod.rs | 36 +++++++++++++++++++----------
+ src/input/mod.rs | 38 +++++++++++++++++++-----------
  src/niri.rs      | 60 ++++++++++++++++++++++++++++++++++++++++++++++--
- 2 files changed, 82 insertions(+), 14 deletions(-)
+ 2 files changed, 83 insertions(+), 15 deletions(-)
 
 diff --git a/src/input/mod.rs b/src/input/mod.rs
-index 9fc48c09..079b1fef 100644
+index 9fc48c09..62cad078 100644
 --- a/src/input/mod.rs
 +++ b/src/input/mod.rs
 @@ -17,6 +17,7 @@ use smithay::backend::input::{
@@ -25,7 +25,7 @@ index 9fc48c09..079b1fef 100644
      }
  
 -    fn on_keyboard<I: InputBackend>(
-+    fn on_keyboard_real<I: InputBackend>(
++    pub fn on_keyboard_real(
          &mut self,
 -        event: I::KeyboardKeyEvent,
 +        key: Keycode,
@@ -57,7 +57,8 @@ index 9fc48c09..079b1fef 100644
              return;
          }
  
-         let Some(Some(bind)) = self.niri.seat.get_keyboard().unwrap().input(
+-        let Some(Some(bind)) = self.niri.seat.get_keyboard().unwrap().input(
++        let Some(Some(bind)) = keyboard.input(
              self,
 -            event.key_code(),
 -            event.state(),
@@ -92,7 +93,7 @@ index 9fc48c09..079b1fef 100644
      fn start_key_repeat(&mut self, bind: Bind) {
          if !bind.repeat {
 diff --git a/src/niri.rs b/src/niri.rs
-index 612d5417..0e8dea70 100644
+index 612d5417..3c0d2c1f 100644
 --- a/src/niri.rs
 +++ b/src/niri.rs
 @@ -19,7 +19,7 @@ use niri_config::{
@@ -150,7 +151,7 @@ index 612d5417..0e8dea70 100644
 +        }
 +        let mut consumed_by_a11y = false;
 +
-+        self.on_keyboard_real(keycode, state, time, keyboard, consumed_by_a11y);
++        self.on_keyboard_real(keycode, state, time, keyboard,&mut consumed_by_a11y);
 +
 +        let hide_hotkey_overlay = self.niri.hotkey_overlay.is_open();
 +
