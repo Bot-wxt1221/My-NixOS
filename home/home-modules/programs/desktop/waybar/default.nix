@@ -19,7 +19,7 @@
   imports = [ ./waybar-style.nix ];
   config =
     let
-      niri-taskbar = pkgs.callPackage ./taskbar.nix { };
+      niri-taskbar = pkgs.nur.repos.linyinfeng.niri-taskbar;
     in
     {
       programs.waybar = {
