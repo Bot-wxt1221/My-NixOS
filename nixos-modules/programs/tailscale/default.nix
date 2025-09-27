@@ -7,7 +7,6 @@
     format = "binary";
     sopsFile = ./key-after;
     mode = "0444";
-    restartUnits = [ "tailscaled.service" ];
   };
   services.tailscale = {
     enable = true;
