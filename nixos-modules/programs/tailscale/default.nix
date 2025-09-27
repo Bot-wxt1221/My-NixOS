@@ -6,7 +6,7 @@
   sops.secrets.tailscale = {
     format = "binary";
     sopsFile = ./key-after;
-    mode = "0400";
+    mode = "0444";
     restartUnits = [ "tailscaled.service" ];
   };
   services.tailscale = {
