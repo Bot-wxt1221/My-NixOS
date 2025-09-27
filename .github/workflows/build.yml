@@ -21,14 +21,11 @@ jobs:
         nix profile install nixpkgs#nixfmt-rfc-style nixpkgs#sops
         ./update.sh | nixfmt > extensions.nix
         cd ../../../
-        curl ${{secrets.VPN_URL}} > nixos-modules/programs/mihomo/.key
-        sops encrypt --input-type binary --output-type json nixos-modules/programs/mihomo/.key > nixos-modules/programs/mihomo/key-after
         nix flake update
         git config --local user.email "3264117476@qq.com"
         git config --local user.name "github-actions[bot]"
         git add flake.lock
         git add nixos-modules/programs/chromium/extensions.nix
-        git add nixos-modules/programs/mihomo/key-after
         git commit -m "Update flakes" || true
     - name: Push changes
       uses: ad-m/github-push-action@master
