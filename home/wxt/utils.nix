@@ -22,7 +22,6 @@
     gnumake
     fd
     gnome-logs
-    kitty
     helvum
     gnome-graphs
     cpu-x
