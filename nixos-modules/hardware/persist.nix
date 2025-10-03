@@ -22,12 +22,6 @@
       "/var/lib/libvirt"
       "/var/lib/systemd/coredump"
       "/etc/NetworkManager/system-connections"
-      {
-        directory = "/var/lib/colord";
-        user = "colord";
-        group = "colord";
-        mode = "u=rwx,g=rx,o=";
-      }
     ];
     files = [
       {
