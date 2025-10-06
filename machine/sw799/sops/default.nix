@@ -1,5 +1,3 @@
-_:
-
 {
   sops.defaultSopsFile = ./secret.yaml.after;
   sops.defaultSopsFormat = "yaml";

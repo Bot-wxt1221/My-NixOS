@@ -120,17 +120,17 @@
           }
         ];
       };
-      nixosConfigurations.wxt-school-real = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.wxt-sw799 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = SystemSpecialArgs;
         modules = [
-          ./machine/school-real
+          ./machine/sw799
           preservation.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.wxt = import ./home/wxt/default-school-real.nix;
+            home-manager.users.wxt = import ./home/wxt/default-sw799.nix;
             home-manager.extraSpecialArgs = HmSpecialArgs;
           }
         ];
@@ -173,7 +173,6 @@
           (_: {
             environment.systemPackages = [
               self.nixosConfigurations.wxt-g3.config.system.build.toplevel
-              self.nixosConfigurations.wxt-school-real.config.system.build.toplevel
             ];
           })
         ];
