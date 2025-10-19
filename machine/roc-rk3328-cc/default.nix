@@ -14,7 +14,11 @@
     ../../nixos-modules
   ];
   time.timeZone = "Asia/Shanghai";
-  Ownhostname = "wxt-sw799";
+  Ownhostname = "wxt-roc-rk3328-cc";
+  boot.loader.systemd-boot = {
+    enable = lib.mkForce false;
+  };
+  EnableAnimeGameLauncher = false;
   Enablesteam = false;
   Enablepipewire = true;
   EnableWaydroid = false;
@@ -44,5 +48,5 @@
     ];
     hashedPasswordFile = config.sops.secrets.wxt-password.path;
   };
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
 }

@@ -120,17 +120,17 @@
           }
         ];
       };
-      nixosConfigurations.wxt-sw799 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+      nixosConfigurations.wxt-roc-rk3328-cc = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
         specialArgs = SystemSpecialArgs;
         modules = [
-          ./machine/sw799
+          ./machine/roc-rk3328-cc
           preservation.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.wxt = import ./home/wxt/default-sw799.nix;
+            home-manager.users.wxt = import ./home/wxt/default-roc-rk3328-cc.nix;
             home-manager.extraSpecialArgs = HmSpecialArgs;
           }
         ];

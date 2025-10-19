@@ -7,6 +7,7 @@
   imports = [
     ./secret
     ./secret/g3
+    ./utils-aarch64.nix
 
     ./shared-modules.nix
   ];

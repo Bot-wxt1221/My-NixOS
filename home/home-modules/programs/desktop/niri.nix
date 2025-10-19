@@ -45,7 +45,7 @@ in
     home.packages = with pkgs; [
       xsel
       pkgs.swaylock-effects
-      clipboard.packages.${pkgs.system}.default
+      clipboard.packages."x86_64-linux".default
       glib.bin
     ];
     home.pointerCursor = {

@@ -8,6 +8,7 @@
   imports = [
     ./secret
     ./secret/g3
+    ./utils.nix
 
     ./shared-modules.nix
   ];

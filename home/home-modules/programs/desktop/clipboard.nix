@@ -41,7 +41,7 @@
     };
 
     Service = {
-      ExecStart = "${clipboard.packages.${pkgs.system}.default}/bin/clipboard-sync --hide-timestamp";
+      ExecStart = "${clipboard.packages."x86_64-linux".default}/bin/clipboard-sync --hide-timestamp";
       Restart = "always";
       RestartSec = "10";
     };
