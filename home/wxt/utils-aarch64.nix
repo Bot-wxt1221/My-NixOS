@@ -75,9 +75,6 @@
 
     yubioath-flutter
 
-    testlib
-    ac-library
-
     numix-icon-theme-circle
     colloid-icon-theme
     catppuccin-gtk
