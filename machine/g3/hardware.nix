@@ -29,7 +29,7 @@
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      vaapiIntel
+      intel-vaapi-driver
       libva
       libvdpau-va-gl
       vaapiVdpau
