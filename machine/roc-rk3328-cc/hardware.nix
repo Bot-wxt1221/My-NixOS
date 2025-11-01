@@ -8,7 +8,7 @@
     ./sops
     ./hardware-configuration.nix
   ];
- 
+
   boot = {
     kernelParams = [
       "net.ifnames=0"

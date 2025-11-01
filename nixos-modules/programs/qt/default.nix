@@ -1,12 +1,8 @@
-{
-  pkgs,
-  ...
-}:
-{
+_: {
   imports = [
 
   ];
   qt.enable = true;
-  qt.platformTheme = "gnome";
+  qt.platformTheme = "kde6";
   qt.style = "adwaita";
 }
