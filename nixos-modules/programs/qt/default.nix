@@ -3,6 +3,6 @@ _: {
 
   ];
   qt.enable = true;
-  qt.platformTheme = "kde6";
+  qt.platformTheme = "kde";
   qt.style = "adwaita";
 }
