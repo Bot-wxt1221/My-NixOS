@@ -20,4 +20,9 @@
       generic-extlinux-compatible.enable = true;
     };
   };
+  systemd.services."usb-enable" = {
+    enable = true;
+    script = "${pkgs.libgpiod}/bin/gpioset 1 26=1";
+    wantedBy = [ "default.target" ];
+  };
 }

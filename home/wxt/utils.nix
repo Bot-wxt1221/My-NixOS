@@ -54,7 +54,6 @@
     ripgrep # recursively searches directories for a regex pattern
     mtr # A network diagnostic tool
     project-lemonlime
-    glxinfo
     file
     which
     tree
