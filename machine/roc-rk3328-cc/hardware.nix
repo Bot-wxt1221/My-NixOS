@@ -9,6 +9,8 @@
     ./hardware-configuration.nix
   ];
 
+  sops.age.keyFile = lib.mkForce "/var/lib/sops-nix/key.txt";
+
   boot = {
     kernelParams = [
       "net.ifnames=0"

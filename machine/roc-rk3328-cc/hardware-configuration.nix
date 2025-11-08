@@ -17,12 +17,6 @@
 
   users.users.root.password = "1";
 
-  systemd.services."getty@ttyS2" = {
-    enable = true;
-    wantedBy = [ "getty.target" ]; # to start at boot
-    serviceConfig.Restart = "always"; # restart when session is closed
-  };
-
   swapDevices = [
     {
       device = "/swapfile";
