@@ -18,7 +18,7 @@
   home.homeDirectory = "/home/wxt";
   home.stateVersion = osConfig.system.stateVersion;
   programs.home-manager.enable = true;
-  programs.git.extraConfig = {
+  programs.git.settings = {
     commit = {
       gpgsign = true;
     };

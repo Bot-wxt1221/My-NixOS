@@ -5,7 +5,7 @@
   ...
 }:
 let
-  niri-use = niri-flake.packages.${pkgs.system}.niri-unstable.overrideAttrs (old: {
+  niri-use = niri-flake.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable.overrideAttrs (old: {
     postPatch = (old.postPatch or "") + ''
       patch -p1 < ${./0422464cd26b0b42cc73069ada2dd8dafb34ae32.patch}
       pushd $cargoDepsCopy/smithay-0.7.0

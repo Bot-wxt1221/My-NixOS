@@ -50,7 +50,7 @@
   };
   programs.nixvim = {
     enable = true;
-    package = neovim.packages.${pkgs.system}.default;
+    package = neovim.packages.${pkgs.stdenv.hostPlatform.system}.default;
     globals = {
       mapleader = " ";
       maplocalleader = " ";
