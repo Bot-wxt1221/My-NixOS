@@ -5,7 +5,9 @@
   ];
   programs.git = {
     enable = true;
-    userName = "wxt";
-    userEmail = "3264117476@qq.com";
+    settings.user = {
+      name = "wxt";
+      email = "3264117476@qq.com";
+    };
   };
 }
