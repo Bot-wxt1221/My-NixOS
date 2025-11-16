@@ -5,6 +5,12 @@
   modulesPath,
   ...
 }:
+let
+  uboot = pkgs.fetchurl {
+    url = "http://boot.libre.computer/release/roc-rk3328-cc/roc-rk3328-cc-boot.bin";
+    hash = "sha256-Y5yMmU/LyMVJi94vrYDpBM+4qwUfILwP+gVUToAXteA=";
+  };
+in
 {
   imports = [
     (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
@@ -18,9 +24,8 @@
   users.extraUsers.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH9YcmQFwhORiIfvNVPVkOXWshLO7yhCYwMOb5BC91uJ wxt@wxt-g3"
   ];
-sdImage.postBuildCommands = with pkgs; ''
-    dd if=${ubootRock64}/idbloader.img of=$img conv=fsync,notrunc bs=512 seek=64
-    dd if=${ubootRock64}/u-boot.itb of=$img conv=fsync,notrunc bs=512 seek=16384
+  sdImage.postBuildCommands = ''
+    dd if=${uboot} of=$img conv=fsync,notrunc bs=512 seek=64
   '';
   boot.supportedFilesystems.zfs = lib.mkForce false;
   boot.kernelPackages = pkgs.linuxPackages_latest;
