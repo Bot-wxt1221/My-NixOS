@@ -1,23 +1,20 @@
 keys:
   - &root_wxt_g3 age19sue9ahqwqu2ltx3zl4vthsh4an45csq5s63esx6ekp457ntwdasvdv0cz
-  - &root_wxt_school age1jfe200uy45gjyk4gy600p2tgv7j07nz3acp292njjsadt9dvcvcqu0revv
 
   - &home_wxt_g3 age1620fd6d3w4vpzjnzvj4ajl055d0zaaq4qp876n42a5kencfg2u4q9j2fx3
-  - &home_wxt_school age1dneshqjnnv5xnhxerr7wx0cg953tdar84j76el54dd2a84jxmqkqfkhnxk
   - &admin_all age12vm3pmngmk4r38x4exjynqp466y42s5ffqgel3ajf6nf3sh63ssqgg6s09
 creation_rules:
   - path_regex: home/wxt/secret/2FA
     key_groups:
     - age:
       - *home_wxt_g3
-      - *home_wxt_school
-      - *admin_all
-  - path_regex: home/wxt/secret/school-*
-    key_groups:
-    - age:
-      - *home_wxt_school
       - *admin_all
   - path_regex: home/wxt/secret/g3
+    key_groups:
+    - age:
+      - *home_wxt_g3
+      - *admin_all
+  - path_regex: home/wxt/secret/roc-rk3328-cc
     key_groups:
     - age:
       - *home_wxt_g3
@@ -27,15 +24,14 @@ creation_rules:
     - age:
       - *root_wxt_g3
       - *admin_all
-  - path_regex: machine/school-real/sops
+  - path_regex: machine/roc-rk3328-cc/sops
     key_groups:
     - age:
-      - *root_wxt_school
+      - *root_wxt_g3
       - *admin_all
   - path_regex: nixos-modules/programs/sing-box/.key
     key_groups:
     - age:
-      - *root_wxt_school
       - *admin_all
       - *root_wxt_g3
   - path_regex: nixos-modules/programs/mihomo/.key
@@ -47,6 +43,5 @@ creation_rules:
   - path_regex: nixos-modules/programs/tailscale/.key
     key_groups:
     - age:
-      - *root_wxt_school
       - *admin_all
       - *root_wxt_g3
