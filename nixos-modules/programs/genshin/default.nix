@@ -22,7 +22,8 @@ with pkgs;
     environment.systemPackages = [
       (buildFHSEnv {
         pname = "anime-game-launcher-wrapped";
-        version = an-anime-game-launcher.packages.${pkgs.stdenv.hostPlatform.system}.an-anime-game-launcher.version;
+        version =
+          an-anime-game-launcher.packages.${pkgs.stdenv.hostPlatform.system}.an-anime-game-launcher.version;
         targetPkgs = pkgs: [
           an-anime-game-launcher.packages.${pkgs.stdenv.hostPlatform.system}.an-anime-game-launcher
           gamescope
