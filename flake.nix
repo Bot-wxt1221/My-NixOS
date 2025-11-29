@@ -142,6 +142,7 @@
           ./sd-image.nix
         ];
       };
+      packages.aarch64-linux.linux-roc-rk3328-cc = self.nixosConfigurations.wxt-roc-rk3328-cc.config.boot.kernelPackages.kernel;
       packages.aarch64-linux.sd-card =
         self.nixosConfigurations.wxt-roc-rk3328-cc-image.config.system.build.sdImage;
       packages.x86_64-linux.iso-image = self.nixosConfigurations.iso-image.config.system.build.isoImage;
