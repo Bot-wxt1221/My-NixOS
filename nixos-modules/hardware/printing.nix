@@ -9,6 +9,7 @@
   services.printing.drivers = [
     pkgs.hplipWithPlugin
     pkgs.cups-pdf-to-pdf
+    pkgs.foo2zjs
   ];
   preservation.preserveAt."/persist" = {
     directories = [
@@ -32,13 +33,22 @@
   };
   services.printing.browsing = true;
   services.printing.defaultShared = true;
-  services.printing.extraConf = ''
-    ServerName 0.0.0.0
-  '';
   services.printing.listenAddresses = [
     "*:631"
   ];
-  services.printing.allowFrom = [
-    "all"
-  ];
+  services.printing.extraConf = ''
+    <Location />
+    Order allow,deny
+    Allow all
+    </Location>
+    <Location /admin>
+    Order allow,deny
+    Allow all
+    </Location>
+    <Location /admin/conf>
+    Order allow,deny
+    Allow all
+    </Location>
+    DefaultEncryption Never
+  ''; 
 }
