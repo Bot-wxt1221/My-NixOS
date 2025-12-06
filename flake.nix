@@ -143,6 +143,17 @@
         ];
       };
       packages.aarch64-linux.linux-roc-rk3328-cc = self.nixosConfigurations.wxt-roc-rk3328-cc.config.boot.kernelPackages.kernel;
+      packages.aarch64-linux.niri = niri-flake.packages."aarch64-linux".niri-unstable.overrideAttrs
+      (old: {
+        postPatch = (old.postPatch or "") + ''
+          patch -p1 < ${./nixos-modules/programs/desktop/0422464cd26b0b42cc73069ada2dd8dafb34ae32.patch}
+          pushd $cargoDepsCopy/smithay-0.7.0
+            patch -p1 < ${./nixos-modules/programs/desktop/0550cb9c2c18c18f91bda00ac8fb23300e799805.patch}
+            patch -p1 < ${./nixos-modules/programs/desktop/bc5911553f77665fd2e39b2d69fd55d9679487d8.patch}
+          popd
+        '';
+      });
+
       packages.aarch64-linux.sd-card =
         self.nixosConfigurations.wxt-roc-rk3328-cc-image.config.system.build.sdImage;
       packages.x86_64-linux.iso-image = self.nixosConfigurations.iso-image.config.system.build.isoImage;
