@@ -4,10 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    an-anime-game-launcher = {
-      url = "github:ezKEa/aagl-gtk-on-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-colors.url = "github:misterio77/nix-colors";
     luogu-gcc.url = "github:luogu-dev/judge-env";
     nixos-facter-modules.url = "github:nix-community/nixos-facter-modules";
@@ -64,7 +60,6 @@
       nix-index-database,
       sops-nix,
       nixos-facter-modules,
-      an-anime-game-launcher,
       niri-flake,
       ...
     }@inputs:
@@ -82,7 +77,6 @@
           nix-index-database
           sops-nix
           nixos-facter-modules
-          an-anime-game-launcher
           ;
       };
       SystemSpecialArgs = {
@@ -99,7 +93,6 @@
           nix-index-database
           sops-nix
           nixos-facter-modules
-          an-anime-game-launcher
           niri-flake
           ;
       };
