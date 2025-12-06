@@ -37,7 +37,6 @@ creation_rules:
   - path_regex: nixos-modules/programs/mihomo/.key
     key_groups:
     - age:
-      - *root_wxt_school
       - *admin_all
       - *root_wxt_g3
   - path_regex: nixos-modules/programs/tailscale/.key
