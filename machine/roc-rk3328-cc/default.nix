@@ -18,7 +18,6 @@
   boot.loader.systemd-boot = {
     enable = lib.mkForce false;
   };
-  EnableAnimeGameLauncher = false;
   Enablesteam = false;
   Enablepipewire = true;
   EnableWaydroid = false;
