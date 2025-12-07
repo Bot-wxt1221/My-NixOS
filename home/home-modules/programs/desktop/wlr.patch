@@ -1,53 +1,3 @@
-From 5d40d7a3297755acaf7fe7d40c2016b346e96473 Mon Sep 17 00:00:00 2001
-From: wxt <3264117476@qq.com>
-Date: Wed, 20 Aug 2025 19:47:42 +0800
-Subject: [PATCH] Update
-
----
- .builds/alpine.yml                            |   1 +
- .builds/archlinux.yml                         |   1 +
- .builds/freebsd.yml                           |   1 +
- .gitignore                                    |   1 +
- include/config.h                              |   7 +
- include/intset.h                              |  37 +
- include/keyboard.h                            |  50 +
- include/remotedesktop.h                       |   8 +
- include/remotedesktop_common.h                |  44 +
- include/screencast.h                          |   2 +
- include/shm.h                                 |  23 +
- include/virtual_input.h                       |  18 +
- include/xdpw.h                                |   6 +
- meson.build                                   |   7 +
- protocols/meson.build                         |   2 +
- protocols/virtual-keyboard-unstable-v1.xml    | 113 +++
- protocols/wlr-virtual-pointer-unstable-v1.xml | 152 +++
- src/core/config.c                             |  20 +
- src/core/main.c                               |   8 +
- src/core/session.c                            |   4 +
- src/remotedesktop/intset.c                    |  97 ++
- src/remotedesktop/keyboard.c                  | 451 +++++++++
- src/remotedesktop/remotedesktop.c             | 897 ++++++++++++++++++
- src/remotedesktop/shm.c                       |  91 ++
- src/remotedesktop/virtual_input.c             |  89 ++
- src/screencast/ext_image_copy.c               |   7 +-
- src/screencast/screencast.c                   |   4 +-
- src/screencast/wlr_screencopy.c               |   5 +
- wlr.portal                                    |   2 +-
- 29 files changed, 2143 insertions(+), 5 deletions(-)
- create mode 100644 include/intset.h
- create mode 100644 include/keyboard.h
- create mode 100644 include/remotedesktop.h
- create mode 100644 include/remotedesktop_common.h
- create mode 100644 include/shm.h
- create mode 100644 include/virtual_input.h
- create mode 100644 protocols/virtual-keyboard-unstable-v1.xml
- create mode 100644 protocols/wlr-virtual-pointer-unstable-v1.xml
- create mode 100644 src/remotedesktop/intset.c
- create mode 100644 src/remotedesktop/keyboard.c
- create mode 100644 src/remotedesktop/remotedesktop.c
- create mode 100644 src/remotedesktop/shm.c
- create mode 100644 src/remotedesktop/virtual_input.c
-
 diff --git a/.builds/alpine.yml b/.builds/alpine.yml
 index 9092c81..dab079a 100644
 --- a/.builds/alpine.yml
@@ -84,17 +34,6 @@ index fd012d8..a54eb45 100644
  sources:
    - https://github.com/emersion/xdg-desktop-portal-wlr
  tasks:
-diff --git a/.gitignore b/.gitignore
-index fc62187..ec89b13 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -1,5 +1,6 @@
- # Prerequisites
- *.d
-+.cache
- 
- # Object files
- *.o
 diff --git a/include/config.h b/include/config.h
 index f856dc1..098cbe9 100644
 --- a/include/config.h
@@ -381,7 +320,7 @@ index 7a6421f..d5f7d75 100644
  struct xdpw_request *xdpw_request_create(sd_bus *bus, const char *object_path);
  void xdpw_request_destroy(struct xdpw_request *req);
 diff --git a/meson.build b/meson.build
-index 82c63ad..a1bff31 100644
+index b2255bb..4ccd893 100644
 --- a/meson.build
 +++ b/meson.build
 @@ -31,6 +31,7 @@ wayland_protos = dependency('wayland-protocols', version: '>=1.24')
@@ -398,9 +337,9 @@ index 82c63ad..a1bff31 100644
  	'src/screencast/fps_limit.c',
 +	'src/remotedesktop/intset.c',
 +	'src/remotedesktop/remotedesktop.c',
++	'src/remotedesktop/virtual_input.c',
 +	'src/remotedesktop/keyboard.c',
 +	'src/remotedesktop/shm.c',
-+	'src/remotedesktop/virtual_input.c',
  )
  
  executable(
@@ -413,16 +352,15 @@ index 82c63ad..a1bff31 100644
  	include_directories: [inc],
  	install: true,
 diff --git a/protocols/meson.build b/protocols/meson.build
-index def3809..49282f7 100644
+index def3809..f6fd4ba 100644
 --- a/protocols/meson.build
 +++ b/protocols/meson.build
-@@ -12,7 +12,9 @@ client_protocols = [
- 	wl_protocol_dir / 'staging/ext-image-capture-source/ext-image-capture-source-v1.xml',
+@@ -13,6 +13,8 @@ client_protocols = [
  	wl_protocol_dir / 'staging/ext-image-copy-capture/ext-image-copy-capture-v1.xml',
  	wl_protocol_dir / 'staging/ext-foreign-toplevel-list/ext-foreign-toplevel-list-v1.xml',
-+	'virtual-keyboard-unstable-v1.xml',
  	'wlr-screencopy-unstable-v1.xml',
 +	'wlr-virtual-pointer-unstable-v1.xml',
++	'virtual-keyboard-unstable-v1.xml',
  ]
  
  wl_proto_files = []
@@ -749,14 +687,14 @@ index 693cc89..dfdae23 100644
  
  static bool file_exists(const char *path) {
 diff --git a/src/core/main.c b/src/core/main.c
-index e27d261..6e30887 100644
+index e27d261..31a40d5 100644
 --- a/src/core/main.c
 +++ b/src/core/main.c
 @@ -120,6 +120,8 @@ int main(int argc, char *argv[]) {
  		.screencast_cursor_modes = HIDDEN | EMBEDDED,
  		.screencast_version = XDP_CAST_PROTO_VER,
  		.screenshot_version = XDP_SHOT_PROTO_VER,
-+		.remotedesktop_available_device_types = POINTER,
++		.remotedesktop_available_device_types = POINTER | KEYBOARD,
 +		.remotedesktop_version = XDP_REMOTE_PROTO_VER,
  		.config = &config,
  	};
@@ -1358,10 +1296,10 @@ index 0000000..cd6f87d
 +}
 diff --git a/src/remotedesktop/remotedesktop.c b/src/remotedesktop/remotedesktop.c
 new file mode 100644
-index 0000000..1fe2f3a
+index 0000000..c27ea05
 --- /dev/null
 +++ b/src/remotedesktop/remotedesktop.c
-@@ -0,0 +1,897 @@
+@@ -0,0 +1,895 @@
 +#include "remotedesktop.h"
 +
 +#include <spa/utils/result.h>
@@ -1371,7 +1309,6 @@ index 0000000..1fe2f3a
 +#include "remotedesktop_common.h"
 +#include "screencast.h"
 +#include "virtual_input.h"
-+#include "wayland-util.h"
 +#include "wlr-virtual-pointer-unstable-v1-client-protocol.h"
 +#include "xdpw.h"
 +
@@ -1660,7 +1597,7 @@ index 0000000..1fe2f3a
 +	}
 +
 +	ret = sd_bus_message_append(reply, "{sv}",
-+		"devices", "u", POINTER | KEYBOARD);
++		"devices", "u", remote->devices);
 +	if (ret < 0) {
 +		return ret;
 +	}
@@ -1733,7 +1670,7 @@ index 0000000..1fe2f3a
 +	}
 +
 +	ret = sd_bus_message_append(reply, "{sv}",
-+		"devices", "u", KEYBOARD | POINTER);
++		"devices", "u", remote->devices);
 +	if (ret < 0) {
 +		return ret;
 +	}
@@ -1843,7 +1780,7 @@ index 0000000..1fe2f3a
 +	if (ret < 0) {
 +		return ret;
 +	}
-+	ret = sd_bus_message_skip(msg, "u");
++		ret = sd_bus_message_skip(msg, "u");
 +	if (ret < 0) {
 +		return ret;
 +	}
@@ -1859,8 +1796,7 @@ index 0000000..1fe2f3a
 +	struct xdpw_wlr_output *output = sess->screencast_data.screencast_instance->target->output;
 +	zwlr_virtual_pointer_v1_motion_absolute(sess->remotedesktop_data.virtual_pointer,
 +		get_timestamp_ms(&sess->remotedesktop_data),
-+		wl_fixed_from_double(x), wl_fixed_from_double(y),
-+		wl_fixed_from_int(output->width), wl_fixed_from_int(output->height));
++		x, y, output->width, output->height);
 +	zwlr_virtual_pointer_v1_frame(sess->remotedesktop_data.virtual_pointer);
 +
 +	return 0;
@@ -2173,19 +2109,19 @@ index 0000000..1fe2f3a
 +static int method_remotedesktop_notify_touch_down(
 +		sd_bus_message *msg, void *data, sd_bus_error *ret_error) {
 +
-+	logprint(DEBUG, "remotedesktop: npt: called, but not supported!");
++	logprint(ERROR, "remotedesktop: notify_touch_down called, but not supported!");
 +	return -1;
 +}
 +
 +static int method_remotedesktop_notify_touch_motion(
 +		sd_bus_message *msg, void *data, sd_bus_error *ret_error) {
-+	logprint(DEBUG, "remotedesktop: npt: called, but not supported!");
++	logprint(ERROR, "remotedesktop: notify_touch_motion called, but not supported!");
 +	return -1;
 +}
 +
 +static int method_remotedesktop_notify_touch_up(
 +		sd_bus_message *msg, void *data, sd_bus_error *ret_error) {
-+	logprint(DEBUG, "remotedesktop: npt: called, but not supported!");
++	logprint(ERROR, "remotedesktop: notify_touch_up called, but not supported!");
 +	return -1;
 +}
 +
@@ -2235,13 +2171,13 @@ index 0000000..1fe2f3a
 +	int err;
 +	err = xdpw_virtual_input_init(state);
 +	if (err) {
-+		goto fail_virtual_pointer;
++		goto fail_virtual_input;
 +	}
 +
 +	return sd_bus_add_object_vtable(state->bus, &slot, object_path,
 +		interface_name, remotedesktop_vtable, state);
 +
-+fail_virtual_pointer:
++fail_virtual_input:
 +	xdpw_virtual_input_finish(&state->remotedesktop);
 +
 +	return err;
@@ -2261,10 +2197,10 @@ index 0000000..1fe2f3a
 +}
 diff --git a/src/remotedesktop/shm.c b/src/remotedesktop/shm.c
 new file mode 100644
-index 0000000..f1940e6
+index 0000000..2bb5546
 --- /dev/null
 +++ b/src/remotedesktop/shm.c
-@@ -0,0 +1,91 @@
+@@ -0,0 +1,93 @@
 +/*
 + * Copied from wayvnc: https://github.com/any1/wayvnc/
 + *
@@ -2285,6 +2221,8 @@ index 0000000..f1940e6
 +
 +#include <errno.h>
 +#include <fcntl.h>
++// Required for SHM_ANON on BSD, by default disabled due to _POSIX_C_SOURCE
++#define __BSD_VISIBLE 1
 +#include <sys/mman.h>
 +#include <time.h>
 +#include <unistd.h>
@@ -2358,10 +2296,10 @@ index 0000000..f1940e6
 +}
 diff --git a/src/remotedesktop/virtual_input.c b/src/remotedesktop/virtual_input.c
 new file mode 100644
-index 0000000..20c9cbc
+index 0000000..a24c74a
 --- /dev/null
 +++ b/src/remotedesktop/virtual_input.c
-@@ -0,0 +1,89 @@
+@@ -0,0 +1,88 @@
 +#include "virtual_input.h"
 +
 +#include "virtual-keyboard-unstable-v1-client-protocol.h"
@@ -2405,7 +2343,6 @@ index 0000000..20c9cbc
 +		ctx->seat = wl_registry_bind(reg, id, &wl_seat_interface, 7);
 +	}
 +}
-+
 +
 +static void wlr_registry_handle_remove(void *data, struct wl_registry *reg,
 +		uint32_t id) {
@@ -2451,29 +2388,11 @@ index 0000000..20c9cbc
 +		zwlr_virtual_pointer_manager_v1_destroy(ctx->virtual_pointer_manager);
 +	}
 +}
-diff --git a/src/screencast/ext_image_copy.c b/src/screencast/ext_image_copy.c
-index 05ee467..bfbdec4 100644
---- a/src/screencast/ext_image_copy.c
-+++ b/src/screencast/ext_image_copy.c
-@@ -326,8 +326,11 @@ void xdpw_ext_ic_session_close(struct xdpw_screencast_instance *cast) {
- }
- 
- int xdpw_ext_ic_session_init(struct xdpw_screencast_instance *cast) {
--	if (cast->ctx->ext_image_copy_capture_manager == NULL ||
--			cast->ctx->ext_output_image_capture_source_manager == NULL) {
-+	if ((cast->target->type == MONITOR &&
-+			(cast->ctx->ext_image_copy_capture_manager == NULL ||
-+			cast->ctx->ext_output_image_capture_source_manager == NULL))
-+			|| (cast->target->type == WINDOW &&
-+				cast->ctx->ext_foreign_toplevel_image_capture_source_manager == NULL)) {
- 		logprint(INFO, "ext: unsupported");
- 		return -1;
- 	}
 diff --git a/src/screencast/screencast.c b/src/screencast/screencast.c
-index 7d18d45..90a90f5 100644
+index 448f2b2..4117f82 100644
 --- a/src/screencast/screencast.c
 +++ b/src/screencast/screencast.c
-@@ -222,7 +222,7 @@ bool setup_target(struct xdpw_screencast_context *ctx, struct xdpw_session *sess
+@@ -228,7 +228,7 @@ bool setup_target(struct xdpw_screencast_context *ctx, struct xdpw_session *sess
  
  }
  
@@ -2482,7 +2401,7 @@ index 7d18d45..90a90f5 100644
  	int ret;
  	ret = xdpw_wlr_session_init(cast);
  	if (ret < 0) {
-@@ -582,7 +582,7 @@ static int method_screencast_start(sd_bus_message *msg, void *data,
+@@ -588,7 +588,7 @@ static int method_screencast_start(sd_bus_message *msg, void *data,
  	}
  
  	if (!cast->initialized) {
@@ -2491,22 +2410,6 @@ index 7d18d45..90a90f5 100644
  	}
  	if (ret < 0) {
  		return ret;
-diff --git a/src/screencast/wlr_screencopy.c b/src/screencast/wlr_screencopy.c
-index a3b69d8..806de53 100644
---- a/src/screencast/wlr_screencopy.c
-+++ b/src/screencast/wlr_screencopy.c
-@@ -184,6 +184,11 @@ static void wlr_frame_damage(void *data, struct zwlr_screencopy_frame_v1 *frame,
- 	logprint(TRACE, "wlroots: damage event handler");
- 
- 	struct xdpw_buffer *buffer = cast->current_frame.xdpw_buffer;
-+	if(!buffer){
-+		logprint(TRACE, "wlroots: frame not created. Ignore frame damage");
-+		return ;
-+	}
-+
- 	logprint(TRACE, "wlroots: damage %"PRIu32": %"PRIu32",%"PRIu32"x%"PRIu32",%"PRIu32, buffer->damage.size, x, y, width, height);
- 	struct xdpw_frame_damage *damage = wl_array_add(&buffer->damage, sizeof(*damage));
- 	*damage = (struct xdpw_frame_damage){ .x = x, .y = y, .width = width, .height = height };
 diff --git a/wlr.portal b/wlr.portal
 index aa63335..087c008 100644
 --- a/wlr.portal
@@ -2517,6 +2420,3 @@ index aa63335..087c008 100644
 -Interfaces=org.freedesktop.impl.portal.Screenshot;org.freedesktop.impl.portal.ScreenCast;
 +Interfaces=org.freedesktop.impl.portal.Screenshot;org.freedesktop.impl.portal.ScreenCast;org.freedesktop.impl.portal.RemoteDesktop;
  UseIn=wlroots;sway;Wayfire;river;phosh;Hyprland;
--- 
-2.50.1
-
