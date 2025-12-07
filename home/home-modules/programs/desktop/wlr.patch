@@ -2410,6 +2410,22 @@ index 448f2b2..4117f82 100644
  	}
  	if (ret < 0) {
  		return ret;
+diff --git a/src/screencast/wlr_screencopy.c b/src/screencast/wlr_screencopy.c
+index d4d0eb9..aa4ecab 100644
+--- a/src/screencast/wlr_screencopy.c
++++ b/src/screencast/wlr_screencopy.c
+@@ -181,6 +181,11 @@ static void wlr_frame_damage(void *data, struct zwlr_screencopy_frame_v1 *frame,
+ 	logprint(TRACE, "wlroots: damage event handler");
+ 
+ 	struct xdpw_buffer *buffer = cast->current_frame.xdpw_buffer;
++	if(!buffer){
++		logprint(TRACE, "wlroots: frame not created. Ignore frame damage");
++		return ;
++	}
++
+ 	logprint(TRACE, "wlroots: damage %"PRIu32": %"PRIu32",%"PRIu32"x%"PRIu32",%"PRIu32, buffer->damage.size, x, y, width, height);
+ 	struct xdpw_frame_damage *damage = wl_array_add(&buffer->damage, sizeof(*damage));
+ 	*damage = (struct xdpw_frame_damage){ .x = x, .y = y, .width = width, .height = height };
 diff --git a/wlr.portal b/wlr.portal
 index aa63335..087c008 100644
 --- a/wlr.portal
