@@ -48,6 +48,7 @@
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "iHD";
     QT_QPA_PLATFORM = "wayland";
+    GSK_RENDERER = "gl";
   };
   hardware.nvidia = {
     modesetting.enable = true;

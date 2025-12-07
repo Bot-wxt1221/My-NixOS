@@ -16,8 +16,4 @@
   sops.secrets.github_token = {
     mode = "0400";
   };
-  home.sessionVariables = {
-    GITHUB_TOKEN = "$(cat ${config.sops.secrets.github_token.path})";
-    GITHUB_PACKAGES_TOKEN = "$(cat ${config.sops.secrets.github_token.path})";
-  };
 }
