@@ -13,6 +13,7 @@
     ./shared-modules.nix
   ];
   haveBacklight = false;
+  programs.thunderbird.enable = lib.mkForce false;
   home.username = "wxt";
   home.homeDirectory = "/home/wxt";
   home.stateVersion = osConfig.system.stateVersion;
