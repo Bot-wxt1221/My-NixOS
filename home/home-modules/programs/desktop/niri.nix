@@ -33,7 +33,7 @@ in
   imports = [
     ./clipboard.nix
   ];
-  config = {
+  config = lib.mkIf config.enableDesktop {
     programs.fuzzel = {
       enable = true;
       settings = {
@@ -104,50 +104,6 @@ in
       };
     };
 
-    programs.niriswitcher = {
-      enable = true;
-      settings = {
-        keys = {
-          modifier = "Super";
-          switch = {
-            next = "Tab";
-            prev = "Shift+Tab";
-          };
-        };
-        center_on_focus = true;
-        appearance = {
-          system_theme = "dark";
-          icon_size = 64;
-        };
-      };
-      style = ''
-        .application-name {
-          opacity: 1;
-          color: rgba(255, 255, 255, 0.6);
-        }
-        .application.selected .application-name {
-          color: rgba(255, 255, 255, 1);
-        }
-      '';
-    };
-    systemd.user.services.niriswitcher = {
-      Install = {
-        WantedBy = [ config.wayland.systemd.target ];
-      };
-
-      Unit = {
-        ConditionEnvironment = "WAYLAND_DISPLAY";
-        Description = "niriswitcher";
-        After = [ config.wayland.systemd.target ];
-        PartOf = [ config.wayland.systemd.target ];
-      };
-
-      Service = {
-        ExecStart = "${lib.getExe pkgs.niriswitcher}";
-        Restart = "on-failure";
-        RestartSec = "10";
-      };
-    };
     home.file = {
       ".config/wayvnc/config".text = ''
         enable_auth=true

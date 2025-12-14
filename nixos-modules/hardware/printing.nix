@@ -50,5 +50,5 @@
     Allow all
     </Location>
     DefaultEncryption Never
-  ''; 
+  '';
 }

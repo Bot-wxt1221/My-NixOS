@@ -21,7 +21,7 @@
     let
       niri-taskbar = pkgs.nur.repos.linyinfeng.niri-taskbar;
     in
-    {
+    lib.mkIf config.enableDesktop {
       programs.waybar = {
         enable = true;
         systemd.enable = true;

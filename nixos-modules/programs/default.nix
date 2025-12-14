@@ -27,7 +27,6 @@
     ./ollama
     ./openssh
     ./qt
-    ./rustdesk
     # ./sing-box
     ./steam
     ./tailscale
