@@ -40,7 +40,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     niri-flake = {
-      url = "github:sodiboo/niri-flake/10aae4855ee275f7d80d85f4328c24265fb20f1f";
+      url = "github:sodiboo/niri-flake/d06ab0308d797dc4b2f9025d5952cca90afd11a7";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -137,8 +137,8 @@
       };
       packages.aarch64-linux.linux-roc-rk3328-cc =
         self.nixosConfigurations.wxt-roc-rk3328-cc.config.boot.kernelPackages.kernel;
-      packages.aarch64-linux.niri =
-        niri-flake.packages."aarch64-linux".niri-unstable.overrideAttrs
+      packages.x86_64-linux.niri =
+        niri-flake.packages."x86_64-linux".niri-unstable.overrideAttrs
           (old: {
             postPatch = (old.postPatch or "") + ''
               patch -p1 < ${./nixos-modules/programs/desktop/0422464cd26b0b42cc73069ada2dd8dafb34ae32.patch}

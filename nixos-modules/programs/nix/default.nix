@@ -32,7 +32,6 @@
     in
     builtins.concatMap collectFlakeInputs (builtins.attrValues inputs);
   nixpkgs.config.allowUnfree = true;
-  system.rebuild.enableNg = true;
   nix.registry.nixpkgs.flake = nixpkgs;
   environment.etc."nix/inputs/nixpkgs".source = "${nixpkgs}";
   nix.settings.nix-path = lib.mkForce "nixpkgs=/etc/nix/inputs/nixpkgs";
