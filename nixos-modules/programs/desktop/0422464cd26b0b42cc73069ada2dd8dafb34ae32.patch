@@ -1,26 +1,16 @@
-From 8a043bfeeb748efa403fe88c66401bdd54df80ff Mon Sep 17 00:00:00 2001
-From: wxt <3264117476@qq.com>
-Date: Sat, 6 Dec 2025 19:48:38 +0800
-Subject: [PATCH] feat: handle virtual keyboard by ourself
-
----
- src/input/mod.rs | 39 ++++++++++++++++++++-----------
- src/niri.rs      | 60 ++++++++++++++++++++++++++++++++++++++++++++++--
- 2 files changed, 84 insertions(+), 15 deletions(-)
-
 diff --git a/src/input/mod.rs b/src/input/mod.rs
-index 81e5d863..ee3dce36 100644
+index 5e055e6e..2d038208 100644
 --- a/src/input/mod.rs
 +++ b/src/input/mod.rs
-@@ -19,6 +19,7 @@ use smithay::backend::input::{
-     TabletToolTipState, TouchEvent,
+@@ -20,6 +20,7 @@ use smithay::backend::input::{
  };
  use smithay::backend::libinput::LibinputInputBackend;
+ use smithay::input::dnd::DnDGrab;
 +use smithay::input::keyboard::KeyboardHandle;
  use smithay::input::keyboard::{keysyms, FilterResult, Keysym, Layout, ModifiersState};
  use smithay::input::pointer::{
      AxisFrame, ButtonEvent, CursorIcon, CursorImageStatus, Focus, GestureHoldBeginEvent,
-@@ -358,16 +359,18 @@ impl State {
+@@ -360,16 +361,18 @@ impl State {
              .is_some_and(KeyboardShortcutsInhibitor::is_active)
      }
  
@@ -43,7 +33,7 @@ index 81e5d863..ee3dce36 100644
  
          // Stop bind key repeat on any release. This won't work 100% correctly in cases like:
          // 1. Press Mod
-@@ -395,11 +398,8 @@ impl State {
+@@ -397,11 +400,8 @@ impl State {
          // other changes.
          #[cfg(feature = "dbus")]
          let block = {
@@ -57,7 +47,7 @@ index 81e5d863..ee3dce36 100644
              if block != KbMonBlock::Pass {
                  *consumed_by_a11y = true;
              }
-@@ -413,14 +413,14 @@ impl State {
+@@ -415,14 +415,14 @@ impl State {
          #[cfg(not(feature = "dbus"))]
          let _ = consumed_by_a11y;
  
@@ -76,7 +66,7 @@ index 81e5d863..ee3dce36 100644
                  let modified = keysym.modified_sym();
                  let raw = keysym.raw_latin_sym_or_raw_current_sym();
                  let modifiers = modifiers_from_state(*mods);
-@@ -554,6 +554,19 @@ impl State {
+@@ -556,6 +556,19 @@ impl State {
  
          self.start_key_repeat(bind);
      }
@@ -97,7 +87,7 @@ index 81e5d863..ee3dce36 100644
      fn start_key_repeat(&mut self, bind: Bind) {
          if !bind.repeat {
 diff --git a/src/niri.rs b/src/niri.rs
-index e59de48b..14f74531 100644
+index 324b3c26..efdc8970 100644
 --- a/src/niri.rs
 +++ b/src/niri.rs
 @@ -19,7 +19,7 @@ use niri_config::{
@@ -127,7 +117,7 @@ index e59de48b..14f74531 100644
  use smithay::wayland::xdg_activation::XdgActivationState;
  use smithay::wayland::xdg_foreign::XdgForeignState;
  
-@@ -6571,6 +6573,60 @@ fn scale_relocate_crop<E: Element>(
+@@ -6558,6 +6560,60 @@ fn scale_relocate_crop<E: Element>(
      CropRenderElement::from_element(elem, output_scale, ws_geo)
  }
  
@@ -188,6 +178,3 @@ index e59de48b..14f74531 100644
  niri_render_elements! {
      OutputRenderElements<R> => {
          Monitor = MonitorRenderElement<R>,
--- 
-2.51.2
-
