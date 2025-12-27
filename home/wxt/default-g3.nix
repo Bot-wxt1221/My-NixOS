@@ -20,7 +20,7 @@
   programs.home-manager.enable = true;
   programs.git.settings = {
     commit = {
-      gpgsign = true;
+      gpgsign = false;
     };
     user = {
       signingKey = "CA84C7AEB96B2788DADCA9FD039BE163733B8242";
