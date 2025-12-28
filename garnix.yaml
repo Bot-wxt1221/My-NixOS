@@ -8,4 +8,5 @@ builds:
   - 'nixosConfigurations.iso-image-with-mininal-config'
   include:
   - '*.x86_64-linux.*'
+  - 'nixosConfigurations.wxt-g3'
   - defaultPackage.x86_64-linux
