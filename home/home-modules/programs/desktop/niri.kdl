@@ -8,11 +8,7 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 
 spawn-at-startup "bash" "@startClashVerge@"
-spawn-at-startup "rustdesk" "--tray"
-
-environment {
-    DISPLAY ":0"
-}
+spawn-at-startup "rustdesk"
 
 input {
     keyboard {
