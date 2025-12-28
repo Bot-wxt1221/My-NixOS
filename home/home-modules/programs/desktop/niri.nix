@@ -42,6 +42,7 @@ in
         };
       };
     };
+    home.file.".config/xdg-desktop-portal-wlr/config".source = ./xdg-desktop-portal-wlr.ini;
     home.packages = with pkgs; [
       xsel
       pkgs.swaylock-effects
