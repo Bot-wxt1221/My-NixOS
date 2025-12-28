@@ -43,11 +43,9 @@ in
       niri-use
       gnome-tweaks
       gnome-system-monitor
+      xwayland-satellite
     ];
-    programs.xwayland = {
-      enable = true;
-      package = pkgs.xwayland-satellite;
-    };
+    environment.pathsToLink = [ "/share/X11" ];
     environment.sessionVariables = {
       QT_QPA_PLATFORM = "wayland";
       QT_IM_MODULE = "fcitx5";

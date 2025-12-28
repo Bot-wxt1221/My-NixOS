@@ -197,34 +197,6 @@ in
         RestartSec = "10";
       };
     };
-    systemd.user.services.xwayland-satellite = {
-      Install = {
-        WantedBy = [ config.wayland.systemd.target ];
-      };
-
-      Unit = {
-        RefuseManualStop = true;
-        ConditionEnvironment = "WAYLAND_DISPLAY";
-        Description = "xwayland-satellite";
-        After = [ config.wayland.systemd.target ];
-        PartOf = [ config.wayland.systemd.target ];
-      };
-
-      Service = {
-        ExecStart =
-          let
-            script = pkgs.writeText "a.sh" ''
-              sleep 5
-              ${lib.getExe pkgs.xwayland-satellite} :0
-            '';
-          in
-          ''
-            ${lib.getExe pkgs.bash} ${script}
-          '';
-        Restart = "always";
-        RestartSec = "10";
-      };
-    };
     systemd.user.services.wayvnc = {
       Install = {
         WantedBy = [ config.wayland.systemd.target ];
