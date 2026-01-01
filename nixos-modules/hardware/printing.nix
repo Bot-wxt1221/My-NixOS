@@ -9,7 +9,6 @@
   services.printing.drivers = [
     pkgs.hplipWithPlugin
     pkgs.cups-pdf-to-pdf
-    pkgs.foo2zjs
   ];
   preservation.preserveAt."/persist" = {
     directories = [

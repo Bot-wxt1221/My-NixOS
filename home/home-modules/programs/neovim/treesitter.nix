@@ -27,7 +27,6 @@
       just
       json
       nix
-      jsonc
       typescript
       markdown
       markdown_inline
