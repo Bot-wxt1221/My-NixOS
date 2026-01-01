@@ -58,7 +58,10 @@ in
     xdg.portal.enable = true;
     xdg.portal.config.common.default = "*";
     programs.gnome-disks.enable = true;
-    services.devmon.enable = true;
+    services.udisks2 = {
+      enable = true;
+      mountOnMedia = true;
+    };
     services.gvfs.enable = true;
     services.gnome.gnome-keyring.enable = true;
   };
