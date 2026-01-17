@@ -113,7 +113,7 @@ in
     };
     home.activation.mimeapps-remove = lib.hm.dag.entryBefore [
       "checkLinkTargets"
-    ] ''rm -f ${config.home.homeDirectory}/.config/mimeapps.list'';
+    ] "rm -f ${config.home.homeDirectory}/.config/mimeapps.list";
     xdg.mimeApps =
       let
         br = "firefox-beta.desktop";

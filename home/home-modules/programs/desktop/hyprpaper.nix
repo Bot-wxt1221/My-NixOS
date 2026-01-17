@@ -21,8 +21,12 @@
       hyprpaper = {
         enable = true;
         settings = {
-          preload = [ "${config.home.homeDirectory}/.config/hypr/wallpaper.png" ];
-          wallpaper = [ ",${config.home.homeDirectory}/.config/hypr/wallpaper.png" ];
+          wallpaper = [
+            {
+              monitor = "";
+              path = "${config.home.homeDirectory}/.config/hypr/wallpaper.png";
+            }
+          ];
         };
         package = pkgs.hyprpaper;
       };
