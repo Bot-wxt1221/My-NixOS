@@ -29,7 +29,7 @@
     weston
     file-roller
     pigz
-    nixfmt-rfc-style
+    nixfmt
     wayvnc
     bilibili
     wl-clipboard

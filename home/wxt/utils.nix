@@ -32,7 +32,7 @@
     weston
     file-roller
     pigz
-    nixfmt-rfc-style
+    nixfmt
     wayvnc
     realvnc-vnc-viewer
     bilibili
