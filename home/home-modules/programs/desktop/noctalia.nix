@@ -7,7 +7,7 @@
 
 {
   config = {
-    systemd.user.services.agent-polkit = {
+    systemd.user.services.noctalia-shell = {
       Install = {
         WantedBy = [ config.wayland.systemd.target ];
       };
