@@ -14,7 +14,7 @@
 
       Unit = {
         ConditionEnvironment = "WAYLAND_DISPLAY";
-        Description = "agent-polkit";
+        Description = "noctalia-shell";
         After = [ config.wayland.systemd.target ];
         PartOf = [ config.wayland.systemd.target ];
       };
