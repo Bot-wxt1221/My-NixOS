@@ -12,8 +12,9 @@
   imports = [
     ./fcitx5.nix
     ./hyprpaper.nix
-    ./waybar
+    #    ./waybar
     ./niri.nix
+    ./noctalia.nix
     ./swaync
     #    ./clipboard.nix
   ];
