@@ -12,7 +12,6 @@
 
     ./shared-modules.nix
   ];
-  haveBacklight = false;
   enableDesktop = false;
   programs.thunderbird.enable = lib.mkForce false;
   home.username = "wxt";
