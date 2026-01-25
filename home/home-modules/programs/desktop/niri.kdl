@@ -9,6 +9,20 @@
 
 spawn-at-startup "bash" "@startClashVerge@"
 spawn-at-startup "rustdesk"
+spawn-at-startup "noctalia-shell"
+
+window-rule {
+  // Rounded corners for a modern look.
+  geometry-corner-radius 20
+
+  // Clips window contents to the rounded corner boundaries.
+  clip-to-geometry true
+}
+
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
+}
 
 input {
     keyboard {
@@ -228,8 +242,8 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Q { spawn "konsole"; }
     Mod+E { spawn "nautilus" "-w"; }
-    Mod+R { spawn "fuzzel"; }
-    Mod+L { spawn "bash" "@swaylockscript@"; }
+    Mod+R { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    Mod+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
     // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }

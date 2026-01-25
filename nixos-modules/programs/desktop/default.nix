@@ -28,13 +28,13 @@ in
     };
   };
   config = {
-    security.pam.services.swaylock = { };
     security.pam.services.wayvnc = {
       text = ''
         auth    required pam_unix.so nodelay deny=3 unlock_time=600
         account required pam_unix.so nodelay deny=3 unlock_time=600
       '';
     };
+    services.upower.enable = true;
     services.displayManager.gdm.enable = true;
     services.displayManager.gdm.wayland = true;
     services.displayManager.sessionPackages = [ niri-use ];

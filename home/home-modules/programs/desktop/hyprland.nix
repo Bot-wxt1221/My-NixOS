@@ -7,7 +7,6 @@
 
   ];
   home.packages = with pkgs; [
-    fuzzel
     hyprshot
   ];
   home.pointerCursor = {

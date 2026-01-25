@@ -6,7 +6,6 @@ _: {
   preservation.preserveAt."/persist".users.wxt = {
     directories = [
       ".config/rustdesk"
-      ".config/noctalia"
     ];
   };
 }

@@ -34,18 +34,9 @@ in
     ./clipboard.nix
   ];
   config = lib.mkIf config.enableDesktop {
-    programs.fuzzel = {
-      enable = true;
-      settings = {
-        main = {
-          terminal = "${lib.getExe pkgs.zsh}";
-        };
-      };
-    };
     home.file.".config/xdg-desktop-portal-wlr/config".source = ./xdg-desktop-portal-wlr.ini;
     home.packages = with pkgs; [
       xsel
-      pkgs.swaylock-effects
       clipboard.packages."x86_64-linux".default
       glib.bin
     ];
@@ -219,9 +210,6 @@ in
 
     xdg.configFile."niri/config.kdl".text = builtins.readFile (
       (pkgs.replaceVars ./niri.kdl {
-        swaylockscript = pkgs.writeText "a.sh" ''
-          ${lib.getExe pkgs.swaylock-effects} --screenshots --clock --font "WenQuanYi Micro Hei" --effect-pixelate 20 --effect-greyscale --effect-vignette 0.7:0.7
-        '';
         startClashVerge = pkgs.writeText "a.sh" ''
           sleep 5
           systemctl restart --user waybar
