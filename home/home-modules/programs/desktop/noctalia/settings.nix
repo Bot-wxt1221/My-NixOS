@@ -6,7 +6,7 @@
     customLaunchPrefix = "";
     customLaunchPrefixEnabled = false;
     enableClipPreview = true;
-    enableClipboardHistory = false;
+    enableClipboardHistory = true;
     iconMode = "tabler";
     ignoreMouseInput = false;
     pinnedApps = [ ];
