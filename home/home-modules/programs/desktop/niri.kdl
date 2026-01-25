@@ -9,7 +9,6 @@
 
 spawn-at-startup "bash" "@startClashVerge@"
 spawn-at-startup "rustdesk"
-spawn-at-startup "noctalia-shell"
 
 window-rule {
   // Rounded corners for a modern look.

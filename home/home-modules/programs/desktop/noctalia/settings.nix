@@ -296,14 +296,14 @@
     wallpaperChange = "";
   };
   location = {
-    analogClockInCalendar = false;
+    analogClockInCalendar = true;
     firstDayOfWeek = -1;
     hideWeatherCityName = false;
     hideWeatherTimezone = false;
-    name = "Tokyo";
+    name = "Chengdu";
     showCalendarEvents = true;
     showCalendarWeather = true;
-    showWeekNumberInCalendar = false;
+    showWeekNumberInCalendar = true;
     use12hourFormat = false;
     useFahrenheit = false;
     weatherEnabled = true;
