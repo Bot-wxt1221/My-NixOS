@@ -96,5 +96,7 @@
           --replace-fail "org.freedesktop.portal.Desktop" "org.freedesktop.portal.Desktop-for-rustdesk"
       '';
     }))
+    discord
+    telegram-desktop
   ];
 }

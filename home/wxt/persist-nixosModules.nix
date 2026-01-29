@@ -28,6 +28,9 @@ _: {
       ".var"
 
       ".config/gh"
+
+      ".local/share/TelegramDesktop"
+      ".config/discord"
     ];
     files = [
       ".wakatime.cfg"

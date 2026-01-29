@@ -14,7 +14,7 @@
     ./hyprpaper.nix
     #./waybar
     ./niri.nix
-    ./noctalia
+    ./dankmaterialshell
     # ./swaync
     #    ./clipboard.nix
   ];
