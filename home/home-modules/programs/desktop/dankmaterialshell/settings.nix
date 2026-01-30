@@ -113,7 +113,7 @@
   showWorkspaceName = false;
   showWorkspacePadding = false;
   workspaceScrolling = false;
-  showWorkspaceApps = true;
+  showWorkspaceApps = false;
   maxWorkspaceIcons = 3;
   workspaceAppIconSizeOffset = 0;
   groupWorkspaceApps = true;
@@ -366,8 +366,8 @@
         "clock"
         "weather"
         {
-          id = "dankKDEConnect";
           enabled = true;
+          id = "dankKDEConnect";
         }
       ];
       enabled = true;
@@ -379,15 +379,18 @@
       innerPadding = 4;
       leftWidgets = [
         "launcherButton"
-        "workspaceSwitcher"
         {
-          id = "focusedWindow";
+          id = "workspaceSwitcher";
           enabled = true;
-          focusedWindowCompactMode = false;
         }
         {
-          id = "appsDock";
           enabled = true;
+          focusedWindowCompactMode = false;
+          id = "focusedWindow";
+        }
+        {
+          enabled = true;
+          id = "appsDock";
         }
       ];
       maximizeDetection = true;
@@ -398,13 +401,38 @@
       popupGapsManual = 4;
       position = 1;
       rightWidgets = [
-        "systemTray"
-        "clipboard"
-        "cpuUsage"
-        "memUsage"
-        "notificationButton"
-        "battery"
-        "controlCenterButton"
+        {
+          id = "systemTray";
+          enabled = true;
+        }
+        {
+          id = "clipboard";
+          enabled = true;
+        }
+        {
+          id = "nixMonitor";
+          enabled = true;
+        }
+        {
+          id = "cpuUsage";
+          enabled = true;
+        }
+        {
+          id = "memUsage";
+          enabled = true;
+        }
+        {
+          id = "notificationButton";
+          enabled = true;
+        }
+        {
+          id = "battery";
+          enabled = true;
+        }
+        {
+          id = "controlCenterButton";
+          enabled = true;
+        }
       ];
       screenPreferences = [
         "all"

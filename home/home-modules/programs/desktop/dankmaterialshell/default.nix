@@ -30,7 +30,21 @@ in
           settings = {
             enable = true;
           };
-          src = dms-plugin-registry.packages.${pkgs.system}.dankKDEConnect;
+          src = dms-plugin-registry.packages.${pkgs.stdenv.hostPlatform.system}.dankKDEConnect;
+        };
+        niriWindows = {
+          enable = true;
+          settings = {
+            enable = true;
+          };
+          src = dms-plugin-registry.packages.${pkgs.stdenv.hostPlatform.system}.niriWindows;
+        };
+        powerOptions = {
+          enable = true;
+          settings = {
+            enable = true;
+          };
+          src = dms-plugin-registry.packages.${pkgs.stdenv.hostPlatform.system}.powerOptions;
         };
       };
       enable = true;
