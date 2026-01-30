@@ -4,6 +4,7 @@
   config,
   osConfig,
   dms,
+  dms-plugin-registry,
   ...
 }:
 let
@@ -23,6 +24,15 @@ in
   ];
   config = {
     programs.dank-material-shell = {
+      plugins = {
+        dankKDEConnect = {
+          enable = true;
+          settings = {
+            enable = true;
+          };
+          src = dms-plugin-registry.packages.${pkgs.system}.dankKDEConnect;
+        };
+      };
       enable = true;
       systemd = {
         enable = true;
@@ -35,5 +45,8 @@ in
     home.file.".config/DankMaterialShell/settings.json" = {
       source = generateJson "settings" (import ./settings.nix { inherit lib config osConfig; });
     };
+    home.activation.copy-session = ''
+      cp ${./session.json} /home/wxt/.local/state/DankMaterialShell/session.json
+    '';
   };
 }

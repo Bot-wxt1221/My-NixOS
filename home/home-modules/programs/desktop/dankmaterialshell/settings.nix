@@ -11,6 +11,7 @@
   dockTransparency = 1;
   widgetBackgroundColor = "sch";
   widgetColorMode = "default";
+  controlCenterTileColorMode = "primary";
   cornerRadius = 12;
   niriLayoutGapsOverride = -1;
   niriLayoutRadiusOverride = -1;
@@ -23,7 +24,9 @@
   mangoLayoutBorderSize = -1;
   use24HourClock = true;
   showSeconds = true;
+  padHours12Hour = false;
   useFahrenheit = false;
+  windSpeedUnit = "kmh";
   nightModeEnabled = false;
   animationSpeed = 1;
   customAnimationDuration = 500;
@@ -66,43 +69,43 @@
   privacyShowScreenShareIcon = false;
   controlCenterWidgets = [
     {
+      enabled = true;
       id = "volumeSlider";
-      enabled = true;
       width = 50;
     }
     {
+      enabled = true;
       id = "brightnessSlider";
-      enabled = true;
       width = 50;
     }
     {
+      enabled = true;
       id = "wifi";
-      enabled = true;
       width = 50;
     }
     {
+      enabled = true;
       id = "bluetooth";
-      enabled = true;
       width = 50;
     }
     {
+      enabled = true;
       id = "audioOutput";
-      enabled = true;
       width = 50;
     }
     {
+      enabled = true;
       id = "audioInput";
-      enabled = true;
       width = 50;
     }
     {
+      enabled = true;
       id = "nightMode";
-      enabled = true;
       width = 50;
     }
     {
-      id = "darkMode";
       enabled = true;
+      id = "darkMode";
       width = 50;
     }
   ];
@@ -112,12 +115,14 @@
   workspaceScrolling = false;
   showWorkspaceApps = true;
   maxWorkspaceIcons = 3;
+  workspaceAppIconSizeOffset = 0;
   groupWorkspaceApps = true;
   workspaceFollowFocus = true;
   showOccupiedWorkspacesOnly = false;
   reverseScrolling = false;
   dwlShowAllTags = false;
   workspaceColorMode = "default";
+  workspaceOccupiedColorMode = "none";
   workspaceUnfocusedColorMode = "default";
   workspaceUrgentColorMode = "default";
   workspaceFocusedBorderEnabled = false;
@@ -131,6 +136,9 @@
   clockCompactMode = false;
   focusedWindowCompactMode = false;
   runningAppsCompactMode = true;
+  barMaxVisibleApps = 0;
+  barMaxVisibleRunningApps = 0;
+  barShowOverflowBadge = true;
   keyboardLayoutNameCompactMode = false;
   runningAppsCurrentWorkspace = false;
   runningAppsGroupByApp = false;
@@ -141,30 +149,40 @@
   mediaSize = 1;
   appLauncherViewMode = "list";
   spotlightModalViewMode = "list";
+  browserPickerViewMode = "grid";
+  browserUsageHistory = { };
+  appPickerViewMode = "grid";
+  filePickerUsageHistory = { };
   sortAppsAlphabetically = false;
   appLauncherGridColumns = 4;
   spotlightCloseNiriOverview = true;
+  spotlightSectionViewModes = { };
+  appDrawerSectionViewModes = { };
   niriOverviewOverlayEnabled = true;
+  dankLauncherV2Size = "compact";
+  dankLauncherV2BorderEnabled = false;
+  dankLauncherV2BorderThickness = 2;
+  dankLauncherV2BorderColor = "primary";
+  dankLauncherV2ShowFooter = true;
   useAutoLocation = false;
   weatherEnabled = true;
   networkPreference = "auto";
-  vpnLastConnected = "";
   iconTheme = "System Default";
   cursorSettings = {
-    theme = "System Default";
-    size = 24;
-    niri = {
-      hideWhenTyping = false;
-      hideAfterInactiveMs = 0;
+    dwl = {
+      cursorHideTimeout = 0;
     };
     hyprland = {
       hideOnKeyPress = false;
       hideOnTouch = false;
       inactiveTimeout = 0;
     };
-    dwl = {
-      cursorHideTimeout = 0;
+    niri = {
+      hideAfterInactiveMs = 0;
+      hideWhenTyping = false;
     };
+    size = 24;
+    theme = "System Default";
   };
   launcherLogoMode = "os";
   launcherLogoCustomPath = "";
@@ -236,8 +254,10 @@
   matugenTemplateDgop = true;
   matugenTemplateKcolorscheme = true;
   matugenTemplateVscode = true;
+  matugenTemplateEmacs = true;
   showDock = false;
   dockAutoHide = false;
+  dockSmartAutoHide = false;
   dockGroupByApp = false;
   dockOpenOnOverview = false;
   dockPosition = 1;
@@ -251,6 +271,16 @@
   dockBorderOpacity = 1;
   dockBorderThickness = 1;
   dockIsolateDisplays = false;
+  dockLauncherEnabled = false;
+  dockLauncherLogoMode = "apps";
+  dockLauncherLogoCustomPath = "";
+  dockLauncherLogoColorOverride = "";
+  dockLauncherLogoSizeOffset = 0;
+  dockLauncherLogoBrightness = 0.5;
+  dockLauncherLogoContrast = 1;
+  dockMaxVisibleApps = 0;
+  dockMaxVisibleRunningApps = 0;
+  dockShowOverflowBadge = true;
   notificationOverlayEnabled = true;
   modalDarkenBackground = true;
   lockScreenShowPowerActions = true;
@@ -259,6 +289,8 @@
   lockScreenShowDate = true;
   lockScreenShowProfileImage = true;
   lockScreenShowPasswordField = true;
+  lockScreenShowMediaPlayer = true;
+  lockScreenPowerOffMonitorsOnLock = false;
   enableFprint = false;
   maxFprintTries = 15;
   lockScreenActiveMonitor = "all";
@@ -315,26 +347,56 @@
   showOnLastDisplay = { };
   niriOutputSettings = { };
   hyprlandOutputSettings = { };
+  displayProfiles = { };
+  activeDisplayProfile = { };
+  displayProfileAutoSelect = false;
+  displayShowDisconnected = false;
+  displaySnapToEdge = true;
   barConfigs = [
     {
-      id = "default";
-      name = "Main Bar";
-      enabled = true;
-      position = 1;
-      screenPreferences = [
-        "all"
-      ];
-      showOnLastDisplay = true;
-      leftWidgets = [
-        "launcherButton"
-        "workspaceSwitcher"
-        "focusedWindow"
-      ];
+      autoHide = false;
+      autoHideDelay = 250;
+      borderColor = "surfaceText";
+      borderEnabled = false;
+      borderOpacity = 1;
+      borderThickness = 1;
+      bottomGap = 0;
       centerWidgets = [
         "music"
         "clock"
         "weather"
+        {
+          id = "dankKDEConnect";
+          enabled = true;
+        }
       ];
+      enabled = true;
+      fontScale = 1;
+      gothCornerRadiusOverride = false;
+      gothCornerRadiusValue = 12;
+      gothCornersEnabled = true;
+      id = "default";
+      innerPadding = 4;
+      leftWidgets = [
+        "launcherButton"
+        "workspaceSwitcher"
+        {
+          id = "focusedWindow";
+          enabled = true;
+          focusedWindowCompactMode = false;
+        }
+        {
+          id = "appsDock";
+          enabled = true;
+        }
+      ];
+      maximizeDetection = true;
+      name = "Main Bar";
+      noBackground = false;
+      openOnOverview = true;
+      popupGapsAuto = true;
+      popupGapsManual = 4;
+      position = 1;
       rightWidgets = [
         "systemTray"
         "clipboard"
@@ -344,40 +406,27 @@
         "battery"
         "controlCenterButton"
       ];
-      spacing = 4;
-      innerPadding = 4;
-      bottomGap = 0;
-      transparency = 0.8;
-      widgetTransparency = 1;
-      squareCorners = false;
-      noBackground = false;
-      gothCornersEnabled = true;
-      gothCornerRadiusOverride = false;
-      gothCornerRadiusValue = 12;
-      borderEnabled = false;
-      borderColor = "surfaceText";
-      borderOpacity = 1;
-      borderThickness = 1;
-      widgetOutlineEnabled = true;
-      widgetOutlineColor = "primary";
-      widgetOutlineOpacity = 1;
-      widgetOutlineThickness = 1;
-      fontScale = 1;
-      autoHide = false;
-      autoHideDelay = 250;
-      showOnWindowsOpen = false;
-      openOnOverview = true;
-      visible = true;
-      popupGapsAuto = true;
-      popupGapsManual = 4;
-      maximizeDetection = true;
+      screenPreferences = [
+        "all"
+      ];
       scrollEnabled = true;
       scrollXBehavior = "column";
       scrollYBehavior = "workspace";
-      shadowIntensity = 0;
-      shadowOpacity = 60;
       shadowColorMode = "text";
       shadowCustomColor = "#000000";
+      shadowIntensity = 0;
+      shadowOpacity = 60;
+      showOnLastDisplay = true;
+      showOnWindowsOpen = false;
+      spacing = 4;
+      squareCorners = false;
+      transparency = 0.8;
+      visible = true;
+      widgetOutlineColor = "primary";
+      widgetOutlineEnabled = true;
+      widgetOutlineOpacity = 1;
+      widgetOutlineThickness = 1;
+      widgetTransparency = 1;
     }
   ];
   desktopClockEnabled = false;
@@ -456,5 +505,7 @@
       trigger = "?";
     };
   };
+  launcherPluginVisibility = { };
+  launcherPluginOrder = [ ];
   configVersion = 5;
 }
