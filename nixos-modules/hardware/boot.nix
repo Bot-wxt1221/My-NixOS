@@ -6,4 +6,6 @@ _: {
     netbootxyz.enable = true;
   };
   boot.loader.efi.canTouchEfiVariables = true;
+  system.nixos-init.enable = true;
+  services.userborn.enable = true;
 }
