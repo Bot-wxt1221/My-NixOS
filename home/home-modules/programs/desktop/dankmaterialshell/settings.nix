@@ -26,7 +26,7 @@
   showSeconds = true;
   padHours12Hour = false;
   useFahrenheit = false;
-  windSpeedUnit = "kmh";
+  windSpeedUnit = "ms";
   nightModeEnabled = false;
   animationSpeed = 1;
   customAnimationDuration = 500;
@@ -380,8 +380,8 @@
       leftWidgets = [
         "launcherButton"
         {
-          id = "workspaceSwitcher";
           enabled = true;
+          id = "workspaceSwitcher";
         }
         {
           enabled = true;
@@ -402,36 +402,36 @@
       position = 1;
       rightWidgets = [
         {
+          enabled = true;
           id = "systemTray";
-          enabled = true;
         }
         {
+          enabled = true;
           id = "clipboard";
-          enabled = true;
         }
         {
+          enabled = true;
           id = "nixMonitor";
-          enabled = true;
         }
         {
+          enabled = true;
           id = "cpuUsage";
-          enabled = true;
         }
         {
+          enabled = true;
           id = "memUsage";
-          enabled = true;
         }
         {
+          enabled = true;
           id = "notificationButton";
-          enabled = true;
         }
         {
+          enabled = true;
           id = "battery";
-          enabled = true;
         }
         {
-          id = "controlCenterButton";
           enabled = true;
+          id = "controlCenterButton";
         }
       ];
       screenPreferences = [

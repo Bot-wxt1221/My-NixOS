@@ -46,6 +46,13 @@ in
           };
           src = dms-plugin-registry.packages.${pkgs.stdenv.hostPlatform.system}.powerOptions;
         };
+        DankCalculator = {
+          enable = true;
+          settings = {
+            enable = true;
+          };
+          src = dms-plugin-registry.packages.${pkgs.stdenv.hostPlatform.system}.calculator;
+        };
       };
       enable = true;
       systemd = {
