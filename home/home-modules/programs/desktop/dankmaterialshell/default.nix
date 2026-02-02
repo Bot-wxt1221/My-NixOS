@@ -46,7 +46,7 @@ in
           };
           src = dms-plugin-registry.packages.${pkgs.stdenv.hostPlatform.system}.powerOptions;
         };
-        DankCalculator = {
+        calculator = {
           enable = true;
           settings = {
             enable = true;
