@@ -9,6 +9,7 @@ _: {
       ".local/state/DankMaterialShell"
       ".local/state/wireplumber"
       ".config/kdeconnect"
+      ".config/warp"
     ];
   };
 }

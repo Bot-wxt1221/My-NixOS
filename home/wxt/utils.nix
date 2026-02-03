@@ -98,5 +98,8 @@
     }))
     discord
     telegram-desktop
+
+    seahorse
+    warp
   ];
 }
