@@ -11,9 +11,9 @@
     "https://mirrors.ustc.edu.cn/nix-channels/store"
     "https://cache.nixos.org"
     "https://nix-community.cachix.org"
+    "https://cache.nixos-cuda.org"
     "https://wxt1221.cachix.org"
     "https://luogu-judge.cachix.org"
-    "https://niri.cachix.org"
     "https://cache.garnix.io"
   ];
   nix.settings.narinfo-cache-positive-ttl = 3600;
@@ -22,6 +22,7 @@
     "wxt"
   ];
   nix.settings.trusted-public-keys = [
+    "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     "wxt1221.cachix.org-1:JmeZ+5reEo1i5qBc6X+2hEadoN5GFqTOQcwaGD5PEwY="
     "luogu-judge.cachix.org-1:vBoiA0n//KfYZ5Xp5HhcujXcdT7dK3+rEK3U4zw66TQ="
