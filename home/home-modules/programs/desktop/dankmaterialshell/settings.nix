@@ -12,6 +12,7 @@
   widgetBackgroundColor = "sch";
   widgetColorMode = "default";
   controlCenterTileColorMode = "primary";
+  buttonColorMode = "primary";
   cornerRadius = 12;
   niriLayoutGapsOverride = -1;
   niriLayoutRadiusOverride = -1;
@@ -114,6 +115,7 @@
   showWorkspacePadding = false;
   workspaceScrolling = false;
   showWorkspaceApps = false;
+  workspaceDragReorder = true;
   maxWorkspaceIcons = 3;
   workspaceAppIconSizeOffset = 0;
   groupWorkspaceApps = true;
@@ -139,6 +141,12 @@
   barMaxVisibleApps = 0;
   barMaxVisibleRunningApps = 0;
   barShowOverflowBadge = true;
+  appsDockHideIndicators = false;
+  appsDockColorizeActive = false;
+  appsDockActiveColorMode = "primary";
+  appsDockEnlargeOnHover = false;
+  appsDockEnlargePercentage = 125;
+  appsDockIconSizePercentage = 100;
   keyboardLayoutNameCompactMode = false;
   runningAppsCurrentWorkspace = false;
   runningAppsGroupByApp = false;
@@ -385,11 +393,6 @@
         }
         {
           enabled = true;
-          focusedWindowCompactMode = false;
-          id = "focusedWindow";
-        }
-        {
-          enabled = true;
           id = "appsDock";
         }
       ];
@@ -402,36 +405,36 @@
       position = 1;
       rightWidgets = [
         {
-          enabled = true;
           id = "systemTray";
+          enabled = true;
         }
         {
-          enabled = true;
           id = "clipboard";
+          enabled = true;
         }
         {
-          enabled = true;
-          id = "nixMonitor";
-        }
-        {
-          enabled = true;
           id = "cpuUsage";
+          enabled = true;
         }
         {
-          enabled = true;
           id = "memUsage";
+          enabled = true;
         }
         {
-          enabled = true;
           id = "notificationButton";
+          enabled = true;
         }
         {
-          enabled = true;
           id = "battery";
+          enabled = true;
         }
         {
+          id = "powerUsagePlugin";
           enabled = true;
+        }
+        {
           id = "controlCenterButton";
+          enabled = true;
         }
       ];
       screenPreferences = [

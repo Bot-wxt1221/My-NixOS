@@ -50,9 +50,27 @@ in
           enable = true;
           settings = {
             enable = true;
+            trigger = "=";
           };
           src = dms-plugin-registry.packages.${pkgs.stdenv.hostPlatform.system}.calculator;
         };
+        powerUsagePlugin = {
+          enable = true;
+          settings = {
+            enable = true;
+            selectedPopout = "battery";
+          };
+          src = dms-plugin-registry.packages.${pkgs.stdenv.hostPlatform.system}.powerUsagePlugin;
+        };
+        emojiLauncher = {
+          enable = true;
+          settings = {
+            enable = true;
+            trigger = "@";
+          };
+          src = dms-plugin-registry.packages.${pkgs.stdenv.hostPlatform.system}.emojiLauncher;
+        };
+
       };
       enable = true;
       systemd = {
