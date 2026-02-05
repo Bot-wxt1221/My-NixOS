@@ -13,7 +13,6 @@
     fastfetch
     yazi
     sops
-    kdePackages.konversation
     kdePackages.konsole
     gcc
     gdb
@@ -25,7 +24,7 @@
     gnome-logs
     helvum
     gnome-graphs
-    # cpu-x
+    cpu-x
     nautilus
     gimp3-with-plugins
     gnome-calculator

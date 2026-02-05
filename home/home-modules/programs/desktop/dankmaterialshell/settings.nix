@@ -223,7 +223,7 @@
   fadeToLockGracePeriod = 5;
   fadeToDpmsEnabled = true;
   fadeToDpmsGracePeriod = 5;
-  launchPrefix = "";
+  launchPrefix = "niri msg action spawn -- ";
   brightnessDevicePins = { };
   wifiNetworkPins = { };
   bluetoothDevicePins = { };
