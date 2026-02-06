@@ -51,6 +51,10 @@
       url = "github:AvengeMedia/dms-plugin-registry";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    firefox-gnome-theme = {
+      url = "github:rafaelmardojai/firefox-gnome-theme";
+      flake = false;
+    };
   };
 
   outputs =
@@ -71,6 +75,7 @@
       niri-flake,
       dms,
       dms-plugin-registry,
+      firefox-gnome-theme,
       ...
     }@inputs:
     let
@@ -89,6 +94,7 @@
           nixos-facter-modules
           dms
           dms-plugin-registry
+          firefox-gnome-theme
           ;
       };
       SystemSpecialArgs = {

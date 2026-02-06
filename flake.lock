@@ -77,6 +77,22 @@
         "type": "github"
       }
     },
+    "firefox-gnome-theme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1769534627,
+        "narHash": "sha256-zWHaHaj+g56VZlqy7siL4OQucd6RUo0vBIcJTqNMw4A=",
+        "owner": "rafaelmardojai",
+        "repo": "firefox-gnome-theme",
+        "rev": "5d6052b18a6cfff6ee69859206c68b8f1947f970",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rafaelmardojai",
+        "repo": "firefox-gnome-theme",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -497,6 +513,7 @@
         "clipboard": "clipboard",
         "dms": "dms",
         "dms-plugin-registry": "dms-plugin-registry",
+        "firefox-gnome-theme": "firefox-gnome-theme",
         "home-manager": "home-manager",
         "luogu-gcc": "luogu-gcc",
         "neovim": "neovim",
