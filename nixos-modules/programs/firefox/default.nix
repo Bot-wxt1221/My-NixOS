@@ -102,6 +102,7 @@
                   "browser.startup.homepage" = "https://www.bing.com";
                   "browser.tabs.loadInBackground" = true;
                   "browser.fullscreen.autohide" = true;
+                  "general.smoothScroll.currentVelocityWeighting" = 0.1;
                   "browser.newtabpage.activity-stream.feeds.topsites" = false;
                   "browser.urlbar.keepPanelOpenDuringImeComposition" = true;
                   "widget.use-xdg-desktop-portal.file-picker" = 1;

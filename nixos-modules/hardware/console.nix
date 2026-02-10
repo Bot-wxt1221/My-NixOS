@@ -14,15 +14,4 @@
   };
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
-  services.kmscon = {
-    enable = true;
-    hwRender = true;
-    useXkbConfig = true;
-    fonts = [
-      {
-        name = "Jetbrains Mono";
-        package = pkgs.jetbrains-mono;
-      }
-    ];
-  };
 }
