@@ -22,6 +22,7 @@
         "/home/wxt/.local/share/waydroid"
       ];
     };
+    networking.nftables.enable = true;
     home-manager.sharedModules = [
       (_: {
         config = {
