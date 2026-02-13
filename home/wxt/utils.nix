@@ -17,7 +17,6 @@
     gcc
     gdb
     pkgs.nur.repos.bot-wxt1221.ddz_py
-    wechat
     cmake
     gnumake
     fd
