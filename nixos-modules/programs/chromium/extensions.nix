@@ -48,7 +48,7 @@
   {
     id = "gakohpplicjdhhfllilcjpfildodfnnn";
     crxPath = pkgs.fetchurl {
-      url = "https://clients2.googleusercontent.com/crx/blobs/AV8Xwo6YTFprfHccbchO_21DDX7E_gmsLrHQRaHkz4pH3hjQlw3LgZxzIFLQzByDqIncVQJNZFAOYsSdOp62kncqL2jG2fDdNK7RwIX3E5l0RaY6bLyXdy3UCrIfF72gLccAxlKa5UwZwsURObEZfHCzQSINYWl53HLC/GAKOHPPLICJDHHFLLILCJPFILDODFNNN_0_6_8_0.crx";
+      url = "https://clients2.googleusercontent.com/crx/blobs/Aa54OTAFE_BxFtLh1bjFcxPa1bJfh49MQv5cqHkU7BAz7SGRKdTK998855ImU5FRcFli9oqWyZJG5mSXHK-dC1McF9EHJ7AJ8Lqy1jM7OP10lKWox8mHHB1FuiVL_SJsl64AxlKa5VkN9SVYsXJilN9T_OX6l7gtw9e7/GAKOHPPLICJDHHFLLILCJPFILDODFNNN_0_6_8_0.crx";
       name = "gakohpplicjdhhfllilcjpfildodfnnn.crx";
       hash = "sha256-hzSVthWYltz7c7zsDo6gOBMbTNbP1mOd2tyO18lVyWQ=";
     };
