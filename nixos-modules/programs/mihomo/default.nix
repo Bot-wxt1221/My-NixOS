@@ -53,6 +53,12 @@
       '';
     };
   };
+  preservation.preserveAt."/persist" = {
+    files = [
+      "/var/lib/private/mihomo/cache.db"
+    ];
+  };
+
   services.mihomo = {
     enable = true;
     tunMode = true;

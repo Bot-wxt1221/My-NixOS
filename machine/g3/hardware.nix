@@ -54,8 +54,8 @@
     modesetting.enable = true;
     powerManagement.enable = true;
     powerManagement.finegrained = true;
-    open = true;
-    nvidiaPersistenced = false;
+    open = false;
+    nvidiaPersistenced = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
     videoAcceleration = true;
@@ -84,10 +84,10 @@
   boot.kernelModules = [
     "kvm-intel"
     "acpi_call"
-    #  "v4l2loopback"
+    "v4l2loopback"
   ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
     acpi_call
-    #    v4l2loopback
+    v4l2loopback
   ];
 }
