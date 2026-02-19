@@ -7,6 +7,7 @@
     #./latex.nix
     ./nix.nix
     ./python.nix
+    ./rust.nix
   ];
   programs.nixvim.plugins.lsp = {
     enable = true;
