@@ -49,13 +49,14 @@
           ${lib.getExe' pkgs.coreutils-full "ln"} -sf ${pkgs.v2ray-geoip}/share/v2ray/geoip.dat /var/lib/private/mihomo/geoip.dat
           ${lib.getExe' pkgs.coreutils-full "ln"} -sf ${pkgs.v2ray-domain-list-community}/share/v2ray/geosite.dat /var/lib/private/mihomo/geosite.dat
           ${lib.getExe' pkgs.coreutils-full "ln"} -sf ${pkgs.dbip-country-lite.mmdb} /var/lib/private/mihomo/Country.mmdb
+          ${lib.getExe' pkgs.coreutils-full "ln"} -sf /var/lib/mihomo-data/cache.db /var/lib/mihomo/cache.db
         ''}
       '';
     };
   };
   preservation.preserveAt."/persist" = {
     files = [
-      "/var/lib/private/mihomo/cache.db"
+      "/var/lib/mihomo-data/cache.db"
     ];
   };
 
