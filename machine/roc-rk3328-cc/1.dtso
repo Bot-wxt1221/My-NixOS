@@ -1,0 +1,42 @@
+// SPDX-License-Identifier: GPL-2.0 OR MIT
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/usb/pd.h>
+
+/ {
+    /*
+     * 限定覆盖仅适用于 ROC-RK3399-PC 板卡，
+     * 防止在其他硬件上误加载。
+     */
+    compatible = "rockchip,rk3399-roc-pc";
+};
+
+/*
+ * 修改 I2C4 总线时序，以满足 Type-C PD 通信要求。
+ */
+&i2c4 {
+    clock-frequency = <400000>;
+    i2c-scl-rising-time-ns = <345>;
+    i2c-scl-falling-time-ns = <11>;
+};
+
+/*
+ * 修改 fusb0 (USB Type-C 控制器) 节点：
+ * - 将 VBUS 电源改为直接使用 12V 输入 (dc_12v)
+ * - 添加 connector 子节点，定义电源角色和 PDO 参数
+ */
+&fusb0 {
+    vbus-supply = <&dc_12v>;
+
+    connector {
+        compatible = "usb-c-connector";
+        data-role = "dual";
+        label = "USB-C";
+        power-role = "sink";
+        try-power-role = "sink";
+        op-sink-microwatt = <10000000>;
+        sink-pdos = <PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)
+                     PDO_VAR(5000, 20000, 5000)>;
+    };
+};

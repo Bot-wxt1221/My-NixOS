@@ -24,16 +24,13 @@
     };
   };
 
-  boot.kernelPackages = lib.mkForce (
-    pkgs.linuxKernel.packagesFor (
-      pkgs.linuxKernel.kernels.linux_latest.override {
-        argsOverride = {
-          kernelPatches = [
-            { patch = ./1.patch; }
-          ];
-        };
+  hardware.deviceTree = {
+    enable = true;  # 启用设备树
+    overlays = [
+      {
+        name = "my-device-fix";  # 覆盖层名称
+        dtsFile = ./1.dtso; # 指向你的 .dtso 文件
       }
-    )
-  );
-
+    ];
+  };
 }
