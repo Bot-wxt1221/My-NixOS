@@ -77,6 +77,7 @@ in
         enable = true;
         restartIfChanged = true;
       };
+      enableCalendarEvents = false;
       enableSystemMonitoring = true;
       enableAudioWavelength = true;
       enableClipboardPaste = true;

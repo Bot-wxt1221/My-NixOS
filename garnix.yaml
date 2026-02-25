@@ -9,4 +9,5 @@ builds:
   include:
   - '*.x86_64-linux.*'
   - 'nixosConfigurations.wxt-g3'
+  - 'nixosConfigurations.wxt-roc-rk3328-cc'
   - defaultPackage.x86_64-linux
