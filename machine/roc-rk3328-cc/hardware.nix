@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   ...
 }:
@@ -16,21 +15,12 @@
       "net.ifnames=0"
       "console=tty1"
       "earlycon"
+      "modprobe.blacklist=fusb302"
       "console=ttyS2,1500000n8"
     ];
     loader = {
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
     };
-  };
-
-  hardware.deviceTree = {
-    enable = true;  # 启用设备树
-    overlays = [
-      {
-        name = "my-device-fix";  # 覆盖层名称
-        dtsFile = ./1.dtso; # 指向你的 .dtso 文件
-      }
-    ];
   };
 }
