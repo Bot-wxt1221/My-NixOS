@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   ...
 }:
@@ -15,6 +14,7 @@
     kernelParams = [
       "net.ifnames=0"
       "console=tty1"
+      "modprobe.blacklist=fusb302"
       "earlycon"
       "console=ttyS2,1500000n8"
     ];
@@ -23,17 +23,4 @@
       generic-extlinux-compatible.enable = true;
     };
   };
-
-  boot.kernelPackages = lib.mkForce (
-    pkgs.linuxKernel.packagesFor (
-      pkgs.linuxKernel.kernels.linux_latest.override {
-        argsOverride = {
-          kernelPatches = [
-            { patch = ./0001-Update.patch; }
-          ];
-        };
-      }
-    )
-  );
-
 }
