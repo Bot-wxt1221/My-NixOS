@@ -14,7 +14,6 @@
     kernelParams = [
       "net.ifnames=0"
       "console=tty1"
-      "modprobe.blacklist=fusb302"
       "earlycon"
       "console=ttyS2,1500000n8"
     ];
