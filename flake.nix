@@ -44,7 +44,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     niri-flake = {
-      url = "github:sodiboo/niri-flake/5ea4a8fef8084b9308f6174ad02d66dfb44d6410";
+      url = "github:sodiboo/niri-flake/f8899e60a1425d21a03a05ac2c069a85398039b5";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dms = {
@@ -171,15 +171,7 @@
           popd
         '';
       });
-      packages.aarch64-linux.niri = niri-flake.packages."x86_64-linux".niri-unstable.overrideAttrs (old: {
-        postPatch = (old.postPatch or "") + ''
-          patch -p1 < ${./nixos-modules/programs/desktop/0422464cd26b0b42cc73069ada2dd8dafb34ae32.patch}
-          pushd $cargoDepsCopy/smithay-0.7.0
-            patch -p1 < ${./nixos-modules/programs/desktop/0550cb9c2c18c18f91bda00ac8fb23300e799805.patch}
-            patch -p1 < ${./nixos-modules/programs/desktop/bc5911553f77665fd2e39b2d69fd55d9679487d8.patch}
-          popd
-        '';
-      });
+      packages.aarch64-linux.niri = niri-flake.packages."aarch64-linux".niri-unstable;
 
       packages.aarch64-linux.sd-card =
         self.nixosConfigurations.wxt-roc-rk3328-cc-image.config.system.build.sdImage;

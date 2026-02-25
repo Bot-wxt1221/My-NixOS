@@ -6,16 +6,7 @@
 }:
 let
   niri-use =
-    niri-flake.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable.overrideAttrs
-      (old: {
-        postPatch = (old.postPatch or "") + ''
-          patch -p1 < ${./0422464cd26b0b42cc73069ada2dd8dafb34ae32.patch}
-          pushd $cargoDepsCopy/smithay-0.7.0
-            patch -p1 < ${./0550cb9c2c18c18f91bda00ac8fb23300e799805.patch}
-            patch -p1 < ${./bc5911553f77665fd2e39b2d69fd55d9679487d8.patch}
-          popd
-        '';
-      });
+    niri-flake.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
 in
 {
   imports = [
