@@ -3,14 +3,14 @@ index c32913df93c3..8963b3858eae 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3399-roc-pc.dtsi
 +++ b/arch/arm64/boot/dts/rockchip/rk3399-roc-pc.dtsi
 @@ -6,6 +6,7 @@
-/dts-v1/;
+ /dts-v1/;
  #include <dt-bindings/input/linux-event-codes.h>
  #include <dt-bindings/pwm/pwm.h>
 +#include "dt-bindings/usb/pd.h"
  #include "rk3399.dtsi"
  #include "rk3399-opp.dtsi"
 
- @@ -524,8 +525,9 @@ &i2c3 {
+@@ -524,8 +525,9 @@ &i2c3 {
  };
 
  &i2c4 {
