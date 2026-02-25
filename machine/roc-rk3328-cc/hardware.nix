@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   ...
 }:
@@ -22,4 +23,17 @@
       generic-extlinux-compatible.enable = true;
     };
   };
+
+  boot.kernelPackages = lib.mkForce (
+    pkgs.linuxKernel.packagesFor (
+      pkgs.linuxKernel.kernels.linux_latest.override {
+        argsOverride = {
+          kernelPatches = [
+            { patch = ./1.patch; }
+          ];
+        };
+      }
+    )
+  );
+
 }
