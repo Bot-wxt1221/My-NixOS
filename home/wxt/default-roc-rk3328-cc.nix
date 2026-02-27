@@ -12,7 +12,8 @@
 
     ./shared-modules.nix
   ];
-  enableDesktop = false;
+  enableDesktop = true;
+  upperDMS = true;
   programs.thunderbird.enable = lib.mkForce false;
   home.username = "wxt";
   home.homeDirectory = "/home/wxt";

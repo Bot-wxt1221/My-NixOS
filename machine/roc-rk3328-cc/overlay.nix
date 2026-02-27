@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+_:
 
 {
   hardware.deviceTree.enable = true;

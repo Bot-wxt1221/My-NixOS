@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   currentThemeName = "monochrome";
   currentThemeCategory = "generic";
@@ -402,7 +402,7 @@
       openOnOverview = true;
       popupGapsAuto = true;
       popupGapsManual = 4;
-      position = 1;
+      position = if (config.upperDMS) then 0 else 1;
       rightWidgets = [
         {
           id = "systemTray";

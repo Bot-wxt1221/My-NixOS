@@ -22,6 +22,12 @@ in
   imports = [
     dms.homeModules.default
   ];
+  options = {
+    upperDMS = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+    };
+  };
   config = {
     programs.dank-material-shell = {
       plugins = {

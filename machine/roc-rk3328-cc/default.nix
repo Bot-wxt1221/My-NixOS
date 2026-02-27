@@ -23,7 +23,7 @@
   EnableWaydroid = false;
   EnableVirt = false;
   enableChromium = false;
-  enableFirefox = false;
+  enableFirefox = true;
 
   EnableOllama = false;
   EnableMineGPU = false;
