@@ -34,7 +34,6 @@ in
     "console=tty1"
     "earlycon"
     "console=ttyS2,1500000n8"
-    "modprobe.blacklist=fusb302"
   ];
   services.openssh.enable = true;
 

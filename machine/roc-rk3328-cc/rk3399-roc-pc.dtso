@@ -1,0 +1,173 @@
+// SPDX-License-Identifier: GPL-2.0 OR MIT
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/usb/pd.h>
+
+/ {
+    compatible = "firefly,roc-rk3399-pc", "rockchip,rk3399";
+};
+
+&cluster0_opp {
+	opp006 {
+		opp-hz = /bits/ 64 <1512000000>;
+		opp-microvolt = <1200000>;
+		opp-microvolt-L0 = <1200000>;
+		opp-microvolt-L1 = <1175000>;
+		opp-microvolt-L2 = <1150000>;
+		opp-microvolt-L3 = <1125000>;
+		clock-latency-ns = <40000>;
+	};
+};
+
+&cluster1_opp {
+	opp008 {
+		opp-hz = /bits/ 64 <1992000000>;
+		opp-microvolt = <1300000>;
+		opp-microvolt-L0 = <1300000>;
+		opp-microvolt-L1 = <1275000>;
+		opp-microvolt-L2 = <1250000>;
+		opp-microvolt-L3 = <1225000>;
+		clock-latency-ns = <40000>;
+	};
+};
+
+&i2c4 {
+	clock-frequency = <400000>;
+  i2c-scl-rising-time-ns = <345>;
+	i2c-scl-falling-time-ns = <11>;
+};
+
+&fusb1 {
+    connector {
+        compatible = "usb-c-connector";
+        data-role = "dual";
+        label = "USB-C1";
+        power-role = "source";
+        source-pdos = <PDO_FIXED(5000, 2000, PDO_FIXED_USB_COMM)>;
+        sink-pdos = <PDO_FIXED(5000, 2000, PDO_FIXED_USB_COMM)>;
+
+        ports {
+            #address-cells = <1>;
+            #size-cells = <0>;
+
+            port@0 {
+                reg = <0>;
+
+                usbc1_hs: endpoint {
+                    remote-endpoint =
+                        <&u2phy1_typec_hs>;
+                };
+            };
+
+            port@1 {
+                reg = <1>;
+
+                usbc1_ss: endpoint {
+                    remote-endpoint =
+                        <&tcphy1_typec_ss>;
+                };
+            };
+            port@2 {
+                reg = <2>;
+
+                usbc1_dp: endpoint {
+                    remote-endpoint =
+                        <&tcphy1_typec_dp>;
+                };
+            };
+        };
+    };
+};
+
+
+&fusb0 {
+	vbus-supply = <&dc_12v>;
+  connector {
+			compatible = "usb-c-connector";
+			data-role = "dual";
+			label = "USB-C0";
+			op-sink-microwatt = <1000000>;
+			power-role = "sink";
+			try-power-role = "sink";
+			sink-pdos = <PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)
+				     PDO_VAR(5000, 20000, 5000)>;
+			ports {
+				#address-cells = <1>;
+				#size-cells = <0>;
+
+				port@0 {
+					reg = <0>;
+
+					usbc0_hs: endpoint {
+						remote-endpoint =
+							<&u2phy0_typec_hs>;
+					};
+				};
+
+				port@1 {
+					reg = <1>;
+
+					usbc0_ss: endpoint {
+						remote-endpoint =
+							<&tcphy0_typec_ss>;
+					};
+				};
+				port@2 {
+					reg = <2>;
+
+					usbc0_dp: endpoint {
+						remote-endpoint =
+							<&tcphy0_typec_dp>;
+					};
+				};
+			};
+		};
+};
+
+&tcphy0_dp {
+	port {
+		tcphy0_typec_dp: endpoint {
+			remote-endpoint = <&usbc0_dp>;
+		};
+	};
+};
+
+&tcphy0_usb3 {
+	port {
+		tcphy0_typec_ss: endpoint {
+			remote-endpoint = <&usbc0_ss>;
+		};
+	};
+};
+
+&tcphy1_dp {
+	port {
+		tcphy1_typec_dp: endpoint {
+			remote-endpoint = <&usbc1_dp>;
+		};
+	};
+};
+
+&tcphy1_usb3 {
+	port {
+		tcphy1_typec_ss: endpoint {
+			remote-endpoint = <&usbc1_ss>;
+		};
+	};
+};
+
+&u2phy0 {
+	port {
+		u2phy0_typec_hs: endpoint {
+			remote-endpoint = <&usbc0_hs>;
+		};
+	};
+};
+&u2phy1 {
+	port {
+		u2phy1_typec_hs: endpoint {
+			remote-endpoint = <&usbc1_hs>;
+		};
+	};
+};
