@@ -20,7 +20,7 @@
   };
   Enablesteam = false;
   Enablepipewire = true;
-  EnableWaydroid = false;
+  EnableWaydroid = true;
   EnableVirt = false;
   enableChromium = false;
   enableFirefox = true;

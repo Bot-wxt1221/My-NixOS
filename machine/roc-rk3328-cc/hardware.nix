@@ -10,6 +10,9 @@
   ];
 
   sops.age.keyFile = lib.mkForce "/var/lib/sops-nix/key.txt";
+  hardware.graphics = {
+    enable = true;
+  };
 
   boot = {
     kernelParams = [

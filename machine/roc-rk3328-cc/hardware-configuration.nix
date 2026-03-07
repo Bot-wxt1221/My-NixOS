@@ -7,7 +7,7 @@
 
   boot.initrd.availableKernelModules = [ ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
+  boot.kernelModules = [ "panfrost" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {

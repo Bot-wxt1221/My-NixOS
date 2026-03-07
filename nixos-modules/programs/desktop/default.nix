@@ -5,8 +5,7 @@
   ...
 }:
 let
-  niri-use =
-    niri-flake.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
+  niri-use = niri-flake.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
 in
 {
   imports = [
