@@ -21,7 +21,6 @@
     gnumake
     fd
     gnome-logs
-    helvum
     gnome-graphs
     nautilus
     gimp3-with-plugins

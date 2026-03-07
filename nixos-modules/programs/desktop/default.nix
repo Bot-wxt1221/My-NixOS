@@ -45,7 +45,6 @@ in
     };
     systemd.user.services.niri-flake-polkit.enable = true;
     programs.dconf.enable = true;
-    programs.light.enable = true;
     xdg.portal.enable = true;
     xdg.portal.config.common.default = "*";
     programs.gnome-disks.enable = true;

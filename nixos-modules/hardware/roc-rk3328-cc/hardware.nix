@@ -1,0 +1,29 @@
+{
+  lib,
+  ...
+}:
+{
+  imports = [
+    ./sops
+    ./hardware-configuration.nix
+    ./overlay.nix
+  ];
+
+  sops.age.keyFile = lib.mkForce "/var/lib/sops-nix/key.txt";
+  hardware.graphics = {
+    enable = true;
+  };
+
+  boot = {
+    kernelParams = [
+      "net.ifnames=0"
+      "console=tty1"
+      "earlycon"
+      "console=ttyS2,1500000n8"
+    ];
+    loader = {
+      grub.enable = false;
+      generic-extlinux-compatible.enable = true;
+    };
+  };
+}

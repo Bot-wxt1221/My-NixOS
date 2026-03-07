@@ -20,5 +20,6 @@
     ./ntsync.nix
     ./persist.nix
     ./printing.nix
+    ./ugreen.nix
   ];
 }
