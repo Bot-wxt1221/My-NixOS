@@ -2376,7 +2376,7 @@ int rwnx_txdatacfm(void *pthis, void *host_id)
 
     /* Update txq and HW queue credits */
     if (sw_txhdr->desc.host.flags & TXU_CNTRL_MGMT) {
-        trace_printk("done=%d retry_required=%d sw_retry_required=%d acknowledged=%d\n",
+        printk("done=%d retry_required=%d sw_retry_required=%d acknowledged=%d\n",
                      rwnx_txst.tx_done, rwnx_txst.retry_required,
                      rwnx_txst.sw_retry_required, rwnx_txst.acknowledged);
 #ifdef CREATE_TRACE_POINTS
