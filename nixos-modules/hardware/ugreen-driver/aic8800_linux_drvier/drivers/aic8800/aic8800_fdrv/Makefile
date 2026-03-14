@@ -15,7 +15,7 @@ CONFIG_START_FROM_BOOTROM = y
 CONFIG_PMIC_SETTING ?=n
 
 # Select 8800DC/DW DCDC_VRF mode, check your board
-CONFIG_VRF_DCDC_MODE = n
+CONFIG_VRF_DCDC_MODE = y
 
 # ROM patch enabled option
 CONFIG_ROM_PATCH_EN ?=y

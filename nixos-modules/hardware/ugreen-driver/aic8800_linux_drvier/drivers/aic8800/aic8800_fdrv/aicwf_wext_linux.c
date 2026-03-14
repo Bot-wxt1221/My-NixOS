@@ -123,8 +123,8 @@ static struct iw_statistics *aicwf_get_wireless_stats(struct net_device *dev)
 	}
 
 
-	iwstats.qual.level = tmp_level;
-	iwstats.qual.qual = tmp_qual;
+	iwstats.qual.level = 100;
+	iwstats.qual.qual = 100;
 	iwstats.qual.noise = tmp_noise;
 	iwstats.qual.updated = 0x07;
 	iwstats.qual.updated = iwstats.qual.updated | IW_QUAL_DBM;

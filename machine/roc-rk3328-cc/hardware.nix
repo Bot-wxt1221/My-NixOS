@@ -1,5 +1,7 @@
 {
   lib,
+  pkgs,
+  config,
   ...
 }:
 {
@@ -13,6 +15,17 @@
   hardware.graphics = {
     enable = true;
   };
+
+  boot.blacklistedKernelModules = [
+    "rtl8xxxu"
+  ];
+
+  boot.extraModulePackages = [
+    (pkgs.callPackage ./wifi-package.nix {
+      kernel = config.boot.kernelPackages.kernel;
+      kernelModuleMakeFlags = config.boot.kernelPackages.kernelModuleMakeFlags;
+    })
+  ];
 
   boot = {
     kernelParams = [
