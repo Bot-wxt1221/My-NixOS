@@ -14,6 +14,7 @@
     "https://cache.nixos-cuda.org"
     "https://wxt1221.cachix.org"
     "https://luogu-judge.cachix.org"
+    "https://ezkea.cachix.org"
     "https://cache.garnix.io"
   ];
   nix.settings.narinfo-cache-positive-ttl = 3600;
@@ -28,5 +29,6 @@
     "luogu-judge.cachix.org-1:vBoiA0n//KfYZ5Xp5HhcujXcdT7dK3+rEK3U4zw66TQ="
     "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
     "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+    "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
   ];
 }

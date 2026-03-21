@@ -28,6 +28,7 @@
   EnableMineCPU = false;
   EnableCuda = true;
   EnableKubo = false;
+  EnableAnimeGameLauncher = true;
   EnableDocker = true;
   Laptop = true;
   users.users.wxt = {
