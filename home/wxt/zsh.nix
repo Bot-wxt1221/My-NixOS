@@ -19,6 +19,7 @@
     };
     shellAliases = {
       l = "ls -l";
+      sudo = "run0";
     };
     history.size = 100000;
     history.path = "${config.xdg.dataHome}/zsh/history";
