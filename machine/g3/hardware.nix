@@ -12,7 +12,6 @@
     ./sops
     nixos-facter-modules.nixosModules.facter
   ];
-  facter.reportPath = ./facter-g3.json;
   boot.initrd.kernelModules = [
     "i915"
     "vfio-iommu-type1"
@@ -68,19 +67,36 @@
       intelBusId = "PCI:0:2:0";
     };
   };
+  specialisation = {
+    nvidia-passthru = {
+      inheritParentConfig = true;
+      configuration = {
+        hardware.nvidia = lib.mkForce { };
+        services.xserver.videoDrivers = lib.mkForce [ "modesetting"];
+        boot.kernelParams = [
+          "modprobe.blacklist=nvidia,nvidia_drm,nvidia_modeset,nvidia_uvm,nouveau"
+          "iommu=pt"
+          "intremap=no_x2apic_optout"
+          "vfio-pci.ids=10de:10fa,10de:1f91"
+        ];
+        boot.blacklistedKernelModules = [
+          "nvidia"
+          "nvidia_nvm"
+          "nvidia_drm"
+          "nvidia_modeset"
+          "nouveau"
+        ];
+      };
+    };
+  };
   boot.kernelParams = [
     "intel_iommu=on"
     "i915.enable_guc=3"
-    "nvidia_drm.fbdev=1"
-    "nvidia_drm.modeset=1"
     "i915.enable_fbc=1"
     "i915.enable_execlists=0"
     "acpi_osi=Linux-Dell-Video"
   ];
-  services.xserver.videoDrivers = [
-    "modesettings"
-    "nvidia"
-  ];
+  services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
   boot.kernelModules = [
     "kvm-intel"
     "acpi_call"

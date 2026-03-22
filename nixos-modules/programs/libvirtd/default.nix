@@ -20,6 +20,10 @@
     virtualisation.vswitch.enable = true;
     environment.systemPackages = with pkgs; [ virt-manager ];
     virtualisation.spiceUSBRedirection.enable = true;
+    systemd.services.libvirtd.serviceConfig.LoadCredentialEncrypted = lib.mkForce "";
+    environment.etc."libvirt/secret.conf".text = ''
+      encrypt_data = 0
+    '';
     home-manager.sharedModules = [
       (
         { ... }:
