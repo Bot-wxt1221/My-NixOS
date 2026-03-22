@@ -18,6 +18,15 @@
 		opp-microvolt-L3 = <1125000>;
 		clock-latency-ns = <40000>;
 	};
+	opp007 {
+		opp-hz = /bits/ 64 <1800000000>;
+		opp-microvolt = <1350000>;
+		opp-microvolt-L0 = <1350000>;
+		opp-microvolt-L1 = <1325000>;
+		opp-microvolt-L2 = <1300000>;
+		opp-microvolt-L3 = <1275000>;
+		clock-latency-ns = <40000>;
+	};
 };
 
 &cluster1_opp {
@@ -28,6 +37,15 @@
 		opp-microvolt-L1 = <1275000>;
 		opp-microvolt-L2 = <1250000>;
 		opp-microvolt-L3 = <1225000>;
+		clock-latency-ns = <40000>;
+	};
+	opp009 {
+		opp-hz = /bits/ 64 <2208000000>;
+		opp-microvolt = <1400000>;
+		opp-microvolt-L0 = <1400000>;
+		opp-microvolt-L1 = <1375000>;
+		opp-microvolt-L2 = <1350000>;
+		opp-microvolt-L3 = <1325000>;
 		clock-latency-ns = <40000>;
 	};
 };
