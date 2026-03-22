@@ -49,6 +49,21 @@
 	};
 };
 
+&gpu_opp_table {
+				opp06 {
+            opp-hz = /bits/ 64 <900000000>;
+            opp-microvolt = <1200000>;
+        };
+        opp07 {
+            opp-hz = /bits/ 64 <1000000000>;
+            opp-microvolt = <1300000>;
+        };
+        opp08 {
+            opp-hz = /bits/ 64 <1100000000>;
+            opp-microvolt = <1350000>;
+        };
+};
+
 &i2c4 {
 	clock-frequency = <400000>;
   i2c-scl-rising-time-ns = <345>;
