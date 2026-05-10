@@ -59,5 +59,8 @@
       vim.cmd("nnoremap d \"_d")
       vim.cmd("xnoremap d \"_d")
     '';
+    nixpkgs = {
+      config.allowUnfree = true;
+    };
   };
 }

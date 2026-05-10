@@ -47,6 +47,7 @@
       ".ssh"
       ".config/direnv"
       ".local/share/direnv"
+      ".local/share/anime-game-launcher"
     ];
   };
 }

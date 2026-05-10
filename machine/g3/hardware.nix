@@ -56,7 +56,7 @@
     open = false;
     nvidiaPersistenced = true;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
     videoAcceleration = true;
     prime = {
       offload = {
