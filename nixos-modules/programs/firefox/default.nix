@@ -17,6 +17,9 @@
         ".cache/mozilla"
         ".mozilla/firefox/botwxt"
       ];
+      files = [
+        ".mozilla/firefox/profiles.ini"
+      ];
     };
     systemd.tmpfiles.settings.preservation = {
       "/home/wxt/.mozilla".d = {

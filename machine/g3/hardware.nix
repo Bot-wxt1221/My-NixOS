@@ -72,7 +72,7 @@
       inheritParentConfig = true;
       configuration = {
         hardware.nvidia = lib.mkForce { };
-        services.xserver.videoDrivers = lib.mkForce [ "modesetting"];
+        services.xserver.videoDrivers = lib.mkForce [ "modesetting" ];
         boot.kernelParams = [
           "modprobe.blacklist=nvidia,nvidia_drm,nvidia_modeset,nvidia_uvm,nouveau"
           "iommu=pt"
@@ -96,7 +96,10 @@
     "i915.enable_execlists=0"
     "acpi_osi=Linux-Dell-Video"
   ];
-  services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
+  services.xserver.videoDrivers = [
+    "modesetting"
+    "nvidia"
+  ];
   boot.kernelModules = [
     "kvm-intel"
     "acpi_call"

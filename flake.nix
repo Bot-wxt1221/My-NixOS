@@ -164,6 +164,7 @@
         self.nixosConfigurations.wxt-roc-rk3328-cc.config.boot.kernelPackages.kernel;
       packages.x86_64-linux.niri = niri-flake.packages."x86_64-linux".niri-unstable;
       packages.aarch64-linux.niri = niri-flake.packages."aarch64-linux".niri-unstable;
+      packages.aarch64-linux.dms-shell = niri-flake.packages."aarch64-linux".dms-shell;
 
       packages.aarch64-linux.sd-card =
         self.nixosConfigurations.wxt-roc-rk3328-cc-image.config.system.build.sdImage;

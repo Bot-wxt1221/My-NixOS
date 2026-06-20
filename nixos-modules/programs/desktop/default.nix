@@ -27,7 +27,6 @@ in
     services.upower.enable = true;
     programs.kdeconnect.enable = true;
     services.displayManager.gdm.enable = true;
-    services.displayManager.gdm.wayland = true;
     services.displayManager.sessionPackages = [ niri-use ];
     environment.systemPackages = with pkgs; [
       dconf

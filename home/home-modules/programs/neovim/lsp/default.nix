@@ -33,31 +33,30 @@
 
   programs.nixvim.extraConfigLua = # lua
     ''
-      vim.diagnostic.config {
-        virtual_text = {
-          prefix = "",
-        },
-        text = {
-          [vim.diagnostic.severity.ERROR] = "󰅙",
-          [vim.diagnostic.severity.INFO] = "󰋼",
-          [vim.diagnostic.severity.HINT] = "󰌵",
-          [vim.diagnostic.severity.WARN] = "",
-        },
-        numhl = {
-          [vim.diagnostic.severity.ERROR] = "DiagnosticSign" .. "Error",
-          [vim.diagnostic.severity.INFO] = "DiagnosticSign" .. "Info",
-          [vim.diagnostic.severity.HINT] = "DiagnosticSign" .. "Hint",
-          [vim.diagnostic.severity.WARN] = "DiagnosticSign" .. "Warn",
-        },
-        signs = true,
-        underline = true,
+            vim.diagnostic.config {
+              virtual_text = {
+                prefix = "",
+              },
+              text = {
+                [vim.diagnostic.severity.ERROR] = "󰅙",
+                [vim.diagnostic.severity.INFO] = "󰋼",
+                [vim.diagnostic.severity.HINT] = "󰌵",
+                [vim.diagnostic.severity.WARN] = "",
+              },
+              numhl = {
+                [vim.diagnostic.severity.ERROR] = "DiagnosticSign" .. "Error",
+                [vim.diagnostic.severity.INFO] = "DiagnosticSign" .. "Info",
+                [vim.diagnostic.severity.HINT] = "DiagnosticSign" .. "Hint",
+                [vim.diagnostic.severity.WARN] = "DiagnosticSign" .. "Warn",
+              },
+              signs = true,
+              underline = true,
 
-        float = {
-          border = "single",
-        },
-      }
-
-      --  LspInfo window borders
+              float = {
+                border = "single",
+              },
+            }
+      -- LspInfo window border
       local win = require "lspconfig.ui.windows"
       local _default_opts = win.default_opts
 
@@ -66,8 +65,10 @@
         opts.border = "single"
         return opts
       end
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = {
+
+      vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, config)
+        config = config or {}
+        config.border = {
           { "╭" },
           { "─" },
           { "╮" },
@@ -77,6 +78,7 @@
           { "╰" },
           { "│" },
         }
-      })
-    '';
+        -- 调用原始的 hover 处理函数，传递修改后的 config
+        vim.lsp.handlers.hover(err, result, ctx, config)
+      end'';
 }

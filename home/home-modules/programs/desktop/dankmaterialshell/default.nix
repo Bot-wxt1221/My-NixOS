@@ -30,6 +30,7 @@ in
   };
   config = {
     programs.dank-material-shell = {
+      package = pkgs.dms-shell;
       plugins = {
         dankKDEConnect = {
           enable = true;
