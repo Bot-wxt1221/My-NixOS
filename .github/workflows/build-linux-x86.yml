@@ -20,3 +20,4 @@ jobs:
         name: wxt1221
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - run: nix build .#niri
+    - run: nix build .#rustdesk-flutter

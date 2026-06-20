@@ -162,6 +162,7 @@
       };
       packages.aarch64-linux.linux-roc-rk3328-cc =
         self.nixosConfigurations.wxt-roc-rk3328-cc.config.boot.kernelPackages.kernel;
+      packages.x86_64-linux.rustdesk-flutter = self.nixosConfigurations.wxt-g3.config.rustdesk;
       packages.x86_64-linux.niri = niri-flake.packages."x86_64-linux".niri-unstable;
       packages.aarch64-linux.niri = niri-flake.packages."aarch64-linux".niri-unstable;
       packages.aarch64-linux.dms-shell = niri-flake.packages."aarch64-linux".dms-shell;
