@@ -87,11 +87,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782502147,
-        "narHash": "sha256-pLBmunmeJM1zrn2CD58m6Q64qBPTGJ+oqjCRBZZHvG8=",
+        "lastModified": 1782526586,
+        "narHash": "sha256-3luLigo1C2dsH0TdxF5TjPCzt9HS/4IVhmTpVCKPdqw=",
         "owner": "AvengeMedia",
         "repo": "dms-plugin-registry",
-        "rev": "a3daa8d2eaa2049c7eaed6485b7a01f709a2a2b6",
+        "rev": "945aa7f2015ab37159ccc865e630f4552bc3526e",
         "type": "github"
       },
       "original": {
@@ -202,11 +202,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782423922,
-        "narHash": "sha256-qPNd6lUohHP5gcJhqQ7rLV87RwIx0xYR2A4Frb9Zjc4=",
+        "lastModified": 1782522538,
+        "narHash": "sha256-CvOaUvJ+mXlxU3m2cPWKcOAhtKETsPUYhq+Xa5ewBp4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "5d320ab301cfaaca7d32514f13815d19d109f5f4",
+        "rev": "8d8a6cc50ddc60748791a14ee1163c865ec57635",
         "type": "github"
       },
       "original": {
@@ -376,9 +376,7 @@
     "nixVim": {
       "inputs": {
         "flake-parts": "flake-parts_2",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
+        "nixpkgs": "nixpkgs_2",
         "systems": "systems"
       },
       "locked": {
@@ -459,6 +457,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1781607440,
+        "narHash": "sha256-rxO+uc/KFbSJp+pgyXRuAX6QlG9hJdnt0BXpEQRXY+U=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "3e41b24abd260e8f71dbe2f5737d24122f972158",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1782175435,
         "narHash": "sha256-EMzXKmnOtBQ2MnvpiNOm7E+kOMvdPrIKaeg52Tip2Uk=",
         "owner": "NixOS",
@@ -497,11 +511,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782519522,
-        "narHash": "sha256-+fSo6liae8ujDGG3K5CGY168QtdAZhZTmgTSNbAjwPQ=",
+        "lastModified": 1782535821,
+        "narHash": "sha256-m8U+QLxG43tNwS+sGRFv5EK5dXbZdAQQHLssw59qk3A=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "a94583039a0f54dd9a90139a15cb349820ff8753",
+        "rev": "784dd5dfe462ffb697e6ff03d6d7f85c567c79b4",
         "type": "github"
       },
       "original": {
@@ -562,7 +576,7 @@
         "nix-index-database": "nix-index-database",
         "nixVim": "nixVim",
         "nixos-facter-modules": "nixos-facter-modules",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "nur": "nur",
         "preservation": "preservation",
         "sops-nix": "sops-nix"
