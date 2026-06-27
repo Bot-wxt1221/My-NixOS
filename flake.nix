@@ -25,7 +25,6 @@
     };
     nixVim = {
       url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     clipboard = {
       url = "github:Bot-wxt1221/clipboard-sync";
