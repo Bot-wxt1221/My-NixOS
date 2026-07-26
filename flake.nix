@@ -86,6 +86,7 @@
       HmSpecialArgs = {
         inherit
           inputs
+          nixpkgs
           clipboard
           nixVim
           luogu-gcc
