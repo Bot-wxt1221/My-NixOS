@@ -2,6 +2,7 @@
   pkgs,
   neovim,
   nixVim,
+  nixpkgs,
   lib,
   ...
 }:
@@ -50,7 +51,7 @@
   };
   programs.nixvim = {
     enable = true;
-    #    package = neovim.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    package = neovim.packages.${pkgs.stdenv.hostPlatform.system}.default;
     globals = {
       mapleader = " ";
       maplocalleader = " ";
@@ -60,6 +61,7 @@
       vim.cmd("xnoremap d \"_d")
     '';
     nixpkgs = {
+      source = nixpkgs;
       config.allowUnfree = true;
     };
   };

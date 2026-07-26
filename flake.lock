@@ -392,7 +392,9 @@
     "nixVim": {
       "inputs": {
         "flake-parts": "flake-parts_2",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
         "systems": "systems"
       },
       "locked": {
@@ -472,22 +474,6 @@
       }
     },
     "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1784555310,
-        "narHash": "sha256-/FCliTPgiuV1owejZFNx3Ch9irdvkOfOFl+HHZ+DrtM=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "421eebfd0ec7bccd4abe826ce62d7e6e83129493",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
       "locked": {
         "lastModified": 1784812282,
         "narHash": "sha256-Na4aTmdz22ovtSvcvNKaRwEWkg801hDyX6t8JqvW+sE=",
@@ -570,7 +556,7 @@
         "nix-index-database": "nix-index-database",
         "nixVim": "nixVim",
         "nixos-facter-modules": "nixos-facter-modules",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_2",
         "nur": "nur",
         "preservation": "preservation",
         "sops-nix": "sops-nix"
