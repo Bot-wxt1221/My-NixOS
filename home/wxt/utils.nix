@@ -31,7 +31,6 @@
     pigz
     nixfmt
     wayvnc
-    realvnc-vnc-viewer
     bilibili
     wl-clipboard
     resources
