@@ -23,7 +23,7 @@ let
   });
   xdg-desktop-portal-for-rustdesk = pkgs.xdg-desktop-portal.overrideAttrs (old: {
     postPatch = old.postPatch + ''
-      substituteInPlace src/xdg-desktop-portal.c \
+      substituteInPlace src/xdp-types.h \
         --replace-fail "org.freedesktop.portal.Desktop" "org.freedesktop.portal.Desktop-for-rustdesk"
     '';
     doCheck = false;

@@ -49,6 +49,7 @@ with pkgs;
   gdk-pixbuf
   glib
   gtk3
+  openssl_3_6
   libGL
   libappindicator-gtk3
   vulkan-loader

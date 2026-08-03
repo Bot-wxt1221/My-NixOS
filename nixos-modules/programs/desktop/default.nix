@@ -1,11 +1,13 @@
 {
   pkgs,
   lib,
-  niri-flake,
+  niri,
   ...
 }:
 let
-  niri-use = niri-flake.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
+  niri-use = pkgs.callPackage ./niri.nix {
+    src = niri;
+  };
 in
 {
   imports = [

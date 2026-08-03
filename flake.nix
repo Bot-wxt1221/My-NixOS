@@ -42,9 +42,9 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri-flake = {
-      url = "github:sodiboo/niri-flake/e43ef13f23c2c7ae5b10e842745cb345faff4f40";
-      inputs.nixpkgs.follows = "nixpkgs";
+    niri = {
+      url = "github:niri-wm/niri";
+      flake = false;
     };
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
@@ -76,7 +76,7 @@
       sops-nix,
       nixos-facter-modules,
       an-anime-game-launcher,
-      niri-flake,
+      niri,
       dms,
       dms-plugin-registry,
       firefox-gnome-theme,
@@ -118,7 +118,7 @@
           sops-nix
           nixos-facter-modules
           an-anime-game-launcher
-          niri-flake
+          niri
           ;
       };
     in
@@ -163,9 +163,8 @@
       packages.aarch64-linux.linux-roc-rk3328-cc =
         self.nixosConfigurations.wxt-roc-rk3328-cc.config.boot.kernelPackages.kernel;
       packages.x86_64-linux.rustdesk-flutter = self.nixosConfigurations.wxt-g3.config.rustdesk;
-      packages.x86_64-linux.niri = niri-flake.packages."x86_64-linux".niri-unstable;
-      packages.aarch64-linux.niri = niri-flake.packages."aarch64-linux".niri-unstable;
-      packages.aarch64-linux.dms-shell = niri-flake.packages."aarch64-linux".dms-shell;
+      packages.x86_64-linux.niri = self.nixosConfigurations.wxt-g3.config.niriInUse;
+      packages.aarch64-linux.niri = self.nixosConfigurations.roc-rk3328-cc.config.niriInUse;
 
       packages.aarch64-linux.sd-card =
         self.nixosConfigurations.wxt-roc-rk3328-cc-image.config.system.build.sdImage;
