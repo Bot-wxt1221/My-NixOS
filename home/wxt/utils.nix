@@ -98,5 +98,6 @@
 
     seahorse
     warp
+    kdePackages.krdc
   ];
 }

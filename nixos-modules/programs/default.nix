@@ -8,14 +8,12 @@
   options = {
     rustdesk = lib.mkOption {
       type = lib.types.package;
-      default = (
-        pkgs.rustdesk-flutter.overrideAttrs (old: {
-          postPatch = old.postPatch or "" + ''
-            substituteInPlace ../libs/scrap/src/wayland/pipewire.rs \
-              --replace-fail "org.freedesktop.portal.Desktop" "org.freedesktop.portal.Desktop-for-rustdesk"
-          '';
-        })
-      );
+      default = pkgs.rustdesk-flutter.overrideAttrs (old: {
+        postPatch = old.postPatch or "" + ''
+          substituteInPlace ../libs/scrap/src/wayland/pipewire.rs \
+            --replace-fail "org.freedesktop.portal.Desktop" "org.freedesktop.portal.Desktop-for-rustdesk"
+        '';
+      });
     };
   };
   imports = [

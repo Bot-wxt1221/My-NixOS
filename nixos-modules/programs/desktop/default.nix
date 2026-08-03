@@ -34,6 +34,7 @@ in
       niri-use
       gnome-tweaks
       gnome-system-monitor
+      adwaita-icon-theme
       xwayland-satellite
     ];
     environment.pathsToLink = [ "/share/X11" ];
