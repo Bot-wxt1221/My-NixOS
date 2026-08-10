@@ -164,7 +164,7 @@
         self.nixosConfigurations.wxt-roc-rk3328-cc.config.boot.kernelPackages.kernel;
       packages.x86_64-linux.rustdesk-flutter = self.nixosConfigurations.wxt-g3.config.rustdesk;
       packages.x86_64-linux.niri = self.nixosConfigurations.wxt-g3.config.niriInUse;
-      packages.aarch64-linux.niri = self.nixosConfigurations.roc-rk3328-cc.config.niriInUse;
+      packages.aarch64-linux.niri = self.nixosConfigurations.wxt-roc-rk3328-cc.config.niriInUse;
 
       packages.aarch64-linux.sd-card =
         self.nixosConfigurations.wxt-roc-rk3328-cc-image.config.system.build.sdImage;
