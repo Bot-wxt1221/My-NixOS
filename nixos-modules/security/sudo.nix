@@ -1,4 +1,5 @@
 {
+  pkgs,
   ...
 }:
 {
@@ -13,5 +14,13 @@
       touch /var/db/sudo/lectured/1000
     '';
     wantedBy = [ "multi-user.target" ];
+  };
+  security.wrappers = {
+    pkexec = {
+      setuid = true;
+      owner = "root";
+      group = "root";
+      source = "${pkgs.polkit.bin}/bin/pkexec";
+    };
   };
 }
