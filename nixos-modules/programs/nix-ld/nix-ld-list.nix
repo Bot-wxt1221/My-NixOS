@@ -67,4 +67,5 @@ with pkgs;
   xorg.libxcb
   xorg.libxkbfile
   xorg.libxshmfence
+  libgbm
 ]
