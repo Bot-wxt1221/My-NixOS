@@ -22,8 +22,9 @@
   nixpkgs.config.packageOverrides = pkgs: {
     intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
   };
-  nixpkgs.config.cudaSupport = false;
+  nixpkgs.config.cudaSupport = true;
   services.hardware.bolt.enable = true;
+  hardware.intel-gpu-tools.enable = true;
   services.fstrim.enable = lib.mkDefault true;
   hardware.graphics = {
     enable = true;
@@ -34,7 +35,7 @@
       libva-vdpau-driver
       ocl-icd
       intel-ocl
-      # intel-compute-runtime-legacy1
+      intel-compute-runtime-legacy1
       nvidia-vaapi-driver
       intel-media-driver
     ];
