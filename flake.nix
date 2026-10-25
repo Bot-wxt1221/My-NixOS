@@ -17,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     preservation = {
-      url = "github:nix-community/preservation";
+      url = "github:nix-community/preservation/ed8dbeaac0ad240341259c814cade7163a53fc1f";
     };
     neovim = {
       url = "github:nix-community/neovim-nightly-overlay/master";
