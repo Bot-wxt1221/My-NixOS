@@ -86,7 +86,7 @@ in
       source = generateJson "settings" (import ./settings.nix { inherit lib config osConfig; });
     };
     home.activation.copy-session = ''
-      cp ${./session.json} /home/wxt/.local/state/DankMaterialShell/session.json
+      cp ${./session.json} /home/wxt/.local/state/dms/session.json
     '';
   };
 }
