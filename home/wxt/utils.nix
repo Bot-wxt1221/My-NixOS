@@ -31,7 +31,6 @@
     pigz
     nixfmt
     wayvnc
-    bilibili
     wl-clipboard
     resources
     obs-studio
@@ -97,5 +96,7 @@
     seahorse
     warp
     kdePackages.krdc
+
+    piliplus
   ];
 }
