@@ -1,12 +1,10 @@
 {
-  pkgs,
   lib,
   ...
 }:
 
 {
   programs.thunderbird = {
-    package = pkgs.thunderbird-latest;
     enable = true;
     profiles.admin = {
       isDefault = true;

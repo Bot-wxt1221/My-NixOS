@@ -55,9 +55,6 @@
               nativeMessagingHosts = [
                 pkgs.keepassxc
               ];
-              package = pkgs.wrapFirefox (pkgs.firefox-unwrapped.override {
-                enableDataReporting = false;
-              }) { };
               profiles.botwxt = {
                 isDefault = true;
                 name = "BotIsNotBot";

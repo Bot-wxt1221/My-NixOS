@@ -24,7 +24,6 @@
     gnome-logs
     gnome-graphs
     nautilus
-    gimp3-with-plugins
     gnome-calculator
     weston
     file-roller

@@ -24,7 +24,6 @@
     gnome-graphs
     cpu-x
     nautilus
-    gimp3-with-plugins
     gnome-calculator
     weston
     file-roller
