@@ -63,7 +63,6 @@
     nix-output-monitor
 
     strace # system call monitoring
-    ltrace # library call monitoring
     lsof # list open files
 
     # system tools

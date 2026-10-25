@@ -55,9 +55,8 @@
               nativeMessagingHosts = [
                 pkgs.keepassxc
               ];
-              package = pkgs.wrapFirefox (pkgs.firefox-beta-unwrapped.override {
-                pipewireSupport = true;
-                ffmpegSupport = true;
+              package = pkgs.wrapFirefox (pkgs.firefox-unwrapped.override {
+                enableDataReporting = false;
               }) { };
               profiles.botwxt = {
                 isDefault = true;

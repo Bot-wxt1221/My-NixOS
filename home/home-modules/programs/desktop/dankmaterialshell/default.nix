@@ -46,13 +46,6 @@ in
           };
           src = dms-plugin-registry.packages.${pkgs.stdenv.hostPlatform.system}.niriWindows;
         };
-        powerOptions = {
-          enable = true;
-          settings = {
-            enable = true;
-          };
-          src = dms-plugin-registry.packages.${pkgs.stdenv.hostPlatform.system}.powerOptions;
-        };
         calculator = {
           enable = true;
           settings = {
